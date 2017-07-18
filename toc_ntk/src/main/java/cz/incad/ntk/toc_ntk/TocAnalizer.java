@@ -11,7 +11,9 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.apache.http.client.utils.URIBuilder;
@@ -64,32 +66,32 @@ public class TocAnalizer {
     }
     return mtokens;
   }
-  
+
   /**
    * Find the keyword candidates for the Ordered list of tokens
+   *
    * @param tokens
-   * @return 
-   * A list of candidates 
+   * @return A list of candidates
    */
-  public List<Candidate> findCandidates(ArrayList<MorphoToken> tokens ){
-    
+  public List<Candidate> findCandidates(ArrayList<MorphoToken> tokens) {
+
     List<Candidate> candidates = new ArrayList<>();
-    
+
     //First case: we propose all nouns
     for (MorphoToken token : tokens) {
-      if(token.getTag().isNoun()){
+      if (token.getTag().isNoun()) {
         candidates.add(new Candidate(token.getLemmaSimple()));
       }
     }
-    
+
     //All adjectives followed by nouns
     String str = "";
     boolean hasAdjective = false;
     for (MorphoToken token : tokens) {
-      if(token.getTag().isAdjective()){
-        str += token.getToken()+ " ";
+      if (token.getTag().isAdjective()) {
+        str += token.getToken() + " ";
         hasAdjective = true;
-      } else if(token.getTag().isNoun() && hasAdjective){
+      } else if (token.getTag().isNoun() && hasAdjective) {
         str += token.getToken();
         candidates.add(new Candidate(str));
         str = "";
@@ -99,28 +101,28 @@ public class TocAnalizer {
         hasAdjective = false;
       }
     }
-    
+
     //Nouns followed by words in genitive
     str = "";
     boolean hasNoun = false;
     for (MorphoToken token : tokens) {
-      if(token.getTag().isNoun() && !hasNoun){
+      if (token.getTag().isNoun() && !hasNoun) {
         str = token.getToken();
         hasNoun = true;
-      } else if(token.getTag().isGenitive() && hasNoun){
+      } else if (token.getTag().isGenitive() && hasNoun) {
         str += " " + token.getToken();
       } else {
-        if(str.length() > 0){
+        if (str.length() > 0) {
           candidates.add(new Candidate(str));
         }
         str = "";
         hasNoun = false;
       }
     }
-    if(str.length() > 0){
+    if (str.length() > 0) {
       candidates.add(new Candidate(str));
     }
-    
+
     return candidates;
   }
 
@@ -176,5 +178,24 @@ public class TocAnalizer {
       }
     }
     return lines;
+  }
+
+  public Map<String, Candidate> analyze(File f) {
+    Map<String, Candidate> candidates = new HashMap<>();
+    List<TocLine> lines = getLines(f);
+    for (TocLine line : lines) {
+      ArrayList<MorphoToken> tokens = analyzeLine(line.text);
+      for (MorphoToken token : tokens) {
+
+      }
+      for (Candidate c : findCandidates(tokens)) {
+        if(candidates.containsKey(c.text)){
+          candidates.get(c.text).found++;
+        } else {
+          candidates.put(c.text, c);
+        }
+      }
+    }
+    return candidates;
   }
 }

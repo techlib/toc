@@ -20,9 +20,12 @@ public class Candidate {
   boolean isMatched;
   String matched_text;
   String dictionary;
+  
+  int found;
 
   public Candidate(String text) {
     this.text = text;
+    this.found = 1;
     this.match();
   }
 
@@ -34,7 +37,7 @@ public class Candidate {
       query.setQuery("\"" + this.text.toLowerCase() + "\"");
       query.set("defType", "edismax");
       query.set("qf", "key_cz");
-      query.set("mm", "100%");
+      query.set("mm", "60%");
       QueryResponse response = solr.query(query);
       if(response.getResults().getNumFound() > 0){
         this.isMatched = true;

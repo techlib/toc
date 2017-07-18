@@ -4,7 +4,10 @@ import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
@@ -107,32 +110,74 @@ public class MorphoDiTaServlet extends HttpServlet {
         TocAnalizer t = new TocAnalizer();
         List<TocLine> lines = t.getLines(new File(filename));
         for (TocLine line : lines) {
-          
-        JSONObject l = new JSONObject();
+
+          JSONObject l = new JSONObject();
           l.put("phrase", line.text);
           l.put("deep", line.deep);
-          if(line.text.trim().length() > 0){
-            ArrayList<MorphoToken> tokens =  t.analyzeLine(line.text);
+          if (line.text.trim().length() > 0) {
+            ArrayList<MorphoToken> tokens = t.analyzeLine(line.text);
             for (MorphoToken token : tokens) {
-              l.append("tokens (part of speech) (Case)",
+              l.append("tokens (part of speech) (Case) (Lemma)",
                       token.getToken() + " (" + token.getTag().getPosHuman() + ")"
-                      + " (" + token.getTag().getCaseHuman() + " - " + token.getTag().getCase() + ")");
+                      + " (" + token.getTag().getCaseHuman() + " - " + token.getTag().getCase() + ") (" + token.getLemma() + ")");
             }
-            for(Candidate c: t.findCandidates(tokens)){
-              String str = c.text ;
-              if(c.isMatched){
-                str +=  " ('" + c.matched_text + "' in dictionary: " + c.dictionary + ")";
-                if(c.text.split(" ").length > 1){
+            for (Candidate c : t.findCandidates(tokens)) {
+              String str = c.text;
+              if (c.isMatched) {
+                str += " ('" + c.matched_text + "' in dictionary: " + c.dictionary + ")";
+                if (c.text.split(" ").length > 1) {
                   str += "!!!";
                 }
               }
-                l.append("candidates", str);
+              l.append("candidates", str);
             }
           }
           ret.append("lines", l);
 
         }
-        
+
+        out.print(ret.toString(2));
+      }
+    },
+    ANALYZE_FILE {
+      @Override
+      void doPerform(HttpServletRequest request, HttpServletResponse response) throws Exception {
+
+        response.setContentType("text/json;charset=UTF-8");
+        PrintWriter out = response.getWriter();
+        JSONObject ret = new JSONObject();
+
+        String filename = request.getParameter("filename");
+
+        ret.put("filename", filename);
+
+        TocAnalizer t = new TocAnalizer();
+        Map<String, Candidate> cs = t.analyze(new File(filename));
+
+        List<Candidate> sorted = new ArrayList<>();
+        for (String key : cs.keySet()) {
+          Candidate c = cs.get(key);
+          sorted.add(c);
+        }
+        Collections.sort(sorted, new Comparator<Candidate>(){
+          @Override
+                public int compare(Candidate lhs, Candidate rhs) {
+                    // -1 - less than, 1 - greater than, 0 - equal, all inversed for descending
+                    return rhs.found - lhs.found;
+                }
+        });
+        //sorted.sort(c.found);
+        for (Candidate c: sorted) {
+          String str = c.text;
+          if (c.isMatched) {
+            str += " ('" + c.matched_text + "' in dictionary: " + c.dictionary + ")";
+            if (c.text.split(" ").length > 1) {
+              str += "!!!";
+            }
+          }
+          ret.append("candidates", c.found + ".- " + str );
+        }
+
         out.print(ret.toString(2));
       }
     };
