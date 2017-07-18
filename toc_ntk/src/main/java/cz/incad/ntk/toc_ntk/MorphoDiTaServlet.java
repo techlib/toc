@@ -3,6 +3,8 @@ package cz.incad.ntk.toc_ntk;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -14,6 +16,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import org.apache.commons.io.FileUtils;
 import org.json.JSONObject;
 
 /**
@@ -159,15 +162,15 @@ public class MorphoDiTaServlet extends HttpServlet {
           Candidate c = cs.get(key);
           sorted.add(c);
         }
-        Collections.sort(sorted, new Comparator<Candidate>(){
+        Collections.sort(sorted, new Comparator<Candidate>() {
           @Override
-                public int compare(Candidate lhs, Candidate rhs) {
-                    // -1 - less than, 1 - greater than, 0 - equal, all inversed for descending
-                    return rhs.found - lhs.found;
-                }
+          public int compare(Candidate lhs, Candidate rhs) {
+            // -1 - less than, 1 - greater than, 0 - equal, all inversed for descending
+            return rhs.found - lhs.found;
+          }
         });
         //sorted.sort(c.found);
-        for (Candidate c: sorted) {
+        for (Candidate c : sorted) {
           String str = c.text;
           if (c.isMatched) {
             str += " ('" + c.matched_text + "' in dictionary: " + c.dictionary + ")";
@@ -175,7 +178,51 @@ public class MorphoDiTaServlet extends HttpServlet {
               str += "!!!";
             }
           }
-          ret.append("candidates", c.found + ".- " + str );
+          ret.append("candidates", c.found + ".- " + str);
+        }
+
+        out.print(ret.toString(2));
+      }
+    },
+    ANALYZE_FOLDER {
+      @Override
+      void doPerform(HttpServletRequest request, HttpServletResponse response) throws Exception {
+
+        response.setContentType("text/json;charset=UTF-8");
+        PrintWriter out = response.getWriter();
+        JSONObject ret = new JSONObject();
+
+        String foldername = request.getParameter("foldername");
+
+        ret.put("foldername", foldername);
+
+        TocAnalizer t = new TocAnalizer();
+        Map<String, Candidate> cs = t.analyzeFolder(foldername);
+
+        List<Candidate> sorted = new ArrayList<>();
+        for (String key : cs.keySet()) {
+          Candidate c = cs.get(key);
+          sorted.add(c);
+        }
+        Collections.sort(sorted, new Comparator<Candidate>() {
+          @Override
+          public int compare(Candidate lhs, Candidate rhs) {
+            // -1 - less than, 1 - greater than, 0 - equal, all inversed for descending
+            return rhs.found - lhs.found;
+          }
+        });
+        //sorted.sort(c.found);
+        for (Candidate c : sorted) {
+          String str = c.text;
+          if (c.isMatched) {
+            str += " ('" + c.matched_text + "' in dictionary: " + c.dictionary + ")";
+            if (c.text.split(" ").length > 1) {
+              str += "!!!";
+            }
+            ret.append("candidates in dictionary", c.found + ".- " + str);
+          }
+          ret.append("candidates", c.found + ".- " + str);
+
         }
 
         out.print(ret.toString(2));

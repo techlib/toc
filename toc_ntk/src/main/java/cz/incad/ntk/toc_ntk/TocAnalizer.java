@@ -1,5 +1,6 @@
 package cz.incad.ntk.toc_ntk;
 
+import cz.incad.ntk.toc_ntk.Candidate.CandidateType;
 import cz.incad.utils.RESTHelper;
 import java.io.BufferedReader;
 import java.io.File;
@@ -16,6 +17,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import org.apache.commons.io.FileUtils;
 import org.apache.http.client.utils.URIBuilder;
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -80,7 +82,7 @@ public class TocAnalizer {
     //First case: we propose all nouns
     for (MorphoToken token : tokens) {
       if (token.getTag().isNoun()) {
-        candidates.add(new Candidate(token.getLemmaSimple()));
+        candidates.add(new Candidate(token.getLemmaSimple(), CandidateType.NOUN));
       }
     }
 
@@ -93,7 +95,7 @@ public class TocAnalizer {
         hasAdjective = true;
       } else if (token.getTag().isNoun() && hasAdjective) {
         str += token.getToken();
-        candidates.add(new Candidate(str));
+        candidates.add(new Candidate(str, CandidateType.ADJETIVES_NOUN));
         str = "";
         hasAdjective = false;
       } else {
@@ -113,14 +115,14 @@ public class TocAnalizer {
         str += " " + token.getToken();
       } else {
         if (str.length() > 0) {
-          candidates.add(new Candidate(str));
+          candidates.add(new Candidate(str, CandidateType.NOUN_GENITIVES));
         }
         str = "";
         hasNoun = false;
       }
     }
     if (str.length() > 0) {
-      candidates.add(new Candidate(str));
+      candidates.add(new Candidate(str, CandidateType.NOUN_GENITIVES));
     }
 
     return candidates;
@@ -189,10 +191,36 @@ public class TocAnalizer {
 
       }
       for (Candidate c : findCandidates(tokens)) {
-        if(candidates.containsKey(c.text)){
+        if (candidates.containsKey(c.text)) {
           candidates.get(c.text).found++;
         } else {
           candidates.put(c.text, c);
+          c.match();
+        }
+      }
+    }
+    return candidates;
+  }
+
+  public Map<String, Candidate> analyzeFolder(String foldername) {
+    Map<String, Candidate> candidates = new HashMap<>();
+    File dir = new File(foldername);
+    String[] extensions = new String[]{"txt"};
+    List<File> files = (List<File>) FileUtils.listFiles(dir, extensions, false);
+    for (File f : files) {
+      List<TocLine> lines = getLines(f);
+      for (TocLine line : lines) {
+        ArrayList<MorphoToken> tokens = analyzeLine(line.text);
+        for (MorphoToken token : tokens) {
+
+        }
+        for (Candidate c : findCandidates(tokens)) {
+          if (candidates.containsKey(c.text)) {
+            candidates.get(c.text).found++;
+          } else {
+            candidates.put(c.text, c);
+            c.match();
+          }
         }
       }
     }

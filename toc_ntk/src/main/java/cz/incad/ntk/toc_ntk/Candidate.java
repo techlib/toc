@@ -15,29 +15,39 @@ import org.apache.solr.common.SolrDocument;
  * @author alberto
  */
 public class Candidate {
+  
+  
+  public enum CandidateType {
+    NOUN, NOUN_GENITIVES, ADJETIVES_NOUN
+  }
 
   String text;
   boolean isMatched;
   String matched_text;
   String dictionary;
+  CandidateType type;
   
   int found;
 
-  public Candidate(String text) {
-    this.text = text;
+  public Candidate(String text, CandidateType type) {
+    this.text = text.trim();
+    this.type = type;
     this.found = 1;
-    this.match();
   }
 
-  private void match() {
+  public void match() {
     try {
       String urlString = "http://localhost:8983/solr/slovnik";
       SolrClient solr = new HttpSolrClient.Builder(urlString).build();
       SolrQuery query = new SolrQuery();
       query.setQuery("\"" + this.text.toLowerCase() + "\"");
       query.set("defType", "edismax");
-      query.set("qf", "key_cz");
-      query.set("mm", "60%");
+      if(this.text.indexOf(" ") > 0){
+        query.set("qf", "key_cz");
+      } else {
+        query.set("qf", "key_lower");
+      }
+      query.set("mm", "80%");
       QueryResponse response = solr.query(query);
       if(response.getResults().getNumFound() > 0){
         this.isMatched = true;
