@@ -5,8 +5,20 @@
  */
 package cz.incad.ntk.toc_ntk;
 
+import static cz.incad.ntk.toc_ntk.TocAnalizer.LOGGER;
+import cz.incad.utils.RESTHelper;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.nio.charset.Charset;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import org.apache.http.client.utils.URIBuilder;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 /**
  *
@@ -20,7 +32,31 @@ public class TocLine {
   String deep;
   String text;
   int start_page;
+  ArrayList<MorphoToken> mtokens;
+  JSONArray jaTokens;
 
+  public TocLine(JSONObject json) {
+    this.raw = json.getString("raw");
+    this.deep = json.getString("deep");
+    this.text = json.getString("text");
+    this.start_page = json.getInt("start_page");
+    mtokens = new ArrayList();
+    this.jaTokens = json.getJSONArray("mtokens");
+    for (int i = 0; i < this.jaTokens.length(); i++) {
+      mtokens.add(new MorphoToken(this.jaTokens.getJSONObject(i)));
+    }
+  }
+  
+  public JSONObject toJSON(){
+    JSONObject json = new JSONObject();
+    json.put("raw", this.raw);
+    json.put("deep", this.deep);
+    json.put("text", this.text);
+    json.put("start_page", this.start_page);
+    json.put("mtokens", this.jaTokens);
+    return json;
+  }
+  
   public TocLine(String rawStr) {
     this.raw = rawStr;
     String str = rawStr.trim();
@@ -53,6 +89,42 @@ public class TocLine {
       }
     } else {
       this.text = str.substring(0, page_pos).trim();
+    }
+    getMorphoTokens();
+  }
+  
+  
+  
+
+  private void getMorphoTokens() {
+    mtokens = new ArrayList();
+    try {
+      Options opts = Options.getInstance();
+
+      //LOGGER.log(Level.INFO, "requesting data {0}", line);
+
+      String host = opts.getString("morpho.host");
+      URI uri = new URIBuilder().setScheme("http")
+              .setCharset(Charset.forName("UTF-8"))
+              .setHost(host)
+              .setPath("/tag")
+              .setParameter("data", text)
+              .setParameter("output", "json")
+              .build();
+
+      LOGGER.log(Level.INFO, "requesting url {0}", uri.toString());
+      InputStream inputStream = RESTHelper.inputStream(uri.toString());
+
+      String json = org.apache.commons.io.IOUtils.toString(inputStream, Charset.forName("UTF-8"));
+
+      JSONObject js = new JSONObject(json);
+      this.jaTokens = js.getJSONArray("result").getJSONArray(0);
+
+      for (int i = 0; i < this.jaTokens.length(); i++) {
+        mtokens.add(new MorphoToken(this.jaTokens.getJSONObject(i)));
+      }
+    } catch (IOException | JSONException | URISyntaxException ex) {
+      LOGGER.log(Level.SEVERE, null, ex);
     }
   }
 }

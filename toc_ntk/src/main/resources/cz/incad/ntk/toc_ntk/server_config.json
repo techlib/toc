@@ -1,5 +1,6 @@
 {
   "morpho.host": "lindat.mff.cuni.cz/services/morphodita/api",
+  "saved_tocs_dir": "/home/alberto/Projects/NTK/morpho/",
   "users":{
     "test": "test"
   },

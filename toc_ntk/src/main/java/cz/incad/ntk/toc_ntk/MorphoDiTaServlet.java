@@ -8,6 +8,7 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.logging.Level;
@@ -88,12 +89,12 @@ public class MorphoDiTaServlet extends HttpServlet {
 
         ret.put("phrase", data);
 
-        TocAnalizer t = new TocAnalizer();
-        for (MorphoToken token : t.analyzeLine(data)) {
-          ret.append("tokens (part of speech) (Case)",
-                  token.getToken() + " (" + token.getTag().getPosHuman() + ")"
-                  + " (" + token.getTag().getCase() + ")");
-        }
+//        TocAnalizer t = new TocAnalizer();
+//        for (MorphoToken token : t.analyzeLine(data)) {
+//          ret.append("tokens (part of speech) (Case)",
+//                  token.getToken() + " (" + token.getTag().getPosHuman() + ")"
+//                  + " (" + token.getTag().getCase() + ")");
+//        }
 
         out.print(ret.toString(2));
       }
@@ -118,13 +119,12 @@ public class MorphoDiTaServlet extends HttpServlet {
           l.put("phrase", line.text);
           l.put("deep", line.deep);
           if (line.text.trim().length() > 0) {
-            ArrayList<MorphoToken> tokens = t.analyzeLine(line.text);
-            for (MorphoToken token : tokens) {
+            for (MorphoToken token : line.mtokens) {
               l.append("tokens (part of speech) (Case) (Lemma)",
                       token.getToken() + " (" + token.getTag().getPosHuman() + ")"
                       + " (" + token.getTag().getCaseHuman() + " - " + token.getTag().getCase() + ") (" + token.getLemma() + ")");
             }
-            for (Candidate c : t.findCandidates(tokens)) {
+            for (Candidate c : t.findCandidates(line.mtokens)) {
               String str = c.text;
               if (c.isMatched) {
                 str += " ('" + c.matched_text + "' in dictionary: " + c.dictionary + ")";
@@ -155,7 +155,8 @@ public class MorphoDiTaServlet extends HttpServlet {
         ret.put("filename", filename);
 
         TocAnalizer t = new TocAnalizer();
-        Map<String, Candidate> cs = t.analyze(new File(filename));
+        Map<String, Candidate> cs = new HashMap<>();
+        t.analyze(new File(filename), cs);
 
         List<Candidate> sorted = new ArrayList<>();
         for (String key : cs.keySet()) {

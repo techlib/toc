@@ -32,41 +32,11 @@ public class TocAnalizer {
 
   public static final Logger LOGGER = Logger.getLogger(TocAnalizer.class.getName());
 
+  File tocFile;
+  JSONObject tocFileData;
+
   public void processFolder(String path) {
 
-  }
-
-  public ArrayList<MorphoToken> analyzeLine(String line) {
-    ArrayList mtokens = new ArrayList();
-    try {
-      Options opts = Options.getInstance();
-
-      LOGGER.log(Level.INFO, "requesting data {0}", line);
-
-      String host = opts.getString("morpho.host");
-      URI uri = new URIBuilder().setScheme("http")
-              .setCharset(Charset.forName("UTF-8"))
-              .setHost(host)
-              .setPath("/tag")
-              .setParameter("data", line)
-              .setParameter("output", "json")
-              .build();
-
-      LOGGER.log(Level.INFO, "requesting url {0}", uri.toString());
-      InputStream inputStream = RESTHelper.inputStream(uri.toString());
-
-      String json = org.apache.commons.io.IOUtils.toString(inputStream, Charset.forName("UTF-8"));
-
-      JSONObject js = new JSONObject(json);
-      JSONArray tokens = js.getJSONArray("result").getJSONArray(0);
-
-      for (int i = 0; i < tokens.length(); i++) {
-        mtokens.add(new MorphoToken(tokens.getJSONObject(i)));
-      }
-    } catch (IOException | JSONException | URISyntaxException ex) {
-      LOGGER.log(Level.SEVERE, null, ex);
-    }
-    return mtokens;
   }
 
   /**
@@ -182,15 +152,60 @@ public class TocAnalizer {
     return lines;
   }
 
-  public Map<String, Candidate> analyze(File f) {
-    Map<String, Candidate> candidates = new HashMap<>();
-    List<TocLine> lines = getLines(f);
+  public List<TocLine> getLinesFromSaved() {
+    List<TocLine> lines = new ArrayList<>();
+    try {
+      String t = FileUtils.readFileToString(tocFile, Charset.forName("UTF-8"));
+      tocFileData = new JSONObject(t);
+      JSONArray jalines = tocFileData.getJSONArray("lines");
+      for (int i = 0; i < jalines.length(); i++) {
+        lines.add(new TocLine(jalines.getJSONObject(i)));
+      }
+
+    } catch (FileNotFoundException ex) {
+      LOGGER.log(Level.SEVERE, null, ex);
+    } catch (IOException ex) {
+      LOGGER.log(Level.SEVERE, null, ex);
+    } 
+    return lines;
+  }
+
+  private boolean loadFromSaved(String filename) {
+    try {
+      String dir = Options.getInstance().getString("saved_tocs_dir");
+      tocFile = new File(dir + filename);
+      return tocFile.exists();
+    } catch (IOException | JSONException ex) {
+      LOGGER.log(Level.SEVERE, null, ex);
+    }
+    return false;
+  }
+
+  private void save(List<TocLine> lines) {
+    try {
+      tocFileData = new JSONObject();
+      for (TocLine line : lines) {
+        tocFileData.append("lines", line.toJSON());
+      }
+      FileUtils.writeStringToFile(tocFile, tocFileData.toString(), Charset.forName("UTF-8"));
+    } catch (IOException ex) {
+      LOGGER.log(Level.SEVERE, null, ex);
+    }
+  }
+
+  public void analyze(File f, Map<String, Candidate> candidates) {
+    List<TocLine> lines;
+    if (loadFromSaved(f.getName())) {
+      lines = getLinesFromSaved();
+    } else {
+      lines = getLines(f);
+      save(lines);
+    }
     for (TocLine line : lines) {
-      ArrayList<MorphoToken> tokens = analyzeLine(line.text);
-      for (MorphoToken token : tokens) {
+      for (MorphoToken token : line.mtokens) {
 
       }
-      for (Candidate c : findCandidates(tokens)) {
+      for (Candidate c : findCandidates(line.mtokens)) {
         if (candidates.containsKey(c.text)) {
           candidates.get(c.text).found++;
         } else {
@@ -199,7 +214,6 @@ public class TocAnalizer {
         }
       }
     }
-    return candidates;
   }
 
   public Map<String, Candidate> analyzeFolder(String foldername) {
@@ -208,21 +222,7 @@ public class TocAnalizer {
     String[] extensions = new String[]{"txt"};
     List<File> files = (List<File>) FileUtils.listFiles(dir, extensions, false);
     for (File f : files) {
-      List<TocLine> lines = getLines(f);
-      for (TocLine line : lines) {
-        ArrayList<MorphoToken> tokens = analyzeLine(line.text);
-        for (MorphoToken token : tokens) {
-
-        }
-        for (Candidate c : findCandidates(tokens)) {
-          if (candidates.containsKey(c.text)) {
-            candidates.get(c.text).found++;
-          } else {
-            candidates.put(c.text, c);
-            c.match();
-          }
-        }
-      }
+      analyze(f, candidates);
     }
     return candidates;
   }
