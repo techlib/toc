@@ -187,7 +187,7 @@ public class TocAnalizer {
       for (TocLine line : lines) {
         tocFileData.append("lines", line.toJSON());
       }
-      FileUtils.writeStringToFile(tocFile, tocFileData.toString(), Charset.forName("UTF-8"));
+      FileUtils.writeStringToFile(tocFile, tocFileData.toString(2), Charset.forName("UTF-8"));
     } catch (IOException ex) {
       LOGGER.log(Level.SEVERE, null, ex);
     }

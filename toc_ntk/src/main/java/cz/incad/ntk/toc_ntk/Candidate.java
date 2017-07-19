@@ -26,7 +26,7 @@ public class Candidate {
   String matched_text;
   String dictionary;
   CandidateType type;
-  
+  int score;
   int found;
 
   public Candidate(String text, CandidateType type) {
@@ -61,5 +61,17 @@ public class Candidate {
       Logger.getLogger(Candidate.class.getName()).log(Level.SEVERE, null, ex);
     }
     
+  }
+  
+  public int score(){
+    this.score = this.found;
+    if (isMatched) {
+      this.score += 5;
+      if (text.split(" ").length > 1) {
+        this.score += 10;
+      }
+    }
+    
+    return this.score;
   }
 }

@@ -37,13 +37,15 @@ public class TocLine {
 
   public TocLine(JSONObject json) {
     this.raw = json.getString("raw");
-    this.deep = json.getString("deep");
+    this.deep = json.optString("deep");
     this.text = json.getString("text");
-    this.start_page = json.getInt("start_page");
+    this.start_page = json.optInt("start_page");
     mtokens = new ArrayList();
-    this.jaTokens = json.getJSONArray("mtokens");
-    for (int i = 0; i < this.jaTokens.length(); i++) {
-      mtokens.add(new MorphoToken(this.jaTokens.getJSONObject(i)));
+    this.jaTokens = json.optJSONArray("mtokens");
+    if(this.jaTokens != null){
+      for (int i = 0; i < this.jaTokens.length(); i++) {
+        mtokens.add(new MorphoToken(this.jaTokens.getJSONObject(i)));
+      }
     }
   }
   

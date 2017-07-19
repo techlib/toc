@@ -209,20 +209,20 @@ public class MorphoDiTaServlet extends HttpServlet {
           @Override
           public int compare(Candidate lhs, Candidate rhs) {
             // -1 - less than, 1 - greater than, 0 - equal, all inversed for descending
-            return rhs.found - lhs.found;
+            return rhs.score() - lhs.score();
           }
         });
         //sorted.sort(c.found);
         for (Candidate c : sorted) {
           String str = c.text;
           if (c.isMatched) {
-            str += " ('" + c.matched_text + "' in dictionary: " + c.dictionary + ")";
+            str += " ('" + c.matched_text + "' in: " + c.dictionary + ")";
             if (c.text.split(" ").length > 1) {
               str += "!!!";
             }
-            ret.append("candidates in dictionary", c.found + ".- " + str);
+            ret.append("candidates in dictionary", c.score + ".- " + str);
           }
-          ret.append("candidates", c.found + ".- " + str);
+          ret.append("candidates", c.score + ".- " + str);
 
         }
 
