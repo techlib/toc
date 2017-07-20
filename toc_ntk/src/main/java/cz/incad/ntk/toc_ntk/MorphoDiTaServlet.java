@@ -205,16 +205,20 @@ public class MorphoDiTaServlet extends HttpServlet {
           Candidate c = cs.get(key);
           sorted.add(c);
         }
+        final ScoreConfig sc = new ScoreConfig();
+        sc.found = .5f;
+        sc.multiple = 15.0f;
         Collections.sort(sorted, new Comparator<Candidate>() {
           @Override
           public int compare(Candidate lhs, Candidate rhs) {
             // -1 - less than, 1 - greater than, 0 - equal, all inversed for descending
-            return rhs.score() - lhs.score();
+            return (int) (rhs.score(sc) - lhs.score(sc));
           }
         });
         //sorted.sort(c.found);
         for (Candidate c : sorted) {
           String str = c.text;
+          ret.append("candidates", str + " (" + c.type + ")");
           if (c.isMatched) {
             str += " ('" + c.matched_text + "' in: " + c.dictionary + ")";
             if (c.text.split(" ").length > 1) {
@@ -222,7 +226,6 @@ public class MorphoDiTaServlet extends HttpServlet {
             }
             ret.append("candidates in dictionary", c.score + ".- " + str);
           }
-          ret.append("candidates", c.score + ".- " + str);
 
         }
 

@@ -27,7 +27,7 @@ public class Candidate {
   String dictionary;
   CandidateType type;
   boolean hasProperNoun;
-  int score;
+  float score;
   int found;
 
   public Candidate(String text, CandidateType type) {
@@ -72,20 +72,20 @@ public class Candidate {
     
   }
   
-  public int score(){
-    this.score = this.found;
+  public float score(ScoreConfig sc){
+    this.score = this.found * sc.found;
     if (isMatched) {
-      this.score += 5;
+      this.score = this.score * sc.matched;
       if (text.split(" ").length > 1) {
-        this.score += 10;
+        this.score = this.score * sc.multiple;
       }
     }
     if(hasProperNoun){
-      this.score += 5;
+      this.score = this.score * sc.hasProperNoun;
     }
     
     if(type == CandidateType.DICTIONARY_WORD){
-      this.score += 5;
+      this.score = this.score * sc.isDictionaryWord;
     }
     
     return this.score;

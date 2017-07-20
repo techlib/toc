@@ -92,6 +92,9 @@ public class TocLine {
     } else {
       this.text = str.substring(0, page_pos).trim();
     }
+    
+    //Clean multiple dots 
+    this.text = this.text.replaceAll("\\.+", "\\.");
     getMorphoTokens();
   }
   
