@@ -124,7 +124,7 @@ public class MorphoDiTaServlet extends HttpServlet {
                       token.getToken() + " (" + token.getTag().getPosHuman() + ")"
                       + " (" + token.getTag().getCaseHuman() + " - " + token.getTag().getCase() + ") (" + token.getLemma() + ")");
             }
-            for (Candidate c : t.findCandidates(line.mtokens)) {
+            for (Candidate c : t.findCandidates(line)) {
               String str = c.text;
               if (c.isMatched) {
                 str += " ('" + c.matched_text + "' in dictionary: " + c.dictionary + ")";

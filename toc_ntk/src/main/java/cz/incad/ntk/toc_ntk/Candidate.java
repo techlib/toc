@@ -18,7 +18,7 @@ public class Candidate {
   
   
   public enum CandidateType {
-    NOUN, NOUN_GENITIVES, ADJETIVES_NOUN
+    NOUN, PROPERNOUN, NOUN_GENITIVES, ADJETIVES_NOUN, DICTIONARY_WORD
   }
 
   String text;
@@ -26,16 +26,25 @@ public class Candidate {
   String matched_text;
   String dictionary;
   CandidateType type;
+  boolean hasProperNoun;
   int score;
   int found;
 
   public Candidate(String text, CandidateType type) {
+    this(text, type, false);
+  }
+
+  public Candidate(String text, CandidateType type, boolean hasProperNoun) {
     this.text = text.trim();
     this.type = type;
     this.found = 1;
+    this.hasProperNoun = hasProperNoun;
   }
-
+  
   public void match() {
+    if(type == CandidateType.DICTIONARY_WORD){
+      return;
+    }
     try {
       String urlString = "http://localhost:8983/solr/slovnik";
       SolrClient solr = new HttpSolrClient.Builder(urlString).build();
@@ -70,6 +79,13 @@ public class Candidate {
       if (text.split(" ").length > 1) {
         this.score += 10;
       }
+    }
+    if(hasProperNoun){
+      this.score += 5;
+    }
+    
+    if(type == CandidateType.DICTIONARY_WORD){
+      this.score += 5;
     }
     
     return this.score;

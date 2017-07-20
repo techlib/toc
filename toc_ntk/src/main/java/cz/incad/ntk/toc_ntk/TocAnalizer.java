@@ -19,6 +19,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.apache.commons.io.FileUtils;
 import org.apache.http.client.utils.URIBuilder;
+import org.apache.solr.common.SolrDocument;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -45,57 +46,97 @@ public class TocAnalizer {
    * @param tokens
    * @return A list of candidates
    */
-  public List<Candidate> findCandidates(ArrayList<MorphoToken> tokens) {
+  public List<Candidate> findCandidates(TocLine line) {
 
     List<Candidate> candidates = new ArrayList<>();
 
     //First case: we propose all nouns
-    for (MorphoToken token : tokens) {
+    for (MorphoToken token : line.mtokens) {
       if (token.getTag().isNoun()) {
-        candidates.add(new Candidate(token.getLemmaSimple(), CandidateType.NOUN));
+        if (token.isProperNoun()) {
+          candidates.add(new Candidate(token.getLemmaSimple(), CandidateType.PROPERNOUN));
+        } else {
+          candidates.add(new Candidate(token.getLemmaSimple(), CandidateType.NOUN));
+        }
       }
     }
 
     //All adjectives followed by nouns
     String str = "";
     boolean hasAdjective = false;
-    for (MorphoToken token : tokens) {
+    boolean hasProperNoun = false;
+    for (MorphoToken token : line.mtokens) {
       if (token.getTag().isAdjective()) {
         str += token.getToken() + " ";
         hasAdjective = true;
+        hasProperNoun = token.isProperNoun() || hasProperNoun;
       } else if (token.getTag().isNoun() && hasAdjective) {
         str += token.getToken();
-        candidates.add(new Candidate(str, CandidateType.ADJETIVES_NOUN));
+        hasProperNoun = token.isProperNoun() || hasProperNoun;
+        candidates.add(new Candidate(str, CandidateType.ADJETIVES_NOUN, hasProperNoun));
         str = "";
         hasAdjective = false;
+        hasProperNoun = false;
       } else {
         str = "";
         hasAdjective = false;
+        hasProperNoun = false;
       }
     }
 
     //Nouns followed by words in genitive
     str = "";
     boolean hasNoun = false;
-    for (MorphoToken token : tokens) {
+    hasProperNoun = false;
+    for (MorphoToken token : line.mtokens) {
       if (token.getTag().isNoun() && !hasNoun) {
         str = token.getToken();
         hasNoun = true;
+        hasProperNoun = token.isProperNoun() || hasProperNoun;
       } else if (token.getTag().isGenitive() && hasNoun) {
+        hasProperNoun = token.isProperNoun() || hasProperNoun;
         str += " " + token.getToken();
       } else {
         if (str.length() > 0) {
-          candidates.add(new Candidate(str, CandidateType.NOUN_GENITIVES));
+          candidates.add(new Candidate(str, CandidateType.NOUN_GENITIVES, hasProperNoun));
         }
         str = "";
         hasNoun = false;
+        hasProperNoun = false;
       }
     }
     if (str.length() > 0) {
-      candidates.add(new Candidate(str, CandidateType.NOUN_GENITIVES));
+      candidates.add(new Candidate(str, CandidateType.NOUN_GENITIVES, hasProperNoun));
     }
 
+    //MorphoDiTa split some abbreviations (acronyns). So we will 
+    // search words distinct than tokens in our keywords dictionary
+    String[] words = line.text.split(" ");
+    for (String s : words) {
+      String word = s.replaceAll("\\.+", "\\.");
+      if (!hasWord(line, word)) {
+        //Try to find
+        SolrDocument doc = SolrService.match(word);
+        if (doc != null) {
+          Candidate c = new Candidate(word, CandidateType.DICTIONARY_WORD);
+
+          c.matched_text = doc.getFirstValue("key").toString();
+          c.dictionary = doc.getFirstValue("slovnik").toString();
+          candidates.add(c);
+        }
+      }
+    }
     return candidates;
+  }
+
+  private boolean hasWord(TocLine line, String word) {
+
+    for (MorphoToken token : line.mtokens) {
+      if (word.equals(token.getToken())) {
+        return true;
+      }
+    }
+    return false;
   }
 
   //Parse file and get lines.
@@ -166,7 +207,7 @@ public class TocAnalizer {
       LOGGER.log(Level.SEVERE, null, ex);
     } catch (IOException ex) {
       LOGGER.log(Level.SEVERE, null, ex);
-    } 
+    }
     return lines;
   }
 
@@ -205,7 +246,7 @@ public class TocAnalizer {
       for (MorphoToken token : line.mtokens) {
 
       }
-      for (Candidate c : findCandidates(line.mtokens)) {
+      for (Candidate c : findCandidates(line)) {
         if (candidates.containsKey(c.text)) {
           candidates.get(c.text).found++;
         } else {

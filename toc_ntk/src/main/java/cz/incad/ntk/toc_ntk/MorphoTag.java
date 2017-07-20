@@ -136,6 +136,10 @@ public class MorphoTag {
     return "N".equals(this.getPos());
   }
   
+  public boolean isNeutral(){
+    return "N".equals(this.tag.substring(2, 3));
+  }
+  
   public boolean isAdjective(){
     return "A".equals(this.getPos());
   }

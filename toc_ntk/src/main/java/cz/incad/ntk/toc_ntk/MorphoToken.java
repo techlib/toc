@@ -54,5 +54,9 @@ public class MorphoToken {
   public JSONObject getJson() {
     return mtoken;
   }
+  
+  public boolean isProperNoun(){
+    return this.lemma.contains("_;Y") || this.lemma.contains("_;S");
+  }
 
 }
