@@ -20,6 +20,7 @@ import java.util.logging.Logger;
 import org.apache.commons.io.FileUtils;
 import org.apache.http.client.utils.URIBuilder;
 import org.apache.solr.common.SolrDocument;
+import org.apache.solr.common.SolrDocumentList;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -116,12 +117,12 @@ public class TocAnalizer {
       String word = s.replaceAll("\\.+", "\\.");
       if (!hasWord(line, word)) {
         //Try to find
-        SolrDocument doc = SolrService.match(word);
-        if (doc != null) {
+        SolrDocumentList docs = SolrService.findInDictionaries(word);
+        if (!docs.isEmpty()) {
           Candidate c = new Candidate(word, CandidateType.DICTIONARY_WORD);
-
-          c.matched_text = doc.getFirstValue("key").toString();
-          c.dictionary = doc.getFirstValue("slovnik").toString();
+          
+          c.matched_text = docs.get(0).getFirstValue("key").toString();
+          c.dictionary = docs.get(0).getFirstValue("slovnik").toString();
           candidates.add(c);
         }
       }

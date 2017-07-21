@@ -14,6 +14,7 @@ import org.apache.solr.client.solrj.SolrServerException;
 import org.apache.solr.client.solrj.impl.HttpSolrClient;
 import org.apache.solr.client.solrj.response.QueryResponse;
 import org.apache.solr.common.SolrDocument;
+import org.apache.solr.common.SolrDocumentList;
 
 /**
  *
@@ -21,9 +22,10 @@ import org.apache.solr.common.SolrDocument;
  */
 public class SolrService {
   
-  public static SolrDocument match(String text) {
+  public static SolrDocumentList findInDictionaries(String text) {
+      SolrDocumentList docs = new SolrDocumentList();
     try {
-      String urlString = "http://localhost:8983/solr/slovnik";
+      String urlString = "http://localhost:8983/solr";
       SolrClient solr = new HttpSolrClient.Builder(urlString).build();
       SolrQuery query = new SolrQuery();
       query.setQuery("\"" + text.toLowerCase() + "\"");
@@ -34,13 +36,13 @@ public class SolrService {
         query.set("qf", "key_lower");
       }
       query.set("mm", "80%");
-      QueryResponse response = solr.query(query);
+      QueryResponse response = solr.query("slovnik", query);
       if(response.getResults().getNumFound() > 0){
-        return response.getResults().get(0);
+        docs.addAll(response.getResults());
       }
     } catch (SolrServerException | IOException ex) {
       Logger.getLogger(Candidate.class.getName()).log(Level.SEVERE, null, ex);
     }
-    return null;
+    return docs;
   }
 }
