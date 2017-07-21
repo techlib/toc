@@ -1,0 +1,22 @@
+{
+  "/search/**": {
+    "target": "http://localhost:8983/solr/",
+    "ignorePath": false,
+    "logLevel": "debug",
+    "pathRewrite": {
+      "^/search":""
+    },
+    "changeOrigin": false,
+    "secure": false
+  },
+  "/mdt": {
+    "target": "http://localhost:8082/toc_ntk/mdt",
+    "ignorePath": false,
+    "logLevel": "debug",
+    "pathRewrite": {
+      "^/mdt":""
+    },
+    "changeOrigin": false,
+    "secure": false
+  }
+}
