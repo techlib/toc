@@ -1,29 +1,53 @@
 <mz-input-container class="col s12">
   <i mz-icon-mdi mz-input-prefix
-    [icon]="'folder'">
-  </i>
-  <input mz-input
-    [(ngModel)]="foldername" (keyup.enter)="analyze()"
-    [label]="'Folder'"
-    id="foldername"
-    placeholder="Enter folder name"
-    type="text">
+     [icon]="'folder'">
+</i>
+<input mz-input
+       [(ngModel)]="foldername" (keyup.enter)="analyze()"
+       [label]="'Folder'"
+       id="foldername"
+       placeholder="Enter folder name"
+       type="text">
 </mz-input-container>
 <button mz-button (click)="analyze()">analyze</button>
+
+<form [formGroup]="scoreConfig" novalidate>
+  <mz-input-container class="col s12" [inline]="'true'">
+    <input class="col s2" id="found" type="number" formControlName="found" mz-input [label]="'Found'">
+  </mz-input-container>
+  <mz-input-container class="col s12" [inline]="'true'">
+    <input id="matched" type="number" formControlName="matched" mz-input [label]="'Matched'">
+  </mz-input-container>
+  <mz-input-container class="col s12" [inline]="'true'">
+    <input id="multiple" type="number" formControlName="multiple" mz-input [label]="'Multiple'">
+  </mz-input-container>
+  <mz-input-container class="col s12" [inline]="'true'">
+    <input id="hasProperNoun" type="number" formControlName="hasProperNoun" mz-input [label]="'Proper noun'">
+  </mz-input-container>
+  <mz-input-container class="col s12" [inline]="'true'">
+    <input id="isDictionaryWord" type="number" formControlName="isDictionaryWord" mz-input [label]="'Dictionary'">
+  </mz-input-container>
+</form>
+
+
+
+
 <section>
-<mz-spinner *ngIf="loading"
-  [color]="'blue'"
-  [size]="'big'">
-</mz-spinner>
-<mz-card
-  [hoverable]="true">
-  <mz-card-title>
-    Candidates
-  </mz-card-title>
-  <mz-card-content>
-    <mz-collection>
-      <mz-collection-item *ngFor="let c of candidates">{{c}}</mz-collection-item>
+  <mz-spinner *ngIf="loading"
+    [color]="'blue'"
+    [size]="'big'">
+  </mz-spinner>
+  <mz-card
+    [hoverable]="true">
+    <mz-card-title>
+      Candidates
+    </mz-card-title>
+    <mz-card-content>
+      <mz-collection>
+        <mz-collection-item *ngFor="let c of candidates">
+          {{c.score}} - {{c.text}}
+      </mz-collection-item>
     </mz-collection>
   </mz-card-content>
 </mz-card>
-  </section>
+</section>

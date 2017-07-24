@@ -9,6 +9,7 @@ import org.apache.solr.client.solrj.SolrServerException;
 import org.apache.solr.client.solrj.impl.HttpSolrClient;
 import org.apache.solr.client.solrj.response.QueryResponse;
 import org.apache.solr.common.SolrDocument;
+import org.json.JSONObject;
 
 /**
  *
@@ -39,6 +40,20 @@ public class Candidate {
     this.type = type;
     this.found = 1;
     this.hasProperNoun = hasProperNoun;
+  }
+  
+  
+  public JSONObject toJSON(){
+    JSONObject ret = new JSONObject();
+    ret.put("text", text);
+    ret.put("isMatched", isMatched);
+    ret.put("matched_text", matched_text);
+    ret.put("dictionary", dictionary);
+    ret.put("type", type);
+    ret.put("hasProperNoun", hasProperNoun);
+    ret.put("score", score);
+    ret.put("found", found);
+    return ret;
   }
   
   public void match() {

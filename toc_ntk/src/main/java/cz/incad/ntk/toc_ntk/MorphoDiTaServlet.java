@@ -205,9 +205,14 @@ public class MorphoDiTaServlet extends HttpServlet {
           Candidate c = cs.get(key);
           sorted.add(c);
         }
+        
         final ScoreConfig sc = new ScoreConfig();
-        sc.found = .5f;
-        sc.multiple = 15.0f;
+        String scStr = request.getParameter("scoreconfig");
+        
+        if(scStr != null){
+          sc.fromJSON(new JSONObject(scStr));
+        }
+        
         Collections.sort(sorted, new Comparator<Candidate>() {
           @Override
           public int compare(Candidate lhs, Candidate rhs) {
@@ -217,15 +222,16 @@ public class MorphoDiTaServlet extends HttpServlet {
         });
         //sorted.sort(c.found);
         for (Candidate c : sorted) {
-          String str = c.text;
-          ret.append("candidates", str + " (" + c.type + ")");
-          if (c.isMatched) {
-            str += " ('" + c.matched_text + "' in: " + c.dictionary + ")";
-            if (c.text.split(" ").length > 1) {
-              str += "!!!";
-            }
-            ret.append("candidates in dictionary", c.score + ".- " + str);
-          }
+            ret.append("candidates", c.toJSON());
+//          String str = c.text;
+//          ret.append("candidates", str + " (" + c.type + ")");
+//          if (c.isMatched) {
+//            str += " ('" + c.matched_text + "' in: " + c.dictionary + ")";
+//            if (c.text.split(" ").length > 1) {
+//              str += "!!!";
+//            }
+//            ret.append("candidates in dictionary", c.score + ".- " + str);
+//          }
 
         }
 
