@@ -9,16 +9,19 @@ import { MaterializeModule } from 'ng2-materialize';
 
 import { AppComponent } from './app.component';
 import { AppService } from './app.service';
+import { AppState } from './app.state';
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { HomeComponent } from './home/home.component';
+import { SideComponent } from './side/side.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
     FooterComponent,
-    HomeComponent
+    HomeComponent,
+    SideComponent
   ],
   imports: [
     BrowserModule,
@@ -28,7 +31,7 @@ import { HomeComponent } from './home/home.component';
     HttpModule,
     MaterializeModule.forRoot()
   ],
-  providers: [AppService],
+  providers: [AppState, AppService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

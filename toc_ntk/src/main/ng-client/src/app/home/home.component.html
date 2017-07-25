@@ -1,38 +1,39 @@
-<mz-input-container class="col s12">
+<div class="row">
+<mz-input-container class="col s12 m7">
   <i mz-icon-mdi mz-input-prefix
      [icon]="'folder'">
 </i>
 <input mz-input
-       [(ngModel)]="foldername" (keyup.enter)="analyze()"
+       [(ngModel)]="state.foldername" (keyup.enter)="analyze()"
        [label]="'Folder'"
        id="foldername"
        placeholder="Enter folder name"
        type="text">
 </mz-input-container>
 <button mz-button (click)="analyze()">analyze</button>
-
+<button mz-button (click)="rescore()">rescore</button>
+<button mz-button (click)="tocModal.open()">view toc</button>
+</div>
+<div class="row">
 <form [formGroup]="scoreConfig" novalidate>
-  <mz-input-container class="col s12" [inline]="'true'">
-    <input class="col s2" id="found" type="number" formControlName="found" mz-input [label]="'Found'">
+  <mz-input-container  [inline]="'true'">
+    <input id="found" type="number" formControlName="found" mz-input [label]="'Found'">
   </mz-input-container>
-  <mz-input-container class="col s12" [inline]="'true'">
+  <mz-input-container  [inline]="'true'">
     <input id="matched" type="number" formControlName="matched" mz-input [label]="'Matched'">
   </mz-input-container>
-  <mz-input-container class="col s12" [inline]="'true'">
+  <mz-input-container  [inline]="'true'">
     <input id="multiple" type="number" formControlName="multiple" mz-input [label]="'Multiple'">
   </mz-input-container>
-  <mz-input-container class="col s12" [inline]="'true'">
+  <mz-input-container  [inline]="'true'">
     <input id="hasProperNoun" type="number" formControlName="hasProperNoun" mz-input [label]="'Proper noun'">
   </mz-input-container>
-  <mz-input-container class="col s12" [inline]="'true'">
+  <mz-input-container  [inline]="'true'">
     <input id="isDictionaryWord" type="number" formControlName="isDictionaryWord" mz-input [label]="'Dictionary'">
   </mz-input-container>
 </form>
-
-
-
-
-<section>
+</div>
+<div class="row">
   <mz-spinner *ngIf="loading"
     [color]="'blue'"
     [size]="'big'">
@@ -43,11 +44,41 @@
       Candidates
     </mz-card-title>
     <mz-card-content>
-      <mz-collection>
-        <mz-collection-item *ngFor="let c of candidates">
-          {{c.score}} - {{c.text}}
-      </mz-collection-item>
-    </mz-collection>
+      <table>
+        <thead>
+        <th>score</th>
+        <th>text</th>
+        <th>type</th>
+        <th>isMatched</th>
+        <th>matched_text</th>
+        <th>dictionary</th>
+        <th>hasProperNoun</th>
+        <th>found</th>
+        </thead>
+        <tbody>
+          <tr  *ngFor="let c of candidates">
+            <td>{{c.score | number: '1.1-3'}}</td>
+            <td>{{c.text}}</td>
+            <td>{{c.type}}</td>
+            <td>{{c.isMatched}}</td>
+            <td>{{c.matched_text}}</td>
+            <td>{{c.dictionary}}</td>
+            <td>{{c.hasProperNoun}}</td>
+            <td>{{c.found}}</td>
+          </tr>
+        </tbody>
+      </table>
   </mz-card-content>
 </mz-card>
-</section>
+</div>
+
+<mz-modal #tocModal [fixedFooter]="true" [options]="modalOptions" >
+  <mz-modal-content>
+    <div class="input-field col s12">
+          <textarea id="textarea1" class="materialize-textarea" style="height: 100vh;">{{toc_text}}</textarea>
+        </div>
+  </mz-modal-content>
+  <mz-modal-footer>
+    <button mz-button [flat]="true" mz-modal-close>close</button>
+  </mz-modal-footer>
+</mz-modal>

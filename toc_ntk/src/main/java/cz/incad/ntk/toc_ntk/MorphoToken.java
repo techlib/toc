@@ -56,7 +56,12 @@ public class MorphoToken {
   }
   
   public boolean isProperNoun(){
-    return this.lemma.contains("_;Y") || this.lemma.contains("_;S");
+    return this.lemma.contains("_;Y") || 
+            this.lemma.contains("_;S") ||
+            this.lemma.contains("_;K") ||
+            this.lemma.contains("_;R") ||
+            this.lemma.contains("_;m") ||
+            this.lemma.contains("_;G");
   }
 
 }

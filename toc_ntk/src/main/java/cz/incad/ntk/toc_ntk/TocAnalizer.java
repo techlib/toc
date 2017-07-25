@@ -55,7 +55,7 @@ public class TocAnalizer {
     for (MorphoToken token : line.mtokens) {
       if (token.getTag().isNoun()) {
         if (token.isProperNoun()) {
-          candidates.add(new Candidate(token.getLemmaSimple(), CandidateType.PROPERNOUN));
+          candidates.add(new Candidate(token.getLemmaSimple(), CandidateType.PROPERNOUN, true));
         } else {
           candidates.add(new Candidate(token.getLemmaSimple(), CandidateType.NOUN));
         }
@@ -89,6 +89,7 @@ public class TocAnalizer {
     str = "";
     boolean hasNoun = false;
     hasProperNoun = false;
+    boolean hasGenitive = false;
     for (MorphoToken token : line.mtokens) {
       if (token.getTag().isNoun() && !hasNoun) {
         str = token.getToken();
@@ -97,16 +98,18 @@ public class TocAnalizer {
       } else if (token.getTag().isGenitive() && hasNoun) {
         hasProperNoun = token.isProperNoun() || hasProperNoun;
         str += " " + token.getToken();
+        hasGenitive = true;
       } else {
-        if (str.length() > 0) {
+        if (str.length() > 0 && hasGenitive) {
           candidates.add(new Candidate(str, CandidateType.NOUN_GENITIVES, hasProperNoun));
+          hasGenitive = false;
         }
         str = "";
         hasNoun = false;
         hasProperNoun = false;
       }
     }
-    if (str.length() > 0) {
+    if (str.length() > 0 && hasGenitive) {
       candidates.add(new Candidate(str, CandidateType.NOUN_GENITIVES, hasProperNoun));
     }
 

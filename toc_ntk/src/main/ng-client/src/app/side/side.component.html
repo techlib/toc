@@ -1,0 +1,9 @@
+<section>
+  <div style="height:800px;overflow:scroll;">
+    <mz-collection>
+      <mz-collection-item *ngFor="let f of folders" (click)="state.setFoldername(f)">
+        <span>{{f}}</span>
+      </mz-collection-item>
+    </mz-collection>
+  </div>
+</section>

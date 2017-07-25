@@ -3,6 +3,7 @@ package cz.incad.ntk.toc_ntk;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
@@ -77,6 +78,29 @@ public class MorphoDiTaServlet extends HttpServlet {
 
   enum Actions {
 
+    VIEW_TOC {
+      @Override
+      void doPerform(HttpServletRequest request, HttpServletResponse response) throws Exception {
+
+        response.setContentType("text/plain;charset=UTF-8");
+        PrintWriter out = response.getWriter();
+        String foldername = request.getParameter("foldername");
+        File dir = new File(foldername);
+        String[] extensions = new String[]{"txt"};
+        List<File> files = (List<File>) FileUtils.listFiles(dir, extensions, false);
+        files.sort(new Comparator<File>() {
+          @Override
+          public int compare(File lhs, File rhs) {
+            // -1 - less than, 1 - greater than, 0 - equal, all inversed for descending
+            return lhs.getName().compareToIgnoreCase(rhs.getName());
+          }
+        });
+        for (File f : files) {
+          out.println(FileUtils.readFileToString(f, Charset.forName("UTF-8")));
+        }
+
+      }
+    },
     PROCESS_PHRASE {
       @Override
       void doPerform(HttpServletRequest request, HttpServletResponse response) throws Exception {
@@ -95,7 +119,6 @@ public class MorphoDiTaServlet extends HttpServlet {
 //                  token.getToken() + " (" + token.getTag().getPosHuman() + ")"
 //                  + " (" + token.getTag().getCase() + ")");
 //        }
-
         out.print(ret.toString(2));
       }
     },
@@ -205,33 +228,23 @@ public class MorphoDiTaServlet extends HttpServlet {
           Candidate c = cs.get(key);
           sorted.add(c);
         }
-        
+
         final ScoreConfig sc = new ScoreConfig();
         String scStr = request.getParameter("scoreconfig");
-        
-        if(scStr != null){
+
+        if (scStr != null) {
           sc.fromJSON(new JSONObject(scStr));
         }
-        
-        Collections.sort(sorted, new Comparator<Candidate>() {
-          @Override
-          public int compare(Candidate lhs, Candidate rhs) {
-            // -1 - less than, 1 - greater than, 0 - equal, all inversed for descending
-            return (int) (rhs.score(sc) - lhs.score(sc));
-          }
-        });
-        //sorted.sort(c.found);
-        for (Candidate c : sorted) {
-            ret.append("candidates", c.toJSON());
-//          String str = c.text;
-//          ret.append("candidates", str + " (" + c.type + ")");
-//          if (c.isMatched) {
-//            str += " ('" + c.matched_text + "' in: " + c.dictionary + ")";
-//            if (c.text.split(" ").length > 1) {
-//              str += "!!!";
-//            }
-//            ret.append("candidates in dictionary", c.score + ".- " + str);
+
+//        Collections.sort(sorted, new Comparator<Candidate>() {
+//          @Override
+//          public int compare(Candidate lhs, Candidate rhs) {
+//            // -1 - less than, 1 - greater than, 0 - equal, all inversed for descending
+//            return (int) (rhs.score(sc) - lhs.score(sc));
 //          }
+//        });
+        for (Candidate c : sorted) {
+          ret.append("candidates", c.toJSON());
 
         }
 

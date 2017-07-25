@@ -15,11 +15,23 @@ export class AppService {
     var url = 'mdt';
     let params: URLSearchParams = new URLSearchParams();
     params.set('action', 'ANALYZE_FOLDER');
-    params.set('foldername', foldername);
+    params.set('foldername', '/home/alberto/Projects/NTK/balicky/'+ foldername);
     params.set('scoreconfig', JSON.stringify(config));
     return this.http.get(url, { search: params })
       .map((response: Response) => {
         return response.json();
+      });
+  }
+  
+  getTocText(foldername: string): Observable<any> {
+
+    var url = 'mdt';
+    let params: URLSearchParams = new URLSearchParams();
+    params.set('action', 'VIEW_TOC');
+    params.set('foldername', '/home/alberto/Projects/NTK/balicky/'+ foldername);
+    return this.http.get(url, { search: params })
+      .map((response: Response) => {
+        return response.text();
       });
   }
 }
