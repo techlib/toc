@@ -7,6 +7,8 @@ import { ScoreConfig } from './models/score-config';
 @Injectable()
 export class AppService {
 
+  //basefolder: string = '/home/kudela/.ntk/balicky/';
+  basefolder: string = '/home/alberto/Projects/NTK/balicky/';
   constructor(private http: Http) { }
 
 
@@ -15,7 +17,7 @@ export class AppService {
     var url = 'mdt';
     let params: URLSearchParams = new URLSearchParams();
     params.set('action', 'ANALYZE_FOLDER');
-    params.set('foldername', '/home/alberto/Projects/NTK/balicky/'+ foldername);
+    params.set('foldername', this.basefolder+ foldername);
     params.set('scoreconfig', JSON.stringify(config));
     return this.http.get(url, { search: params })
       .map((response: Response) => {
@@ -28,7 +30,7 @@ export class AppService {
     var url = 'mdt';
     let params: URLSearchParams = new URLSearchParams();
     params.set('action', 'VIEW_TOC');
-    params.set('foldername', '/home/alberto/Projects/NTK/balicky/'+ foldername);
+    params.set('foldername', this.basefolder+ foldername);
     return this.http.get(url, { search: params })
       .map((response: Response) => {
         return response.text();
