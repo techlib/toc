@@ -147,15 +147,17 @@ public class TocAnalizer {
   //Line should starts and ends with digit
   //In other case we join the lines 
   public List<TocLine> getLines(File f) {
-    FileReader in = null;
+//    FileReader in = null;
     List<TocLine> lines = new ArrayList<>();
     try {
+      List<String> strlines = FileUtils.readLines(f, Charset.forName("UTF-8"));
       String previous = "";
-      in = new FileReader(f);
-      BufferedReader br = new BufferedReader(in);
-      String line = br.readLine();
-      while (line != null) {
-        line = line.trim();
+//      in = new FileReader(f);
+//      BufferedReader br = new BufferedReader(in);
+//      String line = br.readLine();
+//      while (line != null) {
+//        line = line.trim();
+      for(String line : strlines){
         if (Character.isDigit(line.charAt(line.length() - 1))) {
           //This is the end
           line = previous + " " + line;
@@ -175,24 +177,24 @@ public class TocAnalizer {
 //          line = lines.get(lines.size() - 1) + line;
 //          lines.set(lines.size() - 1, line);
         }
-        line = br.readLine();
+//        line = br.readLine();
       }
       if (!previous.equals("")) {
         lines.add(new TocLine(previous));
       }
-      in.close();
+//      in.close();
     } catch (FileNotFoundException ex) {
       LOGGER.log(Level.SEVERE, null, ex);
     } catch (IOException ex) {
       LOGGER.log(Level.SEVERE, null, ex);
-    } finally {
-      try {
-        if (in != null) {
-          in.close();
-        }
-      } catch (IOException ex) {
-        Logger.getLogger(TocAnalizer.class.getName()).log(Level.SEVERE, null, ex);
-      }
+//    } finally {
+//      try {
+//        if (in != null) {
+//          in.close();
+//        }
+//      } catch (IOException ex) {
+//        Logger.getLogger(TocAnalizer.class.getName()).log(Level.SEVERE, null, ex);
+//      }
     }
     return lines;
   }

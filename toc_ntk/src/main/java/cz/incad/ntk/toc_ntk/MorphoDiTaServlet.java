@@ -126,7 +126,7 @@ public class MorphoDiTaServlet extends HttpServlet {
       @Override
       void doPerform(HttpServletRequest request, HttpServletResponse response) throws Exception {
 
-        response.setContentType("text/json;charset=UTF-8");
+        response.setContentType("application/json;charset=UTF-8");
         PrintWriter out = response.getWriter();
         JSONObject ret = new JSONObject();
 
@@ -212,7 +212,7 @@ public class MorphoDiTaServlet extends HttpServlet {
       @Override
       void doPerform(HttpServletRequest request, HttpServletResponse response) throws Exception {
 
-        response.setContentType("text/json;charset=UTF-8");
+        response.setContentType("application/json;charset=UTF-8");
         PrintWriter out = response.getWriter();
         JSONObject ret = new JSONObject();
 
