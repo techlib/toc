@@ -8,6 +8,34 @@
         <servlet-name>MorphoDiTaServlet</servlet-name>
         <url-pattern>/mdt</url-pattern>
     </servlet-mapping>
+    
+    
+    <servlet>
+        <servlet-name>StaticServlet</servlet-name>
+        <jsp-file>/index.jsp</jsp-file>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>StaticServlet</servlet-name>
+        <url-pattern>/home</url-pattern>
+        <url-pattern>/results/*</url-pattern>
+        <url-pattern>/info/*</url-pattern>
+        <url-pattern>/napoveda/*</url-pattern>
+        <url-pattern>/duplicity/*</url-pattern>
+        <url-pattern>/admin/*</url-pattern>
+        <url-pattern>/prihlaseni/*</url-pattern>
+    </servlet-mapping>
+    
+    
+    <servlet>
+        <servlet-name>ForwardServlet</servlet-name>
+        <servlet-class>cz.incad.ntk.toc_ntk.ForwardServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ForwardServlet</servlet-name>
+        <url-pattern>/api/*</url-pattern>
+    </servlet-mapping>
+    
+    
     <session-config>
         <session-timeout>
             30
