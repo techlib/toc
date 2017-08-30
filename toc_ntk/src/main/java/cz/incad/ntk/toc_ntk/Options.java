@@ -47,7 +47,6 @@ public class Options {
     String path = InitServlet.CONFIG_DIR + File.separator + "config.json";
 
     //Get server options
-    
     File fserver = FileUtils.toFile(Options.class.getResource("server_config.json"));
     String sjson = FileUtils.readFileToString(fserver, "UTF-8");
     server_conf = new JSONObject(sjson);
@@ -58,25 +57,23 @@ public class Options {
     if (f.exists() && f.canRead()) {
       String json = FileUtils.readFileToString(f, "UTF-8");
       JSONObject customClientConf = new JSONObject(json).getJSONObject("client");
-      Iterator keys = customClientConf.keys();
-      while (keys.hasNext()) {
-        String key = (String) keys.next();
-        LOGGER.log(Level.FINE, "key {0} will be overrided", key);
-        client_conf.put(key, customClientConf.get(key));
-      }
-      String fnmenu = InitServlet.CONFIG_DIR + File.separator + "menu.json";
-      File fmenu = new File(fnmenu);
-      if (fmenu.exists()) {
-        JSONObject jsonMenu = new JSONObject(FileUtils.readFileToString(fmenu, "UTF-8"));
-        client_conf.put("menu", jsonMenu);
+      if (customClientConf != null) {
+        Iterator keys = customClientConf.keys();
+        while (keys.hasNext()) {
+          String key = (String) keys.next();
+          LOGGER.log(Level.FINE, "key {0} will be overrided", key);
+          client_conf.put(key, customClientConf.get(key));
+        }
       }
 
       JSONObject customServerConf = new JSONObject(json).getJSONObject("server");
-      Iterator keys2 = customServerConf.keys();
-      while (keys2.hasNext()) {
-        String key = (String) keys2.next();
-        LOGGER.log(Level.FINE, "key {0} will be overrided", key);
-        server_conf.put(key, customServerConf.get(key));
+      if (customServerConf != null) {
+        Iterator keys2 = customServerConf.keys();
+        while (keys2.hasNext()) {
+          String key = (String) keys2.next();
+          LOGGER.log(Level.FINE, "key {0} will be overrided", key);
+          server_conf.put(key, customServerConf.get(key));
+        }
       }
     }
 

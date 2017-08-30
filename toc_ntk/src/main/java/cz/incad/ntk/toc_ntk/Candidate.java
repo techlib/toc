@@ -1,6 +1,8 @@
 package cz.incad.ntk.toc_ntk;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.apache.solr.client.solrj.SolrClient;
@@ -17,6 +19,8 @@ import org.json.JSONObject;
  */
 public class Candidate {
   
+  static final Logger LOGGER = Logger.getLogger(Candidate.class.getName());
+  
   
   public enum CandidateType {
     NOUN, PROPERNOUN, NOUN_GENITIVES, ADJETIVES_NOUN, DICTIONARY_WORD
@@ -24,8 +28,8 @@ public class Candidate {
 
   String text;
   boolean isMatched;
-  String matched_text;
-  String dictionary;
+//  String matched_text;
+  List<DictionaryMatch> matches = new ArrayList<>();
   CandidateType type;
   boolean hasProperNoun;
   float score;
@@ -47,8 +51,8 @@ public class Candidate {
     JSONObject ret = new JSONObject();
     ret.put("text", text);
     ret.put("isMatched", isMatched);
-    ret.put("matched_text", matched_text);
-    ret.put("dictionary", dictionary);
+//    ret.put("matched_text", matched_text);
+    ret.put("dictionaries", matches.toArray());
     ret.put("type", type);
     ret.put("hasProperNoun", hasProperNoun);
     ret.put("score", score);
@@ -76,13 +80,13 @@ public class Candidate {
       if(response.getResults().getNumFound() > 0){
         this.isMatched = true;
         SolrDocument doc = response.getResults().get(0);
-        this.matched_text = doc.getFirstValue("key").toString();
-        this.dictionary = doc.getFirstValue("slovnik").toString();
+        
+        this.matches.add(
+                new DictionaryMatch(doc.getFirstValue("slovnik").toString(), 
+                        doc.getFirstValue("key").toString()));
       }
-    } catch (SolrServerException ex) {
-      Logger.getLogger(Candidate.class.getName()).log(Level.SEVERE, null, ex);
-    } catch (IOException ex) {
-      Logger.getLogger(Candidate.class.getName()).log(Level.SEVERE, null, ex);
+    } catch (SolrServerException  | IOException ex) {
+      LOGGER.log(Level.SEVERE, null, ex);
     }
     
   }

@@ -1,15 +1,9 @@
 package cz.incad.ntk.toc_ntk;
 
 import cz.incad.ntk.toc_ntk.Candidate.CandidateType;
-import cz.incad.utils.RESTHelper;
-import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.IOException;
-import java.io.InputStream;
-import java.net.URI;
-import java.net.URISyntaxException;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -18,7 +12,6 @@ import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.apache.commons.io.FileUtils;
-import org.apache.http.client.utils.URIBuilder;
 import org.apache.solr.common.SolrDocument;
 import org.apache.solr.common.SolrDocumentList;
 import org.json.JSONArray;
@@ -123,9 +116,15 @@ public class TocAnalizer {
         SolrDocumentList docs = SolrService.findInDictionaries(word);
         if (!docs.isEmpty()) {
           Candidate c = new Candidate(word, CandidateType.DICTIONARY_WORD);
-          
-          c.matched_text = docs.get(0).getFirstValue("key").toString();
-          c.dictionary = docs.get(0).getFirstValue("slovnik").toString();
+
+//          c.matched_text = docs.get(0).getFirstValue("key").toString();
+//          c.dictionary = docs.get(0).getFirstValue("slovnik").toString();
+          for (SolrDocument doc : docs) {
+            c.matches.add(
+                    new DictionaryMatch(doc.getFirstValue("slovnik").toString(),
+                            doc.getFirstValue("key").toString()));
+          }
+
           candidates.add(c);
         }
       }
@@ -157,7 +156,7 @@ public class TocAnalizer {
 //      String line = br.readLine();
 //      while (line != null) {
 //        line = line.trim();
-      for(String line : strlines){
+      for (String line : strlines) {
         if (Character.isDigit(line.charAt(line.length() - 1))) {
           //This is the end
           line = previous + " " + line;
