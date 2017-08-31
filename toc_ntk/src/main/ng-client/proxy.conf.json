@@ -10,7 +10,7 @@
     "secure": false
   },
   "/mdt": {
-    "target": "http://localhost:8082/toc_ntk/mdt",
+    "target": "http://localhost:8082/ntk_toc/mdt",
     "ignorePath": false,
     "logLevel": "debug",
     "pathRewrite": {
