@@ -22,6 +22,8 @@ import org.apache.solr.common.SolrDocumentList;
  */
 public class SolrService {
   
+  static final Logger LOGGER = Logger.getLogger(Candidate.class.getName());
+  
   public static SolrDocumentList findInDictionaries(String text) {
       SolrDocumentList docs = new SolrDocumentList();
     try {
@@ -40,9 +42,28 @@ public class SolrService {
       if(response.getResults().getNumFound() > 0){
         docs.addAll(response.getResults());
       }
+      
+      
+      query = new SolrQuery();
+      query.setQuery("\"" + text.toLowerCase() + "\"");
+      query.set("defType", "edismax");
+      if(text.indexOf(" ") > 0){
+        query.set("qf", "key_cz");
+      } else {
+        query.set("qf", "key_cz");
+      }
+      query.set("mm", "80%");
+      QueryResponse pshResp = solr.query("psh", query);
+      
+      if(pshResp.getResults().getNumFound() > 0){
+        docs.add(pshResp.getResults().get(0));
+      }
+      
     } catch (SolrServerException | IOException ex) {
-      Logger.getLogger(Candidate.class.getName()).log(Level.SEVERE, null, ex);
+      LOGGER.log(Level.SEVERE, null, ex);
     }
     return docs;
   }
+  
+  
 }

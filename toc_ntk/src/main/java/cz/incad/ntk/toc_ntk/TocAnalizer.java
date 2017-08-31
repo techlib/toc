@@ -37,7 +37,7 @@ public class TocAnalizer {
   /**
    * Find the keyword candidates for the Ordered list of tokens
    *
-   * @param tokens
+   * @param line
    * @return A list of candidates
    */
   public List<Candidate> findCandidates(TocLine line) {
@@ -122,7 +122,7 @@ public class TocAnalizer {
           for (SolrDocument doc : docs) {
             c.matches.add(
                     new DictionaryMatch(doc.getFirstValue("slovnik").toString(),
-                            doc.getFirstValue("key").toString()));
+                            doc.getFirstValue("key_cz").toString()));
           }
 
           candidates.add(c);
@@ -256,6 +256,7 @@ public class TocAnalizer {
           candidates.get(c.text).found++;
         } else {
           candidates.put(c.text, c);
+          
           c.match();
         }
       }

@@ -11,6 +11,7 @@ import org.apache.solr.client.solrj.SolrServerException;
 import org.apache.solr.client.solrj.impl.HttpSolrClient;
 import org.apache.solr.client.solrj.response.QueryResponse;
 import org.apache.solr.common.SolrDocument;
+import org.apache.solr.common.SolrDocumentList;
 import org.json.JSONObject;
 
 /**
@@ -52,7 +53,9 @@ public class Candidate {
     ret.put("text", text);
     ret.put("isMatched", isMatched);
 //    ret.put("matched_text", matched_text);
-    ret.put("dictionaries", matches.toArray());
+for(DictionaryMatch dm : matches){
+    ret.append("dictionaries", dm.name);
+}
     ret.put("type", type);
     ret.put("hasProperNoun", hasProperNoun);
     ret.put("score", score);
@@ -60,32 +63,45 @@ public class Candidate {
     return ret;
   }
   
+  
+  
   public void match() {
     if(type == CandidateType.DICTIONARY_WORD){
       return;
     }
     try {
-      String urlString = "http://localhost:8983/solr/slovnik";
-      SolrClient solr = new HttpSolrClient.Builder(urlString).build();
-      SolrQuery query = new SolrQuery();
-      query.setQuery("\"" + this.text.toLowerCase() + "\"");
-      query.set("defType", "edismax");
-      if(this.text.indexOf(" ") > 0){
-        query.set("qf", "key_cz");
-      } else {
-        query.set("qf", "key_lower");
-      }
-      query.set("mm", "80%");
-      QueryResponse response = solr.query(query);
-      if(response.getResults().getNumFound() > 0){
-        this.isMatched = true;
-        SolrDocument doc = response.getResults().get(0);
+      SolrDocumentList docs = SolrService.findInDictionaries(this.text);
+        if (!docs.isEmpty()) {
+          
+          this.isMatched = true;
+          for (SolrDocument doc : docs) {
+            this.matches.add(
+                    new DictionaryMatch(doc.getFirstValue("slovnik").toString(),
+                            doc.getFirstValue("key_cz").toString()));
+          }
+        }
         
-        this.matches.add(
-                new DictionaryMatch(doc.getFirstValue("slovnik").toString(), 
-                        doc.getFirstValue("key").toString()));
-      }
-    } catch (SolrServerException  | IOException ex) {
+//      String urlString = "http://localhost:8983/solr/slovnik";
+//      SolrClient solr = new HttpSolrClient.Builder(urlString).build();
+//      SolrQuery query = new SolrQuery();
+//      query.setQuery("\"" + this.text.toLowerCase() + "\"");
+//      query.set("defType", "edismax");
+//      if(this.text.indexOf(" ") > 0){
+//        query.set("qf", "key_cz");
+//      } else {
+//        query.set("qf", "key_lower");
+//      }
+//      query.set("mm", "80%");
+//      QueryResponse response = solr.query(query);
+//      if(response.getResults().getNumFound() > 0){
+//        this.isMatched = true;
+//        SolrDocument doc = response.getResults().get(0);
+//        
+//        this.matches.add(
+//                new DictionaryMatch(doc.getFirstValue("slovnik").toString(), 
+//                        doc.getFirstValue("key").toString()));
+//      }
+    } catch (Exception ex) {
       LOGGER.log(Level.SEVERE, null, ex);
     }
     
