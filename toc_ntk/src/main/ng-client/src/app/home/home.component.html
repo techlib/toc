@@ -51,7 +51,7 @@
         <th>type</th>
         <th>isMatched</th>
         <th>matched_text</th>
-        <th>dictionary</th>
+        <th>dictionaries</th>
         <th>hasProperNoun</th>
         <th>found</th>
         </thead>
@@ -62,7 +62,7 @@
             <td>{{c.type}}</td>
             <td>{{c.isMatched}}</td>
             <td>{{c.matched_text}}</td>
-            <td>{{c.dictionary}}</td>
+            <td><ul><li *ngFor="let d of c.dictionaries">{{d}}</li></ul></td>
             <td>{{c.hasProperNoun}}</td>
             <td>{{c.found}}</td>
           </tr>
