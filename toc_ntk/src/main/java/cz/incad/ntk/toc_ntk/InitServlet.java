@@ -14,6 +14,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import cz.cuni.mff.ufal.morphodita.Tagger;
+
 /**
  *
  * @author alberto
@@ -36,6 +38,11 @@ public class InitServlet extends HttpServlet {
 
   //Default config directory in webapp
   public static String DEFAULT_I18N_DIR = "/assets/i18n";
+  
+  
+    String TAGGER_MODEL_FILE = "/home/alberto/Projects/NTK/czech-morfflex-pdt-161115/czech-morfflex-pdt-161115.tagger";
+  
+  public static Tagger tagger;
 
 
   /**
@@ -72,6 +79,15 @@ public class InitServlet extends HttpServlet {
       CONFIG_DIR = System.getProperty("user.home") + File.separator + CONFIG_DIR;
     }
     LOGGER.log(Level.INFO, "app dir is {0}", CONFIG_DIR);
+    
+    
+      LOGGER.log(Level.INFO, "Loading tagger from file {0}", TAGGER_MODEL_FILE);
+    
+    tagger = Tagger.load(TAGGER_MODEL_FILE);
+    if (tagger == null) {
+      LOGGER.log(Level.SEVERE, "Cannot load tagger from file {0}", TAGGER_MODEL_FILE);
+    }
+    
     
   }
 

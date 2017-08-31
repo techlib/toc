@@ -104,6 +104,20 @@ public class TocLine {
   private void getMorphoTokens() {
     mtokens = new ArrayList();
     try {
+      JSONObject js = MorphoTagger.getTags(text);
+      this.jaTokens = js.getJSONArray("result");
+
+      for (int i = 0; i < this.jaTokens.length(); i++) {
+        mtokens.add(new MorphoToken(this.jaTokens.getJSONObject(i)));
+      }
+    } catch (JSONException ex) {
+      LOGGER.log(Level.SEVERE, null, ex);
+    }
+  }
+  
+  private void getMorphoTokensRest() {
+    mtokens = new ArrayList();
+    try {
       Options opts = Options.getInstance();
 
       //LOGGER.log(Level.INFO, "requesting data {0}", line);

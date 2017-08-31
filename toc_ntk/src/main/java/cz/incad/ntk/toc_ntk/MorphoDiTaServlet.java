@@ -4,12 +4,8 @@ import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.nio.charset.Charset;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Comparator;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.logging.Level;
@@ -20,6 +16,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.apache.commons.io.FileUtils;
 import org.json.JSONObject;
+
+import cz.cuni.mff.ufal.morphodita.*;
 
 /**
  *
@@ -43,6 +41,8 @@ public class MorphoDiTaServlet extends HttpServlet {
           throws ServletException, IOException {
 
     try {
+
+      System.out.println(System.getProperty("java.library.path"));
 
       String actionNameParam = request.getParameter(ACTION_NAME);
       if (actionNameParam != null) {
@@ -76,8 +76,25 @@ public class MorphoDiTaServlet extends HttpServlet {
 
   }
 
+  public static String encodeEntities(String text) {
+    return text.replaceAll("&", "&amp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll("\"", "&quot;");
+  }
+
   enum Actions {
 
+    TEST_JAR {
+      @Override
+      void doPerform(HttpServletRequest request, HttpServletResponse response) throws Exception {
+
+        response.setContentType("application/json;charset=UTF-8");
+        PrintWriter out = response.getWriter();
+
+        String text = request.getParameter("text");
+
+        out.print(MorphoTagger.getTags(text).toString(2));
+
+      }
+    },
     VIEW_TOC {
       @Override
       void doPerform(HttpServletRequest request, HttpServletResponse response) throws Exception {

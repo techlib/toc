@@ -15,6 +15,15 @@
     </properties>
     
     <dependencies>
+      
+        <dependency>
+            <groupId>morphodita</groupId>
+            <artifactId>morphodita</artifactId>
+            <version>1.9.2</version>
+            <type>jar</type>
+            <scope>provided</scope>
+        </dependency>
+       
         <dependency>
             <groupId>commons-io</groupId>
             <artifactId>commons-io</artifactId>
