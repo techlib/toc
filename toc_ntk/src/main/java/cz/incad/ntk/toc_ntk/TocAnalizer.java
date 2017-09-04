@@ -106,7 +106,12 @@ public class TocAnalizer {
       candidates.add(new Candidate(str, CandidateType.NOUN_GENITIVES, hasProperNoun));
     }
 
-    //MorphoDiTa split some abbreviations (acronyns). So we will 
+    addDictionaryWords(line, candidates);
+    return candidates;
+  }
+  
+  private void addDictionaryWords(TocLine line, List<Candidate> candidates){
+        //MorphoDiTa split some abbreviations (acronyns). So we will 
     // search words distinct than tokens in our keywords dictionary
     String[] words = line.text.split(" ");
     for (String s : words) {
@@ -129,7 +134,6 @@ public class TocAnalizer {
         }
       }
     }
-    return candidates;
   }
 
   private boolean hasWord(TocLine line, String word) {

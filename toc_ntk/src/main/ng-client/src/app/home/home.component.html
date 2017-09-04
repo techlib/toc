@@ -15,21 +15,24 @@
 <button mz-button (click)="tocModal.open()">view toc</button>
 </div>
 <div class="row">
-<form [formGroup]="scoreConfig" novalidate>
+<form >
   <mz-input-container  [inline]="'true'">
-    <input id="found" type="number" formControlName="found" mz-input [label]="'Found'">
+    <input name="found" type="number" [(ngModel)]="scoreConfig.found" mz-input [label]="'Found'">
   </mz-input-container>
   <mz-input-container  [inline]="'true'">
-    <input id="matched" type="number" formControlName="matched" mz-input [label]="'Matched'">
+    <input name="matched" type="number" [(ngModel)]="scoreConfig.matched" mz-input [label]="'Matched'">
   </mz-input-container>
   <mz-input-container  [inline]="'true'">
-    <input id="multiple" type="number" formControlName="multiple" mz-input [label]="'Multiple'">
+    <input name="multiple" type="number" [(ngModel)]="scoreConfig.multiple" mz-input [label]="'Multiple'">
   </mz-input-container>
   <mz-input-container  [inline]="'true'">
-    <input id="hasProperNoun" type="number" formControlName="hasProperNoun" mz-input [label]="'Proper noun'">
+    <input name="hasProperNoun" type="number" [(ngModel)]="scoreConfig.hasProperNoun" mz-input [label]="'Proper noun'">
+  </mz-input-container>
+  <mz-input-container  [inline]="'true'" *ngFor="let d of scoreConfig.dicts">
+    <input [id]="'dict_' + d" type="number" [name]="'dict_' + d" mz-input [label]="d" [(ngModel)]="scoreConfig.dictionaries[d]">
   </mz-input-container>
   <mz-input-container  [inline]="'true'">
-    <input id="isDictionaryWord" type="number" formControlName="isDictionaryWord" mz-input [label]="'Dictionary'">
+    <input name="isDictionaryWord" type="number" [(ngModel)]="scoreConfig.isDictionaryWord" mz-input [label]="'isDictionaryWord'">
   </mz-input-container>
 </form>
 </div>

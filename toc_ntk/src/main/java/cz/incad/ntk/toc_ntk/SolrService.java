@@ -40,7 +40,7 @@ public class SolrService {
       query.set("mm", "80%");
       QueryResponse response = solr.query("slovnik", query);
       if(response.getResults().getNumFound() > 0){
-        docs.addAll(response.getResults());
+        docs.add(response.getResults().get(0));
       }
       
       

@@ -5,6 +5,9 @@
  */
 package cz.incad.ntk.toc_ntk;
 
+import java.util.HashMap;
+import java.util.Map;
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 /**
@@ -17,6 +20,7 @@ public class ScoreConfig {
   float multiple = 3.0f;
   float hasProperNoun = 5.0f;
   float isDictionaryWord = 2.0f;
+  Map<String, Double> dictionaries = new HashMap<>();
   
   public void fromJSON(JSONObject json){
     found = (float) json.getDouble("found");
@@ -24,5 +28,13 @@ public class ScoreConfig {
     multiple = (float) json.getDouble("multiple");
     hasProperNoun = (float) json.getDouble("hasProperNoun");
     isDictionaryWord = (float) json.getDouble("isDictionaryWord");
+    
+    if(json.has("dictionaries")){
+      JSONArray ja = json.getJSONArray("dictionaries");
+      for(int i = 0; i<ja.length(); i++){
+      dictionaries.put(ja.getJSONObject(i).getString("name"),
+              ja.getJSONObject(i).getDouble("score"));
+      }
+    }
   }
 }

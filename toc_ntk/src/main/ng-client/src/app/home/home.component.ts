@@ -18,7 +18,7 @@ export class HomeComponent implements OnInit {
   candidates: Candidate[] = [];
   loading: boolean = false;
 
-  scoreConfig: FormGroup;
+  scoreConfig: ScoreConfig = new ScoreConfig();
 
   constructor(
     public state: AppState,
@@ -28,7 +28,8 @@ export class HomeComponent implements OnInit {
   }
 
   createForm() {
-    this.scoreConfig = this.fb.group(new ScoreConfig());
+//    sc.dicts = [['PSH', '653_klicova_slova_b.txt']];
+//    this.scoreConfig = this.fb.group(sc);
   }
   ngOnInit() {
     this.state.stateChanged.subscribe(st => {
@@ -38,7 +39,7 @@ export class HomeComponent implements OnInit {
 
   analyze() {
     this.loading = true;
-    this.service.processFolder(this.state.foldername, this.scoreConfig.value).subscribe(res => {
+    this.service.processFolder(this.state.foldername, this.scoreConfig).subscribe(res => {
       this.candidates = res['candidates'];
       this.rescore();
       this.loading = false;
@@ -55,13 +56,22 @@ export class HomeComponent implements OnInit {
 
   rescore() {
     this.candidates.forEach((c: Candidate) => {
-      let sc: ScoreConfig = this.scoreConfig.value;
+      let sc: ScoreConfig = this.scoreConfig;
       c.score = 1;
       if (c.isMatched) {
         c.score = c.score * sc.matched;
         if (c.text.split(" ").length > 1) {
           c.score = c.score * sc.multiple;
         }
+        
+        for (let i in c.dictionaries) {
+          let dm = c.dictionaries[i];
+          if (sc.dictionaries.hasOwnProperty(dm)) {
+            c.score = c.score * sc.dictionaries[dm];
+          }
+        }
+      
+      
       }
       if (c.hasProperNoun) {
         c.score = c.score * sc.hasProperNoun;
