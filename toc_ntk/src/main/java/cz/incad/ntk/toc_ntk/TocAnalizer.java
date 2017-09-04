@@ -47,11 +47,14 @@ public class TocAnalizer {
     //First case: we propose all nouns
     for (MorphoToken token : line.mtokens) {
       if (token.getTag().isNoun()) {
+        Candidate c;
         if (token.isProperNoun()) {
-          candidates.add(new Candidate(token.getLemmaSimple(), CandidateType.PROPERNOUN, true));
+          c = new Candidate(token.getLemmaSimple(), CandidateType.PROPERNOUN, true);
         } else {
-          candidates.add(new Candidate(token.getLemmaSimple(), CandidateType.NOUN));
+          c = new Candidate(token.getLemmaSimple(), CandidateType.NOUN);
         }
+        c.setDeep(line.deep);
+        candidates.add(c);
       }
     }
 

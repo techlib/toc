@@ -1,16 +1,9 @@
 package cz.incad.ntk.toc_ntk;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import org.apache.solr.client.solrj.SolrClient;
-import org.apache.solr.client.solrj.SolrQuery;
-import org.apache.solr.client.solrj.SolrServerException;
-import org.apache.solr.client.solrj.impl.HttpSolrClient;
-import org.apache.solr.client.solrj.response.QueryResponse;
 import org.apache.solr.common.SolrDocument;
 import org.apache.solr.common.SolrDocumentList;
 import org.json.JSONObject;
@@ -28,13 +21,22 @@ public class Candidate {
   }
 
   String text;
+  
+  //Keeps when candidate was found in dictionary
   boolean isMatched;
-//  String matched_text;
+  
+  //List of dictionaries in which candidate was found;
   List<DictionaryMatch> matches = new ArrayList<>();
+  
   CandidateType type;
   boolean hasProperNoun;
   float score;
+  
+  //Keeps how many times the canddate was found in the ToC 
   int found;
+  
+  //List of deeps in which the candidate was found
+  List<Integer> deeps = new ArrayList<>();
 
   public Candidate(String text, CandidateType type) {
     this(text, type, false);
@@ -46,6 +48,10 @@ public class Candidate {
     this.found = 1;
     this.hasProperNoun = hasProperNoun;
   }
+  
+  public void setDeep(Integer deep){
+    this.deeps.add(deep);
+  }
 
   public JSONObject toJSON() {
     JSONObject ret = new JSONObject();
@@ -53,7 +59,7 @@ public class Candidate {
     ret.put("isMatched", isMatched);
 //    ret.put("matched_text", matched_text);
     for (DictionaryMatch dm : matches) {
-      ret.append("dictionaries", dm.name);
+      ret.append("dictionaries", dm.toJSON());
     }
     ret.put("type", type);
     ret.put("hasProperNoun", hasProperNoun);
@@ -77,27 +83,6 @@ public class Candidate {
                           doc.getFirstValue("key_cz").toString()));
         }
       }
-
-//      String urlString = "http://localhost:8983/solr/slovnik";
-//      SolrClient solr = new HttpSolrClient.Builder(urlString).build();
-//      SolrQuery query = new SolrQuery();
-//      query.setQuery("\"" + this.text.toLowerCase() + "\"");
-//      query.set("defType", "edismax");
-//      if(this.text.indexOf(" ") > 0){
-//        query.set("qf", "key_cz");
-//      } else {
-//        query.set("qf", "key_lower");
-//      }
-//      query.set("mm", "80%");
-//      QueryResponse response = solr.query(query);
-//      if(response.getResults().getNumFound() > 0){
-//        this.isMatched = true;
-//        SolrDocument doc = response.getResults().get(0);
-//        
-//        this.matches.add(
-//                new DictionaryMatch(doc.getFirstValue("slovnik").toString(), 
-//                        doc.getFirstValue("key").toString()));
-//      }
     } catch (Exception ex) {
       LOGGER.log(Level.SEVERE, null, ex);
     }

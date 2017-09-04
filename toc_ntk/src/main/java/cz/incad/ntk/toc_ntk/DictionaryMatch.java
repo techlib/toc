@@ -21,6 +21,13 @@ public class DictionaryMatch {
     this.matched_text = matched_text;
   }
   
+  public JSONObject toJSON() {
+    JSONObject ret = new JSONObject();
+    ret.put("text", matched_text);
+    ret.put("name", name);
+    return ret;
+  }
+  
   @Override
   public String toString(){
     return new JSONObject().put("name", name).put("text", matched_text).toString();

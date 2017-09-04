@@ -20,13 +20,14 @@
     <input name="found" type="number" [(ngModel)]="scoreConfig.found" mz-input [label]="'Found'">
   </mz-input-container>
   <mz-input-container  [inline]="'true'">
-    <input name="matched" type="number" [(ngModel)]="scoreConfig.matched" mz-input [label]="'Matched'">
-  </mz-input-container>
-  <mz-input-container  [inline]="'true'">
     <input name="multiple" type="number" [(ngModel)]="scoreConfig.multiple" mz-input [label]="'Multiple'">
   </mz-input-container>
   <mz-input-container  [inline]="'true'">
     <input name="hasProperNoun" type="number" [(ngModel)]="scoreConfig.hasProperNoun" mz-input [label]="'Proper noun'">
+  </mz-input-container>
+  <br/>
+  <mz-input-container  [inline]="'false'">
+    <input name="matched" type="number" [(ngModel)]="scoreConfig.matched" mz-input [label]="'Matched'">
   </mz-input-container>
   <mz-input-container  [inline]="'true'" *ngFor="let d of scoreConfig.dicts">
     <input [id]="'dict_' + d" type="number" [name]="'dict_' + d" mz-input [label]="d" [(ngModel)]="scoreConfig.dictionaries[d]">
@@ -53,7 +54,6 @@
         <th>text</th>
         <th>type</th>
         <th>isMatched</th>
-        <th>matched_text</th>
         <th>dictionaries</th>
         <th>hasProperNoun</th>
         <th>found</th>
@@ -64,8 +64,7 @@
             <td>{{c.text}}</td>
             <td>{{c.type}}</td>
             <td>{{c.isMatched}}</td>
-            <td>{{c.matched_text}}</td>
-            <td><ul><li *ngFor="let d of c.dictionaries">{{d}}</li></ul></td>
+            <td><ul><li *ngFor="let d of c.dictionaries">{{d.text}} - {{d.name}}</li></ul></td>
             <td>{{c.hasProperNoun}}</td>
             <td>{{c.found}}</td>
           </tr>
@@ -76,6 +75,7 @@
 </div>
 
 <mz-modal #tocModal [fixedFooter]="true" [options]="modalOptions" >
+  <mz-modal-header>{{state.foldername}}</mz-modal-header>
   <mz-modal-content>
     <div class="input-field col s12">
           <textarea id="textarea1" class="materialize-textarea" style="height: 100vh;">{{toc_text}}</textarea>

@@ -5,7 +5,6 @@
  */
 package cz.incad.ntk.toc_ntk;
 
-import static cz.incad.ntk.toc_ntk.TocAnalizer.LOGGER;
 import cz.incad.utils.RESTHelper;
 import java.io.IOException;
 import java.io.InputStream;
@@ -29,7 +28,8 @@ public class TocLine {
   public static final Logger LOGGER = Logger.getLogger(TocLine.class.getName());
 
   String raw;
-  String deep;
+  Integer deep;
+  //String deep;
   String text;
   int start_page;
   ArrayList<MorphoToken> mtokens;
@@ -37,7 +37,7 @@ public class TocLine {
 
   public TocLine(JSONObject json) {
     this.raw = json.getString("raw");
-    this.deep = json.optString("deep");
+    this.deep = json.optInt("deep");
     this.text = json.getString("text");
     this.start_page = json.optInt("start_page");
     mtokens = new ArrayList();
@@ -84,7 +84,10 @@ public class TocLine {
         pos = str.indexOf(" ");
       }
       if (pos > -1) {
-        this.deep = str.substring(0, pos);
+        // Zatim deep pro farmat 1.2.3
+        //Musime zpracovat tabulatory
+        this.deep = str.substring(0, pos).split(".").length;
+        
         this.text = str.substring(pos, page_pos+1).trim();
       } else {
         this.text = str.substring(0, page_pos + 1).trim();
