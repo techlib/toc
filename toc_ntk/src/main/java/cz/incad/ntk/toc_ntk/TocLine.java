@@ -97,7 +97,7 @@ public class TocLine {
     }
     
     //Clean multiple dots 
-    this.text = this.text.replaceAll("\\.+", "\\.");
+    this.text = this.text.replaceAll("\\.+", "\\.").replaceAll("\\s+", " ");
     getMorphoTokens();
   }
   
@@ -110,7 +110,7 @@ public class TocLine {
    */
   private String cleanText(String s){
     
-    return s.replaceAll("-", "");
+    return s.replaceAll(" - ", " ");
   }
   
   private void getMorphoTokens() {

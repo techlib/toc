@@ -43,9 +43,19 @@ public class TocAnalizer {
   public List<Candidate> findCandidates(TocLine line) {
 
     List<Candidate> candidates = new ArrayList<>();
+    boolean skypSingle;
+    try {
+      skypSingle = Options.getInstance().getBoolean("skypSingleWordTokens", true);
+    } catch (IOException | JSONException ex) {
+      LOGGER.log(Level.SEVERE, null, ex);
+      return candidates;
+    }
 
     //First case: we propose all nouns
     for (MorphoToken token : line.mtokens) {
+      if(skypSingle && token.isSingleWord()){
+        continue;
+      }
       if (token.getTag().isNoun()) {
         Candidate c;
         if (token.isProperNoun()) {
@@ -74,10 +84,12 @@ public class TocAnalizer {
         str = "";
         hasAdjective = false;
         hasProperNoun = false;
+      } else if(token.isParenthesis()){
+        //Tady bychom mely dat dohromady vsechno v zavorkach
       } else {
-        str = "";
-        hasAdjective = false;
-        hasProperNoun = false;
+        str += token.getToken();
+        //hasAdjective = false;
+        //hasProperNoun = false;
       }
     }
 

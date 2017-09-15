@@ -6,6 +6,7 @@
   },
   "cleanBeforeMorphoTag": true,
   "useCacheForTocLines": false,
+  "skypSingleWordTokens": true,
   "jobs": {}
 }
 

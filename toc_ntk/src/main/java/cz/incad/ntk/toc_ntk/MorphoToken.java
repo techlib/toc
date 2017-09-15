@@ -15,12 +15,14 @@ public class MorphoToken {
   JSONObject mtoken;
   MorphoTag tag;
   String lemma;
+  String token;
   String lemmaSimple;
 
   public MorphoToken(JSONObject token) {
     this.mtoken = token;
     this.tag = new MorphoTag(this.mtoken.getString("tag"));
     this.lemma = this.mtoken.getString("lemma");
+    this.token = this.mtoken.getString("token");
     int pos = lemma.indexOf("-");
     if (pos > -1) {
       lemmaSimple = lemma.substring(0, pos);
@@ -33,6 +35,14 @@ public class MorphoToken {
         lemmaSimple = lemma;
       }
     }
+  }
+  
+  public boolean isParenthesis(){
+    return this.token.equals("(");
+  }
+  
+  public boolean isSingleWord(){
+    return this.token.length() < 2;
   }
 
   public String getToken() {
