@@ -39,6 +39,7 @@ export class HomeComponent implements OnInit {
 
   analyze() {
     this.loading = true;
+    this.candidates = [];
     this.service.processFolder(this.state.foldername, this.scoreConfig).subscribe(res => {
       this.candidates = res['candidates'];
       this.rescore();

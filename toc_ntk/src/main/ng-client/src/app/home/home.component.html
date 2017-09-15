@@ -42,7 +42,7 @@
     [color]="'blue'"
     [size]="'big'">
   </mz-spinner>
-  <mz-card
+  <mz-card  *ngIf="!loading"
     [hoverable]="true">
     <mz-card-title>
       Candidates

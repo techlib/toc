@@ -101,20 +101,38 @@ public class TocLine {
     getMorphoTokens();
   }
   
+  /**
+   * Clean the text removing problematic characters
+   * Morphodita handles better without -
+   * Rovnice Rankineova - Hugoniotova => Rovnice Rankineova Hugoniotova
+   * @param s
+   * @return 
+   */
+  private String cleanText(String s){
+    
+    return s.replaceAll("-", "");
+  }
   
-  
-
   private void getMorphoTokens() {
     mtokens = new ArrayList();
     try {
-      JSONObject js = MorphoTagger.getTags(text);
-      this.jaTokens = js.getJSONArray("result");
-
-      for (int i = 0; i < this.jaTokens.length(); i++) {
-        mtokens.add(new MorphoToken(this.jaTokens.getJSONObject(i)));
+      JSONObject js;
+      if(Options.getInstance().getBoolean("cleanBeforeMorphoTag", true)){
+        String s = cleanText(text);
+        LOGGER.log(Level.FINE, s);
+        js = MorphoTagger.getTags(s);
+      } else {
+        js = MorphoTagger.getTags(text);
       }
-    } catch (JSONException ex) {
-      LOGGER.log(Level.SEVERE, null, ex);
+      LOGGER.log(Level.FINE, js.toString());
+      if(js.has("result")){
+        this.jaTokens = js.getJSONArray("result");
+        for (int i = 0; i < this.jaTokens.length(); i++) {
+          mtokens.add(new MorphoToken(this.jaTokens.getJSONObject(i)));
+        }
+      }
+    } catch (IOException | JSONException ex) {
+      LOGGER.log(Level.SEVERE, null,ex);
     }
   }
   

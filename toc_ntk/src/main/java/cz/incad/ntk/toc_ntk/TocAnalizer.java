@@ -247,26 +247,36 @@ public class TocAnalizer {
   }
 
   public void analyze(File f, Map<String, Candidate> candidates) {
-    List<TocLine> lines;
-    if (loadFromSaved(f.getName())) {
-      lines = getLinesFromSaved();
-    } else {
-      lines = getLines(f);
-      save(lines);
-    }
-    for (TocLine line : lines) {
-      for (MorphoToken token : line.mtokens) {
-
-      }
-      for (Candidate c : findCandidates(line)) {
-        if (candidates.containsKey(c.text)) {
-          candidates.get(c.text).found++;
+    try {
+      List<TocLine> lines;
+      
+      
+      if(Options.getInstance().getBoolean("useCacheForTocLines", true)){
+        if (loadFromSaved(f.getName())) {
+          lines = getLinesFromSaved();
         } else {
-          candidates.put(c.text, c);
+          lines = getLines(f);
+          save(lines);
+        }
+      } else {
+        lines = getLines(f);
+      }
+      for (TocLine line : lines) {
+        for (MorphoToken token : line.mtokens) {
           
-          c.match();
+        }
+        for (Candidate c : findCandidates(line)) {
+          if (candidates.containsKey(c.text)) {
+            candidates.get(c.text).found++;
+          } else {
+            candidates.put(c.text, c);
+            
+            c.match();
+          }
         }
       }
+    } catch (IOException | JSONException ex) {
+      LOGGER.log(Level.SEVERE, null, ex);
     }
   }
 
