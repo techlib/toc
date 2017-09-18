@@ -41,6 +41,7 @@ public class InitServlet extends HttpServlet {
   
   
     String TAGGER_MODEL_FILE = "/home/alberto/Projects/NTK/czech-morfflex-pdt-161115/czech-morfflex-pdt-161115.tagger";
+  //  String TAGGER_MODEL_FILE = "/home/kudela/.ntk/czech-morfflex-pdt-161115.tagger";
   
   public static Tagger tagger;
 
@@ -62,7 +63,6 @@ public class InitServlet extends HttpServlet {
   @Override
   public void init() throws ServletException {
     
-  
     if (getServletContext().getInitParameter("def_config_dir") != null) {
       DEFAULT_CONFIG_DIR = getServletContext().getInitParameter("def_config_dir");
     } 

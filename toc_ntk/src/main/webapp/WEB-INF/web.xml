@@ -17,6 +17,15 @@
         <url-pattern>/mdt</url-pattern>
     </servlet-mapping>
     
+    <servlet>
+        <servlet-name>CandidatesServlet</servlet-name>
+        <servlet-class>cz.incad.ntk.toc_ntk.CandidatesServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>CandidatesServlet</servlet-name>
+        <url-pattern>/candidates</url-pattern>
+    </servlet-mapping>
+    
     
     <servlet>
         <servlet-name>StaticServlet</servlet-name>
@@ -26,7 +35,7 @@
         <servlet-name>StaticServlet</servlet-name>
         <url-pattern>/home</url-pattern>
         <url-pattern>/info/*</url-pattern>
-        <url-pattern>/napoveda/*</url-pattern>
+        <url-pattern>/help/*</url-pattern>
         <url-pattern>/admin/*</url-pattern>
         <url-pattern>/prihlaseni/*</url-pattern>
     </servlet-mapping>

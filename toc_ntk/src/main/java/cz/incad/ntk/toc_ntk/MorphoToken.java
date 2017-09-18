@@ -37,6 +37,10 @@ public class MorphoToken {
     }
   }
   
+  public boolean hasSpace(){
+    return this.mtoken.getString("space").equals(" ");
+  }
+  
   public boolean isParenthesis(){
     return this.token.equals("(");
   }

@@ -50,6 +50,7 @@
     <mz-card-content>
       <table>
         <thead>
+        <th></th>
         <th>score</th>
         <th>text</th>
         <th>type</th>
@@ -59,7 +60,12 @@
         <th>found</th>
         </thead>
         <tbody>
-          <tr  *ngFor="let c of candidates">
+          <tr  *ngFor="let c of candidates; let idx = index">
+            <td>
+        <mz-checkbox-container>
+              <input [id]="'ch_'+idx" type="checkbox" mz-checkbox >
+        </mz-checkbox-container>
+            </td>
             <td>{{c.score | number: '1.1-3'}}</td>
             <td>{{c.text}}</td>
             <td>{{c.type}}</td>

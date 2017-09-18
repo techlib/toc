@@ -15,6 +15,7 @@ import org.apache.solr.client.solrj.impl.HttpSolrClient;
 import org.apache.solr.client.solrj.response.QueryResponse;
 import org.apache.solr.common.SolrDocument;
 import org.apache.solr.common.SolrDocumentList;
+import org.apache.solr.common.SolrInputDocument;
 
 /**
  *
@@ -23,11 +24,20 @@ import org.apache.solr.common.SolrDocumentList;
 public class SolrService {
   
   static final Logger LOGGER = Logger.getLogger(Candidate.class.getName());
+  static final String urlString = "http://localhost:8983/solr";
+  
+  public static void addToBlackList(String key) throws SolrServerException, IOException{
+    
+      SolrClient solr = new HttpSolrClient.Builder(urlString).build();
+      SolrInputDocument idoc = new SolrInputDocument();
+      idoc.addField("key", key);
+      LOGGER.info(idoc.toString());
+      solr.add("blacklist", idoc, 100);
+  }
   
   public static SolrDocumentList findInDictionaries(String text) {
       SolrDocumentList docs = new SolrDocumentList();
     try {
-      String urlString = "http://localhost:8983/solr";
       SolrClient solr = new HttpSolrClient.Builder(urlString).build();
       SolrQuery query = new SolrQuery();
       query.setQuery("\"" + text.toLowerCase() + "\"");

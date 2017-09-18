@@ -15,16 +15,16 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.apache.commons.io.FileUtils;
+import org.apache.solr.client.solrj.SolrServerException;
 import org.json.JSONObject;
-
 
 /**
  *
  * @author alberto
  */
-public class MorphoDiTaServlet extends HttpServlet {
+public class CandidatesServlet extends HttpServlet {
 
-  public static final Logger LOGGER = Logger.getLogger(MorphoDiTaServlet.class.getName());
+  public static final Logger LOGGER = Logger.getLogger(CandidatesServlet.class.getName());
   public static final String ACTION_NAME = "action";
 
   /**
@@ -81,64 +81,37 @@ public class MorphoDiTaServlet extends HttpServlet {
 
   enum Actions {
 
-    TEST_JAR {
+    EXPORT {
       @Override
       void doPerform(HttpServletRequest request, HttpServletResponse response) throws Exception {
 
         response.setContentType("application/json;charset=UTF-8");
         PrintWriter out = response.getWriter();
 
-        String text = request.getParameter("text");
+        String text = request.getParameter("key");
 
         out.print(MorphoTagger.getTags(text).toString(2));
 
       }
     },
-    VIEW_TOC {
+    ADD_TO_BLACKLIST {
       @Override
       void doPerform(HttpServletRequest request, HttpServletResponse response) throws Exception {
 
-        response.setContentType("text/plain;charset=UTF-8");
+        response.setContentType("application/json;charset=UTF-8");
         PrintWriter out = response.getWriter();
-        String foldername = request.getParameter("foldername");
-        File dir = new File(foldername);
-        String[] extensions = new String[]{"txt"};
-        List<File> files = (List<File>) FileUtils.listFiles(dir, extensions, false);
-        files.sort(new Comparator<File>() {
-          @Override
-          public int compare(File lhs, File rhs) {
-            // -1 - less than, 1 - greater than, 0 - equal, all inversed for descending
-            return lhs.getName().compareToIgnoreCase(rhs.getName());
-          }
-        });
-        for (File f : files) {
-          out.println(FileUtils.readFileToString(f, Charset.forName("UTF-8")));
+        String text = request.getParameter("key");
+        JSONObject ret = new JSONObject();
+        try {
+          SolrService.addToBlackList(text);
+          out.print(ret.put("code", 0).toString());
+        } catch (Exception ex) {
+          out.print(ret.put("code", 1).put("error", ex).toString());
         }
 
       }
     },
-    PROCESS_PHRASE {
-      @Override
-      void doPerform(HttpServletRequest request, HttpServletResponse response) throws Exception {
-
-        response.setContentType("text/json;charset=UTF-8");
-        PrintWriter out = response.getWriter();
-        JSONObject ret = new JSONObject();
-
-        String data = request.getParameter("data");
-
-        ret.put("phrase", data);
-
-//        TocAnalizer t = new TocAnalizer();
-//        for (MorphoToken token : t.analyzeLine(data)) {
-//          ret.append("tokens (part of speech) (Case)",
-//                  token.getToken() + " (" + token.getTag().getPosHuman() + ")"
-//                  + " (" + token.getTag().getCase() + ")");
-//        }
-        out.print(ret.toString(2));
-      }
-    },
-    ANALYZE_FOLDER {
+    FIND {
       @Override
       void doPerform(HttpServletRequest request, HttpServletResponse response) throws Exception {
 
@@ -165,14 +138,6 @@ public class MorphoDiTaServlet extends HttpServlet {
         if (scStr != null) {
           sc.fromJSON(new JSONObject(scStr));
         }
-
-//        Collections.sort(sorted, new Comparator<Candidate>() {
-//          @Override
-//          public int compare(Candidate lhs, Candidate rhs) {
-//            // -1 - less than, 1 - greater than, 0 - equal, all inversed for descending
-//            return (int) (rhs.score(sc) - lhs.score(sc));
-//          }
-//        });
         for (Candidate c : sorted) {
           ret.append("candidates", c.toJSON());
 
