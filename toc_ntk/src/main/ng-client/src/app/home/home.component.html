@@ -1,34 +1,42 @@
 <div class="row">
   <span class="col s12 m5"><i mz-icon-mdi mz-input-prefix
-     [icon]="'folder'">
-</i>{{state.foldername}}</span>
+                              [icon]="'folder'">
+  </i>{{state.foldername}}</span>
 <button mz-button (click)="analyze()">analyze</button>
 <button mz-button (click)="rescore()">rescore</button>
-<button mz-button (click)="tocModal.open()">view toc</button>
-<button mz-button (click)="export()">export</button>
+<button mz-button [disabled]="!hasToc" (click)="openToc()" >view toc</button>
+<button mz-button [disabled]="selected.length === 0" (click)="export()">export</button>
 </div>
 <div class="row">
-<form >
+  <form >
+    <mz-input-container  [inline]="'true'">
+      <input name="found" type="number" [(ngModel)]="scoreConfig.found" mz-input [label]="'Found'">
+    </mz-input-container>
+    <mz-input-container  [inline]="'true'">
+      <input name="multiple" type="number" [(ngModel)]="scoreConfig.multiple" mz-input [label]="'Multiple'">
+    </mz-input-container>
+    <mz-input-container  [inline]="'true'">
+      <input name="hasProperNoun" type="number" [(ngModel)]="scoreConfig.hasProperNoun" mz-input [label]="'Proper noun'">
+    </mz-input-container>
+    <br/>
+    <mz-input-container  [inline]="'false'">
+      <input name="matched" type="number" [(ngModel)]="scoreConfig.matched" mz-input [label]="'Matched'">
+    </mz-input-container>
+    <mz-input-container  [inline]="'true'" *ngFor="let d of scoreConfig.dicts">
+      <input [id]="'dict_' + d" type="number" [name]="'dict_' + d" mz-input [label]="d" [(ngModel)]="scoreConfig.dictionaries[d]">
+    </mz-input-container>
+    <mz-input-container  [inline]="'true'">
+      <input name="isDictionaryWord" type="number" [(ngModel)]="scoreConfig.isDictionaryWord" mz-input [label]="'isDictionaryWord'">
+    </mz-input-container>
+  </form>
+</div>
+<div class="row">
   <mz-input-container  [inline]="'true'">
-    <input name="found" type="number" [(ngModel)]="scoreConfig.found" mz-input [label]="'Found'">
+    <input id="filter_matched" type="checkbox" [(ngModel)]="showMatched" label="Show matched" mz-input />
   </mz-input-container>
   <mz-input-container  [inline]="'true'">
-    <input name="multiple" type="number" [(ngModel)]="scoreConfig.multiple" mz-input [label]="'Multiple'">
+    <input id="filter_free" type="checkbox" [(ngModel)]="showFree"  label="Show not matched" mz-input />
   </mz-input-container>
-  <mz-input-container  [inline]="'true'">
-    <input name="hasProperNoun" type="number" [(ngModel)]="scoreConfig.hasProperNoun" mz-input [label]="'Proper noun'">
-  </mz-input-container>
-  <br/>
-  <mz-input-container  [inline]="'false'">
-    <input name="matched" type="number" [(ngModel)]="scoreConfig.matched" mz-input [label]="'Matched'">
-  </mz-input-container>
-  <mz-input-container  [inline]="'true'" *ngFor="let d of scoreConfig.dicts">
-    <input [id]="'dict_' + d" type="number" [name]="'dict_' + d" mz-input [label]="d" [(ngModel)]="scoreConfig.dictionaries[d]">
-  </mz-input-container>
-  <mz-input-container  [inline]="'true'">
-    <input name="isDictionaryWord" type="number" [(ngModel)]="scoreConfig.isDictionaryWord" mz-input [label]="'isDictionaryWord'">
-  </mz-input-container>
-</form>
 </div>
 <div class="row">
   <mz-spinner *ngIf="loading"
@@ -53,11 +61,12 @@
         <th>found</th>
         </thead>
         <tbody>
-          <tr  *ngFor="let c of candidates; let idx = index">
+          <ng-container *ngFor="let c of candidates; let idx = index">
+          <tr *ngIf="(showMatched && c.isMatched) || (showFree && !c.isMatched)">
             <td>
-        <mz-checkbox-container>
-              <input [id]="'ch_'+idx" type="checkbox" [(ngModel)]="c.selected" mz-checkbox >
-        </mz-checkbox-container>
+            <mz-checkbox-container>
+              <input [id]="'ch_'+idx" type="checkbox" [(ngModel)]="c.selected" (change)="select()" mz-checkbox >
+            </mz-checkbox-container>
             </td>
             <td>{{c.score | number: '1.1-3'}}</td>
             <td>{{c.text}}</td>
@@ -67,18 +76,31 @@
             <td>{{c.hasProperNoun}}</td>
             <td>{{c.found}}</td>
           </tr>
+          </ng-container>
         </tbody>
       </table>
-  </mz-card-content>
-</mz-card>
+    </mz-card-content>
+  </mz-card>
 </div>
 
 <mz-modal #tocModal [fixedFooter]="true" [options]="modalOptions" >
   <mz-modal-header>{{state.foldername}}</mz-modal-header>
   <mz-modal-content>
     <div class="input-field col s12">
-          <textarea id="textarea1" class="materialize-textarea" style="height: 100vh;">{{toc_text}}</textarea>
-        </div>
+      <textarea id="textarea1" class="materialize-textarea" style="height: 100vh;">{{toc_text}}</textarea>
+    </div>
+  </mz-modal-content>
+  <mz-modal-footer>
+    <button mz-button [flat]="true" mz-modal-close>close</button>
+  </mz-modal-footer>
+</mz-modal>
+
+<mz-modal #exportModal [fixedFooter]="true" [options]="modalOptions" >
+  <mz-modal-header>Exported candidates</mz-modal-header>
+  <mz-modal-content>
+    <div class="input-field col s12">
+      <textarea id="textarea1" class="materialize-textarea" style="height: 100vh;">{{exported}}</textarea>
+    </div>
   </mz-modal-content>
   <mz-modal-footer>
     <button mz-button [flat]="true" mz-modal-close>close</button>
