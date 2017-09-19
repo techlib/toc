@@ -45,8 +45,15 @@ export class HomeComponent implements OnInit {
       this.rescore();
       this.loading = false;
     });
+  }
 
-
+  export() {
+    this.loading = true;
+    let selected: Candidate[] = this.candidates.filter((c:Candidate) => {return c['selected']});
+    this.service.export(selected).subscribe(res => {
+      console.log(res);
+      this.loading = false;
+    });
   }
 
   modalOpened() {

@@ -1,18 +1,11 @@
 <div class="row">
-<mz-input-container class="col s12 m7">
-  <i mz-icon-mdi mz-input-prefix
+  <span class="col s12 m5"><i mz-icon-mdi mz-input-prefix
      [icon]="'folder'">
-</i>
-<input mz-input
-       [(ngModel)]="state.foldername" (keyup.enter)="analyze()"
-       [label]="'Folder'"
-       id="foldername"
-       placeholder="Enter folder name"
-       type="text">
-</mz-input-container>
+</i>{{state.foldername}}</span>
 <button mz-button (click)="analyze()">analyze</button>
 <button mz-button (click)="rescore()">rescore</button>
 <button mz-button (click)="tocModal.open()">view toc</button>
+<button mz-button (click)="export()">export</button>
 </div>
 <div class="row">
 <form >
@@ -63,7 +56,7 @@
           <tr  *ngFor="let c of candidates; let idx = index">
             <td>
         <mz-checkbox-container>
-              <input [id]="'ch_'+idx" type="checkbox" mz-checkbox >
+              <input [id]="'ch_'+idx" type="checkbox" [(ngModel)]="c.selected" mz-checkbox >
         </mz-checkbox-container>
             </td>
             <td>{{c.score | number: '1.1-3'}}</td>

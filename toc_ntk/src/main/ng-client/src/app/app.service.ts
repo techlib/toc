@@ -3,6 +3,7 @@ import { Http, Response, URLSearchParams, Headers, RequestOptions } from '@angul
 import { Observable } from 'rxjs/Rx';
 
 import { ScoreConfig } from './models/score-config';
+import { Candidate } from './models/candidate';
 
 @Injectable()
 export class AppService {
@@ -19,6 +20,18 @@ export class AppService {
     params.set('action', 'ANALYZE_FOLDER');
     params.set('foldername', this.basefolder+ foldername);
     params.set('scoreconfig', JSON.stringify(config));
+    return this.http.get(url, { search: params })
+      .map((response: Response) => {
+        return response.json();
+      });
+  }
+  
+  export(cs: Candidate[]): Observable<any> {
+
+    var url = 'candidates';
+    let params: URLSearchParams = new URLSearchParams();
+    params.set('action', 'EXPORT');
+    params.set('canditates', JSON.stringify(cs));
     return this.http.get(url, { search: params })
       .map((response: Response) => {
         return response.json();
