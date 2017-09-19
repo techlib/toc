@@ -16,6 +16,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.apache.commons.io.FileUtils;
 import org.apache.solr.client.solrj.SolrServerException;
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 /**
@@ -88,9 +89,9 @@ public class CandidatesServlet extends HttpServlet {
         response.setContentType("application/json;charset=UTF-8");
         PrintWriter out = response.getWriter();
 
-        String text = request.getParameter("key");
+        String csStr = request.getParameter("canditates");
 
-        out.print(MorphoTagger.getTags(text).toString(2));
+        out.print(new JSONArray(csStr).toString(2));
 
       }
     },

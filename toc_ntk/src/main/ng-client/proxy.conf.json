@@ -18,5 +18,15 @@
     },
     "changeOrigin": false,
     "secure": false
+  },
+  "/candidates": {
+    "target": "http://localhost:8082/ntk_toc/candidates",
+    "ignorePath": false,
+    "logLevel": "debug",
+    "pathRewrite": {
+      "^/candidates":""
+    },
+    "changeOrigin": false,
+    "secure": false
   }
 }
