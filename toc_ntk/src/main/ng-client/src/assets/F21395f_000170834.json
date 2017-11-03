@@ -12,9 +12,19 @@
       "hasProperNoun": false,
       "score": 0,
       "found": 21,
-      "isMatched": false,
+      "isMatched": true,
       "text": "proudění",
-      "type": "NOUN"
+      "type": "NOUN",
+      "dictionaries": [
+        {
+          "name": "653_klicova_slova_b.txt",
+          "text": "proudění"
+        },
+        {
+          "name": "PSH",
+          "text": "flowing"
+        }
+      ]
     },
     {
       "hasProperNoun": false,
@@ -68,9 +78,13 @@
       "hasProperNoun": false,
       "score": 0,
       "found": 1,
-      "isMatched": false,
+      "isMatched": true,
       "text": "řešení úloh",
-      "type": "NOUN_GENITIVES"
+      "type": "NOUN_GENITIVES",
+      "dictionaries": [{
+        "name": "653_klicova_slova_b.txt",
+        "text": "řešení úloh"
+      }]
     },
     {
       "hasProperNoun": false,
@@ -92,9 +106,19 @@
       "hasProperNoun": false,
       "score": 0,
       "found": 10,
-      "isMatched": false,
+      "isMatched": true,
       "text": "rovnice",
-      "type": "NOUN"
+      "type": "NOUN",
+      "dictionaries": [
+        {
+          "name": "653_klicova_slova_b.txt",
+          "text": "rovnice"
+        },
+        {
+          "name": "PSH",
+          "text": "continuity equation"
+        }
+      ]
     },
     {
       "hasProperNoun": true,
@@ -108,9 +132,13 @@
       "hasProperNoun": false,
       "score": 0,
       "found": 4,
-      "isMatched": false,
+      "isMatched": true,
       "text": "metoda",
-      "type": "NOUN"
+      "type": "NOUN",
+      "dictionaries": [{
+        "name": "PSH",
+        "text": "methods"
+      }]
     },
     {
       "hasProperNoun": false,
@@ -132,17 +160,31 @@
       "hasProperNoun": false,
       "score": 0,
       "found": 1,
-      "isMatched": false,
+      "isMatched": true,
       "text": "zobrazení",
-      "type": "NOUN"
+      "type": "NOUN",
+      "dictionaries": [
+        {
+          "name": "653_klicova_slova_b.txt",
+          "text": "zobrazení"
+        },
+        {
+          "name": "PSH",
+          "text": "continuous mapping"
+        }
+      ]
     },
     {
       "hasProperNoun": false,
       "score": 0,
       "found": 1,
-      "isMatched": false,
+      "isMatched": true,
       "text": "Kritický stav",
-      "type": "ADJETIVES_NOUN"
+      "type": "ADJETIVES_NOUN",
+      "dictionaries": [{
+        "name": "PSH",
+        "text": "critical state"
+      }]
     },
     {
       "hasProperNoun": false,
@@ -156,9 +198,19 @@
       "hasProperNoun": false,
       "score": 0,
       "found": 10,
-      "isMatched": false,
+      "isMatched": true,
       "text": "plyn",
-      "type": "NOUN"
+      "type": "NOUN",
+      "dictionaries": [
+        {
+          "name": "653_klicova_slova_b.txt",
+          "text": "plyn"
+        },
+        {
+          "name": "PSH",
+          "text": "gases"
+        }
+      ]
     },
     {
       "hasProperNoun": false,
@@ -172,9 +224,13 @@
       "hasProperNoun": false,
       "score": 0,
       "found": 1,
-      "isMatched": false,
+      "isMatched": true,
       "text": "Rovnice kontinuity",
-      "type": "NOUN_GENITIVES"
+      "type": "NOUN_GENITIVES",
+      "dictionaries": [{
+        "name": "PSH",
+        "text": "continuity equation"
+      }]
     },
     {
       "hasProperNoun": false,
@@ -196,17 +252,25 @@
       "hasProperNoun": false,
       "score": 0,
       "found": 1,
-      "isMatched": false,
+      "isMatched": true,
       "text": "tabulka",
-      "type": "NOUN"
+      "type": "NOUN",
+      "dictionaries": [{
+        "name": "PSH",
+        "text": "tables"
+      }]
     },
     {
       "hasProperNoun": false,
       "score": 0,
       "found": 1,
-      "isMatched": false,
+      "isMatched": true,
       "text": "značka",
-      "type": "NOUN"
+      "type": "NOUN",
+      "dictionaries": [{
+        "name": "PSH",
+        "text": "signs"
+      }]
     },
     {
       "hasProperNoun": false,
@@ -220,17 +284,25 @@
       "hasProperNoun": false,
       "score": 0,
       "found": 1,
-      "isMatched": false,
+      "isMatched": true,
       "text": "úkol",
-      "type": "NOUN"
+      "type": "NOUN",
+      "dictionaries": [{
+        "name": "PSH",
+        "text": "tasks"
+      }]
     },
     {
       "hasProperNoun": false,
       "score": 0,
       "found": 1,
-      "isMatched": false,
+      "isMatched": true,
       "text": "Nelineární teorie",
-      "type": "ADJETIVES_NOUN"
+      "type": "ADJETIVES_NOUN",
+      "dictionaries": [{
+        "name": "653_klicova_slova_b.txt",
+        "text": "nelineární teorie"
+      }]
     },
     {
       "hasProperNoun": true,
@@ -244,9 +316,13 @@
       "hasProperNoun": false,
       "score": 0,
       "found": 1,
-      "isMatched": false,
+      "isMatched": true,
       "text": "bariéra",
-      "type": "NOUN"
+      "type": "NOUN",
+      "dictionaries": [{
+        "name": "PSH",
+        "text": "ethnic barriers"
+      }]
     },
     {
       "hasProperNoun": false,
@@ -276,9 +352,13 @@
       "hasProperNoun": false,
       "score": 0,
       "found": 4,
-      "isMatched": false,
+      "isMatched": true,
       "text": "úloha",
-      "type": "NOUN"
+      "type": "NOUN",
+      "dictionaries": [{
+        "name": "PSH",
+        "text": "approximation problems"
+      }]
     },
     {
       "hasProperNoun": false,
@@ -308,9 +388,19 @@
       "hasProperNoun": false,
       "score": 0,
       "found": 1,
-      "isMatched": false,
+      "isMatched": true,
       "text": "prostředí",
-      "type": "NOUN"
+      "type": "NOUN",
+      "dictionaries": [
+        {
+          "name": "653_klicova_slova_b.txt",
+          "text": "prostředí"
+        },
+        {
+          "name": "PSH",
+          "text": "prostředí"
+        }
+      ]
     },
     {
       "hasProperNoun": false,
@@ -332,9 +422,19 @@
       "hasProperNoun": false,
       "score": 0,
       "found": 1,
-      "isMatched": false,
+      "isMatched": true,
       "text": "spalování",
-      "type": "NOUN"
+      "type": "NOUN",
+      "dictionaries": [
+        {
+          "name": "653_klicova_slova_b.txt",
+          "text": "spalování"
+        },
+        {
+          "name": "PSH",
+          "text": "combustion"
+        }
+      ]
     },
     {
       "hasProperNoun": false,
@@ -364,9 +464,13 @@
       "hasProperNoun": false,
       "score": 0,
       "found": 2,
-      "isMatched": false,
+      "isMatched": true,
       "text": "vliv",
-      "type": "NOUN"
+      "type": "NOUN",
+      "dictionaries": [{
+        "name": "PSH",
+        "text": "povětrnostní vlivy"
+      }]
     },
     {
       "hasProperNoun": false,
@@ -380,9 +484,19 @@
       "hasProperNoun": false,
       "score": 0,
       "found": 5,
-      "isMatched": false,
+      "isMatched": true,
       "text": "trubice",
-      "type": "NOUN"
+      "type": "NOUN",
+      "dictionaries": [
+        {
+          "name": "653_klicova_slova_b.txt",
+          "text": "trubice"
+        },
+        {
+          "name": "PSH",
+          "text": "electronic tubes"
+        }
+      ]
     },
     {
       "hasProperNoun": false,
@@ -412,9 +526,13 @@
       "hasProperNoun": false,
       "score": 0,
       "found": 4,
-      "isMatched": false,
+      "isMatched": true,
       "text": "stav",
-      "type": "NOUN"
+      "type": "NOUN",
+      "dictionaries": [{
+        "name": "PSH",
+        "text": "hazardní stav"
+      }]
     },
     {
       "hasProperNoun": false,
@@ -428,33 +546,61 @@
       "hasProperNoun": false,
       "score": 0,
       "found": 5,
-      "isMatched": false,
+      "isMatched": true,
       "text": "řešení",
-      "type": "NOUN"
+      "type": "NOUN",
+      "dictionaries": [
+        {
+          "name": "653_klicova_slova_b.txt",
+          "text": "řešení"
+        },
+        {
+          "name": "PSH",
+          "text": "circuits solution"
+        }
+      ]
     },
     {
       "hasProperNoun": false,
       "score": 0,
       "found": 1,
-      "isMatched": false,
+      "isMatched": true,
       "text": "obtékání těles",
-      "type": "NOUN_GENITIVES"
+      "type": "NOUN_GENITIVES",
+      "dictionaries": [{
+        "name": "PSH",
+        "text": "flow past bodies"
+      }]
     },
     {
       "hasProperNoun": false,
       "score": 0,
       "found": 1,
-      "isMatched": false,
+      "isMatched": true,
       "text": "doprava",
-      "type": "NOUN"
+      "type": "NOUN",
+      "dictionaries": [
+        {
+          "name": "653_klicova_slova_b.txt",
+          "text": "doprava"
+        },
+        {
+          "name": "PSH",
+          "text": "doprava"
+        }
+      ]
     },
     {
       "hasProperNoun": false,
       "score": 0,
       "found": 1,
-      "isMatched": false,
+      "isMatched": true,
       "text": "pojem",
-      "type": "NOUN"
+      "type": "NOUN",
+      "dictionaries": [{
+        "name": "PSH",
+        "text": "pojem"
+      }]
     },
     {
       "hasProperNoun": false,
@@ -476,9 +622,13 @@
       "hasProperNoun": false,
       "score": 0,
       "found": 1,
-      "isMatched": false,
+      "isMatched": true,
       "text": "diagram",
-      "type": "NOUN"
+      "type": "NOUN",
+      "dictionaries": [{
+        "name": "PSH",
+        "text": "diagram zatížení"
+      }]
     },
     {
       "hasProperNoun": false,
@@ -500,9 +650,13 @@
       "hasProperNoun": false,
       "score": 0,
       "found": 2,
-      "isMatched": false,
+      "isMatched": true,
       "text": "těleso",
-      "type": "NOUN"
+      "type": "NOUN",
+      "dictionaries": [{
+        "name": "PSH",
+        "text": "fields"
+      }]
     },
     {
       "hasProperNoun": false,
@@ -540,9 +694,13 @@
       "hasProperNoun": false,
       "score": 0,
       "found": 1,
-      "isMatched": false,
+      "isMatched": true,
       "text": "číslo",
-      "type": "NOUN"
+      "type": "NOUN",
+      "dictionaries": [{
+        "name": "PSH",
+        "text": "Reynolds number"
+      }]
     },
     {
       "hasProperNoun": false,
@@ -564,9 +722,13 @@
       "hasProperNoun": false,
       "score": 0,
       "found": 4,
-      "isMatched": false,
+      "isMatched": true,
       "text": "průtok",
-      "type": "NOUN"
+      "type": "NOUN",
+      "dictionaries": [{
+        "name": "PSH",
+        "text": "flow measurement"
+      }]
     },
     {
       "hasProperNoun": false,
@@ -588,9 +750,19 @@
       "hasProperNoun": false,
       "score": 0,
       "found": 1,
-      "isMatched": false,
+      "isMatched": true,
       "text": "tlak",
-      "type": "NOUN"
+      "type": "NOUN",
+      "dictionaries": [
+        {
+          "name": "653_klicova_slova_b.txt",
+          "text": "tlak"
+        },
+        {
+          "name": "PSH",
+          "text": "pressure"
+        }
+      ]
     },
     {
       "hasProperNoun": true,
@@ -604,17 +776,25 @@
       "hasProperNoun": false,
       "score": 0,
       "found": 1,
-      "isMatched": false,
+      "isMatched": true,
       "text": "jet",
-      "type": "NOUN"
+      "type": "NOUN",
+      "dictionaries": [{
+        "name": "PSH",
+        "text": "jet printers"
+      }]
     },
     {
       "hasProperNoun": false,
       "score": 0,
       "found": 1,
-      "isMatched": false,
+      "isMatched": true,
       "text": "prostředek",
-      "type": "NOUN"
+      "type": "NOUN",
+      "dictionaries": [{
+        "name": "PSH",
+        "text": "prací prostředky"
+      }]
     },
     {
       "hasProperNoun": false,
@@ -628,17 +808,31 @@
       "hasProperNoun": false,
       "score": 0,
       "found": 1,
-      "isMatched": false,
+      "isMatched": true,
       "text": "energie",
-      "type": "NOUN"
+      "type": "NOUN",
+      "dictionaries": [
+        {
+          "name": "653_klicova_slova_b.txt",
+          "text": "energie"
+        },
+        {
+          "name": "PSH",
+          "text": "energie"
+        }
+      ]
     },
     {
       "hasProperNoun": false,
       "score": 0,
       "found": 3,
-      "isMatched": false,
+      "isMatched": true,
       "text": "věta",
-      "type": "NOUN"
+      "type": "NOUN",
+      "dictionaries": [{
+        "name": "PSH",
+        "text": "sentence"
+      }]
     },
     {
       "hasProperNoun": true,
@@ -660,17 +854,25 @@
       "hasProperNoun": false,
       "score": 0,
       "found": 2,
-      "isMatched": false,
+      "isMatched": true,
       "text": "divergence",
-      "type": "NOUN"
+      "type": "NOUN",
+      "dictionaries": [{
+        "name": "PSH",
+        "text": "divergence posloupnosti"
+      }]
     },
     {
       "hasProperNoun": false,
       "score": 0,
       "found": 1,
-      "isMatched": false,
+      "isMatched": true,
       "text": "vzorec",
-      "type": "NOUN"
+      "type": "NOUN",
+      "dictionaries": [{
+        "name": "PSH",
+        "text": "formulas"
+      }]
     },
     {
       "hasProperNoun": false,
@@ -700,9 +902,19 @@
       "hasProperNoun": false,
       "score": 0,
       "found": 1,
-      "isMatched": false,
+      "isMatched": true,
       "text": "teplota",
-      "type": "NOUN"
+      "type": "NOUN",
+      "dictionaries": [
+        {
+          "name": "653_klicova_slova_b.txt",
+          "text": "teplota"
+        },
+        {
+          "name": "PSH",
+          "text": "temperature"
+        }
+      ]
     },
     {
       "hasProperNoun": false,
@@ -711,6 +923,18 @@
       "isMatched": false,
       "text": "Proudové pole",
       "type": "ADJETIVES_NOUN"
+    },
+    {
+      "hasProperNoun": false,
+      "score": 0,
+      "found": 1,
+      "isMatched": false,
+      "text": "energii,",
+      "type": "DICTIONARY_WORD",
+      "dictionaries": [{
+        "name": "PSH",
+        "text": "energie"
+      }]
     },
     {
       "hasProperNoun": false,
@@ -772,33 +996,55 @@
       "hasProperNoun": false,
       "score": 0,
       "found": 9,
-      "isMatched": false,
+      "isMatched": true,
       "text": "vlna",
-      "type": "NOUN"
+      "type": "NOUN",
+      "dictionaries": [{
+        "name": "PSH",
+        "text": "radio waves"
+      }]
     },
     {
       "hasProperNoun": false,
       "score": 0,
       "found": 1,
-      "isMatched": false,
+      "isMatched": true,
       "text": "tření",
-      "type": "NOUN"
+      "type": "NOUN",
+      "dictionaries": [
+        {
+          "name": "653_klicova_slova_b.txt",
+          "text": "tření"
+        },
+        {
+          "name": "PSH",
+          "text": "friction"
+        }
+      ]
     },
     {
       "hasProperNoun": false,
       "score": 0,
       "found": 1,
-      "isMatched": false,
+      "isMatched": true,
       "text": "Rázová vlna",
-      "type": "ADJETIVES_NOUN"
+      "type": "ADJETIVES_NOUN",
+      "dictionaries": [{
+        "name": "PSH",
+        "text": "rázové vlny"
+      }]
     },
     {
       "hasProperNoun": false,
       "score": 0,
       "found": 1,
-      "isMatched": false,
+      "isMatched": true,
       "text": "poměry",
-      "type": "NOUN"
+      "type": "NOUN",
+      "dictionaries": [{
+        "name": "PSH",
+        "text": "gyromagnetic ratio"
+      }]
     },
     {
       "hasProperNoun": false,
@@ -812,25 +1058,43 @@
       "hasProperNoun": false,
       "score": 0,
       "found": 1,
-      "isMatched": false,
+      "isMatched": true,
       "text": "Základní pojmy",
-      "type": "ADJETIVES_NOUN"
+      "type": "ADJETIVES_NOUN",
+      "dictionaries": [{
+        "name": "653_klicova_slova_b.txt",
+        "text": "všeobecná chemie - základní pojmy"
+      }]
     },
     {
       "hasProperNoun": false,
       "score": 0,
       "found": 1,
-      "isMatched": false,
+      "isMatched": true,
       "text": "stlačitelnost",
-      "type": "NOUN"
+      "type": "NOUN",
+      "dictionaries": [{
+        "name": "PSH",
+        "text": "incompressible liquids"
+      }]
     },
     {
       "hasProperNoun": false,
       "score": 0,
       "found": 1,
-      "isMatched": false,
+      "isMatched": true,
       "text": "zvuk",
-      "type": "NOUN"
+      "type": "NOUN",
+      "dictionaries": [
+        {
+          "name": "653_klicova_slova_b.txt",
+          "text": "zvuk"
+        },
+        {
+          "name": "PSH",
+          "text": "sound"
+        }
+      ]
     },
     {
       "hasProperNoun": false,
@@ -844,9 +1108,13 @@
       "hasProperNoun": false,
       "score": 0,
       "found": 1,
-      "isMatched": false,
+      "isMatched": true,
       "text": "dynamika plynů",
-      "type": "NOUN_GENITIVES"
+      "type": "NOUN_GENITIVES",
+      "dictionaries": [{
+        "name": "653_klicova_slova_b.txt",
+        "text": "dynamika plynů"
+      }]
     },
     {
       "hasProperNoun": true,
@@ -868,9 +1136,19 @@
       "hasProperNoun": false,
       "score": 0,
       "found": 6,
-      "isMatched": false,
+      "isMatched": true,
       "text": "dynamika",
-      "type": "NOUN"
+      "type": "NOUN",
+      "dictionaries": [
+        {
+          "name": "653_klicova_slova_b.txt",
+          "text": "dynamika"
+        },
+        {
+          "name": "PSH",
+          "text": "dynamics"
+        }
+      ]
     },
     {
       "hasProperNoun": false,
@@ -892,9 +1170,13 @@
       "hasProperNoun": false,
       "score": 0,
       "found": 1,
-      "isMatched": false,
+      "isMatched": true,
       "text": "výběr",
-      "type": "NOUN"
+      "type": "NOUN",
+      "dictionaries": [{
+        "name": "PSH",
+        "text": "statistical selection"
+      }]
     },
     {
       "hasProperNoun": true,
@@ -956,33 +1238,61 @@
       "hasProperNoun": false,
       "score": 0,
       "found": 1,
-      "isMatched": false,
+      "isMatched": true,
       "text": "entropie",
-      "type": "NOUN"
+      "type": "NOUN",
+      "dictionaries": [
+        {
+          "name": "653_klicova_slova_b.txt",
+          "text": "entropie"
+        },
+        {
+          "name": "PSH",
+          "text": "entropie"
+        }
+      ]
     },
     {
       "hasProperNoun": false,
       "score": 0,
       "found": 8,
-      "isMatched": false,
+      "isMatched": true,
       "text": "tekutina",
-      "type": "NOUN"
+      "type": "NOUN",
+      "dictionaries": [{
+        "name": "PSH",
+        "text": "fluids"
+      }]
     },
     {
       "hasProperNoun": false,
       "score": 0,
       "found": 1,
-      "isMatched": false,
+      "isMatched": true,
       "text": "model",
-      "type": "NOUN"
+      "type": "NOUN",
+      "dictionaries": [{
+        "name": "PSH",
+        "text": "Bohr model"
+      }]
     },
     {
       "hasProperNoun": false,
       "score": 0,
       "found": 1,
-      "isMatched": false,
+      "isMatched": true,
       "text": "interakce",
-      "type": "NOUN"
+      "type": "NOUN",
+      "dictionaries": [
+        {
+          "name": "653_klicova_slova_b.txt",
+          "text": "interakce"
+        },
+        {
+          "name": "PSH",
+          "text": "political interaction"
+        }
+      ]
     },
     {
       "hasProperNoun": false,
@@ -1004,9 +1314,13 @@
       "hasProperNoun": false,
       "score": 0,
       "found": 3,
-      "isMatched": false,
+      "isMatched": true,
       "text": "proces",
-      "type": "NOUN"
+      "type": "NOUN",
+      "dictionaries": [{
+        "name": "PSH",
+        "text": "processes"
+      }]
     },
     {
       "hasProperNoun": false,
@@ -1020,25 +1334,37 @@
       "hasProperNoun": false,
       "score": 0,
       "found": 7,
-      "isMatched": false,
+      "isMatched": true,
       "text": "tryska",
-      "type": "NOUN"
+      "type": "NOUN",
+      "dictionaries": [{
+        "name": "PSH",
+        "text": "nozzles"
+      }]
     },
     {
       "hasProperNoun": false,
       "score": 0,
       "found": 4,
-      "isMatched": false,
+      "isMatched": true,
       "text": "šíření",
-      "type": "NOUN"
+      "type": "NOUN",
+      "dictionaries": [{
+        "name": "PSH",
+        "text": "dissemination"
+      }]
     },
     {
       "hasProperNoun": false,
       "score": 0,
       "found": 1,
-      "isMatched": false,
+      "isMatched": true,
       "text": "Nadzvukové proudění",
-      "type": "ADJETIVES_NOUN"
+      "type": "ADJETIVES_NOUN",
+      "dictionaries": [{
+        "name": "PSH",
+        "text": "nadzvukové proudění"
+      }]
     },
     {
       "hasProperNoun": false,
@@ -1060,9 +1386,13 @@
       "hasProperNoun": false,
       "score": 0,
       "found": 1,
-      "isMatched": false,
+      "isMatched": true,
       "text": "obtékání",
-      "type": "NOUN"
+      "type": "NOUN",
+      "dictionaries": [{
+        "name": "PSH",
+        "text": "flow past bodies"
+      }]
     },
     {
       "hasProperNoun": false,
@@ -1093,8 +1423,36 @@
       "score": 0,
       "found": 1,
       "isMatched": false,
+      "text": "těleso,",
+      "type": "DICTIONARY_WORD",
+      "dictionaries": [{
+        "name": "PSH",
+        "text": "fields"
+      }]
+    },
+    {
+      "hasProperNoun": false,
+      "score": 0,
+      "found": 1,
+      "isMatched": true,
       "text": "charakteristika",
-      "type": "NOUN"
+      "type": "NOUN",
+      "dictionaries": [{
+        "name": "PSH",
+        "text": "amplitude characteristics"
+      }]
+    },
+    {
+      "hasProperNoun": false,
+      "score": 0,
+      "found": 1,
+      "isMatched": false,
+      "text": "toku,",
+      "type": "DICTIONARY_WORD",
+      "dictionaries": [{
+        "name": "PSH",
+        "text": "financial flows"
+      }]
     },
     {
       "hasProperNoun": false,
@@ -1188,41 +1546,79 @@
       "hasProperNoun": false,
       "score": 0,
       "found": 1,
-      "isMatched": false,
+      "isMatched": true,
       "text": "pohyb",
-      "type": "NOUN"
+      "type": "NOUN",
+      "dictionaries": [{
+        "name": "PSH",
+        "text": "motion"
+      }]
     },
     {
       "hasProperNoun": false,
       "score": 0,
       "found": 1,
-      "isMatched": false,
+      "isMatched": true,
       "text": "literatura",
-      "type": "NOUN"
+      "type": "NOUN",
+      "dictionaries": [
+        {
+          "name": "653_klicova_slova_b.txt",
+          "text": "literatura"
+        },
+        {
+          "name": "PSH",
+          "text": "literatura"
+        }
+      ]
     },
     {
       "hasProperNoun": false,
       "score": 0,
       "found": 1,
-      "isMatched": false,
+      "isMatched": true,
       "text": "Matematické modely",
-      "type": "ADJETIVES_NOUN"
+      "type": "ADJETIVES_NOUN",
+      "dictionaries": [
+        {
+          "name": "653_klicova_slova_b.txt",
+          "text": "matematické modely"
+        },
+        {
+          "name": "PSH",
+          "text": "matematické modely"
+        }
+      ]
     },
     {
       "hasProperNoun": false,
       "score": 0,
       "found": 1,
-      "isMatched": false,
+      "isMatched": true,
       "text": "mechanika",
-      "type": "NOUN"
+      "type": "NOUN",
+      "dictionaries": [
+        {
+          "name": "653_klicova_slova_b.txt",
+          "text": "mechanika"
+        },
+        {
+          "name": "PSH",
+          "text": "stavební mechanika"
+        }
+      ]
     },
     {
       "hasProperNoun": false,
       "score": 0,
       "found": 1,
-      "isMatched": false,
+      "isMatched": true,
       "text": "tok",
-      "type": "NOUN"
+      "type": "NOUN",
+      "dictionaries": [{
+        "name": "PSH",
+        "text": "financial flows"
+      }]
     },
     {
       "hasProperNoun": false,
@@ -1236,9 +1632,13 @@
       "hasProperNoun": false,
       "score": 0,
       "found": 1,
-      "isMatched": false,
+      "isMatched": true,
       "text": "možnost",
-      "type": "NOUN"
+      "type": "NOUN",
+      "dictionaries": [{
+        "name": "PSH",
+        "text": "možnosti migrace"
+      }]
     },
     {
       "hasProperNoun": false,
@@ -1252,9 +1652,13 @@
       "hasProperNoun": false,
       "score": 0,
       "found": 3,
-      "isMatched": false,
+      "isMatched": true,
       "text": "ztráta",
-      "type": "NOUN"
+      "type": "NOUN",
+      "dictionaries": [{
+        "name": "PSH",
+        "text": "tepelné ztráty"
+      }]
     },
     {
       "hasProperNoun": false,
@@ -1268,9 +1672,13 @@
       "hasProperNoun": false,
       "score": 0,
       "found": 1,
-      "isMatched": false,
+      "isMatched": true,
       "text": "popis",
-      "type": "NOUN"
+      "type": "NOUN",
+      "dictionaries": [{
+        "name": "PSH",
+        "text": "description"
+      }]
     },
     {
       "hasProperNoun": false,
@@ -1284,9 +1692,13 @@
       "hasProperNoun": false,
       "score": 0,
       "found": 1,
-      "isMatched": false,
+      "isMatched": true,
       "text": "obsah",
-      "type": "NOUN"
+      "type": "NOUN",
+      "dictionaries": [{
+        "name": "PSH",
+        "text": "contents"
+      }]
     },
     {
       "hasProperNoun": false,
@@ -1308,9 +1720,13 @@
       "hasProperNoun": false,
       "score": 0,
       "found": 3,
-      "isMatched": false,
+      "isMatched": true,
       "text": "vlastnost",
-      "type": "NOUN"
+      "type": "NOUN",
+      "dictionaries": [{
+        "name": "PSH",
+        "text": "characteristic"
+      }]
     },
     {
       "hasProperNoun": false,
@@ -1332,33 +1748,67 @@
       "hasProperNoun": false,
       "score": 0,
       "found": 3,
-      "isMatched": false,
+      "isMatched": true,
       "text": "teorie",
-      "type": "NOUN"
+      "type": "NOUN",
+      "dictionaries": [
+        {
+          "name": "653_klicova_slova_b.txt",
+          "text": "teorie"
+        },
+        {
+          "name": "PSH",
+          "text": "teorie"
+        }
+      ]
     },
     {
       "hasProperNoun": false,
       "score": 0,
       "found": 3,
-      "isMatched": false,
+      "isMatched": true,
       "text": "pole",
-      "type": "NOUN"
+      "type": "NOUN",
+      "dictionaries": [
+        {
+          "name": "653_klicova_slova_b.txt",
+          "text": "pole"
+        },
+        {
+          "name": "PSH",
+          "text": "force field"
+        }
+      ]
     },
     {
       "hasProperNoun": false,
       "score": 0,
       "found": 1,
-      "isMatched": false,
+      "isMatched": true,
       "text": "aproximace",
-      "type": "NOUN"
+      "type": "NOUN",
+      "dictionaries": [
+        {
+          "name": "653_klicova_slova_b.txt",
+          "text": "aproximace"
+        },
+        {
+          "name": "PSH",
+          "text": "approximation"
+        }
+      ]
     },
     {
       "hasProperNoun": false,
       "score": 0,
       "found": 1,
-      "isMatched": false,
+      "isMatched": true,
       "text": "Pohybové rovnice",
-      "type": "ADJETIVES_NOUN"
+      "type": "ADJETIVES_NOUN",
+      "dictionaries": [{
+        "name": "653_klicova_slova_b.txt",
+        "text": "pohybové rovnice"
+      }]
     },
     {
       "hasProperNoun": false,
@@ -1372,9 +1822,13 @@
       "hasProperNoun": false,
       "score": 0,
       "found": 1,
-      "isMatched": false,
+      "isMatched": true,
       "text": "hustota",
-      "type": "NOUN"
+      "type": "NOUN",
+      "dictionaries": [{
+        "name": "PSH",
+        "text": "density"
+      }]
     },
     {
       "hasProperNoun": false,
@@ -1428,9 +1882,13 @@
       "hasProperNoun": false,
       "score": 0,
       "found": 1,
-      "isMatched": false,
+      "isMatched": true,
       "text": "zákon",
-      "type": "NOUN"
+      "type": "NOUN",
+      "dictionaries": [{
+        "name": "PSH",
+        "text": "laws"
+      }]
     },
     {
       "hasProperNoun": false,
@@ -1444,9 +1902,13 @@
       "hasProperNoun": false,
       "score": 0,
       "found": 1,
-      "isMatched": false,
+      "isMatched": true,
       "text": "proud",
-      "type": "NOUN"
+      "type": "NOUN",
+      "dictionaries": [{
+        "name": "PSH",
+        "text": "current sources"
+      }]
     },
     {
       "hasProperNoun": false,
@@ -1476,9 +1938,13 @@
       "hasProperNoun": false,
       "score": 0,
       "found": 1,
-      "isMatched": false,
+      "isMatched": true,
       "text": "základ",
-      "type": "NOUN"
+      "type": "NOUN",
+      "dictionaries": [{
+        "name": "PSH",
+        "text": "machine bases"
+      }]
     },
     {
       "hasProperNoun": false,
@@ -1492,17 +1958,31 @@
       "hasProperNoun": false,
       "score": 0,
       "found": 1,
-      "isMatched": false,
+      "isMatched": true,
       "text": "kontinuita",
-      "type": "NOUN"
+      "type": "NOUN",
+      "dictionaries": [{
+        "name": "PSH",
+        "text": "continuity equation"
+      }]
     },
     {
       "hasProperNoun": false,
       "score": 0,
       "found": 1,
-      "isMatched": false,
+      "isMatched": true,
       "text": "Transsonické proudění",
-      "type": "ADJETIVES_NOUN"
+      "type": "ADJETIVES_NOUN",
+      "dictionaries": [
+        {
+          "name": "653_klicova_slova_b.txt",
+          "text": "transsonické proudění"
+        },
+        {
+          "name": "PSH",
+          "text": "transonic flow"
+        }
+      ]
     },
     {
       "hasProperNoun": false,
@@ -1516,17 +1996,25 @@
       "hasProperNoun": false,
       "score": 0,
       "found": 1,
-      "isMatched": false,
+      "isMatched": true,
       "text": "seznam",
-      "type": "NOUN"
+      "type": "NOUN",
+      "dictionaries": [{
+        "name": "PSH",
+        "text": "lists"
+      }]
     },
     {
       "hasProperNoun": false,
       "score": 0,
       "found": 2,
-      "isMatched": false,
+      "isMatched": true,
       "text": "rovina",
-      "type": "NOUN"
+      "type": "NOUN",
+      "dictionaries": [{
+        "name": "PSH",
+        "text": "plains"
+      }]
     },
     {
       "hasProperNoun": false,
@@ -1580,25 +2068,37 @@
       "hasProperNoun": false,
       "score": 0,
       "found": 1,
-      "isMatched": false,
+      "isMatched": true,
       "text": "napjatost",
-      "type": "NOUN"
+      "type": "NOUN",
+      "dictionaries": [{
+        "name": "653_klicova_slova_b.txt",
+        "text": "napjatost"
+      }]
     },
     {
       "hasProperNoun": false,
       "score": 0,
       "found": 1,
-      "isMatched": false,
+      "isMatched": true,
       "text": "Vazkost tekutin",
-      "type": "NOUN_GENITIVES"
+      "type": "NOUN_GENITIVES",
+      "dictionaries": [{
+        "name": "653_klicova_slova_b.txt",
+        "text": "vazké tekutiny"
+      }]
     },
     {
       "hasProperNoun": false,
       "score": 0,
       "found": 1,
-      "isMatched": false,
+      "isMatched": true,
       "text": "velikost",
-      "type": "NOUN"
+      "type": "NOUN",
+      "dictionaries": [{
+        "name": "PSH",
+        "text": "hvězdné velikosti"
+      }]
     },
     {
       "hasProperNoun": false,
@@ -1636,9 +2136,13 @@
       "hasProperNoun": false,
       "score": 0,
       "found": 1,
-      "isMatched": false,
+      "isMatched": true,
       "text": "rychlost",
-      "type": "NOUN"
+      "type": "NOUN",
+      "dictionaries": [{
+        "name": "PSH",
+        "text": "rychlost"
+      }]
     },
     {
       "hasProperNoun": false,

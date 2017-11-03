@@ -5,6 +5,18 @@
       "score": 0,
       "found": 1,
       "isMatched": false,
+      "text": "typologii.",
+      "type": "DICTIONARY_WORD",
+      "dictionaries": [{
+        "name": "PSH",
+        "text": "typologie"
+      }]
+    },
+    {
+      "hasProperNoun": false,
+      "score": 0,
+      "found": 1,
+      "isMatched": false,
       "text": "PRAVIDLA PREZENTOVÁNÍ",
       "type": "NOUN_GENITIVES"
     },
@@ -12,41 +24,85 @@
       "hasProperNoun": false,
       "score": 0,
       "found": 1,
-      "isMatched": false,
+      "isMatched": true,
       "text": "software",
-      "type": "NOUN"
+      "type": "NOUN",
+      "dictionaries": [
+        {
+          "name": "653_klicova_slova_b.txt",
+          "text": "software"
+        },
+        {
+          "name": "PSH",
+          "text": "software"
+        }
+      ]
     },
     {
       "hasProperNoun": false,
       "score": 0,
       "found": 2,
-      "isMatched": false,
+      "isMatched": true,
       "text": "osobnost",
-      "type": "NOUN"
+      "type": "NOUN",
+      "dictionaries": [{
+        "name": "PSH",
+        "text": "osobnost"
+      }]
     },
     {
       "hasProperNoun": false,
       "score": 0,
       "found": 1,
       "isMatched": false,
+      "text": "temperamentu.",
+      "type": "DICTIONARY_WORD",
+      "dictionaries": [{
+        "name": "PSH",
+        "text": "temperament"
+      }]
+    },
+    {
+      "hasProperNoun": false,
+      "score": 0,
+      "found": 1,
+      "isMatched": true,
       "text": "den",
-      "type": "NOUN"
+      "type": "NOUN",
+      "dictionaries": [{
+        "name": "PSH",
+        "text": "DNA"
+      }]
     },
     {
       "hasProperNoun": false,
       "score": 0,
       "found": 1,
-      "isMatched": false,
+      "isMatched": true,
       "text": "Neverbální komunikace",
-      "type": "ADJETIVES_NOUN"
+      "type": "ADJETIVES_NOUN",
+      "dictionaries": [
+        {
+          "name": "653_klicova_slova_b.txt",
+          "text": "neverbální komunikace"
+        },
+        {
+          "name": "PSH",
+          "text": "verbal communication"
+        }
+      ]
     },
     {
       "hasProperNoun": false,
       "score": 0,
       "found": 1,
-      "isMatched": false,
+      "isMatched": true,
       "text": "postavení",
-      "type": "NOUN"
+      "type": "NOUN",
+      "dictionaries": [{
+        "name": "PSH",
+        "text": "position of Earth in cosmos"
+      }]
     },
     {
       "hasProperNoun": false,
@@ -60,9 +116,13 @@
       "hasProperNoun": false,
       "score": 0,
       "found": 1,
-      "isMatched": false,
+      "isMatched": true,
       "text": "problém",
-      "type": "NOUN"
+      "type": "NOUN",
+      "dictionaries": [{
+        "name": "PSH",
+        "text": "problem solving"
+      }]
     },
     {
       "hasProperNoun": false,
@@ -76,57 +136,139 @@
       "hasProperNoun": false,
       "score": 0,
       "found": 1,
-      "isMatched": false,
+      "isMatched": true,
       "text": "veřejnost",
-      "type": "NOUN"
+      "type": "NOUN",
+      "dictionaries": [{
+        "name": "PSH",
+        "text": "public"
+      }]
+    },
+    {
+      "hasProperNoun": false,
+      "score": 0,
+      "found": 1,
+      "isMatched": true,
+      "text": "proces",
+      "type": "NOUN",
+      "dictionaries": [{
+        "name": "PSH",
+        "text": "processes"
+      }]
+    },
+    {
+      "hasProperNoun": false,
+      "score": 0,
+      "found": 4,
+      "isMatched": true,
+      "text": "etiketa",
+      "type": "NOUN",
+      "dictionaries": [{
+        "name": "PSH",
+        "text": "speech etiquette"
+      }]
     },
     {
       "hasProperNoun": false,
       "score": 0,
       "found": 1,
       "isMatched": false,
-      "text": "proces",
-      "type": "NOUN"
+      "text": "(TA).",
+      "type": "DICTIONARY_WORD",
+      "dictionaries": [{
+        "name": "PSH",
+        "text": "peer-to peer networks"
+      }]
+    },
+    {
+      "hasProperNoun": false,
+      "score": 0,
+      "found": 1,
+      "isMatched": false,
+      "text": "JEDNÁNÍ.",
+      "type": "DICTIONARY_WORD",
+      "dictionaries": [{
+        "name": "PSH",
+        "text": "impetuous behaviour"
+      }]
+    },
+    {
+      "hasProperNoun": false,
+      "score": 0,
+      "found": 1,
+      "isMatched": true,
+      "text": "událost",
+      "type": "NOUN",
+      "dictionaries": [{
+        "name": "PSH",
+        "text": "event"
+      }]
+    },
+    {
+      "hasProperNoun": false,
+      "score": 0,
+      "found": 7,
+      "isMatched": true,
+      "text": "typologie",
+      "type": "NOUN",
+      "dictionaries": [{
+        "name": "PSH",
+        "text": "typologie"
+      }]
     },
     {
       "hasProperNoun": false,
       "score": 0,
       "found": 4,
       "isMatched": false,
-      "text": "etiketa",
-      "type": "NOUN"
-    },
-    {
-      "hasProperNoun": false,
-      "score": 0,
-      "found": 1,
-      "isMatched": false,
-      "text": "událost",
-      "type": "NOUN"
-    },
-    {
-      "hasProperNoun": false,
-      "score": 0,
-      "found": 7,
-      "isMatched": false,
-      "text": "typologie",
-      "type": "NOUN"
+      "text": "komunikace.",
+      "type": "DICTIONARY_WORD",
+      "dictionaries": [{
+        "name": "PSH",
+        "text": "public communications"
+      }]
     },
     {
       "hasProperNoun": false,
       "score": 0,
       "found": 2,
-      "isMatched": false,
+      "isMatched": true,
       "text": "rétorika",
-      "type": "NOUN"
+      "type": "NOUN",
+      "dictionaries": [
+        {
+          "name": "653_klicova_slova_b.txt",
+          "text": "rétorika"
+        },
+        {
+          "name": "PSH",
+          "text": "rhetoric expression"
+        }
+      ]
     },
     {
       "hasProperNoun": false,
       "score": 0,
       "found": 1,
       "isMatched": false,
+      "text": "B.",
+      "type": "DICTIONARY_WORD",
+      "dictionaries": [{
+        "name": "PSH",
+        "text": "vitamins B"
+      }]
+    },
+    {
+      "hasProperNoun": false,
+      "score": 0,
+      "found": 1,
+      "isMatched": true,
       "text": "charakteristika",
-      "type": "NOUN"
+      "type": "NOUN",
+      "dictionaries": [{
+        "name": "PSH",
+        "text": "amplitude characteristics"
+      }]
     },
     {
       "hasProperNoun": false,
@@ -135,6 +277,18 @@
       "isMatched": false,
       "text": "Efektivní vedení",
       "type": "ADJETIVES_NOUN"
+    },
+    {
+      "hasProperNoun": false,
+      "score": 0,
+      "found": 1,
+      "isMatched": false,
+      "text": "organizací.",
+      "type": "DICTIONARY_WORD",
+      "dictionaries": [{
+        "name": "PSH",
+        "text": "organizace"
+      }]
     },
     {
       "hasProperNoun": false,
@@ -164,9 +318,31 @@
       "hasProperNoun": false,
       "score": 0,
       "found": 1,
-      "isMatched": false,
+      "isMatched": true,
       "text": "Verbální komunikace",
-      "type": "ADJETIVES_NOUN"
+      "type": "ADJETIVES_NOUN",
+      "dictionaries": [
+        {
+          "name": "653_klicova_slova_b.txt",
+          "text": "neverbální komunikace"
+        },
+        {
+          "name": "PSH",
+          "text": "verbal communication"
+        }
+      ]
+    },
+    {
+      "hasProperNoun": false,
+      "score": 0,
+      "found": 1,
+      "isMatched": false,
+      "text": "etikety.",
+      "type": "DICTIONARY_WORD",
+      "dictionaries": [{
+        "name": "PSH",
+        "text": "speech etiquette"
+      }]
     },
     {
       "hasProperNoun": false,
@@ -175,6 +351,18 @@
       "isMatched": false,
       "text": "poster",
       "type": "NOUN"
+    },
+    {
+      "hasProperNoun": false,
+      "score": 0,
+      "found": 1,
+      "isMatched": false,
+      "text": "organizaci.",
+      "type": "DICTIONARY_WORD",
+      "dictionaries": [{
+        "name": "PSH",
+        "text": "organizace"
+      }]
     },
     {
       "hasProperNoun": false,
@@ -196,9 +384,13 @@
       "hasProperNoun": false,
       "score": 0,
       "found": 1,
-      "isMatched": false,
+      "isMatched": true,
       "text": "role",
-      "type": "NOUN"
+      "type": "NOUN",
+      "dictionaries": [{
+        "name": "PSH",
+        "text": "divadelní role"
+      }]
     },
     {
       "hasProperNoun": false,
@@ -213,6 +405,18 @@
       "score": 0,
       "found": 1,
       "isMatched": false,
+      "text": "(typologie",
+      "type": "DICTIONARY_WORD",
+      "dictionaries": [{
+        "name": "PSH",
+        "text": "typologie"
+      }]
+    },
+    {
+      "hasProperNoun": false,
+      "score": 0,
+      "found": 1,
+      "isMatched": false,
       "text": "Komunikacevtýmové práci",
       "type": "ADJETIVES_NOUN"
     },
@@ -220,9 +424,19 @@
       "hasProperNoun": false,
       "score": 0,
       "found": 1,
-      "isMatched": false,
+      "isMatched": true,
       "text": "prostředí",
-      "type": "NOUN"
+      "type": "NOUN",
+      "dictionaries": [
+        {
+          "name": "653_klicova_slova_b.txt",
+          "text": "prostředí"
+        },
+        {
+          "name": "PSH",
+          "text": "prostředí"
+        }
+      ]
     },
     {
       "hasProperNoun": false,
@@ -244,25 +458,49 @@
       "hasProperNoun": false,
       "score": 0,
       "found": 1,
-      "isMatched": false,
+      "isMatched": true,
       "text": "literatura",
-      "type": "NOUN"
+      "type": "NOUN",
+      "dictionaries": [
+        {
+          "name": "653_klicova_slova_b.txt",
+          "text": "literatura"
+        },
+        {
+          "name": "PSH",
+          "text": "literatura"
+        }
+      ]
     },
     {
       "hasProperNoun": false,
       "score": 0,
       "found": 1,
-      "isMatched": false,
+      "isMatched": true,
       "text": "SOCIÁLNÍ KOMUNIKACE",
-      "type": "ADJETIVES_NOUN"
+      "type": "ADJETIVES_NOUN",
+      "dictionaries": [
+        {
+          "name": "653_klicova_slova_b.txt",
+          "text": "sociální komunikace"
+        },
+        {
+          "name": "PSH",
+          "text": "social communication"
+        }
+      ]
     },
     {
       "hasProperNoun": false,
       "score": 0,
       "found": 1,
-      "isMatched": false,
+      "isMatched": true,
       "text": "pravidlo",
-      "type": "NOUN"
+      "type": "NOUN",
+      "dictionaries": [{
+        "name": "PSH",
+        "text": "pravidla"
+      }]
     },
     {
       "hasProperNoun": false,
@@ -284,9 +522,19 @@
       "hasProperNoun": false,
       "score": 0,
       "found": 17,
-      "isMatched": false,
+      "isMatched": true,
       "text": "komunikace",
-      "type": "NOUN"
+      "type": "NOUN",
+      "dictionaries": [
+        {
+          "name": "653_klicova_slova_b.txt",
+          "text": "komunikace"
+        },
+        {
+          "name": "PSH",
+          "text": "public communications"
+        }
+      ]
     },
     {
       "hasProperNoun": false,
@@ -308,33 +556,49 @@
       "hasProperNoun": false,
       "score": 0,
       "found": 2,
-      "isMatched": false,
+      "isMatched": true,
       "text": "prezentace",
-      "type": "NOUN"
+      "type": "NOUN",
+      "dictionaries": [{
+        "name": "653_klicova_slova_b.txt",
+        "text": "prezentace"
+      }]
     },
     {
       "hasProperNoun": false,
       "score": 0,
       "found": 1,
-      "isMatched": false,
+      "isMatched": true,
       "text": "sociálního jednání",
-      "type": "ADJETIVES_NOUN"
+      "type": "ADJETIVES_NOUN",
+      "dictionaries": [{
+        "name": "PSH",
+        "text": "social behaviour"
+      }]
     },
     {
       "hasProperNoun": false,
       "score": 0,
       "found": 1,
-      "isMatched": false,
+      "isMatched": true,
       "text": "obsah",
-      "type": "NOUN"
+      "type": "NOUN",
+      "dictionaries": [{
+        "name": "PSH",
+        "text": "contents"
+      }]
     },
     {
       "hasProperNoun": false,
       "score": 0,
       "found": 1,
-      "isMatched": false,
+      "isMatched": true,
       "text": "TA",
-      "type": "NOUN"
+      "type": "NOUN",
+      "dictionaries": [{
+        "name": "PSH",
+        "text": "peer-to peer networks"
+      }]
     },
     {
       "hasProperNoun": false,
@@ -348,41 +612,133 @@
       "hasProperNoun": false,
       "score": 0,
       "found": 4,
-      "isMatched": false,
+      "isMatched": true,
       "text": "příprava",
-      "type": "NOUN"
+      "type": "NOUN",
+      "dictionaries": [{
+        "name": "PSH",
+        "text": "preparation"
+      }]
+    },
+    {
+      "hasProperNoun": false,
+      "score": 0,
+      "found": 2,
+      "isMatched": false,
+      "text": "KOMUNIKACE.",
+      "type": "DICTIONARY_WORD",
+      "dictionaries": [{
+        "name": "PSH",
+        "text": "public communications"
+      }]
     },
     {
       "hasProperNoun": false,
       "score": 0,
       "found": 1,
-      "isMatched": false,
+      "isMatched": true,
       "text": "temperament",
-      "type": "NOUN"
+      "type": "NOUN",
+      "dictionaries": [
+        {
+          "name": "653_klicova_slova_b.txt",
+          "text": "temperament"
+        },
+        {
+          "name": "PSH",
+          "text": "temperament"
+        }
+      ]
+    },
+    {
+      "hasProperNoun": false,
+      "score": 0,
+      "found": 1,
+      "isMatched": true,
+      "text": "struktura",
+      "type": "NOUN",
+      "dictionaries": [
+        {
+          "name": "653_klicova_slova_b.txt",
+          "text": "STRUKTURA"
+        },
+        {
+          "name": "PSH",
+          "text": "biocenosis structure"
+        }
+      ]
     },
     {
       "hasProperNoun": false,
       "score": 0,
       "found": 1,
       "isMatched": false,
-      "text": "struktura",
-      "type": "NOUN"
+      "text": "RÉTORIKA,",
+      "type": "DICTIONARY_WORD",
+      "dictionaries": [{
+        "name": "PSH",
+        "text": "rhetoric expression"
+      }]
     },
     {
       "hasProperNoun": false,
       "score": 0,
       "found": 2,
-      "isMatched": false,
+      "isMatched": true,
       "text": "člověk",
-      "type": "NOUN"
+      "type": "NOUN",
+      "dictionaries": [
+        {
+          "name": "653_klicova_slova_b.txt",
+          "text": "člověk"
+        },
+        {
+          "name": "PSH",
+          "text": "man"
+        }
+      ]
+    },
+    {
+      "hasProperNoun": false,
+      "score": 0,
+      "found": 2,
+      "isMatched": true,
+      "text": "chování",
+      "type": "NOUN",
+      "dictionaries": [
+        {
+          "name": "653_klicova_slova_b.txt",
+          "text": "chování"
+        },
+        {
+          "name": "PSH",
+          "text": "behaviour"
+        }
+      ]
+    },
+    {
+      "hasProperNoun": false,
+      "score": 0,
+      "found": 1,
+      "isMatched": false,
+      "text": "Osobnost.",
+      "type": "DICTIONARY_WORD",
+      "dictionaries": [{
+        "name": "PSH",
+        "text": "osobnost"
+      }]
     },
     {
       "hasProperNoun": false,
       "score": 0,
       "found": 2,
       "isMatched": false,
-      "text": "chování",
-      "type": "NOUN"
+      "text": "PODNIKU.",
+      "type": "DICTIONARY_WORD",
+      "dictionaries": [{
+        "name": "PSH",
+        "text": "enterprise"
+      }]
     },
     {
       "hasProperNoun": false,
@@ -411,10 +767,26 @@
     {
       "hasProperNoun": false,
       "score": 0,
-      "found": 3,
+      "found": 1,
       "isMatched": false,
+      "text": "události.",
+      "type": "DICTIONARY_WORD",
+      "dictionaries": [{
+        "name": "PSH",
+        "text": "event"
+      }]
+    },
+    {
+      "hasProperNoun": false,
+      "score": 0,
+      "found": 3,
+      "isMatched": true,
       "text": "typ",
-      "type": "NOUN"
+      "type": "NOUN",
+      "dictionaries": [{
+        "name": "PSH",
+        "text": "typ dat"
+      }]
     },
     {
       "hasProperNoun": false,
@@ -468,17 +840,67 @@
       "hasProperNoun": false,
       "score": 0,
       "found": 3,
-      "isMatched": false,
+      "isMatched": true,
       "text": "organizace",
-      "type": "NOUN"
+      "type": "NOUN",
+      "dictionaries": [
+        {
+          "name": "653_klicova_slova_b.txt",
+          "text": "organizace"
+        },
+        {
+          "name": "PSH",
+          "text": "organizace"
+        }
+      ]
     },
     {
       "hasProperNoun": false,
       "score": 0,
       "found": 1,
       "isMatched": false,
+      "text": "typologie.",
+      "type": "DICTIONARY_WORD",
+      "dictionaries": [{
+        "name": "PSH",
+        "text": "typologie"
+      }]
+    },
+    {
+      "hasProperNoun": false,
+      "score": 0,
+      "found": 1,
+      "isMatched": false,
+      "text": "softwaru.",
+      "type": "DICTIONARY_WORD",
+      "dictionaries": [{
+        "name": "PSH",
+        "text": "software"
+      }]
+    },
+    {
+      "hasProperNoun": false,
+      "score": 0,
+      "found": 1,
+      "isMatched": false,
+      "text": "kultury.",
+      "type": "DICTIONARY_WORD",
+      "dictionaries": [{
+        "name": "PSH",
+        "text": "culture"
+      }]
+    },
+    {
+      "hasProperNoun": false,
+      "score": 0,
+      "found": 1,
+      "isMatched": true,
       "text": "práce",
-      "type": "NOUN"
+      "type": "NOUN",
+      "dictionaries": [{
+        "name": "PSH",
+        "text": "práce"
+      }]
     },
     {
       "hasProperNoun": false,
@@ -500,9 +922,13 @@
       "hasProperNoun": false,
       "score": 0,
       "found": 1,
-      "isMatched": false,
+      "isMatched": true,
       "text": "SOCIÁLNI",
-      "type": "NOUN"
+      "type": "NOUN",
+      "dictionaries": [{
+        "name": "PSH",
+        "text": "social themes"
+      }]
     },
     {
       "hasProperNoun": false,
@@ -516,9 +942,31 @@
       "hasProperNoun": false,
       "score": 0,
       "found": 3,
-      "isMatched": false,
+      "isMatched": true,
       "text": "společnost",
-      "type": "NOUN"
+      "type": "NOUN",
+      "dictionaries": [
+        {
+          "name": "653_klicova_slova_b.txt",
+          "text": "společnost"
+        },
+        {
+          "name": "PSH",
+          "text": "society"
+        }
+      ]
+    },
+    {
+      "hasProperNoun": false,
+      "score": 0,
+      "found": 2,
+      "isMatched": false,
+      "text": "komunikaci.",
+      "type": "DICTIONARY_WORD",
+      "dictionaries": [{
+        "name": "PSH",
+        "text": "public communications"
+      }]
     },
     {
       "hasProperNoun": false,
@@ -548,17 +996,31 @@
       "hasProperNoun": false,
       "score": 0,
       "found": 2,
-      "isMatched": false,
+      "isMatched": true,
       "text": "základ",
-      "type": "NOUN"
+      "type": "NOUN",
+      "dictionaries": [{
+        "name": "PSH",
+        "text": "machine bases"
+      }]
     },
     {
       "hasProperNoun": false,
       "score": 0,
       "found": 1,
-      "isMatched": false,
+      "isMatched": true,
       "text": "analýza",
-      "type": "NOUN"
+      "type": "NOUN",
+      "dictionaries": [
+        {
+          "name": "653_klicova_slova_b.txt",
+          "text": "analýza"
+        },
+        {
+          "name": "PSH",
+          "text": "analysis"
+        }
+      ]
     },
     {
       "hasProperNoun": false,
@@ -572,25 +1034,43 @@
       "hasProperNoun": false,
       "score": 0,
       "found": 2,
-      "isMatched": false,
+      "isMatched": true,
       "text": "konflikt",
-      "type": "NOUN"
+      "type": "NOUN",
+      "dictionaries": [{
+        "name": "PSH",
+        "text": "conflict"
+      }]
     },
     {
       "hasProperNoun": false,
       "score": 0,
       "found": 1,
-      "isMatched": false,
+      "isMatched": true,
       "text": "vedení",
-      "type": "NOUN"
+      "type": "NOUN",
+      "dictionaries": [
+        {
+          "name": "653_klicova_slova_b.txt",
+          "text": "vedení"
+        },
+        {
+          "name": "PSH",
+          "text": "přívodní vedení"
+        }
+      ]
     },
     {
       "hasProperNoun": false,
       "score": 0,
       "found": 1,
-      "isMatched": false,
+      "isMatched": true,
       "text": "zásada",
-      "type": "NOUN"
+      "type": "NOUN",
+      "dictionaries": [{
+        "name": "PSH",
+        "text": "bases"
+      }]
     },
     {
       "hasProperNoun": false,
@@ -604,17 +1084,67 @@
       "hasProperNoun": false,
       "score": 0,
       "found": 2,
-      "isMatched": false,
+      "isMatched": true,
       "text": "kultura",
-      "type": "NOUN"
+      "type": "NOUN",
+      "dictionaries": [
+        {
+          "name": "653_klicova_slova_b.txt",
+          "text": "kultura"
+        },
+        {
+          "name": "PSH",
+          "text": "culture"
+        }
+      ]
+    },
+    {
+      "hasProperNoun": false,
+      "score": 0,
+      "found": 1,
+      "isMatched": false,
+      "text": "konfliktu.",
+      "type": "DICTIONARY_WORD",
+      "dictionaries": [{
+        "name": "PSH",
+        "text": "conflict"
+      }]
+    },
+    {
+      "hasProperNoun": false,
+      "score": 0,
+      "found": 1,
+      "isMatched": false,
+      "text": "Rétorika.",
+      "type": "DICTIONARY_WORD",
+      "dictionaries": [{
+        "name": "PSH",
+        "text": "rhetoric expression"
+      }]
+    },
+    {
+      "hasProperNoun": false,
+      "score": 0,
+      "found": 1,
+      "isMatched": false,
+      "text": "stavby).",
+      "type": "DICTIONARY_WORD",
+      "dictionaries": [{
+        "name": "PSH",
+        "text": "building dampness"
+      }]
     },
     {
       "hasProperNoun": false,
       "score": 0,
       "found": 2,
-      "isMatched": false,
+      "isMatched": true,
       "text": "podnik",
-      "type": "NOUN"
+      "type": "NOUN",
+      "dictionaries": [{
+        "name": "PSH",
+        "text": "enterprise"
+      }]
     },
     {
       "hasProperNoun": false,
@@ -629,6 +1159,18 @@
       "score": 0,
       "found": 1,
       "isMatched": false,
+      "text": "práci.",
+      "type": "DICTIONARY_WORD",
+      "dictionaries": [{
+        "name": "PSH",
+        "text": "prací prostředky"
+      }]
+    },
+    {
+      "hasProperNoun": false,
+      "score": 0,
+      "found": 1,
+      "isMatched": false,
       "text": "Osobnostní typ",
       "type": "ADJETIVES_NOUN"
     },
@@ -636,17 +1178,49 @@
       "hasProperNoun": false,
       "score": 0,
       "found": 1,
-      "isMatched": false,
+      "isMatched": true,
       "text": "faktor",
-      "type": "NOUN"
+      "type": "NOUN",
+      "dictionaries": [{
+        "name": "PSH",
+        "text": "biological factors"
+      }]
     },
     {
       "hasProperNoun": false,
       "score": 0,
       "found": 1,
       "isMatched": false,
+      "text": "SPOLEČNOSTI.",
+      "type": "DICTIONARY_WORD",
+      "dictionaries": [{
+        "name": "PSH",
+        "text": "society"
+      }]
+    },
+    {
+      "hasProperNoun": false,
+      "score": 0,
+      "found": 1,
+      "isMatched": false,
+      "text": "společnosti.",
+      "type": "DICTIONARY_WORD",
+      "dictionaries": [{
+        "name": "PSH",
+        "text": "society"
+      }]
+    },
+    {
+      "hasProperNoun": false,
+      "score": 0,
+      "found": 1,
+      "isMatched": true,
       "text": "stavba",
-      "type": "NOUN"
+      "type": "NOUN",
+      "dictionaries": [{
+        "name": "PSH",
+        "text": "building dampness"
+      }]
     },
     {
       "hasProperNoun": false,
@@ -676,9 +1250,13 @@
       "hasProperNoun": false,
       "score": 0,
       "found": 2,
-      "isMatched": false,
+      "isMatched": true,
       "text": "jednání",
-      "type": "NOUN"
+      "type": "NOUN",
+      "dictionaries": [{
+        "name": "PSH",
+        "text": "impetuous behaviour"
+      }]
     },
     {
       "hasProperNoun": false,
@@ -717,6 +1295,18 @@
       "score": 0,
       "found": 1,
       "isMatched": false,
+      "text": "CHOVÁNÍ.",
+      "type": "DICTIONARY_WORD",
+      "dictionaries": [{
+        "name": "PSH",
+        "text": "behaviour"
+      }]
+    },
+    {
+      "hasProperNoun": false,
+      "score": 0,
+      "found": 1,
+      "isMatched": false,
       "text": "základě temperamentu",
       "type": "NOUN_GENITIVES"
     },
@@ -727,6 +1317,18 @@
       "isMatched": false,
       "text": "typy sociálního jednání",
       "type": "NOUN_GENITIVES"
+    },
+    {
+      "hasProperNoun": false,
+      "score": 0,
+      "found": 1,
+      "isMatched": false,
+      "text": "LITERATURA.",
+      "type": "DICTIONARY_WORD",
+      "dictionaries": [{
+        "name": "PSH",
+        "text": "literatura"
+      }]
     },
     {
       "hasProperNoun": false,
@@ -764,17 +1366,43 @@
       "hasProperNoun": false,
       "score": 0,
       "found": 1,
-      "isMatched": false,
+      "isMatched": true,
       "text": "princip",
-      "type": "NOUN"
+      "type": "NOUN",
+      "dictionaries": [{
+        "name": "PSH",
+        "text": "variational principles"
+      }]
+    },
+    {
+      "hasProperNoun": false,
+      "score": 0,
+      "found": 1,
+      "isMatched": true,
+      "text": "situace",
+      "type": "NOUN",
+      "dictionaries": [
+        {
+          "name": "653_klicova_slova_b.txt",
+          "text": "situace"
+        },
+        {
+          "name": "PSH",
+          "text": "social situation"
+        }
+      ]
     },
     {
       "hasProperNoun": false,
       "score": 0,
       "found": 1,
       "isMatched": false,
-      "text": "situace",
-      "type": "NOUN"
+      "text": "jednání.",
+      "type": "DICTIONARY_WORD",
+      "dictionaries": [{
+        "name": "PSH",
+        "text": "impetuous behaviour"
+      }]
     }
   ],
   "foldername": "/home/alberto/Projects/NTK/balicky/F21911z_000659731"
