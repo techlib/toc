@@ -1,0 +1,39 @@
+// --- LAYOUT ---
+
+html,
+body, 
+app-root {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+body {
+  font-family: 'Roboto-Condensed-Regular';
+}
+
+app-root {
+  main {
+    display: flex;
+    width: 100%;
+    height: calc(100% - #{$navbar-height});
+  }
+}
+
+app-aside {
+  width: 300px;
+  height: 100%;
+  flex: 1;
+  order: 1;
+  
+  .app-sroll-wrapper {
+    height: 100%;
+    overflow: auto;
+  }
+}
+
+app-home {
+  height: 100%;
+  flex: 5;
+  order: 2;
+}

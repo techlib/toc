@@ -1,0 +1,7 @@
+<section class="app-sroll-wrapper">
+  <mz-collection>
+    <a mz-collection-link href="#!" *ngFor="let f of folders" (click)="state.setFoldername(f)" [class.active]="f === state.foldername">
+      <span>{{f}}</span>
+    </a>
+  </mz-collection>
+</section>

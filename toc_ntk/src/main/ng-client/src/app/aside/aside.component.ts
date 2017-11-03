@@ -2,11 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { AppState } from '../app.state';
 
 @Component({
-  selector: 'app-side',
-  templateUrl: './side.component.html',
-  styleUrls: ['./side.component.css']
+  selector: 'app-aside',
+  templateUrl: './aside.component.html',
+  styleUrls: ['./aside.component.css']
 })
-export class SideComponent implements OnInit {
+export class AsideComponent implements OnInit {
   folders: string[] = [
   'F21944z_000661318', 'F22117z_000678390',
   'F10107_1z_000152680', 'F21945z_000661333', 'F22118z_000678039',

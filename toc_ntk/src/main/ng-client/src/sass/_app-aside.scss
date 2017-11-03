@@ -1,0 +1,12 @@
+// --- ASIDE ---
+
+app-aside {
+  .collection {
+    @extend .app-clean-mg;
+    @extend .app-clean-radius;
+    
+    border-top: 0 !important;
+    border-bottom: 0 !important;
+    border-left: 0 !important;
+  }
+}

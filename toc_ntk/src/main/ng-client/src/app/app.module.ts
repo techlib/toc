@@ -10,18 +10,18 @@ import { MaterializeModule } from 'ng2-materialize';
 import { AppComponent } from './app.component';
 import { AppService } from './app.service';
 import { AppState } from './app.state';
-import { HeaderComponent } from './header/header.component';
+import { NavbarComponent } from './navbar/navbar.component';
 import { FooterComponent } from './footer/footer.component';
 import { HomeComponent } from './home/home.component';
-import { SideComponent } from './side/side.component';
+import { AsideComponent } from './aside/aside.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    HeaderComponent,
+    NavbarComponent,
     FooterComponent,
     HomeComponent,
-    SideComponent
+    AsideComponent
   ],
   imports: [
     BrowserModule,

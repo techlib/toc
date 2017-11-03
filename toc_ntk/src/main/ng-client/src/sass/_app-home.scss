@@ -1,0 +1,19 @@
+// --- HOME ---
+
+app-home {
+  section {
+    height: 100%;
+    
+    .app-toolbar {
+      height: $app-toolbar-height;
+      line-height: $app-toolbar-height;
+      background-color: color("teal", "lighten-5");
+    }
+    
+    .app-sroll-wrapper {
+      height: calc(100% - #{$app-toolbar-height});
+      overflow: auto;
+      padding: 20px 0;
+    }
+  }
+}

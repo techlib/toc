@@ -1,0 +1,16 @@
+// --- NAVBAR ---
+
+app-navbar {
+  nav {
+    @extend .z-depth-0;
+    padding-left: 1.5rem;
+    
+    .nav-wrapper {
+      .brand-logo {
+        font-size: 1.8rem;
+        font-family: 'Roboto-Condensed-Light';
+      }
+    }
+  }
+}
+
