@@ -1,0 +1,1741 @@
+{
+  "candidates": [
+    {
+      "hasProperNoun": false,
+      "score": 0,
+      "found": 1,
+      "isMatched": false,
+      "text": "Stavové vlastnosti",
+      "type": "ADJETIVES_NOUN"
+    },
+    {
+      "hasProperNoun": false,
+      "score": 0,
+      "found": 21,
+      "isMatched": false,
+      "text": "proudění",
+      "type": "NOUN"
+    },
+    {
+      "hasProperNoun": false,
+      "score": 0,
+      "found": 1,
+      "isMatched": false,
+      "text": "Praktické řešení",
+      "type": "ADJETIVES_NOUN"
+    },
+    {
+      "hasProperNoun": false,
+      "score": 0,
+      "found": 1,
+      "isMatched": false,
+      "text": "Šířeníakustických vln",
+      "type": "ADJETIVES_NOUN"
+    },
+    {
+      "hasProperNoun": false,
+      "score": 0,
+      "found": 1,
+      "isMatched": false,
+      "text": "Metody řešení hypersonického proudění",
+      "type": "NOUN_GENITIVES"
+    },
+    {
+      "hasProperNoun": false,
+      "score": 0,
+      "found": 1,
+      "isMatched": false,
+      "text": "Vlnové interakce",
+      "type": "ADJETIVES_NOUN"
+    },
+    {
+      "hasProperNoun": false,
+      "score": 0,
+      "found": 1,
+      "isMatched": false,
+      "text": "Stlačitelnost tekutin",
+      "type": "NOUN_GENITIVES"
+    },
+    {
+      "hasProperNoun": false,
+      "score": 0,
+      "found": 2,
+      "isMatched": false,
+      "text": "vtrubicikonstantního průřezu",
+      "type": "ADJETIVES_NOUN"
+    },
+    {
+      "hasProperNoun": false,
+      "score": 0,
+      "found": 1,
+      "isMatched": false,
+      "text": "řešení úloh",
+      "type": "NOUN_GENITIVES"
+    },
+    {
+      "hasProperNoun": false,
+      "score": 0,
+      "found": 1,
+      "isMatched": false,
+      "text": "Pohybzvukových vln",
+      "type": "ADJETIVES_NOUN"
+    },
+    {
+      "hasProperNoun": false,
+      "score": 0,
+      "found": 1,
+      "isMatched": false,
+      "text": "Experimentální dynamika",
+      "type": "ADJETIVES_NOUN"
+    },
+    {
+      "hasProperNoun": false,
+      "score": 0,
+      "found": 10,
+      "isMatched": false,
+      "text": "rovnice",
+      "type": "NOUN"
+    },
+    {
+      "hasProperNoun": true,
+      "score": 0,
+      "found": 1,
+      "isMatched": false,
+      "text": "Rovnice Rankineova Hugoniotova",
+      "type": "NOUN_GENITIVES"
+    },
+    {
+      "hasProperNoun": false,
+      "score": 0,
+      "found": 4,
+      "isMatched": false,
+      "text": "metoda",
+      "type": "NOUN"
+    },
+    {
+      "hasProperNoun": false,
+      "score": 0,
+      "found": 1,
+      "isMatched": false,
+      "text": "Zvuková bariéra",
+      "type": "ADJETIVES_NOUN"
+    },
+    {
+      "hasProperNoun": false,
+      "score": 0,
+      "found": 1,
+      "isMatched": false,
+      "text": "Pohyb zvukových vln",
+      "type": "NOUN_GENITIVES"
+    },
+    {
+      "hasProperNoun": false,
+      "score": 0,
+      "found": 1,
+      "isMatched": false,
+      "text": "zobrazení",
+      "type": "NOUN"
+    },
+    {
+      "hasProperNoun": false,
+      "score": 0,
+      "found": 1,
+      "isMatched": false,
+      "text": "Kritický stav",
+      "type": "ADJETIVES_NOUN"
+    },
+    {
+      "hasProperNoun": false,
+      "score": 0,
+      "found": 2,
+      "isMatched": false,
+      "text": "proudění stlačitelných tekutin",
+      "type": "NOUN_GENITIVES"
+    },
+    {
+      "hasProperNoun": false,
+      "score": 0,
+      "found": 10,
+      "isMatched": false,
+      "text": "plyn",
+      "type": "NOUN"
+    },
+    {
+      "hasProperNoun": false,
+      "score": 0,
+      "found": 1,
+      "isMatched": false,
+      "text": "Plošná hustota",
+      "type": "ADJETIVES_NOUN"
+    },
+    {
+      "hasProperNoun": false,
+      "score": 0,
+      "found": 1,
+      "isMatched": false,
+      "text": "Rovnice kontinuity",
+      "type": "NOUN_GENITIVES"
+    },
+    {
+      "hasProperNoun": false,
+      "score": 0,
+      "found": 1,
+      "isMatched": false,
+      "text": "vnávrhových poměrech",
+      "type": "ADJETIVES_NOUN"
+    },
+    {
+      "hasProperNoun": true,
+      "score": 0,
+      "found": 1,
+      "isMatched": false,
+      "text": "Rayleighův proces",
+      "type": "ADJETIVES_NOUN"
+    },
+    {
+      "hasProperNoun": false,
+      "score": 0,
+      "found": 1,
+      "isMatched": false,
+      "text": "tabulka",
+      "type": "NOUN"
+    },
+    {
+      "hasProperNoun": false,
+      "score": 0,
+      "found": 1,
+      "isMatched": false,
+      "text": "značka",
+      "type": "NOUN"
+    },
+    {
+      "hasProperNoun": false,
+      "score": 0,
+      "found": 1,
+      "isMatched": false,
+      "text": "Rovnicenestacionárního jednorozměrového proudění",
+      "type": "ADJETIVES_NOUN"
+    },
+    {
+      "hasProperNoun": false,
+      "score": 0,
+      "found": 1,
+      "isMatched": false,
+      "text": "úkol",
+      "type": "NOUN"
+    },
+    {
+      "hasProperNoun": false,
+      "score": 0,
+      "found": 1,
+      "isMatched": false,
+      "text": "Nelineární teorie",
+      "type": "ADJETIVES_NOUN"
+    },
+    {
+      "hasProperNoun": true,
+      "score": 0,
+      "found": 1,
+      "isMatched": false,
+      "text": "akritické Machovo číslo",
+      "type": "ADJETIVES_NOUN"
+    },
+    {
+      "hasProperNoun": false,
+      "score": 0,
+      "found": 1,
+      "isMatched": false,
+      "text": "bariéra",
+      "type": "NOUN"
+    },
+    {
+      "hasProperNoun": false,
+      "score": 0,
+      "found": 1,
+      "isMatched": false,
+      "text": "Další neizoentropické procesy",
+      "type": "ADJETIVES_NOUN"
+    },
+    {
+      "hasProperNoun": false,
+      "score": 0,
+      "found": 1,
+      "isMatched": false,
+      "text": "mechanikystlačitelných tekutin",
+      "type": "ADJETIVES_NOUN"
+    },
+    {
+      "hasProperNoun": false,
+      "score": 0,
+      "found": 1,
+      "isMatched": false,
+      "text": "Potenciální proudění",
+      "type": "ADJETIVES_NOUN"
+    },
+    {
+      "hasProperNoun": false,
+      "score": 0,
+      "found": 4,
+      "isMatched": false,
+      "text": "úloha",
+      "type": "NOUN"
+    },
+    {
+      "hasProperNoun": false,
+      "score": 0,
+      "found": 1,
+      "isMatched": false,
+      "text": "expanze",
+      "type": "NOUN"
+    },
+    {
+      "hasProperNoun": false,
+      "score": 0,
+      "found": 1,
+      "isMatched": false,
+      "text": "difuzorech bez tření",
+      "type": "NOUN_GENITIVES"
+    },
+    {
+      "hasProperNoun": false,
+      "score": 0,
+      "found": 1,
+      "isMatched": false,
+      "text": "úlohoizoentropickém proudění",
+      "type": "ADJETIVES_NOUN"
+    },
+    {
+      "hasProperNoun": false,
+      "score": 0,
+      "found": 1,
+      "isMatched": false,
+      "text": "prostředí",
+      "type": "NOUN"
+    },
+    {
+      "hasProperNoun": false,
+      "score": 0,
+      "found": 1,
+      "isMatched": false,
+      "text": "rovnice mechaniky stlačitelných tekutin",
+      "type": "NOUN_GENITIVES"
+    },
+    {
+      "hasProperNoun": false,
+      "score": 0,
+      "found": 1,
+      "isMatched": false,
+      "text": "Osověsymetrické aprostorové podzvukové izoentropické proudění",
+      "type": "ADJETIVES_NOUN"
+    },
+    {
+      "hasProperNoun": false,
+      "score": 0,
+      "found": 1,
+      "isMatched": false,
+      "text": "spalování",
+      "type": "NOUN"
+    },
+    {
+      "hasProperNoun": false,
+      "score": 0,
+      "found": 1,
+      "isMatched": false,
+      "text": "Prostředkykpotlačenívlivůtranssonické divergence",
+      "type": "ADJETIVES_NOUN"
+    },
+    {
+      "hasProperNoun": false,
+      "score": 0,
+      "found": 1,
+      "isMatched": false,
+      "text": "příloha",
+      "type": "NOUN"
+    },
+    {
+      "hasProperNoun": false,
+      "score": 0,
+      "found": 1,
+      "isMatched": false,
+      "text": "Podzvukové subsonické )proudění",
+      "type": "ADJETIVES_NOUN"
+    },
+    {
+      "hasProperNoun": false,
+      "score": 0,
+      "found": 2,
+      "isMatched": false,
+      "text": "vliv",
+      "type": "NOUN"
+    },
+    {
+      "hasProperNoun": false,
+      "score": 0,
+      "found": 1,
+      "isMatched": false,
+      "text": "Úvod do dynamiky plynů",
+      "type": "NOUN_GENITIVES"
+    },
+    {
+      "hasProperNoun": false,
+      "score": 0,
+      "found": 5,
+      "isMatched": false,
+      "text": "trubice",
+      "type": "NOUN"
+    },
+    {
+      "hasProperNoun": false,
+      "score": 0,
+      "found": 1,
+      "isMatched": false,
+      "text": "výtok",
+      "type": "NOUN"
+    },
+    {
+      "hasProperNoun": false,
+      "score": 0,
+      "found": 1,
+      "isMatched": false,
+      "text": "Potenciální rovnice",
+      "type": "ADJETIVES_NOUN"
+    },
+    {
+      "hasProperNoun": true,
+      "score": 0,
+      "found": 1,
+      "isMatched": false,
+      "text": "Fannův proces",
+      "type": "ADJETIVES_NOUN"
+    },
+    {
+      "hasProperNoun": false,
+      "score": 0,
+      "found": 4,
+      "isMatched": false,
+      "text": "stav",
+      "type": "NOUN"
+    },
+    {
+      "hasProperNoun": false,
+      "score": 0,
+      "found": 1,
+      "isMatched": false,
+      "text": "Dynamická teplota",
+      "type": "ADJETIVES_NOUN"
+    },
+    {
+      "hasProperNoun": false,
+      "score": 0,
+      "found": 5,
+      "isMatched": false,
+      "text": "řešení",
+      "type": "NOUN"
+    },
+    {
+      "hasProperNoun": false,
+      "score": 0,
+      "found": 1,
+      "isMatched": false,
+      "text": "obtékání těles",
+      "type": "NOUN_GENITIVES"
+    },
+    {
+      "hasProperNoun": false,
+      "score": 0,
+      "found": 1,
+      "isMatched": false,
+      "text": "doprava",
+      "type": "NOUN"
+    },
+    {
+      "hasProperNoun": false,
+      "score": 0,
+      "found": 1,
+      "isMatched": false,
+      "text": "pojem",
+      "type": "NOUN"
+    },
+    {
+      "hasProperNoun": false,
+      "score": 0,
+      "found": 1,
+      "isMatched": false,
+      "text": "Možnostimatematického řešení",
+      "type": "ADJETIVES_NOUN"
+    },
+    {
+      "hasProperNoun": false,
+      "score": 0,
+      "found": 1,
+      "isMatched": false,
+      "text": "Dynamický akinetický tlak",
+      "type": "ADJETIVES_NOUN"
+    },
+    {
+      "hasProperNoun": false,
+      "score": 0,
+      "found": 1,
+      "isMatched": false,
+      "text": "diagram",
+      "type": "NOUN"
+    },
+    {
+      "hasProperNoun": false,
+      "score": 0,
+      "found": 1,
+      "isMatched": false,
+      "text": "Šířenírozruchůkonečné velikosti",
+      "type": "ADJETIVES_NOUN"
+    },
+    {
+      "hasProperNoun": false,
+      "score": 0,
+      "found": 1,
+      "isMatched": false,
+      "text": "Hypersonické proudění",
+      "type": "ADJETIVES_NOUN"
+    },
+    {
+      "hasProperNoun": false,
+      "score": 0,
+      "found": 2,
+      "isMatched": false,
+      "text": "těleso",
+      "type": "NOUN"
+    },
+    {
+      "hasProperNoun": false,
+      "score": 0,
+      "found": 1,
+      "isMatched": false,
+      "text": "Metodyřešeníhypersonického proudění",
+      "type": "ADJETIVES_NOUN"
+    },
+    {
+      "hasProperNoun": false,
+      "score": 0,
+      "found": 1,
+      "isMatched": false,
+      "text": "Metody praktického řešení úloh",
+      "type": "NOUN_GENITIVES"
+    },
+    {
+      "hasProperNoun": false,
+      "score": 0,
+      "found": 1,
+      "isMatched": false,
+      "text": "Šikmá rázová vlna",
+      "type": "ADJETIVES_NOUN"
+    },
+    {
+      "hasProperNoun": false,
+      "score": 0,
+      "found": 1,
+      "isMatched": false,
+      "text": "rovnice stlačitelných tekutin",
+      "type": "NOUN_GENITIVES"
+    },
+    {
+      "hasProperNoun": false,
+      "score": 0,
+      "found": 1,
+      "isMatched": false,
+      "text": "číslo",
+      "type": "NOUN"
+    },
+    {
+      "hasProperNoun": false,
+      "score": 0,
+      "found": 1,
+      "isMatched": false,
+      "text": "Teoriešířeníakustických vln",
+      "type": "ADJETIVES_NOUN"
+    },
+    {
+      "hasProperNoun": false,
+      "score": 0,
+      "found": 1,
+      "isMatched": false,
+      "text": "Metoda charakteristik",
+      "type": "NOUN_GENITIVES"
+    },
+    {
+      "hasProperNoun": false,
+      "score": 0,
+      "found": 4,
+      "isMatched": false,
+      "text": "průtok",
+      "type": "NOUN"
+    },
+    {
+      "hasProperNoun": false,
+      "score": 0,
+      "found": 1,
+      "isMatched": false,
+      "text": "Nadzvukový difuzor",
+      "type": "ADJETIVES_NOUN"
+    },
+    {
+      "hasProperNoun": false,
+      "score": 0,
+      "found": 1,
+      "isMatched": false,
+      "text": ",scramjetatransatmosférická doprava",
+      "type": "ADJETIVES_NOUN"
+    },
+    {
+      "hasProperNoun": false,
+      "score": 0,
+      "found": 1,
+      "isMatched": false,
+      "text": "tlak",
+      "type": "NOUN"
+    },
+    {
+      "hasProperNoun": true,
+      "score": 0,
+      "found": 1,
+      "isMatched": false,
+      "text": "PrůtokLavalovou tryskou",
+      "type": "ADJETIVES_NOUN"
+    },
+    {
+      "hasProperNoun": false,
+      "score": 0,
+      "found": 1,
+      "isMatched": false,
+      "text": "jet",
+      "type": "NOUN"
+    },
+    {
+      "hasProperNoun": false,
+      "score": 0,
+      "found": 1,
+      "isMatched": false,
+      "text": "prostředek",
+      "type": "NOUN"
+    },
+    {
+      "hasProperNoun": false,
+      "score": 0,
+      "found": 1,
+      "isMatched": false,
+      "text": "Vícerozměrové stacionární proudění",
+      "type": "ADJETIVES_NOUN"
+    },
+    {
+      "hasProperNoun": false,
+      "score": 0,
+      "found": 1,
+      "isMatched": false,
+      "text": "energie",
+      "type": "NOUN"
+    },
+    {
+      "hasProperNoun": false,
+      "score": 0,
+      "found": 3,
+      "isMatched": false,
+      "text": "věta",
+      "type": "NOUN"
+    },
+    {
+      "hasProperNoun": true,
+      "score": 0,
+      "found": 1,
+      "isMatched": false,
+      "text": "Vénantova Wantzelova",
+      "type": "NOUN_GENITIVES"
+    },
+    {
+      "hasProperNoun": false,
+      "score": 0,
+      "found": 1,
+      "isMatched": false,
+      "text": "Stavová rovina",
+      "type": "ADJETIVES_NOUN"
+    },
+    {
+      "hasProperNoun": false,
+      "score": 0,
+      "found": 2,
+      "isMatched": false,
+      "text": "divergence",
+      "type": "NOUN"
+    },
+    {
+      "hasProperNoun": false,
+      "score": 0,
+      "found": 1,
+      "isMatched": false,
+      "text": "vzorec",
+      "type": "NOUN"
+    },
+    {
+      "hasProperNoun": false,
+      "score": 0,
+      "found": 1,
+      "isMatched": false,
+      "text": "Rovnicekolmé adiabatické rázové vlny",
+      "type": "ADJETIVES_NOUN"
+    },
+    {
+      "hasProperNoun": false,
+      "score": 0,
+      "found": 1,
+      "isMatched": false,
+      "text": "úlohokolmé rázové vlně",
+      "type": "ADJETIVES_NOUN"
+    },
+    {
+      "hasProperNoun": false,
+      "score": 0,
+      "found": 1,
+      "isMatched": false,
+      "text": "Linearizované podzvukové rovinné proudění",
+      "type": "ADJETIVES_NOUN"
+    },
+    {
+      "hasProperNoun": false,
+      "score": 0,
+      "found": 1,
+      "isMatched": false,
+      "text": "teplota",
+      "type": "NOUN"
+    },
+    {
+      "hasProperNoun": false,
+      "score": 0,
+      "found": 1,
+      "isMatched": false,
+      "text": "Proudové pole",
+      "type": "ADJETIVES_NOUN"
+    },
+    {
+      "hasProperNoun": false,
+      "score": 0,
+      "found": 1,
+      "isMatched": false,
+      "text": "řešení úloh transsonické dynamiky plynů",
+      "type": "NOUN_GENITIVES"
+    },
+    {
+      "hasProperNoun": false,
+      "score": 0,
+      "found": 2,
+      "isMatched": false,
+      "text": "vproudové trubici",
+      "type": "ADJETIVES_NOUN"
+    },
+    {
+      "hasProperNoun": true,
+      "score": 0,
+      "found": 2,
+      "isMatched": false,
+      "text": "Hugoniotov",
+      "type": "PROPERNOUN"
+    },
+    {
+      "hasProperNoun": false,
+      "score": 0,
+      "found": 2,
+      "isMatched": false,
+      "text": "Základní rovnice",
+      "type": "ADJETIVES_NOUN"
+    },
+    {
+      "hasProperNoun": false,
+      "score": 0,
+      "found": 1,
+      "isMatched": false,
+      "text": "potlačení vlivů transsonické divergence",
+      "type": "NOUN_GENITIVES"
+    },
+    {
+      "hasProperNoun": false,
+      "score": 0,
+      "found": 1,
+      "isMatched": false,
+      "text": "stav napjatosti",
+      "type": "NOUN_GENITIVES"
+    },
+    {
+      "hasProperNoun": true,
+      "score": 0,
+      "found": 1,
+      "isMatched": false,
+      "text": "Prandtlova Meyerova expanze",
+      "type": "ADJETIVES_NOUN"
+    },
+    {
+      "hasProperNoun": false,
+      "score": 0,
+      "found": 9,
+      "isMatched": false,
+      "text": "vlna",
+      "type": "NOUN"
+    },
+    {
+      "hasProperNoun": false,
+      "score": 0,
+      "found": 1,
+      "isMatched": false,
+      "text": "tření",
+      "type": "NOUN"
+    },
+    {
+      "hasProperNoun": false,
+      "score": 0,
+      "found": 1,
+      "isMatched": false,
+      "text": "Rázová vlna",
+      "type": "ADJETIVES_NOUN"
+    },
+    {
+      "hasProperNoun": false,
+      "score": 0,
+      "found": 1,
+      "isMatched": false,
+      "text": "poměry",
+      "type": "NOUN"
+    },
+    {
+      "hasProperNoun": false,
+      "score": 0,
+      "found": 2,
+      "isMatched": false,
+      "text": "úlohtranssonické dynamiky",
+      "type": "ADJETIVES_NOUN"
+    },
+    {
+      "hasProperNoun": false,
+      "score": 0,
+      "found": 1,
+      "isMatched": false,
+      "text": "Základní pojmy",
+      "type": "ADJETIVES_NOUN"
+    },
+    {
+      "hasProperNoun": false,
+      "score": 0,
+      "found": 1,
+      "isMatched": false,
+      "text": "stlačitelnost",
+      "type": "NOUN"
+    },
+    {
+      "hasProperNoun": false,
+      "score": 0,
+      "found": 1,
+      "isMatched": false,
+      "text": "zvuk",
+      "type": "NOUN"
+    },
+    {
+      "hasProperNoun": false,
+      "score": 0,
+      "found": 1,
+      "isMatched": false,
+      "text": "Respektování vlivu stlačítelnosti",
+      "type": "NOUN_GENITIVES"
+    },
+    {
+      "hasProperNoun": false,
+      "score": 0,
+      "found": 1,
+      "isMatched": false,
+      "text": "dynamika plynů",
+      "type": "NOUN_GENITIVES"
+    },
+    {
+      "hasProperNoun": true,
+      "score": 0,
+      "found": 1,
+      "isMatched": false,
+      "text": "Věta Hugoniotova",
+      "type": "NOUN_GENITIVES"
+    },
+    {
+      "hasProperNoun": false,
+      "score": 0,
+      "found": 1,
+      "isMatched": false,
+      "text": "vazkost",
+      "type": "NOUN"
+    },
+    {
+      "hasProperNoun": false,
+      "score": 0,
+      "found": 6,
+      "isMatched": false,
+      "text": "dynamika",
+      "type": "NOUN"
+    },
+    {
+      "hasProperNoun": false,
+      "score": 0,
+      "found": 1,
+      "isMatched": false,
+      "text": "Průtokpodzvukovým difuzorem",
+      "type": "ADJETIVES_NOUN"
+    },
+    {
+      "hasProperNoun": false,
+      "score": 0,
+      "found": 1,
+      "isMatched": false,
+      "text": "vlastnosti hypersonického úroudění",
+      "type": "NOUN_GENITIVES"
+    },
+    {
+      "hasProperNoun": false,
+      "score": 0,
+      "found": 1,
+      "isMatched": false,
+      "text": "výběr",
+      "type": "NOUN"
+    },
+    {
+      "hasProperNoun": true,
+      "score": 0,
+      "found": 1,
+      "isMatched": false,
+      "text": "Vénantov",
+      "type": "PROPERNOUN"
+    },
+    {
+      "hasProperNoun": false,
+      "score": 0,
+      "found": 1,
+      "isMatched": false,
+      "text": "Výtoknerozšířenou tryskou",
+      "type": "ADJETIVES_NOUN"
+    },
+    {
+      "hasProperNoun": false,
+      "score": 0,
+      "found": 1,
+      "isMatched": false,
+      "text": "respektování",
+      "type": "NOUN"
+    },
+    {
+      "hasProperNoun": true,
+      "score": 0,
+      "found": 1,
+      "isMatched": false,
+      "text": "Lavalovy trysky",
+      "type": "ADJETIVES_NOUN"
+    },
+    {
+      "hasProperNoun": false,
+      "score": 0,
+      "found": 3,
+      "isMatched": false,
+      "text": "stlačitelných tekutin",
+      "type": "ADJETIVES_NOUN"
+    },
+    {
+      "hasProperNoun": false,
+      "score": 0,
+      "found": 2,
+      "isMatched": false,
+      "text": "stlačitelné tekutiny",
+      "type": "ADJETIVES_NOUN"
+    },
+    {
+      "hasProperNoun": false,
+      "score": 0,
+      "found": 2,
+      "isMatched": false,
+      "text": "průřez",
+      "type": "NOUN"
+    },
+    {
+      "hasProperNoun": false,
+      "score": 0,
+      "found": 1,
+      "isMatched": false,
+      "text": "entropie",
+      "type": "NOUN"
+    },
+    {
+      "hasProperNoun": false,
+      "score": 0,
+      "found": 8,
+      "isMatched": false,
+      "text": "tekutina",
+      "type": "NOUN"
+    },
+    {
+      "hasProperNoun": false,
+      "score": 0,
+      "found": 1,
+      "isMatched": false,
+      "text": "model",
+      "type": "NOUN"
+    },
+    {
+      "hasProperNoun": false,
+      "score": 0,
+      "found": 1,
+      "isMatched": false,
+      "text": "interakce",
+      "type": "NOUN"
+    },
+    {
+      "hasProperNoun": false,
+      "score": 0,
+      "found": 1,
+      "isMatched": false,
+      "text": "Podzvukové proudění",
+      "type": "ADJETIVES_NOUN"
+    },
+    {
+      "hasProperNoun": false,
+      "score": 0,
+      "found": 1,
+      "isMatched": false,
+      "text": "Osověsymetrické aprostorové nadzvukové proudění",
+      "type": "ADJETIVES_NOUN"
+    },
+    {
+      "hasProperNoun": false,
+      "score": 0,
+      "found": 3,
+      "isMatched": false,
+      "text": "proces",
+      "type": "NOUN"
+    },
+    {
+      "hasProperNoun": false,
+      "score": 0,
+      "found": 2,
+      "isMatched": false,
+      "text": "hodograf",
+      "type": "NOUN"
+    },
+    {
+      "hasProperNoun": false,
+      "score": 0,
+      "found": 7,
+      "isMatched": false,
+      "text": "tryska",
+      "type": "NOUN"
+    },
+    {
+      "hasProperNoun": false,
+      "score": 0,
+      "found": 4,
+      "isMatched": false,
+      "text": "šíření",
+      "type": "NOUN"
+    },
+    {
+      "hasProperNoun": false,
+      "score": 0,
+      "found": 1,
+      "isMatched": false,
+      "text": "Nadzvukové proudění",
+      "type": "ADJETIVES_NOUN"
+    },
+    {
+      "hasProperNoun": false,
+      "score": 0,
+      "found": 1,
+      "isMatched": false,
+      "text": "Větyoenergii,druhávětatermodynamická akonštituční rovnice",
+      "type": "ADJETIVES_NOUN"
+    },
+    {
+      "hasProperNoun": false,
+      "score": 0,
+      "found": 1,
+      "isMatched": false,
+      "text": "vlastnosti plynů",
+      "type": "NOUN_GENITIVES"
+    },
+    {
+      "hasProperNoun": false,
+      "score": 0,
+      "found": 1,
+      "isMatched": false,
+      "text": "obtékání",
+      "type": "NOUN"
+    },
+    {
+      "hasProperNoun": false,
+      "score": 0,
+      "found": 1,
+      "isMatched": false,
+      "text": "Možnosti matematického řešení úloh transsonické dynamiky plynů",
+      "type": "NOUN_GENITIVES"
+    },
+    {
+      "hasProperNoun": false,
+      "score": 0,
+      "found": 1,
+      "isMatched": false,
+      "text": "úroudění",
+      "type": "NOUN"
+    },
+    {
+      "hasProperNoun": false,
+      "score": 0,
+      "found": 1,
+      "isMatched": false,
+      "text": "tělespostupnou aproximací",
+      "type": "ADJETIVES_NOUN"
+    },
+    {
+      "hasProperNoun": false,
+      "score": 0,
+      "found": 1,
+      "isMatched": false,
+      "text": "charakteristika",
+      "type": "NOUN"
+    },
+    {
+      "hasProperNoun": false,
+      "score": 0,
+      "found": 1,
+      "isMatched": false,
+      "text": "teoretické dynamiky",
+      "type": "ADJETIVES_NOUN"
+    },
+    {
+      "hasProperNoun": false,
+      "score": 0,
+      "found": 1,
+      "isMatched": false,
+      "text": "Nestacionární jednorozměrové proudění",
+      "type": "ADJETIVES_NOUN"
+    },
+    {
+      "hasProperNoun": false,
+      "score": 0,
+      "found": 1,
+      "isMatched": false,
+      "text": "Rovnice nestacionárního jednorozměrového proudění",
+      "type": "NOUN_GENITIVES"
+    },
+    {
+      "hasProperNoun": false,
+      "score": 0,
+      "found": 1,
+      "isMatched": false,
+      "text": "vnehybném prostředí",
+      "type": "ADJETIVES_NOUN"
+    },
+    {
+      "hasProperNoun": false,
+      "score": 0,
+      "found": 1,
+      "isMatched": false,
+      "text": "Popisproudového pole",
+      "type": "ADJETIVES_NOUN"
+    },
+    {
+      "hasProperNoun": true,
+      "score": 0,
+      "found": 1,
+      "isMatched": false,
+      "text": "Wantzelov",
+      "type": "PROPERNOUN"
+    },
+    {
+      "hasProperNoun": false,
+      "score": 0,
+      "found": 1,
+      "isMatched": false,
+      "text": "Hypersonické vztlakové těleso",
+      "type": "ADJETIVES_NOUN"
+    },
+    {
+      "hasProperNoun": false,
+      "score": 0,
+      "found": 1,
+      "isMatched": false,
+      "text": "Rovnice kolmé adiabatické rázové vlny",
+      "type": "NOUN_GENITIVES"
+    },
+    {
+      "hasProperNoun": true,
+      "score": 0,
+      "found": 1,
+      "isMatched": false,
+      "text": "Rankineov",
+      "type": "PROPERNOUN"
+    },
+    {
+      "hasProperNoun": true,
+      "score": 0,
+      "found": 1,
+      "isMatched": false,
+      "text": "Pitotova trubice",
+      "type": "ADJETIVES_NOUN"
+    },
+    {
+      "hasProperNoun": false,
+      "score": 0,
+      "found": 1,
+      "isMatched": false,
+      "text": "hustota objemového toku",
+      "type": "NOUN_GENITIVES"
+    },
+    {
+      "hasProperNoun": false,
+      "score": 0,
+      "found": 1,
+      "isMatched": false,
+      "text": "pohyb",
+      "type": "NOUN"
+    },
+    {
+      "hasProperNoun": false,
+      "score": 0,
+      "found": 1,
+      "isMatched": false,
+      "text": "literatura",
+      "type": "NOUN"
+    },
+    {
+      "hasProperNoun": false,
+      "score": 0,
+      "found": 1,
+      "isMatched": false,
+      "text": "Matematické modely",
+      "type": "ADJETIVES_NOUN"
+    },
+    {
+      "hasProperNoun": false,
+      "score": 0,
+      "found": 1,
+      "isMatched": false,
+      "text": "mechanika",
+      "type": "NOUN"
+    },
+    {
+      "hasProperNoun": false,
+      "score": 0,
+      "found": 1,
+      "isMatched": false,
+      "text": "tok",
+      "type": "NOUN"
+    },
+    {
+      "hasProperNoun": false,
+      "score": 0,
+      "found": 1,
+      "isMatched": false,
+      "text": "Šíření akustických vln",
+      "type": "NOUN_GENITIVES"
+    },
+    {
+      "hasProperNoun": false,
+      "score": 0,
+      "found": 1,
+      "isMatched": false,
+      "text": "možnost",
+      "type": "NOUN"
+    },
+    {
+      "hasProperNoun": false,
+      "score": 0,
+      "found": 1,
+      "isMatched": false,
+      "text": "Stacionární izoentropické proudění",
+      "type": "ADJETIVES_NOUN"
+    },
+    {
+      "hasProperNoun": false,
+      "score": 0,
+      "found": 3,
+      "isMatched": false,
+      "text": "ztráta",
+      "type": "NOUN"
+    },
+    {
+      "hasProperNoun": false,
+      "score": 0,
+      "found": 1,
+      "isMatched": false,
+      "text": "vproudícím plynu",
+      "type": "ADJETIVES_NOUN"
+    },
+    {
+      "hasProperNoun": false,
+      "score": 0,
+      "found": 1,
+      "isMatched": false,
+      "text": "popis",
+      "type": "NOUN"
+    },
+    {
+      "hasProperNoun": false,
+      "score": 0,
+      "found": 1,
+      "isMatched": false,
+      "text": "Teorie šíření akustických vln",
+      "type": "NOUN_GENITIVES"
+    },
+    {
+      "hasProperNoun": false,
+      "score": 0,
+      "found": 1,
+      "isMatched": false,
+      "text": "obsah",
+      "type": "NOUN"
+    },
+    {
+      "hasProperNoun": false,
+      "score": 0,
+      "found": 1,
+      "isMatched": false,
+      "text": "Rychlostzvukuvproudovém poli",
+      "type": "ADJETIVES_NOUN"
+    },
+    {
+      "hasProperNoun": false,
+      "score": 0,
+      "found": 1,
+      "isMatched": false,
+      "text": "Zákonyjednorozměrového stacionárního proudění",
+      "type": "ADJETIVES_NOUN"
+    },
+    {
+      "hasProperNoun": false,
+      "score": 0,
+      "found": 3,
+      "isMatched": false,
+      "text": "vlastnost",
+      "type": "NOUN"
+    },
+    {
+      "hasProperNoun": false,
+      "score": 0,
+      "found": 1,
+      "isMatched": false,
+      "text": "Linearizované potenciální proudění",
+      "type": "ADJETIVES_NOUN"
+    },
+    {
+      "hasProperNoun": false,
+      "score": 0,
+      "found": 1,
+      "isMatched": false,
+      "text": "Šíření rozruchů konečné velikosti",
+      "type": "NOUN_GENITIVES"
+    },
+    {
+      "hasProperNoun": false,
+      "score": 0,
+      "found": 3,
+      "isMatched": false,
+      "text": "teorie",
+      "type": "NOUN"
+    },
+    {
+      "hasProperNoun": false,
+      "score": 0,
+      "found": 3,
+      "isMatched": false,
+      "text": "pole",
+      "type": "NOUN"
+    },
+    {
+      "hasProperNoun": false,
+      "score": 0,
+      "found": 1,
+      "isMatched": false,
+      "text": "aproximace",
+      "type": "NOUN"
+    },
+    {
+      "hasProperNoun": false,
+      "score": 0,
+      "found": 1,
+      "isMatched": false,
+      "text": "Pohybové rovnice",
+      "type": "ADJETIVES_NOUN"
+    },
+    {
+      "hasProperNoun": false,
+      "score": 0,
+      "found": 1,
+      "isMatched": false,
+      "text": "teorie nestacionárního šíření vln",
+      "type": "NOUN_GENITIVES"
+    },
+    {
+      "hasProperNoun": false,
+      "score": 0,
+      "found": 1,
+      "isMatched": false,
+      "text": "hustota",
+      "type": "NOUN"
+    },
+    {
+      "hasProperNoun": false,
+      "score": 0,
+      "found": 1,
+      "isMatched": false,
+      "text": "Popis proudového pole pomocí hodografu",
+      "type": "NOUN_GENITIVES"
+    },
+    {
+      "hasProperNoun": false,
+      "score": 0,
+      "found": 1,
+      "isMatched": false,
+      "text": "stacionárního izoentropického proudění",
+      "type": "ADJETIVES_NOUN"
+    },
+    {
+      "hasProperNoun": false,
+      "score": 0,
+      "found": 1,
+      "isMatched": false,
+      "text": "rozruch",
+      "type": "NOUN"
+    },
+    {
+      "hasProperNoun": false,
+      "score": 0,
+      "found": 1,
+      "isMatched": false,
+      "text": "Zobrazení do roviny hodografu",
+      "type": "NOUN_GENITIVES"
+    },
+    {
+      "hasProperNoun": true,
+      "score": 0,
+      "found": 1,
+      "isMatched": false,
+      "text": "RovniceSaint Vénantova",
+      "type": "ADJETIVES_NOUN"
+    },
+    {
+      "hasProperNoun": false,
+      "score": 0,
+      "found": 1,
+      "isMatched": false,
+      "text": "objemového toku",
+      "type": "ADJETIVES_NOUN"
+    },
+    {
+      "hasProperNoun": false,
+      "score": 0,
+      "found": 1,
+      "isMatched": false,
+      "text": "zákon",
+      "type": "NOUN"
+    },
+    {
+      "hasProperNoun": false,
+      "score": 0,
+      "found": 1,
+      "isMatched": false,
+      "text": "Klidový stagnační )stav",
+      "type": "ADJETIVES_NOUN"
+    },
+    {
+      "hasProperNoun": false,
+      "score": 0,
+      "found": 1,
+      "isMatched": false,
+      "text": "proud",
+      "type": "NOUN"
+    },
+    {
+      "hasProperNoun": false,
+      "score": 0,
+      "found": 1,
+      "isMatched": false,
+      "text": "Podzvukový difuzor",
+      "type": "ADJETIVES_NOUN"
+    },
+    {
+      "hasProperNoun": false,
+      "score": 0,
+      "found": 1,
+      "isMatched": false,
+      "text": "vnadzvukovém proudu",
+      "type": "ADJETIVES_NOUN"
+    },
+    {
+      "hasProperNoun": false,
+      "score": 0,
+      "found": 1,
+      "isMatched": false,
+      "text": "nestacionárního šíření",
+      "type": "ADJETIVES_NOUN"
+    },
+    {
+      "hasProperNoun": false,
+      "score": 0,
+      "found": 1,
+      "isMatched": false,
+      "text": "základ",
+      "type": "NOUN"
+    },
+    {
+      "hasProperNoun": false,
+      "score": 0,
+      "found": 2,
+      "isMatched": false,
+      "text": "trubici konstantního průřezu",
+      "type": "NOUN_GENITIVES"
+    },
+    {
+      "hasProperNoun": false,
+      "score": 0,
+      "found": 1,
+      "isMatched": false,
+      "text": "kontinuita",
+      "type": "NOUN"
+    },
+    {
+      "hasProperNoun": false,
+      "score": 0,
+      "found": 1,
+      "isMatched": false,
+      "text": "Transsonické proudění",
+      "type": "ADJETIVES_NOUN"
+    },
+    {
+      "hasProperNoun": false,
+      "score": 0,
+      "found": 1,
+      "isMatched": false,
+      "text": "Metodypraktického řešení",
+      "type": "ADJETIVES_NOUN"
+    },
+    {
+      "hasProperNoun": false,
+      "score": 0,
+      "found": 1,
+      "isMatched": false,
+      "text": "seznam",
+      "type": "NOUN"
+    },
+    {
+      "hasProperNoun": false,
+      "score": 0,
+      "found": 2,
+      "isMatched": false,
+      "text": "rovina",
+      "type": "NOUN"
+    },
+    {
+      "hasProperNoun": false,
+      "score": 0,
+      "found": 6,
+      "isMatched": false,
+      "text": "difuzor",
+      "type": "NOUN"
+    },
+    {
+      "hasProperNoun": false,
+      "score": 0,
+      "found": 1,
+      "isMatched": false,
+      "text": "Jednorozměrové stacioámíproudění",
+      "type": "ADJETIVES_NOUN"
+    },
+    {
+      "hasProperNoun": false,
+      "score": 0,
+      "found": 1,
+      "isMatched": false,
+      "text": "Základy teorie spalování",
+      "type": "NOUN_GENITIVES"
+    },
+    {
+      "hasProperNoun": false,
+      "score": 0,
+      "found": 1,
+      "isMatched": false,
+      "text": "potlačení",
+      "type": "NOUN"
+    },
+    {
+      "hasProperNoun": false,
+      "score": 0,
+      "found": 1,
+      "isMatched": false,
+      "text": "Rychlost zvuku",
+      "type": "NOUN_GENITIVES"
+    },
+    {
+      "hasProperNoun": false,
+      "score": 0,
+      "found": 1,
+      "isMatched": false,
+      "text": "Některévlastnostihypersonického úroudění",
+      "type": "ADJETIVES_NOUN"
+    },
+    {
+      "hasProperNoun": false,
+      "score": 0,
+      "found": 1,
+      "isMatched": false,
+      "text": "napjatost",
+      "type": "NOUN"
+    },
+    {
+      "hasProperNoun": false,
+      "score": 0,
+      "found": 1,
+      "isMatched": false,
+      "text": "Vazkost tekutin",
+      "type": "NOUN_GENITIVES"
+    },
+    {
+      "hasProperNoun": false,
+      "score": 0,
+      "found": 1,
+      "isMatched": false,
+      "text": "velikost",
+      "type": "NOUN"
+    },
+    {
+      "hasProperNoun": false,
+      "score": 0,
+      "found": 1,
+      "isMatched": false,
+      "text": "metody dynamiky plynů",
+      "type": "NOUN_GENITIVES"
+    },
+    {
+      "hasProperNoun": false,
+      "score": 0,
+      "found": 1,
+      "isMatched": false,
+      "text": "úvod",
+      "type": "NOUN"
+    },
+    {
+      "hasProperNoun": true,
+      "score": 0,
+      "found": 1,
+      "isMatched": false,
+      "text": ",Fliegnerův vzorec",
+      "type": "ADJETIVES_NOUN"
+    },
+    {
+      "hasProperNoun": true,
+      "score": 0,
+      "found": 1,
+      "isMatched": false,
+      "text": "ZobrazenídorovinyhodografuaKármánův -Tsienův plyn",
+      "type": "ADJETIVES_NOUN"
+    },
+    {
+      "hasProperNoun": false,
+      "score": 0,
+      "found": 1,
+      "isMatched": false,
+      "text": "rychlost",
+      "type": "NOUN"
+    },
+    {
+      "hasProperNoun": false,
+      "score": 0,
+      "found": 1,
+      "isMatched": false,
+      "text": "Experimentální řešení",
+      "type": "ADJETIVES_NOUN"
+    },
+    {
+      "hasProperNoun": true,
+      "score": 0,
+      "found": 1,
+      "isMatched": false,
+      "text": "stavy Lavalovy trysky",
+      "type": "NOUN_GENITIVES"
+    },
+    {
+      "hasProperNoun": false,
+      "score": 0,
+      "found": 1,
+      "isMatched": false,
+      "text": "modely teoretické dynamiky plynů",
+      "type": "NOUN_GENITIVES"
+    },
+    {
+      "hasProperNoun": false,
+      "score": 0,
+      "found": 1,
+      "isMatched": false,
+      "text": "Kolmá adiabatická rázová vlna",
+      "type": "ADJETIVES_NOUN"
+    },
+    {
+      "hasProperNoun": false,
+      "score": 0,
+      "found": 2,
+      "isMatched": false,
+      "text": "proudění stlačitelné tekutiny",
+      "type": "NOUN_GENITIVES"
+    },
+    {
+      "hasProperNoun": false,
+      "score": 0,
+      "found": 1,
+      "isMatched": false,
+      "text": "atranssonická divergence",
+      "type": "ADJETIVES_NOUN"
+    },
+    {
+      "hasProperNoun": false,
+      "score": 0,
+      "found": 1,
+      "isMatched": false,
+      "text": "Linearizované rovinné nadzvukové proudění",
+      "type": "ADJETIVES_NOUN"
+    },
+    {
+      "hasProperNoun": false,
+      "score": 0,
+      "found": 1,
+      "isMatched": false,
+      "text": "rovnice stacionárního izoentropického proudění",
+      "type": "NOUN_GENITIVES"
+    },
+    {
+      "hasProperNoun": false,
+      "score": 0,
+      "found": 1,
+      "isMatched": false,
+      "text": "Zákony jednorozměrového stacionárního proudění",
+      "type": "NOUN_GENITIVES"
+    },
+    {
+      "hasProperNoun": false,
+      "score": 0,
+      "found": 1,
+      "isMatched": false,
+      "text": "Respektovánívlivustlačítelnostipřirovinném obtékání",
+      "type": "ADJETIVES_NOUN"
+    },
+    {
+      "hasProperNoun": false,
+      "score": 0,
+      "found": 1,
+      "isMatched": false,
+      "text": "stlačítelnost",
+      "type": "NOUN"
+    },
+    {
+      "hasProperNoun": false,
+      "score": 0,
+      "found": 1,
+      "isMatched": false,
+      "text": "Nenávrhové provozní stavy",
+      "type": "ADJETIVES_NOUN"
+    }
+  ],
+  "foldername": "/home/alberto/Projects/NTK/balicky/F21395f_000170834"
+}

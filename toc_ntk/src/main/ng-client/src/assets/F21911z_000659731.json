@@ -1,0 +1,781 @@
+{
+  "candidates": [
+    {
+      "hasProperNoun": false,
+      "score": 0,
+      "found": 1,
+      "isMatched": false,
+      "text": "PRAVIDLA PREZENTOVÁNÍ",
+      "type": "NOUN_GENITIVES"
+    },
+    {
+      "hasProperNoun": false,
+      "score": 0,
+      "found": 1,
+      "isMatched": false,
+      "text": "software",
+      "type": "NOUN"
+    },
+    {
+      "hasProperNoun": false,
+      "score": 0,
+      "found": 2,
+      "isMatched": false,
+      "text": "osobnost",
+      "type": "NOUN"
+    },
+    {
+      "hasProperNoun": false,
+      "score": 0,
+      "found": 1,
+      "isMatched": false,
+      "text": "den",
+      "type": "NOUN"
+    },
+    {
+      "hasProperNoun": false,
+      "score": 0,
+      "found": 1,
+      "isMatched": false,
+      "text": "Neverbální komunikace",
+      "type": "ADJETIVES_NOUN"
+    },
+    {
+      "hasProperNoun": false,
+      "score": 0,
+      "found": 1,
+      "isMatched": false,
+      "text": "postavení",
+      "type": "NOUN"
+    },
+    {
+      "hasProperNoun": false,
+      "score": 0,
+      "found": 1,
+      "isMatched": false,
+      "text": "pracovník",
+      "type": "NOUN"
+    },
+    {
+      "hasProperNoun": false,
+      "score": 0,
+      "found": 1,
+      "isMatched": false,
+      "text": "problém",
+      "type": "NOUN"
+    },
+    {
+      "hasProperNoun": false,
+      "score": 0,
+      "found": 1,
+      "isMatched": false,
+      "text": "porada",
+      "type": "NOUN"
+    },
+    {
+      "hasProperNoun": false,
+      "score": 0,
+      "found": 1,
+      "isMatched": false,
+      "text": "veřejnost",
+      "type": "NOUN"
+    },
+    {
+      "hasProperNoun": false,
+      "score": 0,
+      "found": 1,
+      "isMatched": false,
+      "text": "proces",
+      "type": "NOUN"
+    },
+    {
+      "hasProperNoun": false,
+      "score": 0,
+      "found": 4,
+      "isMatched": false,
+      "text": "etiketa",
+      "type": "NOUN"
+    },
+    {
+      "hasProperNoun": false,
+      "score": 0,
+      "found": 1,
+      "isMatched": false,
+      "text": "událost",
+      "type": "NOUN"
+    },
+    {
+      "hasProperNoun": false,
+      "score": 0,
+      "found": 7,
+      "isMatched": false,
+      "text": "typologie",
+      "type": "NOUN"
+    },
+    {
+      "hasProperNoun": false,
+      "score": 0,
+      "found": 2,
+      "isMatched": false,
+      "text": "rétorika",
+      "type": "NOUN"
+    },
+    {
+      "hasProperNoun": false,
+      "score": 0,
+      "found": 1,
+      "isMatched": false,
+      "text": "charakteristika",
+      "type": "NOUN"
+    },
+    {
+      "hasProperNoun": false,
+      "score": 0,
+      "found": 1,
+      "isMatched": false,
+      "text": "Efektivní vedení",
+      "type": "ADJETIVES_NOUN"
+    },
+    {
+      "hasProperNoun": false,
+      "score": 0,
+      "found": 1,
+      "isMatched": false,
+      "text": "Další typologie",
+      "type": "ADJETIVES_NOUN"
+    },
+    {
+      "hasProperNoun": false,
+      "score": 0,
+      "found": 1,
+      "isMatched": false,
+      "text": "Proces přípravy prezentace",
+      "type": "NOUN_GENITIVES"
+    },
+    {
+      "hasProperNoun": false,
+      "score": 0,
+      "found": 1,
+      "isMatched": false,
+      "text": "Postavení člověka",
+      "type": "NOUN_GENITIVES"
+    },
+    {
+      "hasProperNoun": false,
+      "score": 0,
+      "found": 1,
+      "isMatched": false,
+      "text": "Verbální komunikace",
+      "type": "ADJETIVES_NOUN"
+    },
+    {
+      "hasProperNoun": false,
+      "score": 0,
+      "found": 1,
+      "isMatched": false,
+      "text": "poster",
+      "type": "NOUN"
+    },
+    {
+      "hasProperNoun": false,
+      "score": 0,
+      "found": 1,
+      "isMatched": false,
+      "text": "Přípravaprezentacevprezentačním softwaru",
+      "type": "ADJETIVES_NOUN"
+    },
+    {
+      "hasProperNoun": false,
+      "score": 0,
+      "found": 1,
+      "isMatched": false,
+      "text": "principy etikety",
+      "type": "NOUN_GENITIVES"
+    },
+    {
+      "hasProperNoun": false,
+      "score": 0,
+      "found": 1,
+      "isMatched": false,
+      "text": "role",
+      "type": "NOUN"
+    },
+    {
+      "hasProperNoun": false,
+      "score": 0,
+      "found": 1,
+      "isMatched": false,
+      "text": "prostředí mezilidské komunikace",
+      "type": "NOUN_GENITIVES"
+    },
+    {
+      "hasProperNoun": false,
+      "score": 0,
+      "found": 1,
+      "isMatched": false,
+      "text": "Komunikacevtýmové práci",
+      "type": "ADJETIVES_NOUN"
+    },
+    {
+      "hasProperNoun": false,
+      "score": 0,
+      "found": 1,
+      "isMatched": false,
+      "text": "prostředí",
+      "type": "NOUN"
+    },
+    {
+      "hasProperNoun": false,
+      "score": 0,
+      "found": 1,
+      "isMatched": false,
+      "text": "vedoucí",
+      "type": "NOUN"
+    },
+    {
+      "hasProperNoun": false,
+      "score": 0,
+      "found": 1,
+      "isMatched": false,
+      "text": "Varianty konfliktů",
+      "type": "NOUN_GENITIVES"
+    },
+    {
+      "hasProperNoun": false,
+      "score": 0,
+      "found": 1,
+      "isMatched": false,
+      "text": "literatura",
+      "type": "NOUN"
+    },
+    {
+      "hasProperNoun": false,
+      "score": 0,
+      "found": 1,
+      "isMatched": false,
+      "text": "SOCIÁLNÍ KOMUNIKACE",
+      "type": "ADJETIVES_NOUN"
+    },
+    {
+      "hasProperNoun": false,
+      "score": 0,
+      "found": 1,
+      "isMatched": false,
+      "text": "pravidlo",
+      "type": "NOUN"
+    },
+    {
+      "hasProperNoun": false,
+      "score": 0,
+      "found": 1,
+      "isMatched": false,
+      "text": "formulace",
+      "type": "NOUN"
+    },
+    {
+      "hasProperNoun": false,
+      "score": 0,
+      "found": 1,
+      "isMatched": false,
+      "text": "Základní typy",
+      "type": "ADJETIVES_NOUN"
+    },
+    {
+      "hasProperNoun": false,
+      "score": 0,
+      "found": 17,
+      "isMatched": false,
+      "text": "komunikace",
+      "type": "NOUN"
+    },
+    {
+      "hasProperNoun": false,
+      "score": 0,
+      "found": 1,
+      "isMatched": false,
+      "text": "Důležité principy",
+      "type": "ADJETIVES_NOUN"
+    },
+    {
+      "hasProperNoun": false,
+      "score": 0,
+      "found": 1,
+      "isMatched": false,
+      "text": "Komunikacemezivedoucímiapodřízenými pracovníky",
+      "type": "ADJETIVES_NOUN"
+    },
+    {
+      "hasProperNoun": false,
+      "score": 0,
+      "found": 2,
+      "isMatched": false,
+      "text": "prezentace",
+      "type": "NOUN"
+    },
+    {
+      "hasProperNoun": false,
+      "score": 0,
+      "found": 1,
+      "isMatched": false,
+      "text": "sociálního jednání",
+      "type": "ADJETIVES_NOUN"
+    },
+    {
+      "hasProperNoun": false,
+      "score": 0,
+      "found": 1,
+      "isMatched": false,
+      "text": "obsah",
+      "type": "NOUN"
+    },
+    {
+      "hasProperNoun": false,
+      "score": 0,
+      "found": 1,
+      "isMatched": false,
+      "text": "TA",
+      "type": "NOUN"
+    },
+    {
+      "hasProperNoun": false,
+      "score": 0,
+      "found": 1,
+      "isMatched": false,
+      "text": "TypologierolívkomunikaciTransakční analýza",
+      "type": "ADJETIVES_NOUN"
+    },
+    {
+      "hasProperNoun": false,
+      "score": 0,
+      "found": 4,
+      "isMatched": false,
+      "text": "příprava",
+      "type": "NOUN"
+    },
+    {
+      "hasProperNoun": false,
+      "score": 0,
+      "found": 1,
+      "isMatched": false,
+      "text": "temperament",
+      "type": "NOUN"
+    },
+    {
+      "hasProperNoun": false,
+      "score": 0,
+      "found": 1,
+      "isMatched": false,
+      "text": "struktura",
+      "type": "NOUN"
+    },
+    {
+      "hasProperNoun": false,
+      "score": 0,
+      "found": 2,
+      "isMatched": false,
+      "text": "člověk",
+      "type": "NOUN"
+    },
+    {
+      "hasProperNoun": false,
+      "score": 0,
+      "found": 2,
+      "isMatched": false,
+      "text": "chování",
+      "type": "NOUN"
+    },
+    {
+      "hasProperNoun": false,
+      "score": 0,
+      "found": 1,
+      "isMatched": false,
+      "text": "vystoupení",
+      "type": "NOUN"
+    },
+    {
+      "hasProperNoun": false,
+      "score": 0,
+      "found": 1,
+      "isMatched": false,
+      "text": "PROBLÉMYPŘIKOMUNIKACIAKONFLIKTNÍ SITUACE",
+      "type": "ADJETIVES_NOUN"
+    },
+    {
+      "hasProperNoun": false,
+      "score": 0,
+      "found": 1,
+      "isMatched": false,
+      "text": "Struktura organizace",
+      "type": "NOUN_GENITIVES"
+    },
+    {
+      "hasProperNoun": false,
+      "score": 0,
+      "found": 3,
+      "isMatched": false,
+      "text": "typ",
+      "type": "NOUN"
+    },
+    {
+      "hasProperNoun": false,
+      "score": 0,
+      "found": 1,
+      "isMatched": false,
+      "text": "předmluva",
+      "type": "NOUN"
+    },
+    {
+      "hasProperNoun": false,
+      "score": 0,
+      "found": 1,
+      "isMatched": false,
+      "text": "Etiketa všedního dne",
+      "type": "NOUN_GENITIVES"
+    },
+    {
+      "hasProperNoun": false,
+      "score": 0,
+      "found": 1,
+      "isMatched": false,
+      "text": "Etiketavšedního dne",
+      "type": "ADJETIVES_NOUN"
+    },
+    {
+      "hasProperNoun": false,
+      "score": 0,
+      "found": 1,
+      "isMatched": false,
+      "text": "Etiketaajiné kultury",
+      "type": "ADJETIVES_NOUN"
+    },
+    {
+      "hasProperNoun": false,
+      "score": 0,
+      "found": 1,
+      "isMatched": false,
+      "text": "extraverti",
+      "type": "NOUN"
+    },
+    {
+      "hasProperNoun": false,
+      "score": 0,
+      "found": 1,
+      "isMatched": false,
+      "text": "introvert",
+      "type": "NOUN"
+    },
+    {
+      "hasProperNoun": false,
+      "score": 0,
+      "found": 3,
+      "isMatched": false,
+      "text": "organizace",
+      "type": "NOUN"
+    },
+    {
+      "hasProperNoun": false,
+      "score": 0,
+      "found": 1,
+      "isMatched": false,
+      "text": "práce",
+      "type": "NOUN"
+    },
+    {
+      "hasProperNoun": false,
+      "score": 0,
+      "found": 1,
+      "isMatched": false,
+      "text": "chování lidí",
+      "type": "NOUN_GENITIVES"
+    },
+    {
+      "hasProperNoun": false,
+      "score": 0,
+      "found": 1,
+      "isMatched": false,
+      "text": "Typy komunikace",
+      "type": "NOUN_GENITIVES"
+    },
+    {
+      "hasProperNoun": false,
+      "score": 0,
+      "found": 1,
+      "isMatched": false,
+      "text": "SOCIÁLNI",
+      "type": "NOUN"
+    },
+    {
+      "hasProperNoun": false,
+      "score": 0,
+      "found": 1,
+      "isMatched": false,
+      "text": "vedení porad",
+      "type": "NOUN_GENITIVES"
+    },
+    {
+      "hasProperNoun": false,
+      "score": 0,
+      "found": 3,
+      "isMatched": false,
+      "text": "společnost",
+      "type": "NOUN"
+    },
+    {
+      "hasProperNoun": false,
+      "score": 0,
+      "found": 1,
+      "isMatched": false,
+      "text": "Osobnostní faktory",
+      "type": "ADJETIVES_NOUN"
+    },
+    {
+      "hasProperNoun": false,
+      "score": 0,
+      "found": 1,
+      "isMatched": false,
+      "text": "Slavnostní společenské události",
+      "type": "ADJETIVES_NOUN"
+    },
+    {
+      "hasProperNoun": false,
+      "score": 0,
+      "found": 1,
+      "isMatched": false,
+      "text": "Konštituční typologie",
+      "type": "ADJETIVES_NOUN"
+    },
+    {
+      "hasProperNoun": false,
+      "score": 0,
+      "found": 2,
+      "isMatched": false,
+      "text": "základ",
+      "type": "NOUN"
+    },
+    {
+      "hasProperNoun": false,
+      "score": 0,
+      "found": 1,
+      "isMatched": false,
+      "text": "analýza",
+      "type": "NOUN"
+    },
+    {
+      "hasProperNoun": false,
+      "score": 0,
+      "found": 1,
+      "isMatched": false,
+      "text": "Příprava prezentace",
+      "type": "NOUN_GENITIVES"
+    },
+    {
+      "hasProperNoun": false,
+      "score": 0,
+      "found": 2,
+      "isMatched": false,
+      "text": "konflikt",
+      "type": "NOUN"
+    },
+    {
+      "hasProperNoun": false,
+      "score": 0,
+      "found": 1,
+      "isMatched": false,
+      "text": "vedení",
+      "type": "NOUN"
+    },
+    {
+      "hasProperNoun": false,
+      "score": 0,
+      "found": 1,
+      "isMatched": false,
+      "text": "zásada",
+      "type": "NOUN"
+    },
+    {
+      "hasProperNoun": false,
+      "score": 0,
+      "found": 1,
+      "isMatched": false,
+      "text": "Typologie rolí",
+      "type": "NOUN_GENITIVES"
+    },
+    {
+      "hasProperNoun": false,
+      "score": 0,
+      "found": 2,
+      "isMatched": false,
+      "text": "kultura",
+      "type": "NOUN"
+    },
+    {
+      "hasProperNoun": false,
+      "score": 0,
+      "found": 2,
+      "isMatched": false,
+      "text": "podnik",
+      "type": "NOUN"
+    },
+    {
+      "hasProperNoun": false,
+      "score": 0,
+      "found": 1,
+      "isMatched": false,
+      "text": "RÉTORIKA,VERBÁLNÍ ANEVERBÁLNÍ KOMUNIKACE",
+      "type": "ADJETIVES_NOUN"
+    },
+    {
+      "hasProperNoun": false,
+      "score": 0,
+      "found": 1,
+      "isMatched": false,
+      "text": "Osobnostní typ",
+      "type": "ADJETIVES_NOUN"
+    },
+    {
+      "hasProperNoun": false,
+      "score": 0,
+      "found": 1,
+      "isMatched": false,
+      "text": "faktor",
+      "type": "NOUN"
+    },
+    {
+      "hasProperNoun": false,
+      "score": 0,
+      "found": 1,
+      "isMatched": false,
+      "text": "stavba",
+      "type": "NOUN"
+    },
+    {
+      "hasProperNoun": false,
+      "score": 0,
+      "found": 1,
+      "isMatched": false,
+      "text": "ETIKETAAVHODNÉ CHOVÁNÍ",
+      "type": "ADJETIVES_NOUN"
+    },
+    {
+      "hasProperNoun": false,
+      "score": 0,
+      "found": 1,
+      "isMatched": false,
+      "text": "typologienazákladětělesné stavby",
+      "type": "ADJETIVES_NOUN"
+    },
+    {
+      "hasProperNoun": false,
+      "score": 0,
+      "found": 1,
+      "isMatched": false,
+      "text": "Strukturaorganizacejakoprostředímezilidské komunikace",
+      "type": "ADJETIVES_NOUN"
+    },
+    {
+      "hasProperNoun": false,
+      "score": 0,
+      "found": 2,
+      "isMatched": false,
+      "text": "jednání",
+      "type": "NOUN"
+    },
+    {
+      "hasProperNoun": false,
+      "score": 0,
+      "found": 1,
+      "isMatched": false,
+      "text": "základě tělesné stavby",
+      "type": "NOUN_GENITIVES"
+    },
+    {
+      "hasProperNoun": false,
+      "score": 0,
+      "found": 7,
+      "isMatched": false,
+      "text": "úvod",
+      "type": "NOUN"
+    },
+    {
+      "hasProperNoun": false,
+      "score": 0,
+      "found": 1,
+      "isMatched": false,
+      "text": "Příprava posteru",
+      "type": "NOUN_GENITIVES"
+    },
+    {
+      "hasProperNoun": false,
+      "score": 0,
+      "found": 1,
+      "isMatched": false,
+      "text": "kultura společnosti",
+      "type": "NOUN_GENITIVES"
+    },
+    {
+      "hasProperNoun": false,
+      "score": 0,
+      "found": 1,
+      "isMatched": false,
+      "text": "základě temperamentu",
+      "type": "NOUN_GENITIVES"
+    },
+    {
+      "hasProperNoun": false,
+      "score": 0,
+      "found": 1,
+      "isMatched": false,
+      "text": "typy sociálního jednání",
+      "type": "NOUN_GENITIVES"
+    },
+    {
+      "hasProperNoun": false,
+      "score": 0,
+      "found": 1,
+      "isMatched": false,
+      "text": "prezentování",
+      "type": "NOUN"
+    },
+    {
+      "hasProperNoun": false,
+      "score": 0,
+      "found": 1,
+      "isMatched": false,
+      "text": "varianta",
+      "type": "NOUN"
+    },
+    {
+      "hasProperNoun": false,
+      "score": 0,
+      "found": 1,
+      "isMatched": false,
+      "text": "přípravu vystoupení",
+      "type": "NOUN_GENITIVES"
+    },
+    {
+      "hasProperNoun": false,
+      "score": 0,
+      "found": 1,
+      "isMatched": false,
+      "text": "Charakteristika konfliktu",
+      "type": "NOUN_GENITIVES"
+    },
+    {
+      "hasProperNoun": false,
+      "score": 0,
+      "found": 1,
+      "isMatched": false,
+      "text": "princip",
+      "type": "NOUN"
+    },
+    {
+      "hasProperNoun": false,
+      "score": 0,
+      "found": 1,
+      "isMatched": false,
+      "text": "situace",
+      "type": "NOUN"
+    }
+  ],
+  "foldername": "/home/alberto/Projects/NTK/balicky/F21911z_000659731"
+}
