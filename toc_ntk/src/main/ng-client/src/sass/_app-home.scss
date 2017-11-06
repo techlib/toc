@@ -7,13 +7,62 @@ app-home {
     .app-toolbar {
       height: $app-toolbar-height;
       line-height: $app-toolbar-height;
-      background-color: color("teal", "lighten-5");
+      background-color: color("grey", "lighten-4");
+      @include set-border(bottom, 1, solid, lighten(grey, 34%));
+      box-shadow: 0 2px 2px 0 rgba(38, 50, 56, 0), 0 1px 5px 0 rgba(38, 50, 56, 0.12), 0 3px 1px -20px rgba(38, 50, 56, 0.4);
+      color: $collection-active-color;
+      position: relative;
+      z-index: 1024;
+      
+      .col {
+        padding: 0 1rem;
+      }
     }
     
     .app-sroll-wrapper {
       height: calc(100% - #{$app-toolbar-height});
       overflow: auto;
       padding: 20px 0;
+      
+      .row {
+        .col {
+          padding: 0 1rem;
+          position: relative;
+          
+          .input-field {
+            &.inline {
+              margin-left: 0 !important;
+              margin-right: 20px;
+            }
+          }
+          
+          .app-spinner {
+            position: absolute;
+            left: 0;
+            width: 100%;
+          }
+          
+          table {
+            &.highlight {
+              > tbody {
+                > tr:hover {
+                  background-color: color("grey", "lighten-2");
+                }   
+              } 
+            }
+            tr {
+              td {
+                padding: 5px;
+                vertical-align: top;
+                
+                ul, p {
+                  @extend .app-clean-mg;
+                }
+              }
+            }
+          }
+        }
+      }
     }
   }
 }

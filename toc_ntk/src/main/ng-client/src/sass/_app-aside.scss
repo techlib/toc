@@ -8,5 +8,17 @@ app-aside {
     border-top: 0 !important;
     border-bottom: 0 !important;
     border-left: 0 !important;
+    
+    .collection-item {
+      &.active {
+        @extend .app-font-bold;
+        @extend .app-mdi-check;
+        &.app-mdi-check {
+          &::before {
+            margin-right: 5px;  
+          }
+        }
+      }
+    }
   }
 }

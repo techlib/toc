@@ -4,6 +4,10 @@
   box-sizing: border-box;    
 }
 
+h1, h2, h3, h4, h5 {
+  color: $secondary-color;
+}
+
 a,
 .app-cursor-pointer {
   cursor: pointer !important;
@@ -33,6 +37,12 @@ a,
 // clearfix
 .clearfix {
   @include clearfix();
+}
+
+
+// app preloader wrapper
+.app-preloader-wrapper {
+  margin-top: 100px;
 }
 
 
