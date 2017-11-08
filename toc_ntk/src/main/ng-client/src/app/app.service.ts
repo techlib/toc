@@ -42,6 +42,7 @@ export class AppService {
   getTocText(foldername: string): Observable<any> {
 
     var url = 'mdt';
+    url = '/assets/toc.txt';
     let params: URLSearchParams = new URLSearchParams();
     params.set('action', 'VIEW_TOC');
     params.set('foldername', this.basefolder+ foldername);
