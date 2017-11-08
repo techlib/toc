@@ -16,7 +16,7 @@ export class AppService {
   processFolder(foldername: string, config: ScoreConfig): Observable<any> {
 
     var url = 'mdt';
-    //url = '/assets/F21395f_000170834.json';
+    url = '/assets/F21395f_000170834.json';
     let params: URLSearchParams = new URLSearchParams();
     params.set('action', 'ANALYZE_FOLDER');
     params.set('foldername', this.basefolder+ foldername);
