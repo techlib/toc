@@ -10,6 +10,15 @@ app-navbar {
         font-size: 1.8rem;
         font-family: 'Roboto-Condensed-Light';
       }
+      ul {
+        li {
+          a {
+            i[class^="app-mdi"] {
+              display: inline-block;
+            }
+          }
+        }
+      }
     }
   }
 }
