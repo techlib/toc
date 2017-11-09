@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Http, Response, URLSearchParams, Headers, RequestOptions } from '@angular/http';
 import { Observable } from 'rxjs/Rx';
 
+import {AppState} from './app.state';
 import { ScoreConfig } from './models/score-config';
 import { Candidate } from './models/candidate';
 
@@ -9,8 +10,9 @@ import { Candidate } from './models/candidate';
 export class AppService {
 
   //basefolder: string = '/home/kudela/.ntk/balicky/';
-  basefolder: string = '/home/alberto/Projects/NTK/balicky/';
-  constructor(private http: Http) { }
+  constructor(
+    private http: Http,
+    private state: AppState) { }
 
 
   processFolder(foldername: string, config: ScoreConfig): Observable<any> {
@@ -19,7 +21,7 @@ export class AppService {
     //url = '/assets/F21395f_000170834.json';
     let params: URLSearchParams = new URLSearchParams();
     params.set('action', 'ANALYZE_FOLDER');
-    params.set('foldername', this.basefolder+ foldername);
+    params.set('foldername', this.state.config['basefolder']+ foldername);
     params.set('scoreconfig', JSON.stringify(config));
     return this.http.get(url, { search: params })
       .map((response: Response) => {
@@ -45,7 +47,7 @@ export class AppService {
     //url = '/assets/toc.txt';
     let params: URLSearchParams = new URLSearchParams();
     params.set('action', 'VIEW_TOC');
-    params.set('foldername', this.basefolder+ foldername);
+    params.set('foldername', this.state.config['basefolder']+ foldername);
     return this.http.get(url, { search: params })
       .map((response: Response) => {
         return response.text();

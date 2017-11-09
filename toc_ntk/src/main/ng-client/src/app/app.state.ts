@@ -37,7 +37,6 @@ export class AppState {
     this.scoreConfig = cfg['score'];
     this.scoreConfig.dicts = [];
     for (let key in this.scoreConfig.dictionaries){
-      console.log(key);
       this.scoreConfig.dicts.push(key);
     };
 
