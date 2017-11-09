@@ -42,6 +42,7 @@ export class HomeComponent implements OnInit {
   ngOnInit() {
     this.state.stateChanged.subscribe(st => {
       this.analyze();
+      $("#app-table-score").tableHeadFixer(); // pedro
     });
   }
   
@@ -115,5 +116,4 @@ export class HomeComponent implements OnInit {
       this.loading = false;
     });
   }
-
 }
