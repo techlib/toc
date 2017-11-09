@@ -17,23 +17,23 @@
       <div class="col s12">
         <form >
           <mz-input-container  [inline]="'true'">
-            <input name="found" type="number" [(ngModel)]="scoreConfig.found" mz-input [label]="'Found'">
+            <input name="found" type="number" [(ngModel)]="state.scoreConfig.found" mz-input [label]="'Found'">
           </mz-input-container>
           <mz-input-container  [inline]="'true'">
-            <input name="multiple" type="number" [(ngModel)]="scoreConfig.multiple" mz-input [label]="'Multiple'">
+            <input name="multiple" type="number" [(ngModel)]="state.scoreConfig.multiple" mz-input [label]="'Multiple'">
           </mz-input-container>
           <mz-input-container  [inline]="'true'">
-            <input name="hasProperNoun" type="number" [(ngModel)]="scoreConfig.hasProperNoun" mz-input [label]="'Proper noun'">
+            <input name="hasProperNoun" type="number" [(ngModel)]="state.scoreConfig.hasProperNoun" mz-input [label]="'Proper noun'">
           </mz-input-container>
           <br/>
           <mz-input-container  [inline]="'false'">
-            <input name="matched" type="number" [(ngModel)]="scoreConfig.matched" mz-input [label]="'Matched'">
+            <input name="matched" type="number" [(ngModel)]="state.scoreConfig.matched" mz-input [label]="'Matched'">
           </mz-input-container>
-          <mz-input-container  [inline]="'true'" *ngFor="let d of scoreConfig.dicts">
-            <input [id]="'dict_' + d" type="number" [name]="'dict_' + d" mz-input [label]="d" [(ngModel)]="scoreConfig.dictionaries[d]">
+          <mz-input-container  [inline]="'true'" *ngFor="let d of state.scoreConfig.dicts">
+            <input [id]="'dict_' + d" type="number" [name]="'dict_' + d" mz-input [label]="d" [(ngModel)]="state.scoreConfig.dictionaries[d]">
           </mz-input-container>
           <mz-input-container  [inline]="'true'">
-            <input name="isDictionaryWord" type="number" [(ngModel)]="scoreConfig.isDictionaryWord" mz-input [label]="'isDictionaryWord'">
+            <input name="isDictionaryWord" type="number" [(ngModel)]="state.scoreConfig.isDictionaryWord" mz-input [label]="'isDictionaryWord'">
           </mz-input-container>
         </form>
       </div><!--/.col -->

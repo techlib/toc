@@ -27,7 +27,6 @@ export class HomeComponent implements OnInit {
   showMatched: boolean = true;
   showFree: boolean = true;
 
-  scoreConfig: ScoreConfig = new ScoreConfig();
 
   constructor(
     public state: AppState,
@@ -54,7 +53,7 @@ export class HomeComponent implements OnInit {
     this.loading = true;
     this.candidates = [];
     this.selected = [];
-    this.service.processFolder(this.state.foldername, this.scoreConfig).subscribe(res => {
+    this.service.processFolder(this.state.foldername, this.state.scoreConfig).subscribe(res => {
       this.candidates = res['candidates'];
       this.rescore();
       this.hasToc = true;
@@ -74,7 +73,7 @@ export class HomeComponent implements OnInit {
 
   rescore() {
     this.candidates.forEach((c: Candidate) => {
-      let sc: ScoreConfig = this.scoreConfig;
+      let sc: ScoreConfig = this.state.scoreConfig;
       c.score = 1;
       if (c.isMatched) {
         c.score = c.score * sc.matched;
