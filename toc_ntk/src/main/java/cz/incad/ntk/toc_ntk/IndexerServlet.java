@@ -102,6 +102,25 @@ public class IndexerServlet extends HttpServlet {
         }
         out.println(json.toString(2));
       }
+    },
+    INDEX_653 {
+      @Override
+      void doPerform(HttpServletRequest req, HttpServletResponse response) throws Exception {
+
+        response.setContentType("application/json;charset=UTF-8");
+
+        PrintWriter out = response.getWriter();
+        JSONObject json = new JSONObject();
+        try {
+          Indexer indexer = new Indexer();
+            json.put("653", indexer.index653());
+
+        } catch (Exception ex) {
+      LOGGER.log(Level.SEVERE, null, ex);
+          json.put("error", ex.toString());
+        }
+        out.println(json.toString(2));
+      }
     };
 
     abstract void doPerform(HttpServletRequest request, HttpServletResponse response) throws Exception;

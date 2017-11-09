@@ -26,6 +26,9 @@ public class KonspektReader {
   public static final Logger LOGGER = Logger.getLogger(KonspektReader.class.getName());
   SolrClient client;
   KospektRecord currentRecord;
+  
+  final String TAG_CS = "290   ";
+  final String TAG_EN = "290   ";
 
   public void readFromTxt(InputStream is, SolrClient client) {
     
@@ -57,9 +60,9 @@ public class KonspektReader {
       String tag = line.substring(0, 6);
       if("001   ".equals(tag)){
         currentRecord.setId(line.substring(6));
-      } else if("290   ".equals(tag)){
+      } else if(TAG_CS.equals(tag)){
         currentRecord.setKeyCs(getCleanValue(line.substring(6)));
-      } else if("490 0 ".equals(tag)){
+      } else if(TAG_EN.equals(tag)){
         currentRecord.setKeyEn(getCleanValue(line.substring(6)));
       } 
     }

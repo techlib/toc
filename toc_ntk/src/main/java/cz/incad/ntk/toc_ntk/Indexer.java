@@ -62,7 +62,16 @@ public class Indexer {
   public JSONObject index653() {
 
     JSONObject ret = new JSONObject();
+    SimpleKeywordsReader r = new SimpleKeywordsReader("653");
+    try {
+      client = getClient("slovnik");
+      r.readFromTxt(Indexer.class.getResourceAsStream("653_klicova_slova_b.txt"), client);
+    } catch (IOException ex) {
+      ret.put("error", ex);
+      Logger.getLogger(Indexer.class.getName()).log(Level.SEVERE, null, ex);
+    }
     return ret;
+    
   }
 
   public JSONObject indexKonspekt() {

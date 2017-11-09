@@ -40,6 +40,8 @@ public class SolrService {
     try {
       SolrClient solr = new HttpSolrClient.Builder(urlString).build();
       SolrQuery query = new SolrQuery();
+      
+      //Search in simple dictionaries
       query.setQuery("\"" + text.toLowerCase() + "\"");
       query.set("defType", "edismax");
       if(text.indexOf(" ") > 0){
@@ -54,6 +56,7 @@ public class SolrService {
       }
       
       
+      //Search in psh
       query = new SolrQuery();
       query.setQuery("\"" + text.toLowerCase() + "\"");
       query.set("defType", "edismax");
@@ -67,6 +70,22 @@ public class SolrService {
       
       if(pshResp.getResults().getNumFound() > 0){
         docs.add(pshResp.getResults().get(0));
+      }
+      
+      //Search in konspekt
+      query = new SolrQuery();
+      query.setQuery("\"" + text.toLowerCase() + "\"");
+      query.set("defType", "edismax");
+      if(text.indexOf(" ") > 0){
+        query.set("qf", "key_cz");
+      } else {
+        query.set("qf", "key_cz");
+      }
+      query.set("mm", "80%");
+      response = solr.query("konspekt", query);
+      
+      if(response.getResults().getNumFound() > 0){
+        docs.add(response.getResults().get(0));
       }
       
     } catch (SolrServerException | IOException ex) {
