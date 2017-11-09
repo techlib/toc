@@ -26,6 +26,8 @@ export class HomeComponent implements OnInit {
   
   showMatched: boolean = true;
   showFree: boolean = true;
+  
+  maxScore: number = 0;
 
 
   constructor(
@@ -73,6 +75,7 @@ export class HomeComponent implements OnInit {
   }
 
   rescore() {
+    this.maxScore = 0;
     this.candidates.forEach((c: Candidate) => {
       let sc: ScoreConfig = this.state.scoreConfig;
       c.score = 1;
@@ -84,8 +87,8 @@ export class HomeComponent implements OnInit {
 
         for (let i in c.dictionaries) {
           let dm = c.dictionaries[i];
-          if (sc.dictionaries.hasOwnProperty(dm)) {
-            c.score = c.score * sc.dictionaries[dm];
+          if (sc.dictionaries.hasOwnProperty(dm['name'])) {
+            c.score = c.score * sc.dictionaries[dm['name']];
           }
         }
 
@@ -99,6 +102,7 @@ export class HomeComponent implements OnInit {
         c.score = c.score * sc.isDictionaryWord;
       }
       c.score += c.found * sc.found;
+      this.maxScore = Math.max(this.maxScore, c.score);
     });
     this.candidates.sort((a, b) => { return b.score - a.score })
 

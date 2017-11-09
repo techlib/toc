@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AppState } from '../app.state';
 
 @Component({
   selector: 'app-navbar',
@@ -7,9 +8,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NavbarComponent implements OnInit {
 
-  constructor() { }
+  constructor(public state: AppState) { }
 
   ngOnInit() {
+  }
+  
+  setThreshold(e){
+    this.state.threshold = parseInt(e) / 100.0;
   }
 
 }

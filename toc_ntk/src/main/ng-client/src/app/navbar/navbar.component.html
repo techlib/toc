@@ -19,28 +19,28 @@
   <mz-sidenav-link>
     <a href="#!">
       <mz-checkbox-container>
-        <input mz-checkbox [label]="'Show score'" id="show-score" type="checkbox">
+        <input mz-checkbox [label]="'Show score'" id="show-score" type="checkbox" [(ngModel)]="state.showScoreConfig" />
       </mz-checkbox-container>
     </a>
   </mz-sidenav-link>
   <mz-sidenav-link>
     <a href="#!">
       <mz-checkbox-container>
-        <input mz-checkbox [label]="'Show matched'" id="show-matched" type="checkbox">
+        <input mz-checkbox [label]="'Show matched'" id="show-matched" type="checkbox" [(ngModel)]="state.showMatched">
       </mz-checkbox-container>
     </a>
   </mz-sidenav-link>
   <mz-sidenav-link>
     <a href="#!">
       <mz-checkbox-container>
-        <input mz-checkbox [label]="'Show not matched'" id="show-no-matched" type="checkbox">
+        <input mz-checkbox [label]="'Show not matched'" id="show-no-matched" type="checkbox" [(ngModel)]="state.showFree">
       </mz-checkbox-container>
     </a>
   </mz-sidenav-link>
   <mz-sidenav-link>
     <a href="#!">
       <mz-checkbox-container>
-        <input mz-checkbox [label]="'Show details in the table'" id="show-detail" type="checkbox">
+        <input mz-checkbox [label]="'Show details in the table'" id="show-detail" type="checkbox" [(ngModel)]="state.showDetails">
       </mz-checkbox-container>
     </a>
   </mz-sidenav-link>
@@ -48,7 +48,9 @@
   <mz-sidenav-link>
     <a href="#!">
       <mz-input-container>
-        <input mz-input id="threshold" placeholder="Set threshold in percent" type="text">
+        <input mz-input id="threshold" placeholder="Set threshold in percent" type="text" 
+               [ngModel]="state.threshold | percent:'.0-0'"
+               (ngModelChange)="setThreshold($event)">
       </mz-input-container>
     </a>
   </mz-sidenav-link>

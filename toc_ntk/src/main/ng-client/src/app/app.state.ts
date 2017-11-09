@@ -18,6 +18,13 @@ export class AppState {
   scoreConfig: ScoreConfig = new ScoreConfig();
 
   foldername: string;
+  
+  showScoreConfig: boolean = false;
+  showMatched: boolean = true;
+  showFree: boolean = true;
+  showDetails: boolean = false;
+  
+  threshold: number = .5;
 
 
   setFoldername(f: string) {
@@ -29,10 +36,10 @@ export class AppState {
     this.config = cfg;
     this.scoreConfig = cfg['score'];
     this.scoreConfig.dicts = [];
-    this.scoreConfig.dictionaries.forEach((d, a) => {
-      console.log(d, a);
-      this.scoreConfig.dicts.push(d);
-    });
+    for (let key in this.scoreConfig.dictionaries){
+      console.log(key);
+      this.scoreConfig.dicts.push(key);
+    };
 
     this._configSubject.next(cfg);
   }
