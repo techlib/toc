@@ -33,7 +33,7 @@ public class KonspektReader {
   public void readFromTxt(InputStream is, SolrClient client) {
     
     this.client = client;
-    try (BufferedReader br = new BufferedReader(new InputStreamReader(is))) {
+    try (BufferedReader br = new BufferedReader(new InputStreamReader(is, "UTF-8"))) {
       for (String line; (line = br.readLine()) != null;) {
         processLine(line);
       }
