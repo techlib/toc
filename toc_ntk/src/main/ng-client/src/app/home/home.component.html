@@ -5,7 +5,7 @@
       {{state.foldername}}
     </div>
     <div class="col s10 right-align">
-      <button mz-button (click)="analyze()">analyze</button>
+      <!--<button mz-button (click)="analyze()">analyze</button>-->
       <button mz-button (click)="rescore()">rescore</button>
       <button mz-button [disabled]="!hasToc" (click)="openToc()" >view toc</button>
       <button mz-button [disabled]="selected.length === 0" (click)="export()">export</button>
@@ -13,6 +13,7 @@
   </div><!--/.row app-toolbar -->
   
   <div class="app-sroll-wrapper">
+    <!-- Podminku na zobrazeni aplikuj na element s class "row" -->
     <div class="row">
       <div class="col s12">
         <form >
@@ -41,12 +42,12 @@
     
     <div class="row">
       <div class="col s12">
-        <mz-input-container  [inline]="'true'">
-          <input id="filter_matched" type="checkbox" [(ngModel)]="showMatched" label="Show matched" mz-input />
-        </mz-input-container>
-        <mz-input-container  [inline]="'true'">
-          <input id="filter_free" type="checkbox" [(ngModel)]="showFree"  label="Show not matched" mz-input />
-        </mz-input-container>
+        <mz-checkbox-container>
+          <input mz-checkbox id="filter_matched" type="checkbox" [(ngModel)]="showMatched" label="Show matched">
+        </mz-checkbox-container>
+        <mz-checkbox-container>
+          <input mz-checkbox id="filter_free" type="checkbox" [(ngModel)]="showFree"  label="Show not matched">
+        </mz-checkbox-container>
       </div><!--/.col -->
     </div><!--/.row -->
     
@@ -56,16 +57,19 @@
         <div class="app-spinner center-align">
           <mz-spinner *ngIf="loading" [size]="'small'"></mz-spinner>
         </div>
-        <table *ngIf="!loading" class="striped highlight">
+        <!--<table *ngIf="!loading" class="striped highlight" id="app-table-score">-->
+        <table class="striped highlight" id="app-table-score">
           <thead>
-            <th></th>
-            <th>score</th>
-            <th>text</th>
-            <th>type</th>
-            <th>isMatched</th>
-            <th>dictionaries</th>
-            <th>hasProperNoun</th>
-            <th>found</th>
+            <tr>
+              <th><span>&#160;</span></th>
+              <th><span>score</span></th>
+              <th><span>text</span></th>
+              <th><span>type</span></th>
+              <th><span>isMatched</span></th>
+              <th><span>dictionaries</span></th>
+              <th><span>hasProperNoun</span></th>
+              <th><span>found</span></th>
+            </tr>
           </thead>
           <tbody>
             <ng-container *ngFor="let c of candidates; let idx = index">
@@ -75,7 +79,13 @@
                     <input [id]="'ch_'+idx" type="checkbox" [(ngModel)]="c.selected" (change)="select()" mz-checkbox >
                   </mz-checkbox-container>
                 </td>
-                <td>{{c.score | number: '1.1-3'}}</td>
+                <!-- Dodrz prefix class, muze jich byt vice, tohle je jen priklad, barvy prahu se definuje ve variables -->
+                <td 
+                  [class.app-score-1]="c.score == '6.2'" 
+                  [class.app-score-2]="c.score < '6'"
+                  [class.app-score-3]="c.score < '5'"
+                  [class.app-score-4]="c.score < '4'"
+                >{{c.score | number: '1.1-3'}}</td>
                 <td>{{c.text}}</td>
                 <td>{{c.type}}</td>
                 <td>{{c.isMatched}}</td>

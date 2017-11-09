@@ -11,8 +11,8 @@ app-home {
       @include set-border(bottom, 1, solid, lighten(grey, 34%));
       box-shadow: 0 2px 2px 0 rgba(38, 50, 56, 0), 0 1px 5px 0 rgba(38, 50, 56, 0.12), 0 3px 1px -20px rgba(38, 50, 56, 0.4);
       color: $collection-active-color;
-      position: relative;
-      z-index: 1024;
+      /*position: relative;
+      z-index: 1024;*/
       
       .col {
         padding: 0 1rem;
@@ -36,6 +36,12 @@ app-home {
             }
           }
           
+          .checkbox-field {
+            display: inline-block;
+            margin-right: 20px;
+            margin-top: 0;
+          }
+          
           .app-spinner {
             position: absolute;
             left: 0;
@@ -43,6 +49,8 @@ app-home {
           }
           
           table {
+            position: relative;
+            
             &.highlight {
               > tbody {
                 > tr:hover {
@@ -50,14 +58,54 @@ app-home {
                 }   
               } 
             }
-            tr {
-              td {
-                padding: 5px;
-                vertical-align: top;
+            
+            thead {
+              border: none;
+              
+              tr {
+                height: 100%;
                 
-                ul, p {
-                  @extend .app-clean-mg;
+                th {
+                  vertical-align: top;
+                  height:100%;
+                  z-index: 300;
+                  @extend .no-padding;
+                  
+                  span {
+                    display: block;
+                    padding: 20px 0;
+                    position: relative;
+                    height: 100%;
+                    @include set-border(bottom, 1, solid, #{color("grey", "lighten-1")});
+                  }
                 }
+              }
+            }
+           
+            tbody {
+              tr {
+                @include set-border(bottom, 1, solid, $app-color-white);
+                td {
+                  padding: 5px;
+                  vertical-align: top;
+
+                  ul, p {
+                    @extend .app-clean-mg;
+                  }
+
+                  &.app-score-1 {
+                    background-color: $app-score-1;
+                  }
+                  &.app-score-2 {
+                    background-color: $app-score-2;
+                  }
+                  &.app-score-3 {
+                    background-color: $app-score-3;
+                  }
+                  &.app-score-4 {
+                    background-color: $app-score-4;
+                  }
+                } 
               }
             }
           }

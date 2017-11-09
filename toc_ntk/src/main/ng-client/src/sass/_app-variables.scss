@@ -12,6 +12,14 @@ $primary-color-dark:              darken($primary-color, 15%) !default;
 $secondary-color:                 lighten($primary-color, 10%) !default;
 $link-color:                      $primary-color !default;
 
+$app-color-white:                 color("shades", "white") !default;
+
+// score colors
+$app-score-1:                     color("yellow", "base") !default;
+$app-score-2:                     color("yellow", "lighten-2") !default;
+$app-score-3:                     color("yellow", "lighten-4") !default;
+$app-score-4:                     color("yellow", "lighten-5") !default;
+
 // global
 $app-border-radius:               2px !default;
 
