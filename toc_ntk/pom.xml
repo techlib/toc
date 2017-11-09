@@ -42,16 +42,18 @@
             <version>1.7</version>
             <type>jar</type>
         </dependency>
+        <!--
         <dependency>
             <groupId>org.apache.httpcomponents</groupId>
             <artifactId>httpclient</artifactId>
             <version>4.4.1</version>
             <type>jar</type>
         </dependency>
+        -->
         <dependency>
             <groupId>org.apache.solr</groupId>
             <artifactId>solr-solrj</artifactId>
-            <version>6.5.0</version>
+            <version>7.1.0</version>
             <type>jar</type>
         </dependency>
         <dependency>
