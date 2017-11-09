@@ -1,22 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app version="3.1" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
-  
-  
     <servlet>
         <servlet-name>InitServlet</servlet-name>
         <servlet-class>cz.incad.ntk.toc_ntk.InitServlet</servlet-class>
         <load-on-startup>1</load-on-startup>
     </servlet>
-    
     <servlet>
         <servlet-name>MorphoDiTaServlet</servlet-name>
         <servlet-class>cz.incad.ntk.toc_ntk.MorphoDiTaServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>IndexerServlet</servlet-name>
+        <servlet-class>cz.incad.ntk.toc_ntk.IndexerServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>MorphoDiTaServlet</servlet-name>
         <url-pattern>/mdt</url-pattern>
     </servlet-mapping>
-    
     <servlet>
         <servlet-name>CandidatesServlet</servlet-name>
         <servlet-class>cz.incad.ntk.toc_ntk.CandidatesServlet</servlet-class>
@@ -25,8 +25,6 @@
         <servlet-name>CandidatesServlet</servlet-name>
         <url-pattern>/candidates</url-pattern>
     </servlet-mapping>
-    
-    
     <servlet>
         <servlet-name>StaticServlet</servlet-name>
         <jsp-file>/index.jsp</jsp-file>
@@ -39,8 +37,6 @@
         <url-pattern>/admin/*</url-pattern>
         <url-pattern>/prihlaseni/*</url-pattern>
     </servlet-mapping>
-    
-    
     <servlet>
         <servlet-name>ForwardServlet</servlet-name>
         <servlet-class>cz.incad.ntk.toc_ntk.ForwardServlet</servlet-class>
@@ -48,6 +44,22 @@
     <servlet-mapping>
         <servlet-name>ForwardServlet</servlet-name>
         <url-pattern>/api/*</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>IndexerServlet</servlet-name>
+        <url-pattern>/indexer</url-pattern>
+    </servlet-mapping>
+    
+    
+    <servlet>
+        <servlet-name>ConfigServlet</servlet-name>
+        <servlet-class>cz.incad.ntk.toc_ntk.ConfigServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ConfigServlet</servlet-name>
+        <url-pattern>/config/*</url-pattern>
+        <url-pattern>/config</url-pattern>
+        <url-pattern>/assets/config.json</url-pattern>
     </servlet-mapping>
     
     
