@@ -1,11 +1,11 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 //import { FormBuilder } from '@angular/forms';
-import { MzBaseModal, MzModalComponent } from 'ng2-materialize';
+import {MzBaseModal, MzModalComponent} from 'ng2-materialize';
 
-import { AppState } from '../app.state';
-import { AppService } from '../app.service';
-import { ScoreConfig } from '../models/score-config';
-import { Candidate } from '../models/candidate';
+import {AppState} from '../app.state';
+import {AppService} from '../app.service';
+import {ScoreConfig} from '../models/score-config';
+import {Candidate} from '../models/candidate';
 
 @Component({
   selector: 'app-home',
@@ -23,10 +23,10 @@ export class HomeComponent implements OnInit {
   exported: string;
   loading: boolean = false;
   hasToc: boolean = false;
-  
+
   showMatched: boolean = true;
   showFree: boolean = true;
-  
+
   maxScore: number = 0;
 
 
@@ -46,10 +46,10 @@ export class HomeComponent implements OnInit {
       $("#app-table-score").tableHeadFixer(); // pedro
     });
   }
-  
-  select(){
-    
-    this.selected = this.candidates.filter((c: Candidate) => { return c['selected'] !== 'undefined' && c['selected'] });
+
+  select() {
+
+    this.selected = this.candidates.filter((c: Candidate) => {return c['selected'] !== 'undefined' && c['selected']});
   }
 
   analyze() {
@@ -64,10 +64,10 @@ export class HomeComponent implements OnInit {
     });
   }
 
-  export() {
+  showExport() {
     this.loading = true;
-    this.selected = this.candidates.filter((c: Candidate) => { return c['selected'] });
-    this.service.export(this.selected).subscribe(res => {
+    this.selected = this.candidates.filter((c: Candidate) => {return c['selected']});
+    this.service.getExport(this.selected).subscribe(res => {
       this.exported = JSON.stringify(res);
       this.exportModal.open();
       this.loading = false;
@@ -77,34 +77,38 @@ export class HomeComponent implements OnInit {
   rescore() {
     this.maxScore = 0;
     this.candidates.forEach((c: Candidate) => {
-      let sc: ScoreConfig = this.state.scoreConfig;
-      c.score = 1;
-      if (c.isMatched) {
-        c.score = c.score * sc.matched;
-        if (c.text.split(" ").length > 1) {
-          c.score = c.score * sc.multiple;
-        }
-
-        for (let i in c.dictionaries) {
-          let dm = c.dictionaries[i];
-          if (sc.dictionaries.hasOwnProperty(dm['name'])) {
-            c.score = c.score * sc.dictionaries[dm['name']];
+      if (c.blacklisted) {
+        c.score = 0;
+      } else {
+        let sc: ScoreConfig = this.state.scoreConfig;
+        c.score = 1;
+        if (c.isMatched) {
+          c.score = c.score * sc.matched;
+          if (c.text.split(" ").length > 1) {
+            c.score = c.score * sc.multiple;
           }
+
+          for (let i in c.dictionaries) {
+            let dm = c.dictionaries[i];
+            if (sc.dictionaries.hasOwnProperty(dm['name'])) {
+              c.score = c.score * sc.dictionaries[dm['name']];
+            }
+          }
+
+
+        }
+        if (c.hasProperNoun) {
+          c.score = c.score * sc.hasProperNoun;
         }
 
-
+        if (c.type == 'DICTIONARY_WORD') {
+          c.score = c.score * sc.isDictionaryWord;
+        }
+        c.score += c.found * sc.found;
+        this.maxScore = Math.max(this.maxScore, c.score);
       }
-      if (c.hasProperNoun) {
-        c.score = c.score * sc.hasProperNoun;
-      }
-
-      if (c.type == 'DICTIONARY_WORD') {
-        c.score = c.score * sc.isDictionaryWord;
-      }
-      c.score += c.found * sc.found;
-      this.maxScore = Math.max(this.maxScore, c.score);
     });
-    this.candidates.sort((a, b) => { return b.score - a.score })
+    this.candidates.sort((a, b) => {return b.score - a.score})
 
   }
 
@@ -117,6 +121,12 @@ export class HomeComponent implements OnInit {
       this.toc_text = res;
       this.tocModal.open();
       this.loading = false;
+    });
+  }
+
+  addToBlackList(c: Candidate) {
+    this.service.addToBlackList(c.text).subscribe(res => {
+      console.log(res);
     });
   }
 }

@@ -8,7 +8,7 @@
       <!--<button mz-button (click)="analyze()">analyze</button>-->
       <button mz-button (click)="rescore()">rescore</button>
       <button mz-button [disabled]="!hasToc" (click)="openToc()" >view toc</button>
-      <button mz-button [disabled]="selected.length === 0" (click)="export()">export</button>
+      <button mz-button [disabled]="selected.length === 0" (click)="showExport()">export</button>
     </div>
   </div><!--/.row app-toolbar -->
   
@@ -44,9 +44,6 @@
     <div class="row">
       <div class="col s12">
         <h5>Candidates:</h5>
-        <div class="app-spinner center-align">
-          <mz-spinner *ngIf="loading" [size]="'small'"></mz-spinner>
-        </div>
         <!--<table *ngIf="!loading" class="striped highlight" id="app-table-score">-->
         <table class="striped highlight" id="app-table-score">
           <thead>
@@ -63,11 +60,12 @@
           </thead>
           <tbody>
             <ng-container *ngFor="let c of candidates; let idx = index">
-              <tr *ngIf="(state.showMatched && c.isMatched) || (state.showFree && !c.isMatched)">
+              <tr *ngIf="(state.showMatched && c.isMatched) || (state.showFree && !c.isMatched) || (state.showBlacklisted && c.blacklisted) ">
                 <td>
                   <mz-checkbox-container>
-                    <input [id]="'ch_'+idx" type="checkbox" [(ngModel)]="c.selected" (change)="select()" mz-checkbox >
+                    <input [id]="'ch_'+idx" type="checkbox" [(ngModel)]="c.selected" (change)="select()" mz-checkbox />
                   </mz-checkbox-container>
+                    <i class="app-mdi-cancel red-text" (click)="addToBlackList(c)" mz-tooltip [tooltip]="'Add to blacklist'"></i>
                 </td>
                 <!-- Dodrz prefix class, muze jich byt vice, tohle je jen priklad, barvy prahu se definuje ve variables -->
                 <td 
@@ -83,6 +81,10 @@
             </ng-container>
           </tbody>
         </table>
+        
+        <div class="app-spinner center-align">
+          <mz-spinner *ngIf="loading" [size]="'small'"></mz-spinner>
+        </div>
       </div><!--/.col -->
     </div><!--/.row -->
   </div><!--/.app-sroll-wrapper -->

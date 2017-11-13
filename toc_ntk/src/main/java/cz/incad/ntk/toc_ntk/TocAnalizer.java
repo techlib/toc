@@ -282,8 +282,10 @@ public class TocAnalizer {
             candidates.get(c.text).found++;
           } else {
             candidates.put(c.text, c);
-            
-            c.match();
+            c.setBlackListed();
+            if(!c.blackListed){
+              c.match();
+            }
           }
         }
       }

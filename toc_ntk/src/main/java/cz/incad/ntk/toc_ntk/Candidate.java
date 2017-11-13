@@ -22,6 +22,11 @@ public class Candidate {
 
   String text;
   
+  
+  
+  //Keeps when candidate was found in blacklist
+  boolean blackListed;
+  
   //Keeps when candidate was found in dictionary
   boolean isMatched;
   
@@ -56,6 +61,7 @@ public class Candidate {
   public JSONObject toJSON() {
     JSONObject ret = new JSONObject();
     ret.put("text", text);
+    ret.put("blacklisted", blackListed);
     ret.put("isMatched", isMatched);
 //    ret.put("matched_text", matched_text);
     for (DictionaryMatch dm : matches) {
@@ -66,6 +72,10 @@ public class Candidate {
     ret.put("score", score);
     ret.put("found", found);
     return ret;
+  }
+  
+  public void setBlackListed(){
+    this.blackListed = SolrService.isInBlackList(this.text);;
   }
 
   public void match() {
@@ -90,6 +100,9 @@ public class Candidate {
   }
 
   public float score(ScoreConfig sc) {
+    if(this.blackListed){
+      return 0;
+    }
     this.score = this.found * sc.found;
     if (isMatched) {
 

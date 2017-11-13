@@ -22,7 +22,8 @@ export class AppState {
   showScoreConfig: boolean = false;
   showMatched: boolean = true;
   showFree: boolean = true;
-  showDetails: boolean = false;
+  showBlacklisted: boolean = true;
+  showDetails: boolean = true;
   
   threshold: number = .5;
 

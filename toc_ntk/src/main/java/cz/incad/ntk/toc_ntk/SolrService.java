@@ -35,6 +35,40 @@ public class SolrService {
       solr.add("blacklist", idoc, 100);
   }
   
+  
+  
+  public static void addToNerizene(String key) throws SolrServerException, IOException{
+    
+      SolrClient solr = new HttpSolrClient.Builder(urlString).build();
+      SolrInputDocument idoc = new SolrInputDocument();
+      idoc.addField("key", key);
+      LOGGER.info(idoc.toString());
+      solr.add("nerizene", idoc, 100);
+  }
+  
+  public static boolean isInBlackList(String text){
+    SolrDocumentList docs = new SolrDocumentList();
+    try {
+      SolrClient solr = new HttpSolrClient.Builder(urlString).build();
+      SolrQuery query = new SolrQuery();
+      
+      //Search in blacklist
+      query.setQuery("\"" + text.toLowerCase() + "\"");
+      query.set("defType", "edismax");
+      query.set("qf", "key");
+      query.set("mm", "100%");
+      QueryResponse response = solr.query("blacklist", query);
+      if(response.getResults().getNumFound() > 0){
+        return true;
+      }
+      
+    } catch (SolrServerException | IOException ex) {
+      LOGGER.log(Level.SEVERE, null, ex);
+      
+    }
+    return false;
+  }
+  
   public static SolrDocumentList findInDictionaries(String text) {
       SolrDocumentList docs = new SolrDocumentList();
     try {
@@ -79,9 +113,9 @@ public class SolrService {
       if(text.indexOf(" ") > 0){
         query.set("qf", "key_cz");
       } else {
-        query.set("qf", "key_cz");
+        query.set("qf", "key_lower");
       }
-      query.set("mm", "80%");
+      query.set("mm", "100%");
       response = solr.query("konspekt", query);
       
       if(response.getResults().getNumFound() > 0){

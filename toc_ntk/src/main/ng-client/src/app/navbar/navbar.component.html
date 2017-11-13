@@ -40,6 +40,13 @@
   <mz-sidenav-link>
     <a href="#!">
       <mz-checkbox-container>
+        <input mz-checkbox [label]="'Show candidates in blacklist'" id="show-blacklisted" type="checkbox" [(ngModel)]="state.showBlacklisted">
+      </mz-checkbox-container>
+    </a>
+  </mz-sidenav-link>
+  <mz-sidenav-link>
+    <a href="#!">
+      <mz-checkbox-container>
         <input mz-checkbox [label]="'Show details in the table'" id="show-detail" type="checkbox" [(ngModel)]="state.showDetails">
       </mz-checkbox-container>
     </a>

@@ -81,6 +81,7 @@ public class CandidatesServlet extends HttpServlet {
   }
 
   enum Actions {
+    
 
     EXPORT {
       @Override
@@ -96,6 +97,23 @@ public class CandidatesServlet extends HttpServlet {
       }
     },
     ADD_TO_BLACKLIST {
+      @Override
+      void doPerform(HttpServletRequest request, HttpServletResponse response) throws Exception {
+
+        response.setContentType("application/json;charset=UTF-8");
+        PrintWriter out = response.getWriter();
+        String text = request.getParameter("key");
+        JSONObject ret = new JSONObject();
+        try {
+          SolrService.addToBlackList(text);
+          out.print(ret.put("code", 0).toString());
+        } catch (Exception ex) {
+          out.print(ret.put("code", 1).put("error", ex).toString());
+        }
+
+      }
+    },
+    ADD_TO_DICTIONARY {
       @Override
       void doPerform(HttpServletRequest request, HttpServletResponse response) throws Exception {
 

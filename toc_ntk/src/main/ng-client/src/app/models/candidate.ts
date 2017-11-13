@@ -1,5 +1,6 @@
 export class Candidate {
   text: string;
+  blacklisted: boolean;
   isMatched: boolean;
   matched_text: string;
   dictionaries: any[];
@@ -7,4 +8,6 @@ export class Candidate {
   hasProperNoun: boolean;
   score: number;
   found: number;
+  
 }
+
