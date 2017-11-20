@@ -8,7 +8,7 @@
       <!--<button mz-button (click)="analyze()">analyze</button>-->
       <button mz-button (click)="rescore()">rescore</button>
       <button mz-button [disabled]="!hasToc" (click)="openToc()" >view toc</button>
-      <button mz-button [disabled]="selected.length === 0" (click)="showExport()">export</button>
+      <button mz-button  (click)="showExport()">export</button>
     </div>
   </div><!--/.row app-toolbar -->
   
@@ -62,9 +62,6 @@
             <ng-container *ngFor="let c of candidates; let idx = index">
               <tr *ngIf="(state.showMatched && c.isMatched) || (state.showFree && !c.isMatched) || (state.showBlacklisted && c.blacklisted) ">
                 <td>
-                  <mz-checkbox-container>
-                    <input [id]="'ch_'+idx" type="checkbox" [(ngModel)]="c.selected" (change)="select()" mz-checkbox />
-                  </mz-checkbox-container>
                     <i class="app-mdi-cancel red-text" (click)="addToBlackList(c)" mz-tooltip [tooltip]="'Add to blacklist'"></i>
                 </td>
                 <!-- Dodrz prefix class, muze jich byt vice, tohle je jen priklad, barvy prahu se definuje ve variables -->
@@ -74,7 +71,13 @@
                 <td>{{c.text}}</td>
                 <td *ngIf="state.showDetails">{{c.type}}</td>
                 <td *ngIf="state.showDetails">{{c.isMatched}}</td>
-                <td *ngIf="state.showDetails"><ul><li *ngFor="let d of c.dictionaries">{{d.text}} - {{d.name}}</li></ul></td>
+                <td *ngIf="state.showDetails">
+                  <ul><li *ngFor="let d of c.dictionaries; let idx2 = index">
+                  <mz-checkbox-container>
+                    <input [id]="'ch_'+idx+'_'+idx2" type="checkbox" [(ngModel)]="d.selected" mz-checkbox />
+                  </mz-checkbox-container>
+                  {{d.text}} - {{d.name}}</li></ul>
+                </td>
                 <td *ngIf="state.showDetails">{{c.hasProperNoun}}</td>
                 <td *ngIf="state.showDetails">{{c.found}}</td>
               </tr>

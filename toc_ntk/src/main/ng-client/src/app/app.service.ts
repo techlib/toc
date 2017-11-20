@@ -4,7 +4,7 @@ import { Observable } from 'rxjs/Rx';
 
 import {AppState} from './app.state';
 import { ScoreConfig } from './models/score-config';
-import { Candidate } from './models/candidate';
+import {DictionaryMatch} from './models/dictionary-match';
 
 @Injectable()
 export class AppService {
@@ -43,7 +43,7 @@ export class AppService {
       });
   }
   
-  getExport(cs: Candidate[]): Observable<any> {
+  getExport(cs: DictionaryMatch[]): Observable<any> {
 
     var url = 'candidates';
     let params: URLSearchParams = new URLSearchParams();

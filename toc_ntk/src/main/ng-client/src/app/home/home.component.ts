@@ -1,11 +1,14 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
-//import { FormBuilder } from '@angular/forms';
+import { Router, ActivatedRoute, ParamMap } from '@angular/router';
+import { Subscription } from 'rxjs/Subscription';
 import {MzBaseModal, MzModalComponent} from 'ng2-materialize';
 
 import {AppState} from '../app.state';
 import {AppService} from '../app.service';
 import {ScoreConfig} from '../models/score-config';
 import {Candidate} from '../models/candidate';
+import {DictionaryMatch} from '../models/dictionary-match';
+
 
 @Component({
   selector: 'app-home',
@@ -16,13 +19,17 @@ export class HomeComponent implements OnInit {
 
   @ViewChild('exportModal') exportModal: MzModalComponent;
   @ViewChild('tocModal') tocModal: MzModalComponent;
+  
+  subscriptions: Subscription[] = [];
+  
+
   toc_text: string;
 
   info: any = {};
   title: string = "";
   author: string = "";
   candidates: Candidate[] = [];
-  selected: Candidate[] = [];
+  selected: DictionaryMatch[] = [];
   exported: string;
   loading: boolean = false;
   hasToc: boolean = false;
@@ -34,25 +41,35 @@ export class HomeComponent implements OnInit {
 
 
   constructor(
+    private route: ActivatedRoute,
     public state: AppState,
     private service: AppService) {
-    this.createForm();
   }
 
-  createForm() {
-    //    sc.dicts = [['PSH', '653_klicova_slova_b.txt']];
-    //    this.scoreConfig = this.fb.group(sc);
+  ngOnDestroy() {
+    this.subscriptions.forEach((s: Subscription) => {
+      s.unsubscribe();
+    });
+    this.subscriptions = [];
   }
+  
   ngOnInit() {
-    this.state.stateChanged.subscribe(st => {
+    
+    this.subscriptions.push(this.state.stateChanged.subscribe(st => {
       this.analyze();
       $("#app-table-score").tableHeadFixer(); // pedro
-    });
+    }));
+    
+    let sysno = this.route.snapshot.paramMap.get('sysno');
+    console.log(sysno);
+    if(sysno){
+      this.state.setSysno(sysno);
+      //this.analyze();
+    }
   }
 
   select() {
-
-    this.selected = this.candidates.filter((c: Candidate) => {return c['selected'] !== 'undefined' && c['selected']});
+    //this.selected = this.candidates.filter((c: Candidate) => {return c['selected'] !== 'undefined' && c['selected']});
   }
 
   analyze() {
@@ -85,7 +102,18 @@ export class HomeComponent implements OnInit {
 
   showExport() {
     this.loading = true;
-    this.selected = this.candidates.filter((c: Candidate) => {return c['selected']});
+    //this.selected = this.candidates.filter((c: Candidate) => {return c['selected']});
+    this.selected = [];
+    this.candidates.forEach((c: Candidate) => {
+      if(c.dictionaries){
+        c.dictionaries.forEach((dm: DictionaryMatch) => {
+          if(dm['selected']){
+            this.selected.push(dm)
+          }
+        });
+      }
+      
+    });
     this.service.getExport(this.selected).subscribe(res => {
       this.exported = JSON.stringify(res);
       this.exportModal.open();
