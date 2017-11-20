@@ -17,11 +17,25 @@ export class AppService {
 
   processFolder(foldername: string, config: ScoreConfig): Observable<any> {
 
-    var url = 'mdt';
+    var url = 'candidates';
     //url = '/assets/F21395f_000170834.json';
     let params: URLSearchParams = new URLSearchParams();
-    params.set('action', 'ANALYZE_FOLDER');
+    params.set('action', 'FIND');
     params.set('foldername', this.state.config['basefolder']+ foldername);
+    params.set('scoreconfig', JSON.stringify(config));
+    return this.http.get(url, { search: params })
+      .map((response: Response) => {
+        return response.json();
+      });
+  }
+  
+  processSysno(sysno: string, config: ScoreConfig): Observable<any> {
+
+    var url = 'candidates';
+    //url = '/assets/F21395f_000170834.json';
+    let params: URLSearchParams = new URLSearchParams();
+    params.set('action', 'FIND');
+    params.set('sysno', sysno);
     params.set('scoreconfig', JSON.stringify(config));
     return this.http.get(url, { search: params })
       .map((response: Response) => {
@@ -41,6 +55,17 @@ export class AppService {
       });
   }
   
+  getBalicky(): Observable<any> {
+
+    var url = 'candidates';
+    let params: URLSearchParams = new URLSearchParams();
+    params.set('action', 'BALICKY');
+    return this.http.get(url, { search: params })
+      .map((response: Response) => {
+        return response.json();
+      });
+  }
+  
   addToBlackList(key: string): Observable<any> {
 
     var url = 'candidates';
@@ -54,13 +79,13 @@ export class AppService {
       });
   }
   
-  getTocText(foldername: string): Observable<any> {
+  getTocText(sysno: string): Observable<any> {
 
     var url = 'mdt';
     //url = '/assets/toc.txt';
     let params: URLSearchParams = new URLSearchParams();
     params.set('action', 'VIEW_TOC');
-    params.set('foldername', this.state.config['basefolder']+ foldername);
+    params.set('sysno', sysno);
     return this.http.get(url, { search: params })
       .map((response: Response) => {
         return response.text();

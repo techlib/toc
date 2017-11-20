@@ -7,7 +7,7 @@
     </servlet>
     <servlet>
         <servlet-name>MorphoDiTaServlet</servlet-name>
-        <servlet-class>cz.incad.ntk.toc_ntk.MorphoDiTaServlet</servlet-class>
+        <servlet-class>cz.incad.ntk.toc_ntk.morpho.MorphoDiTaServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>IndexerServlet</servlet-name>
@@ -49,8 +49,6 @@
         <servlet-name>IndexerServlet</servlet-name>
         <url-pattern>/indexer</url-pattern>
     </servlet-mapping>
-    
-    
     <servlet>
         <servlet-name>ConfigServlet</servlet-name>
         <servlet-class>cz.incad.ntk.toc_ntk.ConfigServlet</servlet-class>
@@ -61,8 +59,6 @@
         <url-pattern>/config</url-pattern>
         <url-pattern>/assets/config.json</url-pattern>
     </servlet-mapping>
-    
-    
     <session-config>
         <session-timeout>
             30

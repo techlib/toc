@@ -1,5 +1,7 @@
 package cz.incad.ntk.toc_ntk;
 
+import cz.incad.ntk.toc_ntk.index.SolrService;
+import cz.incad.ntk.toc_ntk.morpho.MorphoToken;
 import cz.incad.ntk.toc_ntk.Candidate.CandidateType;
 import java.io.File;
 import java.io.FileNotFoundException;

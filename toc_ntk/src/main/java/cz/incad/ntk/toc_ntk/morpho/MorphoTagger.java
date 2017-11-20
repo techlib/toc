@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package cz.incad.ntk.toc_ntk;
+package cz.incad.ntk.toc_ntk.morpho;
 
 import cz.cuni.mff.ufal.morphodita.Forms;
 import cz.cuni.mff.ufal.morphodita.TaggedLemma;
@@ -11,6 +11,7 @@ import cz.cuni.mff.ufal.morphodita.TaggedLemmas;
 import cz.cuni.mff.ufal.morphodita.TokenRange;
 import cz.cuni.mff.ufal.morphodita.TokenRanges;
 import cz.cuni.mff.ufal.morphodita.Tokenizer;
+import cz.incad.ntk.toc_ntk.InitServlet;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.json.JSONObject;

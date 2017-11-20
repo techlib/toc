@@ -17,7 +17,7 @@ export class AppState {
   config: any = {};
   scoreConfig: ScoreConfig = new ScoreConfig();
 
-  foldername: string;
+  sysno: string;
   
   showScoreConfig: boolean = false;
   showMatched: boolean = true;
@@ -28,8 +28,8 @@ export class AppState {
   threshold: number = .5;
 
 
-  setFoldername(f: string) {
-    this.foldername = f;
+  setSysno(f: string) {
+    this.sysno = f;
     this._stateSubject.next(this);
   }
 

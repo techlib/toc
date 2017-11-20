@@ -1,11 +1,16 @@
 package cz.incad.ntk.toc_ntk;
 
 import java.io.File;
+import java.io.FilenameFilter;
 import java.io.IOException;
+import java.nio.charset.Charset;
+import java.util.Comparator;
 import java.util.Iterator;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.apache.commons.io.FileUtils;
+import org.apache.commons.io.filefilter.FileFilterUtils;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -76,8 +81,31 @@ public class Options {
         }
       }
     }
+    getFolders();
 
   }
+
+  public JSONObject getFolders() {
+    if (!server_conf.has("folders")) {
+      JSONObject dirs = new JSONObject();
+
+      String foldername = server_conf.optString("balicky_dir", "~/.ntk/balicky/");
+      File dir = new File(foldername);
+      String[] directories = dir.list(new FilenameFilter() {
+        @Override
+        public boolean accept(File current, String name) {
+          return new File(current, name).isDirectory();
+        }
+      });
+      for(String d: directories){
+        dirs.put(d.substring(d.lastIndexOf("_")+1), d);
+      }
+
+      server_conf.put("folders", dirs);
+    }
+    return server_conf.optJSONObject("folders");
+  }
+  
 
   public JSONObject getClientConf() {
     return client_conf;

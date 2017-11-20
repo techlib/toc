@@ -5,6 +5,8 @@
  */
 package cz.incad.ntk.toc_ntk;
 
+import cz.incad.ntk.toc_ntk.morpho.MorphoTagger;
+import cz.incad.ntk.toc_ntk.morpho.MorphoToken;
 import cz.incad.utils.RESTHelper;
 import java.io.IOException;
 import java.io.InputStream;

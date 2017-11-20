@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package cz.incad.ntk.toc_ntk;
+package cz.incad.ntk.toc_ntk.index;
 
+import cz.incad.ntk.toc_ntk.Options;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;

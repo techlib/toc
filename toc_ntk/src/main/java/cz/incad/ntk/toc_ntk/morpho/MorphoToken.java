@@ -1,4 +1,4 @@
-package cz.incad.ntk.toc_ntk;
+package cz.incad.ntk.toc_ntk.morpho;
 
 import java.util.logging.Logger;
 import org.json.JSONObject;

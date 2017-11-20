@@ -1,6 +1,8 @@
 {
   "solr.host": "http://localhost:8983/solr/",
   "morpho.host": "lindat.mff.cuni.cz/services/morphodita/api",
+  "balicky_dir": "/home/alberto/Projects/NTK/balicky/",
+  "xserver": "http://aleph.techlib.cz/X?op=find-doc&base=stk01",
   "saved_tocs_dir": "/home/alberto/Projects/NTK/morpho/",
   "tagger_model_file": "/home/alberto/Projects/NTK/czech-morfflex-pdt-161115/czech-morfflex-pdt-161115.tagger",
   "users":{
@@ -11,4 +13,5 @@
   "skypSingleWordTokens": true,
   "jobs": {}
 }
+
 

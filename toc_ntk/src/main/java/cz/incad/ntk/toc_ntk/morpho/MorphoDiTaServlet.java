@@ -1,5 +1,9 @@
-package cz.incad.ntk.toc_ntk;
+package cz.incad.ntk.toc_ntk.morpho;
 
+import cz.incad.ntk.toc_ntk.Candidate;
+import cz.incad.ntk.toc_ntk.Options;
+import cz.incad.ntk.toc_ntk.ScoreConfig;
+import cz.incad.ntk.toc_ntk.TocAnalizer;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -16,7 +20,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.apache.commons.io.FileUtils;
 import org.json.JSONObject;
-
 
 /**
  *
@@ -100,19 +103,25 @@ public class MorphoDiTaServlet extends HttpServlet {
 
         response.setContentType("text/plain;charset=UTF-8");
         PrintWriter out = response.getWriter();
-        String foldername = request.getParameter("foldername");
-        File dir = new File(foldername);
-        String[] extensions = new String[]{"txt"};
-        List<File> files = (List<File>) FileUtils.listFiles(dir, extensions, false);
-        files.sort(new Comparator<File>() {
-          @Override
-          public int compare(File lhs, File rhs) {
-            // -1 - less than, 1 - greater than, 0 - equal, all inversed for descending
-            return lhs.getName().compareToIgnoreCase(rhs.getName());
+        String sysno = request.getParameter("sysno");
+        JSONObject jfolders = Options.getInstance().getFolders();
+        if (jfolders.has(sysno)) {
+          String foldername = Options.getInstance().getString("balicky_dir", "~/.ntk/balicky/") + jfolders.getString(sysno);
+
+          File dir = new File(foldername);
+          String[] extensions = new String[]{"txt"};
+          List<File> files = (List<File>) FileUtils.listFiles(dir, extensions, false);
+          files.sort(new Comparator<File>() {
+            @Override
+            public int compare(File lhs, File rhs) {
+              // -1 - less than, 1 - greater than, 0 - equal, all inversed for descending
+              return lhs.getName().compareToIgnoreCase(rhs.getName());
+            }
+          });
+          for (File f : files) {
+            out.println(FileUtils.readFileToString(f, Charset.forName("UTF-8")));
           }
-        });
-        for (File f : files) {
-          out.println(FileUtils.readFileToString(f, Charset.forName("UTF-8")));
+
         }
 
       }

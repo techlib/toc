@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package cz.incad.ntk.toc_ntk;
+package cz.incad.ntk.toc_ntk.morpho;
 
 import java.util.HashMap;
 import java.util.Map;

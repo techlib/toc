@@ -1,6 +1,7 @@
 
 package cz.incad.ntk.toc_ntk;
 
+import cz.incad.ntk.toc_ntk.index.Indexer;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.logging.Level;

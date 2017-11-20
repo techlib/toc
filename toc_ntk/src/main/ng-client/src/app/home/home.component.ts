@@ -18,6 +18,9 @@ export class HomeComponent implements OnInit {
   @ViewChild('tocModal') tocModal: MzModalComponent;
   toc_text: string;
 
+  info: any = {};
+  title: string = "";
+  author: string = "";
   candidates: Candidate[] = [];
   selected: Candidate[] = [];
   exported: string;
@@ -54,14 +57,30 @@ export class HomeComponent implements OnInit {
 
   analyze() {
     this.loading = true;
+    this.info = {};
+    this.title = '';
+    this.author = '';
     this.candidates = [];
     this.selected = [];
-    this.service.processFolder(this.state.foldername, this.state.scoreConfig).subscribe(res => {
+    this.service.processSysno(this.state.sysno, this.state.scoreConfig).subscribe(res => {
       this.candidates = res['candidates'];
+      this.info = res['info'];
+      this.setInfo();
       this.rescore();
       this.hasToc = true;
       this.loading = false;
     });
+  }
+  
+  setInfo(){
+    for(let i in this.info['varfield']){
+      let vf = this.info['varfield'][i];
+      if(vf['id'] === 245){
+        for(let sb in vf['subfield']){
+          this.title += vf['subfield'][sb]['content'];
+        }
+      }
+    }
   }
 
   showExport() {
@@ -117,7 +136,7 @@ export class HomeComponent implements OnInit {
   }
 
   openToc() {
-    this.service.getTocText(this.state.foldername).subscribe(res => {
+    this.service.getTocText(this.state.sysno).subscribe(res => {
       this.toc_text = res;
       this.tocModal.open();
       this.loading = false;

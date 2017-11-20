@@ -1,5 +1,6 @@
 package cz.incad.ntk.toc_ntk;
 
+import cz.incad.ntk.toc_ntk.index.SolrService;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;

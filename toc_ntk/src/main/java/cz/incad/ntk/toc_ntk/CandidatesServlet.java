@@ -1,11 +1,9 @@
 package cz.incad.ntk.toc_ntk;
 
-import java.io.File;
+import cz.incad.ntk.toc_ntk.index.SolrService;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.nio.charset.Charset;
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 import java.util.logging.Level;
@@ -14,8 +12,6 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import org.apache.commons.io.FileUtils;
-import org.apache.solr.client.solrj.SolrServerException;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -130,6 +126,15 @@ public class CandidatesServlet extends HttpServlet {
 
       }
     },
+    BALICKY {
+      @Override
+      void doPerform(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        response.setContentType("application/json;charset=UTF-8");
+        PrintWriter out = response.getWriter();
+        JSONObject ret = Options.getInstance().getFolders();
+        out.print(ret.toString(2));
+      }
+    },
     FIND {
       @Override
       void doPerform(HttpServletRequest request, HttpServletResponse response) throws Exception {
@@ -138,8 +143,16 @@ public class CandidatesServlet extends HttpServlet {
         PrintWriter out = response.getWriter();
         JSONObject ret = new JSONObject();
 
-        String foldername = request.getParameter("foldername");
+        String foldername = request.getParameter("foldername"); 
+        
+        String sysno = request.getParameter("sysno");
+        JSONObject jfolders = Options.getInstance().getFolders();
+        if(jfolders.has(sysno)){
+          foldername= Options.getInstance().getString("balicky_dir", "~/.ntk/balicky/") + jfolders.getString(sysno);
+        }
+        
 
+        ret.put("info", XServer.find(sysno));
         ret.put("foldername", foldername);
 
         TocAnalizer t = new TocAnalizer();
