@@ -1,5 +1,5 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
-import { Router, ActivatedRoute, ParamMap } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs/Subscription';
 import {MzBaseModal, MzModalComponent} from 'ng2-materialize';
 
@@ -41,6 +41,7 @@ export class HomeComponent implements OnInit {
 
 
   constructor(
+    private router: Router,
     private route: ActivatedRoute,
     public state: AppState,
     private service: AppService) {
@@ -57,15 +58,19 @@ export class HomeComponent implements OnInit {
     
     this.subscriptions.push(this.state.stateChanged.subscribe(st => {
       this.analyze();
+    console.log(sysno);
       $("#app-table-score").tableHeadFixer(); // pedro
     }));
     
     let sysno = this.route.snapshot.paramMap.get('sysno');
-    console.log(sysno);
     if(sysno){
       this.state.setSysno(sysno);
-      //this.analyze();
     }
+  }
+  
+  setSysno(){
+    this.router.navigate(['/sysno', this.state.sysno]);
+      this.analyze();
   }
 
   select() {

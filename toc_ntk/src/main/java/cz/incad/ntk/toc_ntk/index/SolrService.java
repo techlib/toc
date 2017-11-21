@@ -94,6 +94,7 @@ public class SolrService {
       //Search in psh
       query = new SolrQuery();
       query.setQuery("\"" + text.toLowerCase() + "\"");
+      //query.setFields("csPrefLabel");
       query.set("defType", "edismax");
       if(text.indexOf(" ") > 0){
         query.set("qf", "key_cz");
@@ -106,6 +107,7 @@ public class SolrService {
       if(pshResp.getResults().getNumFound() > 0){
         docs.add(pshResp.getResults().get(0));
       }
+      
       
       //Search in konspekt
       query = new SolrQuery();

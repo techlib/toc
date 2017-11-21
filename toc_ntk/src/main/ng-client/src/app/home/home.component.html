@@ -1,18 +1,20 @@
 <section>
   <div class="row app-toolbar app-clean-mg">
-    <div class="col s3">
-      <i *ngIf="state.sysno" class="app-mdi-folder"></i>
-      {{state.sysno}}
+    <div class="col s1 right-align">
+      <label for="sysno">Sysno</label>
     </div>
-    <div class="col s9 right-align">
+    <div class="col s3">
+      <input name="sysno" id="sysno" type="text" [(ngModel)]="state.sysno" (keyup.enter)="setSysno()"  />
+    </div>
+    <div class="col s8 right-align">
       <!--<button mz-button (click)="analyze()">analyze</button>-->
-      <button mz-button (click)="rescore()">rescore</button>
+      <button mz-button (click)="rescore()">re-score</button>
       <button mz-button [disabled]="!hasToc" (click)="openToc()" >view toc</button>
       <button mz-button  (click)="showExport()">export</button>
     </div>
   </div><!--/.row app-toolbar -->
   
-  <div class="app-sroll-wrapper">
+  <div class="app-sroll-wrapper" style="width: 100%;">
     <!-- Podminku na zobrazeni aplikuj na element s class "row" -->
     <div class="row" *ngIf="state.showScoreConfig">
       <div class="col s12">
@@ -43,7 +45,7 @@
     
     <div class="row">
       <div class="col s12">
-        <h5>Candidates for {{title}}</h5>
+        <h5>{{title}}</h5>
         <!--<table *ngIf="!loading" class="striped highlight" id="app-table-score">-->
         <table class="striped highlight" id="app-table-score">
           <thead>
@@ -96,7 +98,7 @@
 
 <!-- Modals -->
 <mz-modal #tocModal [fixedFooter]="true"  >
-  <mz-modal-header>{{state.foldername}}</mz-modal-header>
+  <mz-modal-header>{{state.sysno}}</mz-modal-header>
   <mz-modal-content>
     <div class="input-field col s12">
       <textarea id="textarea1" class="materialize-textarea" style="height: 100vh;">{{toc_text}}</textarea>

@@ -47,7 +47,7 @@ public class PSHReader {
         case XMLStreamReader.START_ELEMENT:
 
           String elementName = reader.getLocalName();
-          LOGGER.log(Level.INFO, "START_ELEMENT: {0}", elementName);
+//          LOGGER.log(Level.INFO, "START_ELEMENT: {0}", elementName);
           if (elementName.equals("RDF")) {
             readPSHConcepts(reader);
           }
@@ -56,17 +56,17 @@ public class PSHReader {
           break;
       }
     }
-    throw new XMLStreamException("Premature end of file");
+    //throw new XMLStreamException("Premature end of file");
   }
 
   private void readPSHConcepts(XMLStreamReader reader) throws XMLStreamException, IOException, SolrServerException {
-
+int i = 0;
     while (reader.hasNext()) {
       int eventType = reader.next();
       switch (eventType) {
         case XMLStreamReader.START_ELEMENT:
           String elementName = reader.getLocalName();
-          LOGGER.log(Level.INFO, "eventType: {0}, elementName: {1}", new Object[]{eventType, elementName});
+          //LOGGER.log(Level.INFO, "eventType: {0}, elementName: {1}", new Object[]{eventType, elementName});
           if (elementName.equals("Concept")) {
             client.addBean(readPSHConcept(reader), 10);
           } else {
@@ -77,7 +77,7 @@ public class PSHReader {
           return;
       }
     }
-    throw new XMLStreamException("Premature end of file");
+    throw new XMLStreamException("Premature end of PSHConcepts");
   }
 
   private PSHConcept readPSHConcept(XMLStreamReader reader) throws XMLStreamException {
@@ -106,7 +106,7 @@ public class PSHReader {
           }
       }
     }
-    throw new XMLStreamException("Premature end of file");
+    throw new XMLStreamException("Premature end of PSHConcept");
   }
 
   private void skipElement(XMLStreamReader reader, String name) throws XMLStreamException {
@@ -122,7 +122,7 @@ public class PSHReader {
           }
       }
     }
-    throw new XMLStreamException("Premature end of file");
+//    throw new XMLStreamException("Premature end of file");
   }
 
 }

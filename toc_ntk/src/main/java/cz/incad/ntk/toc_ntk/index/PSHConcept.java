@@ -25,8 +25,8 @@ public class PSHConcept {
     @Field
     String uri;
 
-    @Field("enAltLabel")
-    List<String> enAltLabel = new ArrayList<>() ;
+    @Field
+    List<String> csPrefLabel = new ArrayList<>();
     
     @Field("csAltLabel")
     List<String> csAltLabel = new ArrayList<>();
@@ -34,8 +34,8 @@ public class PSHConcept {
     @Field
     List<String> enPrefLabel = new ArrayList<>();
 
-    @Field
-    List<String> csPrefLabel = new ArrayList<>();
+    @Field("enAltLabel")
+    List<String> enAltLabel = new ArrayList<>() ;
 
   void setUri(String uri) {
     this.uri = uri;
@@ -44,6 +44,7 @@ public class PSHConcept {
   void setId(String id) {
     this.id = id;
   }
+  
 
   void addAltLabel(String lang, String label) {
     if("en".equals(lang)){
