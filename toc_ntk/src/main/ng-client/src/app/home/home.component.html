@@ -47,15 +47,15 @@
       <div class="col s12">
         <h5>{{title}}</h5>
         <!--<table *ngIf="!loading" class="striped highlight" id="app-table-score">-->
-        <table class="striped highlight" id="app-table-score">
+        <table class="striped highlight" id="app-table-score" *ngIf="!loading">
           <thead>
             <tr>
               <th><span>&#160;</span></th>
               <th><span>score</span></th>
               <th><span>text</span></th>
+              <th><span>dictionaries</span></th>
               <th *ngIf="state.showDetails"><span>type</span></th>
               <th *ngIf="state.showDetails"><span>isMatched</span></th>
-              <th *ngIf="state.showDetails"><span>dictionaries</span></th>
               <th *ngIf="state.showDetails"><span>hasProperNoun</span></th>
               <th *ngIf="state.showDetails"><span>found</span></th>
             </tr>
@@ -71,15 +71,14 @@
                   [class.app-score-1]="c.score > maxScore * state.threshold" 
                 >{{c.score | number: '1.1-3'}}</td>
                 <td>{{c.text}}</td>
-                <td *ngIf="state.showDetails">{{c.type}}</td>
-                <td *ngIf="state.showDetails">{{c.isMatched}}</td>
-                <td *ngIf="state.showDetails">
+                <td>
                   <ul><li *ngFor="let d of c.dictionaries; let idx2 = index">
                   <mz-checkbox-container>
-                    <input [id]="'ch_'+idx+'_'+idx2" type="checkbox" [(ngModel)]="d.selected" mz-checkbox />
-                  </mz-checkbox-container>
-                  {{d.text}} - {{d.name}}</li></ul>
+                    <input [id]="'ch_'+idx+'_'+idx2" type="checkbox" [(ngModel)]="d.selected" mz-checkbox [label]="d.text + '-' + d.name" />
+                  </mz-checkbox-container></li></ul>
                 </td>
+                <td *ngIf="state.showDetails">{{c.type}}</td>
+                <td *ngIf="state.showDetails">{{c.isMatched}}</td>
                 <td *ngIf="state.showDetails">{{c.hasProperNoun}}</td>
                 <td *ngIf="state.showDetails">{{c.found}}</td>
               </tr>
@@ -98,7 +97,7 @@
 
 <!-- Modals -->
 <mz-modal #tocModal [fixedFooter]="true"  >
-  <mz-modal-header>{{state.sysno}}</mz-modal-header>
+  <mz-modal-header>{{state.sysno}}: {{title}}</mz-modal-header>
   <mz-modal-content>
     <div class="input-field col s12">
       <textarea id="textarea1" class="materialize-textarea" style="height: 100vh;">{{toc_text}}</textarea>
@@ -113,7 +112,7 @@
   <mz-modal-header>Exported candidates</mz-modal-header>
   <mz-modal-content>
     <div class="input-field col s12">
-      <textarea id="textarea1" class="materialize-textarea" style="height: 100vh;">{{exported}}</textarea>
+      <textarea id="exportArea" class="materialize-textarea" style="height: 100vh;" #exportArea>{{exported}}</textarea>
     </div>
   </mz-modal-content>
   <mz-modal-footer>

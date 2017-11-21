@@ -1,6 +1,6 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
-import { Subscription } from 'rxjs/Subscription';
+import {Component, OnInit, ViewChild, ElementRef} from '@angular/core';
+import {Router, ActivatedRoute} from '@angular/router';
+import {Subscription} from 'rxjs/Subscription';
 import {MzBaseModal, MzModalComponent} from 'ng2-materialize';
 
 import {AppState} from '../app.state';
@@ -19,9 +19,10 @@ export class HomeComponent implements OnInit {
 
   @ViewChild('exportModal') exportModal: MzModalComponent;
   @ViewChild('tocModal') tocModal: MzModalComponent;
-  
+  @ViewChild('exportArea') exportArea: ElementRef;
+
   subscriptions: Subscription[] = [];
-  
+
 
   toc_text: string;
 
@@ -53,24 +54,22 @@ export class HomeComponent implements OnInit {
     });
     this.subscriptions = [];
   }
-  
+
   ngOnInit() {
-    
+
     this.subscriptions.push(this.state.stateChanged.subscribe(st => {
       this.analyze();
-    console.log(sysno);
-      $("#app-table-score").tableHeadFixer(); // pedro
     }));
-    
+
     let sysno = this.route.snapshot.paramMap.get('sysno');
-    if(sysno){
+    if (sysno) {
       this.state.setSysno(sysno);
     }
   }
-  
-  setSysno(){
+
+  setSysno() {
     this.router.navigate(['/sysno', this.state.sysno]);
-      this.analyze();
+    this.analyze();
   }
 
   select() {
@@ -91,14 +90,18 @@ export class HomeComponent implements OnInit {
       this.rescore();
       this.hasToc = true;
       this.loading = false;
+
+      setTimeout(() => {
+        $("#app-table-score").tableHeadFixer();
+      }, 1);
     });
   }
-  
-  setInfo(){
-    for(let i in this.info['varfield']){
+
+  setInfo() {
+    for (let i in this.info['varfield']) {
       let vf = this.info['varfield'][i];
-      if(vf['id'] === 245){
-        for(let sb in vf['subfield']){
+      if (vf['id'] === 245) {
+        for (let sb in vf['subfield']) {
           this.title += vf['subfield'][sb]['content'];
         }
       }
@@ -106,25 +109,50 @@ export class HomeComponent implements OnInit {
   }
 
   showExport() {
-    this.loading = true;
+    //this.loading = true;
     //this.selected = this.candidates.filter((c: Candidate) => {return c['selected']});
     this.selected = [];
     this.candidates.forEach((c: Candidate) => {
-      if(c.dictionaries){
+      if (c.dictionaries) {
         c.dictionaries.forEach((dm: DictionaryMatch) => {
-          if(dm['selected']){
+          if (dm['selected']) {
             this.selected.push(dm)
           }
         });
       }
-      
+
     });
     this.service.getExport(this.selected).subscribe(res => {
       this.exported = JSON.stringify(res);
       this.exportModal.open();
+      console.log(this.exportArea);
+      setTimeout(() => {
+         this.exportArea.nativeElement.select();
+         let a = document.execCommand('copy');
+         console.log(a);
+      }, 10);
       this.loading = false;
     });
   }
+
+  selectElementText(el) {
+    var doc = window.document;
+    if (window.getSelection && doc.createRange) {
+      let sel = window.getSelection();
+      let range = doc.createRange();
+      range.selectNodeContents(el);
+      sel.removeAllRanges();
+      sel.addRange(range);
+    } else {
+      el.select();
+//    } else if (doc.body.createTextRange) {
+//      let range = doc.body.createTextRange();
+//      range.moveToElementText(el);
+//      range.select();
+    }
+  }
+
+
 
   rescore() {
     this.maxScore = 0;

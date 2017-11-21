@@ -19,11 +19,12 @@ export class AppState {
 
   sysno: string;
   
+  showSideBar: boolean = true;
   showScoreConfig: boolean = false;
   showMatched: boolean = true;
   showFree: boolean = true;
   showBlacklisted: boolean = true;
-  showDetails: boolean = true;
+  showDetails: boolean = false;
   
   threshold: number = .5;
 
