@@ -142,49 +142,6 @@ public class MorphoDiTaServlet extends HttpServlet {
         ret.put("tocline", tc.toJSON());
         out.print(ret.toString(2));
       }
-    },
-    ANALYZE_FOLDER {
-      @Override
-      void doPerform(HttpServletRequest request, HttpServletResponse response) throws Exception {
-
-        response.setContentType("application/json;charset=UTF-8");
-        PrintWriter out = response.getWriter();
-        JSONObject ret = new JSONObject();
-
-        String foldername = request.getParameter("foldername");
-
-        ret.put("foldername", foldername);
-
-        TocAnalizer t = new TocAnalizer();
-        Map<String, Candidate> cs = t.analyzeFolder(foldername);
-
-        List<Candidate> sorted = new ArrayList<>();
-        for (String key : cs.keySet()) {
-          Candidate c = cs.get(key);
-          sorted.add(c);
-        }
-
-        final ScoreConfig sc = new ScoreConfig();
-        String scStr = request.getParameter("scoreconfig");
-
-        if (scStr != null) {
-          sc.fromJSON(new JSONObject(scStr));
-        }
-
-//        Collections.sort(sorted, new Comparator<Candidate>() {
-//          @Override
-//          public int compare(Candidate lhs, Candidate rhs) {
-//            // -1 - less than, 1 - greater than, 0 - equal, all inversed for descending
-//            return (int) (rhs.score(sc) - lhs.score(sc));
-//          }
-//        });
-        for (Candidate c : sorted) {
-          ret.append("candidates", c.toJSON());
-
-        }
-
-        out.print(ret.toString(2));
-      }
     };
 
     abstract void doPerform(HttpServletRequest request, HttpServletResponse response) throws Exception;

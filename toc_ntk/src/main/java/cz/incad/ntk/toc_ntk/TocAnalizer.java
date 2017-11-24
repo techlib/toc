@@ -327,7 +327,13 @@ public class TocAnalizer {
         }
     }
 
-    public Map<String, Candidate> analyzeFolder(String foldername) {
+    /**
+     *
+     * @param foldername Name of the folder containing ocr
+     * @param info: JSON returned from XServer
+     * @return
+     */
+    public Map<String, Candidate> analyzeFolder(String foldername, JSONObject info) {
         Map<String, Candidate> candidates = new HashMap<>();
         File dir = new File(foldername);
         String[] extensions = new String[]{"txt"};
@@ -335,6 +341,41 @@ public class TocAnalizer {
         for (File f : files) {
             analyze(f, candidates);
         }
+        addCandidatesFromInfo(candidates, info);
         return candidates;
     }
+
+    private void addCandidatesFromInfo(Map<String, Candidate> candidates, JSONObject info) {
+        JSONArray varfield = info.optJSONArray("varfield");
+        String title = " ";
+        for (int i = 0; i < varfield.length(); i++) {
+            JSONObject vf = varfield.getJSONObject(i);
+            if ("245".equals(vf.optString("id"))) {
+
+                JSONArray sb = vf.optJSONArray("subfield");
+                if (sb != null) {
+                    for (int j = 0; j < sb.length(); j++) {
+                        title += sb.getJSONObject(j).getString("content") + " ";
+                    }
+                }
+            }
+
+        }
+        TocLine tc = new TocLine(title);
+
+        for (Candidate c : findCandidates(tc, -1)) {
+            if (candidates.containsKey(c.text)) {
+                candidates.get(c.text).found++;
+                candidates.get(c.text).inTitle = true;
+            } else {
+                c.inTitle = true;
+                candidates.put(c.text, c);
+                c.setBlackListed();
+                if (!c.blackListed) {
+                    c.match();
+                }
+            }
+        }
+    }
+
 }

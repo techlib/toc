@@ -25,6 +25,9 @@ public class Candidate {
   
   
   
+  //Keeps when candidate was found in title
+  boolean inTitle;
+  
   //Keeps when candidate was found in blacklist
   boolean blackListed;
   
@@ -70,6 +73,7 @@ public class Candidate {
     JSONObject ret = new JSONObject();
     ret.put("text", text);
     ret.put("blacklisted", blackListed);
+    ret.put("inTitle", inTitle);
     ret.put("isMatched", isMatched);
 //    ret.put("matched_text", matched_text);
     for (DictionaryMatch dm : matches) {

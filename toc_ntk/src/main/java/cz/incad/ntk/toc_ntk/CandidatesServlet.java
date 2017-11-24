@@ -151,12 +151,12 @@ public class CandidatesServlet extends HttpServlet {
           foldername= Options.getInstance().getString("balicky_dir", "~/.ntk/balicky/") + jfolders.getString(sysno);
         }
         
-
+        
         ret.put("info", XServer.find(sysno));
         ret.put("foldername", foldername);
 
         TocAnalizer t = new TocAnalizer();
-        Map<String, Candidate> cs = t.analyzeFolder(foldername);
+        Map<String, Candidate> cs = t.analyzeFolder(foldername, ret.getJSONObject("info"));
 
         List<Candidate> sorted = new ArrayList<>();
         for (String key : cs.keySet()) {
