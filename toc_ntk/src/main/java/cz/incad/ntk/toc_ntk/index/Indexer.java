@@ -60,12 +60,12 @@ public class Indexer {
     return ret;
   }
 
-  public JSONObject index653() {
+  public JSONObject indexKeywords() {
 
     JSONObject ret = new JSONObject();
-    SimpleKeywordsReader r = new SimpleKeywordsReader("653");
+    SimpleKeywordsReader r = new SimpleKeywordsReader("keywords");
     try {
-      client = getClient("slovnik");
+      client = getClient("keywords");
       r.readFromTxt(Indexer.class.getResourceAsStream("653_klicova_slova_b.txt"), client);
     } catch (IOException ex) {
       ret.put("error", ex);

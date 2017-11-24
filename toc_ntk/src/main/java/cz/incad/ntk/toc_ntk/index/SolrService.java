@@ -85,7 +85,7 @@ public class SolrService {
         query.set("qf", "key_lower");
       }
       query.set("mm", "80%");
-      QueryResponse response = solr.query("slovnik", query);
+      QueryResponse response = solr.query("keywords", query);
       if(response.getResults().getNumFound() > 0){
         docs.add(response.getResults().get(0));
       }

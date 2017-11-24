@@ -138,7 +138,7 @@ public class TocAnalizer {
         SolrDocumentList docs = SolrService.findInDictionaries(word);
         if (!docs.isEmpty()) {
           Candidate c = new Candidate(word, CandidateType.DICTIONARY_WORD);
-
+c.isMatched = true;
 //          c.matched_text = docs.get(0).getFirstValue("key").toString();
 //          c.dictionary = docs.get(0).getFirstValue("slovnik").toString();
           for (SolrDocument doc : docs) {

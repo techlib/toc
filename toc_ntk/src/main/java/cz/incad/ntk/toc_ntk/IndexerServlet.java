@@ -104,7 +104,7 @@ public class IndexerServlet extends HttpServlet {
         out.println(json.toString(2));
       }
     },
-    INDEX_653 {
+    INDEX_SIMPLE_KEYWORDS {
       @Override
       void doPerform(HttpServletRequest req, HttpServletResponse response) throws Exception {
 
@@ -114,7 +114,7 @@ public class IndexerServlet extends HttpServlet {
         JSONObject json = new JSONObject();
         try {
           Indexer indexer = new Indexer();
-            json.put("653", indexer.index653());
+            json.put("keywords", indexer.indexKeywords());
 
         } catch (Exception ex) {
       LOGGER.log(Level.SEVERE, null, ex);

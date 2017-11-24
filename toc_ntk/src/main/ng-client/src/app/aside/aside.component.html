@@ -1,6 +1,6 @@
 <section class="app-sroll-wrapper" *ngIf="state.showSideBar">
   <mz-collection>
-    <a mz-collection-link  *ngFor="let f of folders" (click)="setSysno(f)" [class.active]="f === state.foldername">
+    <a mz-collection-link  *ngFor="let f of folders" (click)="setSysno(f)" [class.active]="f === state.sysno">
       <span>{{f}}</span>
     </a>
   </mz-collection>
