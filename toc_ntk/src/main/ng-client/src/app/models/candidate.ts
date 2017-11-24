@@ -11,5 +11,8 @@ export class Candidate {
   score: number;
   found: number;
   
+  extents: number[];
+  deeps: number[];
+  
 }
 

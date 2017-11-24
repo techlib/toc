@@ -171,6 +171,7 @@ public class CandidatesServlet extends HttpServlet {
           sc.fromJSON(new JSONObject(scStr));
         }
         for (Candidate c : sorted) {
+          c.score(sc);
           ret.append("candidates", c.toJSON());
 
         }

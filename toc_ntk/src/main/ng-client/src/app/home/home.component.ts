@@ -185,6 +185,7 @@ export class HomeComponent implements OnInit {
           c.score = c.score * sc.isDictionaryWord;
         }
         c.score += c.found * sc.found;
+        c.score += c.extents[0] * sc.extent;
         this.maxScore = Math.max(this.maxScore, c.score);
       }
     });

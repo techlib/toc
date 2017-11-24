@@ -4,6 +4,7 @@ import cz.incad.ntk.toc_ntk.Candidate;
 import cz.incad.ntk.toc_ntk.Options;
 import cz.incad.ntk.toc_ntk.ScoreConfig;
 import cz.incad.ntk.toc_ntk.TocAnalizer;
+import cz.incad.ntk.toc_ntk.TocLine;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -136,14 +137,9 @@ public class MorphoDiTaServlet extends HttpServlet {
 
         String data = request.getParameter("data");
 
-        ret.put("phrase", data);
-
-//        TocAnalizer t = new TocAnalizer();
-//        for (MorphoToken token : t.analyzeLine(data)) {
-//          ret.append("tokens (part of speech) (Case)",
-//                  token.getToken() + " (" + token.getTag().getPosHuman() + ")"
-//                  + " (" + token.getTag().getCase() + ")");
-//        }
+        ret.put("data", data);
+        TocLine tc = new TocLine(data);
+        ret.put("tocline", tc.toJSON());
         out.print(ret.toString(2));
       }
     },

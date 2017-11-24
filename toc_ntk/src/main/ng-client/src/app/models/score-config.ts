@@ -5,6 +5,7 @@ export class ScoreConfig {
   multiple: number = 3.0;
   hasProperNoun: number = 5.0;
   isDictionaryWord: number = 2.0;
-  dicts: any[] = ['PSH', "653", "konspekt"];
-  dictionaries: any = {PSH: 3.0, "653": 1.2, "konspekt": 4.0};
+  extent: number = 1.2;
+  dicts: any[] = ['PSH', "keywords", "konspekt"];
+  dictionaries: any = {PSH: 3.0, "keywords": 1.2, "konspekt": 4.0};
 }

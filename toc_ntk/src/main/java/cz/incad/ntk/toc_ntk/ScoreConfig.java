@@ -22,6 +22,7 @@ public class ScoreConfig {
   float multiple = 3.0f;
   float hasProperNoun = 5.0f;
   float isDictionaryWord = 2.0f;
+  float extent = 1.2f;
   Map<String, Double> dictionaries = new HashMap<>();
 
   public void fromJSON(JSONObject json) {
@@ -30,6 +31,7 @@ public class ScoreConfig {
     multiple = (float) json.getDouble("multiple");
     hasProperNoun = (float) json.getDouble("hasProperNoun");
     isDictionaryWord = (float) json.getDouble("isDictionaryWord");
+    extent = (float) json.getDouble("extent");
 
     if (json.has("dictionaries")) {
       JSONObject jo = json.getJSONObject("dictionaries");

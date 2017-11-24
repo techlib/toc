@@ -43,6 +43,9 @@ public class Candidate {
   
   //List of deeps in which the candidate was found
   List<Integer> deeps = new ArrayList<>();
+  
+  //Pages extents
+  List<Integer> extents = new ArrayList<>();
 
   public Candidate(String text, CandidateType type) {
     this(text, type, false);
@@ -55,8 +58,12 @@ public class Candidate {
     this.hasProperNoun = hasProperNoun;
   }
   
-  public void setDeep(Integer deep){
+  public void addDeep(Integer deep){
     this.deeps.add(deep);
+  }
+  
+  public void addExtent(Integer extent){
+    this.extents.add(extent);
   }
 
   public JSONObject toJSON() {
@@ -67,6 +74,12 @@ public class Candidate {
 //    ret.put("matched_text", matched_text);
     for (DictionaryMatch dm : matches) {
       ret.append("dictionaries", dm.toJSON());
+    }
+    for (Integer deep : deeps) {
+      ret.append("deeps", deep);
+    }
+    for (Integer extent : extents) {
+      ret.append("extents", extent);
     }
     ret.put("type", type);
     ret.put("hasProperNoun", hasProperNoun);
@@ -125,6 +138,8 @@ public class Candidate {
     if (type == CandidateType.DICTIONARY_WORD) {
       this.score = this.score * sc.isDictionaryWord;
     }
+    
+    this.score += this.extents.get(0) * sc.extent;
 
     return this.score;
   }

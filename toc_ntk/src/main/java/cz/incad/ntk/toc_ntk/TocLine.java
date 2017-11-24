@@ -30,8 +30,8 @@ public class TocLine {
   public static final Logger LOGGER = Logger.getLogger(TocLine.class.getName());
 
   String raw;
-  Integer deep;
-  //String deep;
+  Integer deep = 0;
+  String deep_str;
   String text;
   int start_page;
   ArrayList<MorphoToken> mtokens;
@@ -40,6 +40,7 @@ public class TocLine {
   public TocLine(JSONObject json) {
     this.raw = json.getString("raw");
     this.deep = json.optInt("deep");
+    this.deep_str = json.optString("deep_str");
     this.text = json.getString("text");
     this.start_page = json.optInt("start_page");
     mtokens = new ArrayList();
@@ -55,6 +56,7 @@ public class TocLine {
     JSONObject json = new JSONObject();
     json.put("raw", this.raw);
     json.put("deep", this.deep);
+    json.put("deep_str", this.deep_str);
     json.put("text", this.text);
     json.put("start_page", this.start_page);
     json.put("mtokens", this.jaTokens);
@@ -85,16 +87,24 @@ public class TocLine {
       } else {
         pos = str.indexOf(" ");
       }
+      LOGGER.log(Level.INFO, "pos: {0}", pos);
       if (pos > -1) {
         // Zatim deep pro farmat 1.2.3
         //Musime zpracovat tabulatory
-        this.deep = str.substring(0, pos).split(".").length;
+        this.deep_str = str.substring(0, pos);
+        this.deep = this.deep_str.split("\\.").length;
         
         this.text = str.substring(pos, page_pos+1).trim();
       } else {
         this.text = str.substring(0, page_pos + 1).trim();
       }
     } else {
+      int pos = str.indexOf("\t");
+      if (pos > -1) {
+        // Treba II.
+        this.deep_str = str.substring(0, pos);
+        this.deep = this.deep_str.split("\\.").length;
+      }
       this.text = str.substring(0, page_pos).trim();
     }
     
