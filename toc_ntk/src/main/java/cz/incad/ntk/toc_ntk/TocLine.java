@@ -87,7 +87,7 @@ public class TocLine {
       } else {
         pos = str.indexOf(" ");
       }
-      LOGGER.log(Level.INFO, "pos: {0}", pos);
+      LOGGER.log(Level.FINE, "pos: {0}", pos);
       if (pos > -1) {
         // Zatim deep pro farmat 1.2.3
         //Musime zpracovat tabulatory

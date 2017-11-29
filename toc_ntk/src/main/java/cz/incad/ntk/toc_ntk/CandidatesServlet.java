@@ -175,7 +175,7 @@ public class CandidatesServlet extends HttpServlet {
           ret.append("candidates", c.toJSON());
 
         }
-
+        
         out.print(ret.toString(2));
       }
     };

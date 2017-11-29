@@ -13,6 +13,7 @@ export class Candidate {
   
   extents: number[];
   deeps: number[];
-  
+  inTitle: boolean;
+  explain: string[];
 }
 

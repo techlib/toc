@@ -145,7 +145,8 @@ public class TocAnalizer {
         // search words distinct than tokens in our keywords dictionary
         String[] words = line.text.split(" ");
         for (String s : words) {
-            String word = s.replaceAll("\\.+", "\\.");
+            //Cistime tecky, zavorky
+            String word = s.replaceAll("\\.+", "").replaceAll("\\(", "").replaceAll("\\)", "");
             if (!hasWord(line, word)) {
                 //Try to find
                 SolrDocumentList docs = SolrService.findInDictionaries(word);
@@ -197,6 +198,7 @@ public class TocAnalizer {
                     //This is the end
                     line = previous + " " + line;
                     lines.add(new TocLine(line.trim()));
+                    
                     previous = "";
                 } else if (Character.isDigit(line.charAt(0))) {
                     // This is the begining or we are continuing
@@ -311,10 +313,10 @@ public class TocAnalizer {
 
                 }
                 for (Candidate c : findCandidates(line, next_start_page)) {
-                    if (candidates.containsKey(c.text)) {
-                        candidates.get(c.text).found++;
+                    if (candidates.containsKey(c.text.toLowerCase())) {
+                        candidates.get(c.text.toLowerCase()).found++;
                     } else {
-                        candidates.put(c.text, c);
+                        candidates.put(c.text.toLowerCase(), c);
                         c.setBlackListed();
                         if (!c.blackListed) {
                             c.match();
@@ -364,12 +366,12 @@ public class TocAnalizer {
         TocLine tc = new TocLine(title);
 
         for (Candidate c : findCandidates(tc, -1)) {
-            if (candidates.containsKey(c.text)) {
-                candidates.get(c.text).found++;
-                candidates.get(c.text).inTitle = true;
+            if (candidates.containsKey(c.text.toLowerCase())) {
+                candidates.get(c.text.toLowerCase()).found++;
+                candidates.get(c.text.toLowerCase()).inTitle = true;
             } else {
                 c.inTitle = true;
-                candidates.put(c.text, c);
+                candidates.put(c.text.toLowerCase(), c);
                 c.setBlackListed();
                 if (!c.blackListed) {
                     c.match();

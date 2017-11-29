@@ -4,9 +4,10 @@
     "found": 0.2,
     "matched": 2.0,
     "multiple": 3.0,
-    "hasProperNoun": 5.0,
+    "hasProperNoun": 1.9,
     "isDictionaryWord": 2.0,
     "extent": 1.2,
+    "inTitle": 1.5,
     "dictionaries": {
       "PSH": 3.0,
       "keywords": 1.2,

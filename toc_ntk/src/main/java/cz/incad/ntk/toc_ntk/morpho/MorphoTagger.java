@@ -66,9 +66,15 @@ public class MorphoTagger {
 //                            i + 1 == lemmas.size() ? "</sentence>" : "");
           t = token_end;
           ret.append("result", jotoken);
+          
         }
 
       }
+      forms.clear();
+      lemmas.clear();
+      tokens.clear();
+      tokenizer.delete();
+      tokenizer = null;
       //ret.put("tokens", jatokens);
 //      out.print(encodeEntities(text.substring(t)));
     }

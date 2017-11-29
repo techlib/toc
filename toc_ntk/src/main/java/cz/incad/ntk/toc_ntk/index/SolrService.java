@@ -59,6 +59,7 @@ public class SolrService {
       query.set("qf", "key");
       query.set("mm", "100%");
       QueryResponse response = solr.query("blacklist", query);
+      solr.close();
       if(response.getResults().getNumFound() > 0){
         return true;
       }
@@ -67,6 +68,7 @@ public class SolrService {
       LOGGER.log(Level.SEVERE, null, ex);
       
     }
+    
     return false;
   }
   
@@ -124,7 +126,7 @@ public class SolrService {
       if(response.getResults().getNumFound() > 0){
         docs.add(response.getResults().get(0));
       }
-      
+      solr.close();
     } catch (SolrServerException | IOException ex) {
       LOGGER.log(Level.SEVERE, null, ex);
     }

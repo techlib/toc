@@ -70,7 +70,7 @@
                     <i *ngIf="!c.isMatched" class="app-mdi-cancel red-text" (click)="addToBlackList(c)" mz-tooltip [tooltip]="'Add to blacklist'"></i>
                 </td>
                 <!-- Dodrz prefix class, muze jich byt vice, tohle je jen priklad, barvy prahu se definuje ve variables -->
-                <td 
+                <td [title]="formatExplain(c)"
                   [class.app-score-1]="c.score > maxScore * state.threshold" 
                 >{{c.score | number: '1.1-3'}}</td>
                 <td>{{c.text}}</td>
