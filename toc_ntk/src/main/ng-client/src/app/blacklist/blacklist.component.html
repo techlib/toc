@@ -1,0 +1,7 @@
+<section>
+    <div class="app-sroll-wrapper" style="width: 100%;">
+    <div  *ngFor="let w of words">
+        <a (click)="removeFromBlackList(w.key)">{{w.key}}</a>
+    </div>
+</div>
+</section>

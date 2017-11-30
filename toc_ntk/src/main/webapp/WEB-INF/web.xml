@@ -6,17 +6,25 @@
         <load-on-startup>1</load-on-startup>
     </servlet>
     <servlet>
+        <servlet-name>SearchServlet</servlet-name>
+        <servlet-class>cz.incad.ntk.toc_ntk.SearchServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>SearchServlet</servlet-name>
+        <url-pattern>/search</url-pattern>
+    </servlet-mapping>
+    <servlet>
         <servlet-name>MorphoDiTaServlet</servlet-name>
         <servlet-class>cz.incad.ntk.toc_ntk.morpho.MorphoDiTaServlet</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>IndexerServlet</servlet-name>
-        <servlet-class>cz.incad.ntk.toc_ntk.IndexerServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>MorphoDiTaServlet</servlet-name>
         <url-pattern>/mdt</url-pattern>
     </servlet-mapping>
+    <servlet>
+        <servlet-name>IndexerServlet</servlet-name>
+        <servlet-class>cz.incad.ntk.toc_ntk.IndexerServlet</servlet-class>
+    </servlet>
     <servlet>
         <servlet-name>CandidatesServlet</servlet-name>
         <servlet-class>cz.incad.ntk.toc_ntk.CandidatesServlet</servlet-class>

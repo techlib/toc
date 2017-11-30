@@ -66,6 +66,19 @@ export class AppService {
       });
   }
   
+  getBlacklist(): Observable<any> {
+
+    var url = 'search/blacklist/select';
+    let params: URLSearchParams = new URLSearchParams();
+    params.set('q', '*');
+    params.set('rows', '50');
+    params.set('sort', 'key asc');
+    return this.http.get(url, { search: params })
+      .map((response: Response) => {
+        return response.json();
+      });
+  }
+  
   addToBlackList(key: string): Observable<any> {
 
     var url = 'candidates';
@@ -73,6 +86,18 @@ export class AppService {
     params.set('action', 'ADD_TO_BLACKLIST');
     params.set('key', key);
     console.log(key);
+    return this.http.get(url, { search: params })
+      .map((response: Response) => {
+        return response.json();
+      });
+  }
+  
+  removeFromBlackList(key: string): Observable<any> {
+
+    var url = 'candidates';
+    let params: URLSearchParams = new URLSearchParams();
+    params.set('action', 'REMOVE_FROM_BLACKLIST');
+    params.set('key', key);
     return this.http.get(url, { search: params })
       .map((response: Response) => {
         return response.json();

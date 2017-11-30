@@ -34,6 +34,16 @@ public class SolrService {
       idoc.addField("key", key);
       LOGGER.info(idoc.toString());
       solr.add("blacklist", idoc, 100);
+      solr.close();
+  }
+  
+  public static void removeFromBlackList(String key) throws SolrServerException, IOException{
+    
+      SolrClient solr = new HttpSolrClient.Builder(urlString).build();
+      solr.deleteById("blacklist", key, 10);
+      
+      LOGGER.info("deleted");
+      solr.close();
   }
   
   
@@ -45,10 +55,10 @@ public class SolrService {
       idoc.addField("key", key);
       LOGGER.info(idoc.toString());
       solr.add("nerizene", idoc, 100);
+      solr.close();
   }
   
   public static boolean isInBlackList(String text){
-    SolrDocumentList docs = new SolrDocumentList();
     try {
       SolrClient solr = new HttpSolrClient.Builder(urlString).build();
       SolrQuery query = new SolrQuery();

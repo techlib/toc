@@ -15,6 +15,7 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { FooterComponent } from './footer/footer.component';
 import { HomeComponent } from './home/home.component';
 import { AsideComponent } from './aside/aside.component';
+import { BlacklistComponent } from './blacklist/blacklist.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { AsideComponent } from './aside/aside.component';
     NavbarComponent,
     FooterComponent,
     HomeComponent,
-    AsideComponent
+    AsideComponent,
+    BlacklistComponent
   ],
   imports: [
     BrowserModule,
@@ -33,6 +35,7 @@ import { AsideComponent } from './aside/aside.component';
     MaterializeModule.forRoot(),
     RouterModule.forRoot([
       { path: 'home', component: HomeComponent },
+      { path: 'blacklist', component: BlacklistComponent },
       { path: 'sysno/:sysno', component: HomeComponent},
       { path: '', redirectTo: 'home', pathMatch: 'full' }
     ])
