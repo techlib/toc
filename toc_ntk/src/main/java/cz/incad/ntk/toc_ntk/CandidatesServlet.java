@@ -39,7 +39,6 @@ public class CandidatesServlet extends HttpServlet {
 
         try {
 
-            System.out.println(System.getProperty("java.library.path"));
 
             String actionNameParam = request.getParameter(ACTION_NAME);
             if (actionNameParam != null) {

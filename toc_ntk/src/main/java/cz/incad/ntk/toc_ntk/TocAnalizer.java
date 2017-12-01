@@ -352,10 +352,8 @@ public class TocAnalizer {
         List<File> files = (List<File>) FileUtils.listFiles(dir, extensions, false);
         int totalPages = 0;
         for (File f : files) {
-        System.out.println("############ totalPages " + totalPages);
             totalPages += analyze(f, candidates);
         }
-        System.out.println("############ totalPages " + totalPages);
         addCandidatesFromInfo(candidates, info, totalPages);
         return candidates;
     }
