@@ -23,7 +23,7 @@ export class HomeComponent implements OnInit {
 
     subscriptions: Subscription[] = [];
 
-
+error: string = '';
     toc_text: string;
 
     info: any = {};
@@ -63,7 +63,7 @@ export class HomeComponent implements OnInit {
 
         let sysno = this.route.snapshot.paramMap.get('sysno');
         if (sysno) {
-            this.state.setSysno(sysno);
+            setTimeout(() => this.state.setSysno(sysno), 100);
         }
     }
 
@@ -80,20 +80,29 @@ export class HomeComponent implements OnInit {
         this.loading = true;
         this.info = {};
         this.title = '';
+        this.error = '';
         this.author = '';
         this.candidates = [];
         this.selected = [];
         this.service.processSysno(this.state.sysno, this.state.scoreConfig).subscribe(res => {
-            this.candidates = res['candidates'];
-            this.info = res['info'];
-            this.setInfo();
-            this.rescore();
-            this.hasToc = true;
-            this.loading = false;
+            
+            if(res.hasOwnProperty('error')){
+                this.error = res['error'];
+                this.hasToc = false;
+                this.loading = false;
+            }else{
+                
+                this.candidates = res['candidates'];
+                this.info = res['info'];
+                this.setInfo();
+                this.rescore();
+                this.hasToc = true;
+                this.loading = false;
 
-            setTimeout(() => {
-                $("#app-table-score").tableHeadFixer();
-            }, 1);
+                setTimeout(() => {
+                    $("#app-table-score").tableHeadFixer();
+                }, 1);
+            }
         });
     }
 
@@ -102,7 +111,7 @@ export class HomeComponent implements OnInit {
             let vf = this.info['varfield'][i];
             if (vf['id'] === 245) {
                 for (let sb in vf['subfield']) {
-                    this.title += vf['subfield'][sb]['content'];
+                    this.title += vf['subfield'][sb]['content'] + ' ';
                 }
             }
         }
@@ -197,8 +206,8 @@ export class HomeComponent implements OnInit {
                 }
                 c.score += c.found * sc.found;
                 c.explain.push('key word found ' + c.found + ' times ( ' + sc.found + ' ) = ' + c.score);
-                c.score += c.extents[0] * sc.extent;
-                c.explain.push('keyword has a extent of ' + c.extents[0] + ' pages ( ' + sc.extent + ' ) = ' + c.score);
+                c.score += c.extent * sc.extent;
+                c.explain.push('keyword has a extent of ' + c.extent + ' pages ( ' + sc.extent + ' ) = ' + c.score);
                 this.maxScore = Math.max(this.maxScore, c.score);
             }
         });
@@ -206,8 +215,8 @@ export class HomeComponent implements OnInit {
 
     }
     
-    formatExplain(c: Candidate): string{
-        let ret: string = '';
+    formatInfo(c: Candidate): string{
+        let ret: string = c.text + '\n\n';
         for(let e in c.explain){
             ret += c.explain[e] + '\n';
         }
@@ -220,7 +229,7 @@ export class HomeComponent implements OnInit {
 
     openToc() {
         this.service.getTocText(this.state.sysno).subscribe(res => {
-            this.toc_text = res;
+            this.toc_text = res + '\n';
             this.tocModal.open();
             this.loading = false;
         });

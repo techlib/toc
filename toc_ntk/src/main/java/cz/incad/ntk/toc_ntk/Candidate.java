@@ -48,7 +48,7 @@ public class Candidate {
   List<Integer> deeps = new ArrayList<>();
   
   //Pages extents
-  List<Integer> extents = new ArrayList<>();
+  Integer extent = 0;
 
   public Candidate(String text, CandidateType type) {
     this(text, type, false);
@@ -66,7 +66,10 @@ public class Candidate {
   }
   
   public void addExtent(Integer extent){
-    this.extents.add(extent);
+    this.extent += extent + 1;
+  }
+  public void setExtent(Integer extent){
+    this.extent = extent + 1;
   }
 
   public JSONObject toJSON() {
@@ -82,9 +85,9 @@ public class Candidate {
     for (Integer deep : deeps) {
       ret.append("deeps", deep);
     }
-    for (Integer extent : extents) {
-      ret.append("extents", extent);
-    }
+    
+      ret.append("extent", extent);
+      
     ret.put("type", type);
     ret.put("hasProperNoun", hasProperNoun);
     ret.put("score", score);
@@ -143,7 +146,7 @@ public class Candidate {
       this.score = this.score * sc.isDictionaryWord;
     }
     
-    this.score += this.extents.get(0) * sc.extent;
+    this.score += this.extent * sc.extent;
 
     return this.score;
   }

@@ -33,7 +33,7 @@ public class TocLine {
   Integer deep = 0;
   String deep_str;
   String text;
-  int start_page;
+  int start_page = 0;
   ArrayList<MorphoToken> mtokens;
   JSONArray jaTokens;
 

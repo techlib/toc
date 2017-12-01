@@ -2,6 +2,7 @@
 package cz.incad.ntk.toc_ntk;
 
 import cz.incad.ntk.toc_ntk.index.Indexer;
+import cz.incad.ntk.toc_ntk.index.SolrService;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.logging.Level;
@@ -115,6 +116,25 @@ public class IndexerServlet extends HttpServlet {
         try {
           Indexer indexer = new Indexer();
             json.put("keywords", indexer.indexKeywords());
+
+        } catch (Exception ex) {
+      LOGGER.log(Level.SEVERE, null, ex);
+          json.put("error", ex.toString());
+        }
+        out.println(json.toString(2));
+      }
+    },
+    FIND{
+      @Override
+      void doPerform(HttpServletRequest req, HttpServletResponse response) throws Exception {
+
+        response.setContentType("application/json;charset=UTF-8");
+
+        PrintWriter out = response.getWriter();
+        JSONObject json = new JSONObject();
+        try {
+        String text = req.getParameter("text"); 
+            json.put("results", SolrService.findInDictionariesAsJSON(text));
 
         } catch (Exception ex) {
       LOGGER.log(Level.SEVERE, null, ex);

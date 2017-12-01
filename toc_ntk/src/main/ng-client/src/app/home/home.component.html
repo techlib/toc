@@ -41,6 +41,9 @@
           <mz-input-container  [inline]="'true'">
             <input name="extent" type="number" [(ngModel)]="state.scoreConfig.extent" mz-input [label]="'Extent'">
           </mz-input-container>
+          <mz-input-container  [inline]="'true'">
+            <input name="inTitle" type="number" [(ngModel)]="state.scoreConfig.inTitle" mz-input [label]="'Term in title'">
+          </mz-input-container>
         </form>
       </div><!--/.col -->
     </div><!--/.row -->
@@ -53,27 +56,18 @@
         <table class="striped highlight" id="app-table-score" *ngIf="!loading">
           <thead>
             <tr>
-              <th><span>&#160;</span></th>
               <th><span>score</span></th>
-              <th><span>text</span></th>
               <th *ngFor="let d of state.scoreConfig.dicts"><span>{{d}}</span></th>
-              <th *ngIf="state.showDetails"><span>type</span></th>
-              <th *ngIf="state.showDetails"><span>isMatched</span></th>
-              <th *ngIf="state.showDetails"><span>hasProperNoun</span></th>
-              <th *ngIf="state.showDetails"><span>found</span></th>
+              <th><span>nerizene</span></th>
             </tr>
           </thead>
           <tbody>
             <ng-container *ngFor="let c of candidates; let idx = index">
               <tr *ngIf="(state.showMatched && c.isMatched) || (state.showFree && !c.isMatched) || (state.showBlacklisted && c.blacklisted) ">
-                <td>
-                    <i *ngIf="!c.isMatched" class="app-mdi-cancel red-text" (click)="addToBlackList(c)" mz-tooltip [tooltip]="'Add to blacklist'"></i>
-                </td>
                 <!-- Dodrz prefix class, muze jich byt vice, tohle je jen priklad, barvy prahu se definuje ve variables -->
-                <td [title]="formatExplain(c)"
+                <td [title]="formatInfo(c)"
                   [class.app-score-1]="c.score > maxScore * state.threshold" 
                 >{{c.score | number: '1.1-3'}}</td>
-                <td>{{c.text}}</td>
                 <td *ngFor="let d of state.scoreConfig.dicts">
                 <ng-container *ngFor="let cd of c.dictionaries; let idx2 = index">
                   <mz-checkbox-container *ngIf="cd.name === d">
@@ -81,10 +75,12 @@
                   </mz-checkbox-container>
                 </ng-container>
                 </td>
-                <td *ngIf="state.showDetails">{{c.type}}</td>
-                <td *ngIf="state.showDetails">{{c.isMatched}}</td>
-                <td *ngIf="state.showDetails">{{c.hasProperNoun}}</td>
-                <td *ngIf="state.showDetails">{{c.found}}</td>
+                <td>
+                  <mz-checkbox-container *ngIf="!c.isMatched" >
+                    <i class="app-mdi-cancel red-text" (click)="addToBlackList(c)" mz-tooltip [tooltip]="'Add to blacklist'"></i>
+                    <input [id]="'ch_'+c.text" type="checkbox" [(ngModel)]="c.selected" mz-checkbox [label]="c.text" />
+                  </mz-checkbox-container>
+                </td>
               </tr>
             </ng-container>
           </tbody>
@@ -92,6 +88,15 @@
         
         <div class="app-spinner center-align">
           <mz-spinner *ngIf="loading" [size]="'small'"></mz-spinner>
+        </div>
+        <div *ngIf="error !== ''">
+            
+            <mz-card class="blue-grey darken-1"
+                [hoverable]="true">
+                <mz-card-content>
+                  {{error}}
+                </mz-card-content>
+              </mz-card>
         </div>
       </div><!--/.col -->
     </div><!--/.row -->
@@ -104,7 +109,7 @@
   <mz-modal-header>{{state.sysno}}: {{title}}</mz-modal-header>
   <mz-modal-content>
     <div class="input-field col s12">
-      <textarea id="textarea1" class="materialize-textarea" style="height: 100vh;">{{toc_text}}</textarea>
+      <textarea id="textarea1"  style="height: 40vh;">{{toc_text}}</textarea>
     </div>
   </mz-modal-content>
   <mz-modal-footer>

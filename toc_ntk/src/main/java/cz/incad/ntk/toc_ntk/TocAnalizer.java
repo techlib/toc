@@ -194,6 +194,10 @@ public class TocAnalizer {
 //      while (line != null) {
 //        line = line.trim();
             for (String line : strlines) {
+                if(!line.trim().contains(" ") && !line.trim().contains("\t")){
+                    LOGGER.log(Level.INFO, "Skiping line {0}", line);
+                    continue;
+                }
                 if (Character.isDigit(line.charAt(line.length() - 1))) {
                     //This is the end
                     line = previous + " " + line;
@@ -280,8 +284,14 @@ public class TocAnalizer {
             LOGGER.log(Level.SEVERE, null, ex);
         }
     }
-
-    public void analyze(File f, Map<String, Candidate> candidates) {
+/***
+ * 
+ * @param f the file to analize
+ * @param candidates Map of candidates to fill
+ * @return the total pages extent
+ */
+    public int analyze(File f, Map<String, Candidate> candidates) {
+            int next_start_page = 0;
         try {
             List<TocLine> lines;
 
@@ -299,7 +309,6 @@ public class TocAnalizer {
                     save(lines);
                 }
             }
-            int next_start_page = 0;
             //for (TocLine line : lines) {
             for (int i = 0; i < lines.size(); i++) {
                 TocLine line = lines.get(i);
@@ -327,27 +336,31 @@ public class TocAnalizer {
         } catch (IOException | JSONException ex) {
             LOGGER.log(Level.SEVERE, null, ex);
         }
+            return next_start_page;
     }
 
     /**
      *
      * @param foldername Name of the folder containing ocr
      * @param info: JSON returned from XServer
-     * @return
+     * @return Map of candidates
      */
     public Map<String, Candidate> analyzeFolder(String foldername, JSONObject info) {
         Map<String, Candidate> candidates = new HashMap<>();
         File dir = new File(foldername);
         String[] extensions = new String[]{"txt"};
         List<File> files = (List<File>) FileUtils.listFiles(dir, extensions, false);
+        int totalPages = 0;
         for (File f : files) {
-            analyze(f, candidates);
+        System.out.println("############ totalPages " + totalPages);
+            totalPages += analyze(f, candidates);
         }
-        addCandidatesFromInfo(candidates, info);
+        System.out.println("############ totalPages " + totalPages);
+        addCandidatesFromInfo(candidates, info, totalPages);
         return candidates;
     }
 
-    private void addCandidatesFromInfo(Map<String, Candidate> candidates, JSONObject info) {
+    private void addCandidatesFromInfo(Map<String, Candidate> candidates, JSONObject info, int totalPages) {
         JSONArray varfield = info.optJSONArray("varfield");
         String title = " ";
         for (int i = 0; i < varfield.length(); i++) {
@@ -357,7 +370,10 @@ public class TocAnalizer {
                 JSONArray sb = vf.optJSONArray("subfield");
                 if (sb != null) {
                     for (int j = 0; j < sb.length(); j++) {
-                        title += sb.getJSONObject(j).getString("content") + " ";
+                        //Exclude author label = c
+                        if(!sb.getJSONObject(j).getString("label").equals("c")){
+                            title += sb.getJSONObject(j).getString("content") + " ";
+                        }
                     }
                 }
             }
@@ -365,10 +381,11 @@ public class TocAnalizer {
         }
         TocLine tc = new TocLine(title);
 
-        for (Candidate c : findCandidates(tc, -1)) {
+        for (Candidate c : findCandidates(tc, totalPages)) {
             if (candidates.containsKey(c.text.toLowerCase())) {
                 candidates.get(c.text.toLowerCase()).found++;
                 candidates.get(c.text.toLowerCase()).inTitle = true;
+                candidates.get(c.text.toLowerCase()).setExtent(totalPages);
             } else {
                 c.inTitle = true;
                 candidates.put(c.text.toLowerCase(), c);

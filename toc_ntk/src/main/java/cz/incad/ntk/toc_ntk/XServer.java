@@ -30,6 +30,7 @@ class XServer {
               .getJSONObject("metadata")
               .getJSONObject("oai_marc");
     } catch (IOException | JSONException ex) {
+      ret.put("error", "error getting info from xserver for " + sysno);
       LOGGER.log(Level.SEVERE, "error getting info from xserver for {0}", sysno);
       LOGGER.log(Level.SEVERE, null, ex);
     }

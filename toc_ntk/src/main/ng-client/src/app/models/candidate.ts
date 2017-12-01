@@ -11,7 +11,7 @@ export class Candidate {
   score: number;
   found: number;
   
-  extents: number[];
+  extent: number;
   deeps: number[];
   inTitle: boolean;
   explain: string[];
