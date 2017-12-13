@@ -71,14 +71,14 @@
                 <td *ngFor="let d of state.scoreConfig.dicts">
                 <ng-container *ngFor="let cd of c.dictionaries; let idx2 = index">
                   <mz-checkbox-container *ngIf="cd.name === d">
-                    <input [id]="'ch_'+idx+'_'+d" type="checkbox" [(ngModel)]="cd.selected" mz-checkbox [label]="cd.text" />
+                    <input [id]="'ch_'+idx+'_'+d" type="checkbox" [(ngModel)]="cd.selected" mz-checkbox [label]="cd.text"  (click)="select(cd.text)" />
                   </mz-checkbox-container>
                 </ng-container>
                 </td>
                 <td>
                   <mz-checkbox-container *ngIf="!c.isMatched" >
                     <i class="app-mdi-cancel red-text" (click)="addToBlackList(c)" mz-tooltip [tooltip]="'Add to blacklist'"></i>
-                    <input [id]="'ch_'+c.text" type="checkbox" [(ngModel)]="c.selected" mz-checkbox [label]="c.text" />
+                    <input [id]="'ch_'+c.text" type="checkbox" [(ngModel)]="c.selected" mz-checkbox [label]="c.text" (click)="select(c.text)" />
                   </mz-checkbox-container>
                 </td>
               </tr>
