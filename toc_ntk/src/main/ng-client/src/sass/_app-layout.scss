@@ -17,52 +17,29 @@ app-root {
     display: flex;
     width: 100%;
     height: calc(100% - #{$navbar-height});
-  }
-}
+    
+    app-analyze {
+      width: 100%;
+      display: flex;
 
-/*app-aside {
-  width: 300px;
-  height: 100%;
-  flex: 1;
-  order: 1;
-  
-  .app-sroll-wrapper {
-    height: 100%;
-    overflow: auto;
-  }
-}*/
+      app-aside {
+        width: 300px;
+        height: 100%;
+        flex: 1;
+        order: 1;
+        
+        @import "app-aside";
+      }
 
-app-home {
-  height: 100%;
-  flex: 5;
-  order: 2;
-}
+      @import "app-analyze";
+    }
 
-app-analyze {
-  width: 100%;
-  display: flex;
-  
-  app-aside {
-    width: 300px;
-    height: 100%;
-    flex: 1;
-    order: 1;
-
-    .app-sroll-wrapper {
+    app-blacklist {
       height: 100%;
-      overflow: auto;
+      flex: 5;
+      order: 2;
+      
+      @import "app-blacklist";
     }
   }
-  
-  & > section {
-    height: 100%;
-    flex: 5;
-    order: 2; 
-  }
-}
-
-app-blacklist {
-  height: 100%;
-  flex: 5;
-  order: 2;
 }

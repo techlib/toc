@@ -1,40 +1,37 @@
-// --- HOME ---
+// --- BLACKLIST ---
 
-app-blacklist {
-  section {
-    height: 100%;
-    
-    
-    .app-sroll-wrapper {
-      height: calc(100% - #{$app-toolbar-height});
-      overflow: auto;
-      padding: 20px 0;
-      
-      .row {
-        .col {
-          padding: 0 1rem;
-          position: relative;
-          
-          .input-field {
-            &.inline {
-              margin-left: 0 !important;
-              margin-right: 20px;
-            }
-          }
-          
-          .checkbox-field {
-            display: inline-block;
+.app-blacklist-wrapper {
+  height: 100%;
+
+  .app-sroll-wrapper {
+    height: calc(100% - #{$app-toolbar-height});
+    overflow: auto;
+    padding: 20px 0;
+
+    .row {
+      .col {
+        padding: 0 1rem;
+        position: relative;
+
+        .input-field {
+          &.inline {
+            margin-left: 0 !important;
             margin-right: 20px;
-            margin-top: 0;
           }
-          
-          .app-spinner {
-            position: absolute;
-            left: 0;
-            width: 100%;
-          }
-          
         }
+
+        .checkbox-field {
+          display: inline-block;
+          margin-right: 20px;
+          margin-top: 0;
+        }
+
+        .app-spinner {
+          position: absolute;
+          left: 0;
+          width: 100%;
+        }
+
       }
     }
   }

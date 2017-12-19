@@ -1,6 +1,9 @@
 // --- ASIDE ---
 
-app-aside {
+.app-sroll-wrapper {
+  height: 100%;
+  overflow: auto;
+  
   .collection {
     @extend .app-clean-mg;
     @extend .app-clean-radius;
