@@ -58,6 +58,7 @@ export class AppService {
     getBalicky(): Observable<any> {
 
         var url = 'candidates';
+        //url = '/assets/balicky.json';
         let params: URLSearchParams = new URLSearchParams();
         params.set('action', 'BALICKY');
         return this.http.get(url, {search: params})
