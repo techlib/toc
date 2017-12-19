@@ -20,7 +20,7 @@ app-root {
   }
 }
 
-app-aside {
+/*app-aside {
   width: 300px;
   height: 100%;
   flex: 1;
@@ -30,12 +30,35 @@ app-aside {
     height: 100%;
     overflow: auto;
   }
-}
+}*/
 
 app-home {
   height: 100%;
   flex: 5;
   order: 2;
+}
+
+app-analyze {
+  width: 100%;
+  display: flex;
+  
+  app-aside {
+    width: 300px;
+    height: 100%;
+    flex: 1;
+    order: 1;
+
+    .app-sroll-wrapper {
+      height: 100%;
+      overflow: auto;
+    }
+  }
+  
+  & > section {
+    height: 100%;
+    flex: 5;
+    order: 2; 
+  }
 }
 
 app-blacklist {

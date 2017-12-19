@@ -1,8 +1,9 @@
 // --- HOME ---
 
-app-home {
+app-home,
+app-analyze {
   section {
-    height: 100%;
+    /*height: 100%;*/
     
     .app-toolbar {
       height: $app-toolbar-height;

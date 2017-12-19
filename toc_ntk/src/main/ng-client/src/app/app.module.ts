@@ -17,6 +17,7 @@ import { HomeComponent } from './home/home.component';
 import { AsideComponent } from './aside/aside.component';
 import { BlacklistComponent } from './blacklist/blacklist.component';
 import { AnalyzeComponent } from './analyze/analyze.component';
+import { HelpComponent } from './help/help.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { AnalyzeComponent } from './analyze/analyze.component';
     HomeComponent,
     AsideComponent,
     BlacklistComponent,
-    AnalyzeComponent
+    AnalyzeComponent,
+    HelpComponent
   ],
   imports: [
     BrowserModule,
@@ -37,6 +39,7 @@ import { AnalyzeComponent } from './analyze/analyze.component';
     MaterializeModule.forRoot(),
     RouterModule.forRoot([
       { path: 'home', component: HomeComponent },
+      { path: 'help', component: HelpComponent },
       { path: 'analyze', component: AnalyzeComponent },
       { path: 'blacklist', component: BlacklistComponent },
       { path: 'sysno/:sysno', component: AnalyzeComponent},
