@@ -70,7 +70,7 @@ export class AppService {
     getBlacklist(): Observable<any> {
 
         var url = 'search/blacklist/select';
-        //url = '/assets/blacklist.json';
+        //url = '/assets/blacklist.json'; // comment
         let params: URLSearchParams = new URLSearchParams();
         params.set('q', '*');
         params.set('rows', '50');
