@@ -1,12 +1,22 @@
-<section class="app-blacklist-wrapper">
-  <div class="app-sroll-wrapper" style="width: 100%;">
-    <div  *ngFor="let w of words">
-      <a (click)="removeFromBlackList(w.key)" >{{w.key}}</a>
-      <a (click)="removeFromBlackList(w.key)" mz-tooltip [tooltip]="'Remove from blacklist'" 
-          mz-icon-mdi
-          class="red-text"
-          [icon]="'delete-forever'"
-          [size]="'24px'"></a>
-    </div>
-  </div>
-</section>
+<section class="app-blacklist-wrapper app-container">
+  <div class="row">
+    <div class="col s2">
+      <h5>Blacklist</h5>
+      <mz-collection>
+        <a mz-collection-link *ngFor="let w of words">
+          <span>{{w.key}}</span>
+          <i mz-icon-mdi [icon]="'delete-forever'" class="red-text app-cursor-pointer right" mz-tooltip [tooltip]="'Remove from blacklist'" [position]="'top'"></i>
+        </a>
+      </mz-collection>
+    </div><!--/.col -->
+    <div class="col s2">
+      <h5>Odstraněné položky</h5>
+      <mz-collection>
+        <a mz-collection-link *ngFor="let w of words">
+          <span>{{w.key}}</span>
+          <i mz-icon-mdi [icon]="'delete-empty'" class="grey-text text-darken-2 app-cursor-pointer right" mz-tooltip [tooltip]="'Restore deleted item back to the blacklist'"  [position]="'top'"></i>
+        </a>
+      </mz-collection>
+    </div><!--/.col -->
+  </div><!--/.row -->
+</section><!--/.app-container -->

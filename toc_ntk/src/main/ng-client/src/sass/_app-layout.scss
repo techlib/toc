@@ -23,16 +23,13 @@ app-root {
       display: flex;
 
       app-aside {
-        width: 300px;
+        width: $app-aside-width;
         height: 100%;
-        //flex: 1;
-        order: 1;
-        
         overflow: hidden;
         transition: margin-left 0.5s;
         
         &.app-aside-hide {
-          margin-left: -300px;
+          margin-left: -$app-aside-width;
           overflow: hidden;
         }
         
@@ -44,8 +41,7 @@ app-root {
 
     app-blacklist {
       height: 100%;
-      //flex: 5;
-      order: 2;
+      width: 100%;
       
       @import "app-blacklist";
     }
