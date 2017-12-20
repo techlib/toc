@@ -1,13 +1,12 @@
-<section>
-    <div class="app-sroll-wrapper" style="width: 100%;">
+<section class="app-blacklist-wrapper">
+  <div class="app-sroll-wrapper" style="width: 100%;">
     <div  *ngFor="let w of words">
-        <a (click)="removeFromBlackList(w.key)" >{{w.key}}
-        </a>
-        <a (click)="removeFromBlackList(w.key)" mz-tooltip [tooltip]="'Remove from blacklist'" 
-            mz-icon-mdi
-            class="red-text"
-            [icon]="'delete-forever'"
-            [size]="'24px'"></a>
+      <a (click)="removeFromBlackList(w.key)" >{{w.key}}</a>
+      <a (click)="removeFromBlackList(w.key)" mz-tooltip [tooltip]="'Remove from blacklist'" 
+          mz-icon-mdi
+          class="red-text"
+          [icon]="'delete-forever'"
+          [size]="'24px'"></a>
     </div>
-</div>
+  </div>
 </section>
