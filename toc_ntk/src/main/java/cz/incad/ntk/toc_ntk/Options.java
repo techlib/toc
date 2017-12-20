@@ -90,6 +90,7 @@ public class Options {
       JSONObject dirs = new JSONObject();
 
       String foldername = server_conf.optString("balicky_dir", "~/.ntk/balicky/");
+      LOGGER.log(Level.INFO, foldername);
       File dir = new File(foldername);
       String[] directories = dir.list(new FilenameFilter() {
         @Override
@@ -98,7 +99,24 @@ public class Options {
         }
       });
       for(String d: directories){
-        dirs.put(d.substring(d.lastIndexOf("_")+1), d);
+        //sysno je nazev jedineho existujici .jpg soubor
+        String sysno = null;
+        
+        File dir2 = new File(foldername + File.separator + d);
+        String[] jpgs = dir2.list(new FilenameFilter() {
+          @Override
+          public boolean accept(File current, String name) {
+            return name.endsWith("jpg") || name.endsWith("jpeg");
+          }
+        });
+        
+        if(jpgs.length > 0){
+            sysno = jpgs[0].substring(0, jpgs[0].indexOf("."));
+        }
+      
+        if(sysno != null){
+            dirs.put(sysno, d);
+        }
       }
 
       server_conf.put("folders", dirs);

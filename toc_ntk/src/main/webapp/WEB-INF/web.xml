@@ -40,7 +40,9 @@
     <servlet-mapping>
         <servlet-name>StaticServlet</servlet-name>
         <url-pattern>/home</url-pattern>
-        <url-pattern>/info/*</url-pattern>
+        <url-pattern>/blacklist/*</url-pattern>
+        <url-pattern>/analyze/*</url-pattern>
+        <url-pattern>/sysno/*</url-pattern>
         <url-pattern>/help/*</url-pattern>
         <url-pattern>/admin/*</url-pattern>
         <url-pattern>/prihlaseni/*</url-pattern>
