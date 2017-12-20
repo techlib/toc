@@ -1,0 +1,26 @@
+{
+  "responseHeader":{
+    "status":0,
+    "QTime":9,
+    "params":{
+      "q":"*",
+      "sort":"key asc",
+      "rows":"50"}},
+  "response":{"numFound":4,"start":0,"docs":[
+      {
+        "key":"doprava",
+        "key_cz":"doprava",
+        "_version_":1584679235771957248},
+      {
+        "key":"kuchyne",
+        "key_cz":"kuchyne",
+        "_version_":1578882191062990848},
+      {
+        "key":"obsah",
+        "key_cz":"obsah",
+        "_version_":1583944454657540096},
+      {
+        "key":"problém",
+        "key_cz":"problém",
+        "_version_":1583944415679873024}]
+  }}

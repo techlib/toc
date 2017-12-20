@@ -103,7 +103,7 @@ public class SolrService {
             SolrClient solr = new HttpSolrClient.Builder(urlString).build();
             SolrQuery query = new SolrQuery();
 
-            //Search in simple dictionaries
+            //Search in keywords
             query.setQuery("\"" + text.toLowerCase() + "\"");
             query.set("defType", "edismax");
             if (text.indexOf(" ") > 0) {
@@ -145,6 +145,22 @@ public class SolrService {
             }
             query.set("mm", "100%");
             response = solr.query("konspekt", query);
+
+            if (response.getResults().getNumFound() > 0) {
+                docs.add(response.getResults().get(0));
+            }
+
+            //Search in nerizene
+            query = new SolrQuery();
+            query.setQuery("\"" + text.toLowerCase() + "\"");
+            query.set("defType", "edismax");
+            if (text.indexOf(" ") > 0) {
+                query.set("qf", "key_cz");
+            } else {
+                query.set("qf", "key_lower");
+            }
+            query.set("mm", "100%");
+            response = solr.query("nerizene", query);
 
             if (response.getResults().getNumFound() > 0) {
                 docs.add(response.getResults().get(0));
