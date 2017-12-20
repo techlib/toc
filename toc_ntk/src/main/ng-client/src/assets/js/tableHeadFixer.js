@@ -51,7 +51,7 @@
 			parent
 				.css({
 					'width' : '100%',
-					'max-height' : '400px',
+					//'height' : '100%',
 					'overflow' : 'auto'
                     //'height' : container.css("height"),
 					//'max-height' : container.css("max-height"),

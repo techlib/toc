@@ -18,6 +18,7 @@ import { AsideComponent } from './aside/aside.component';
 import { BlacklistComponent } from './blacklist/blacklist.component';
 import { AnalyzeComponent } from './analyze/analyze.component';
 import { HelpComponent } from './help/help.component';
+import { ToolbarComponent } from './toolbar/toolbar.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { HelpComponent } from './help/help.component';
     AsideComponent,
     BlacklistComponent,
     AnalyzeComponent,
-    HelpComponent
+    HelpComponent,
+    ToolbarComponent
   ],
   imports: [
     BrowserModule,

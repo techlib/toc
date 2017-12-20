@@ -1,20 +1,15 @@
-<app-aside></app-aside>
+<app-aside [class.app-aside-hide]="!state.showAside"></app-aside>
 
 <section class="app-analyze-wrapper">
-  <div class="row app-toolbar app-clean-mg">
-    <div class="col s1 right-align">
-      <label for="sysno">Sysno</label>
-    </div>
-    <div class="col s3">
-      <input name="sysno" id="sysno" type="text" [(ngModel)]="state.sysno" (keyup.enter)="setSysno()"  />
-    </div>
-    <div class="col s8 right-align">
-      <!--<button mz-button (click)="analyze()">analyze</button>-->
-      <button mz-button (click)="rescore()">re-score</button>
-      <button mz-button [disabled]="!hasToc" (click)="openToc()" >view toc</button>
-      <button mz-button  (click)="showExport()">export</button>
-    </div>
-  </div><!--/.row app-toolbar -->
+  <!-- Aside btn -->
+  <span *ngIf="state.showAside" class="app-btn-aside valign-wrapper" (click)="toogleAsideBar()" mz-tooltip [tooltip]="'Skýt side bar'" [position]="'top'">
+    <i class="app-mdi-menu-left"></i>
+  </span>
+  <span *ngIf="!state.showAside" class="app-btn-aside valign-wrapper" (click)="toogleAsideBar()" mz-tooltip [tooltip]="'Zobrazit side bar'" [position]="'top'">
+    <i class="app-mdi-menu-right"></i>
+  </span>
+  
+  <app-toolbar></app-toolbar>
   
   <div class="app-sroll-wrapper">
     <!-- Podminku na zobrazeni aplikuj na element s class "row" -->
@@ -67,9 +62,9 @@
             <ng-container *ngFor="let c of candidates; let idx = index">
               <tr *ngIf="(state.showMatched && c.isMatched) || (state.showFree && !c.isMatched) || (state.showBlacklisted && c.blacklisted) ">
                 <!-- Dodrz prefix class, muze jich byt vice, tohle je jen priklad, barvy prahu se definuje ve variables -->
-                <td [title]="formatInfo(c)"
-                  [class.app-score-1]="c.score > maxScore * state.threshold" 
-                >{{c.score | number: '1.1-3'}}</td>
+                <td class="app-cursor-pointer" [class.app-score-1]="c.score > maxScore * state.threshold" mz-tooltip [tooltip]="formatInfo(c)" [position]="'top'">
+                  {{c.score | number: '1.1-3'}}
+                </td>
                 <td *ngFor="let d of state.scoreConfig.dicts">
                 <ng-container *ngFor="let cd of c.dictionaries; let idx2 = index">
                   <mz-checkbox-container *ngIf="cd.name === d">

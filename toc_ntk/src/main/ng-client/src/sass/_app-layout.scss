@@ -25,8 +25,16 @@ app-root {
       app-aside {
         width: 300px;
         height: 100%;
-        flex: 1;
+        //flex: 1;
         order: 1;
+        
+        overflow: hidden;
+        transition: margin-left 0.5s;
+        
+        &.app-aside-hide {
+          margin-left: -300px;
+          overflow: hidden;
+        }
         
         @import "app-aside";
       }
@@ -36,7 +44,7 @@ app-root {
 
     app-blacklist {
       height: 100%;
-      flex: 5;
+      //flex: 5;
       order: 2;
       
       @import "app-blacklist";

@@ -6,7 +6,12 @@
 
 h1, h2, h3, h4, h5 {
   color: $secondary-color;
+  font-family: 'Roboto-Condensed-Light';
   margin-top: 0 !important;
+}
+
+h5 {
+  font-size: 1.4rem;
 }
 
 a,

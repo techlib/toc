@@ -1,0 +1,13 @@
+<div class="row app-clean-mg">
+  <div class="col s6">
+    <mz-input-container>
+      <span>Sysno:</span>
+      <input mz-input id="sysno" placeholder="sysno number" type="text" [(ngModel)]="state.sysno" (keyup.enter)="setSysno()" name="sysno" />
+    </mz-input-container>
+  </div><!--/.col -->
+  <div class="col s6 right-align">
+    <button mz-button (click)="rescore()">re-score</button>
+    <button mz-button [disabled]="!hasToc" (click)="openToc()" >view toc</button>
+    <button mz-button  (click)="showExport()">export</button>
+  </div><!--/.col -->
+</div><!--/.row -->

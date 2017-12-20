@@ -18471,8 +18471,8 @@ app-root main {
       height: 100%;
       flex: 5;
       order: 2; }
-      /* line 8, /Users/petr.kudela/Projects/ntk/github/toc_ntk/src/main/ng-client/src/sass/_app-analyze.scss */
-      app-root main app-analyze .app-analyze-wrapper .app-toolbar {
+      /* line 4, /Users/petr.kudela/Projects/ntk/github/toc_ntk/src/main/ng-client/src/sass/_app-toolbar.scss */
+      app-root main app-analyze .app-analyze-wrapper app-toolbar .row {
         height: 55px;
         line-height: 55px;
         background-color: #f5f5f5;
@@ -18480,88 +18480,131 @@ app-root main {
         border-style: solid;
         border-color: #d7d7d7;
         box-shadow: 0 2px 2px 0 rgba(38, 50, 56, 0), 0 1px 5px 0 rgba(38, 50, 56, 0.12), 0 3px 1px -20px rgba(38, 50, 56, 0.4);
-        color: #626262;
-        /*position: relative;
-    z-index: 1024;*/ }
-        /* line 18, /Users/petr.kudela/Projects/ntk/github/toc_ntk/src/main/ng-client/src/sass/_app-analyze.scss */
-        app-root main app-analyze .app-analyze-wrapper .app-toolbar .col {
+        color: #626262; }
+        /* line 12, /Users/petr.kudela/Projects/ntk/github/toc_ntk/src/main/ng-client/src/sass/_app-toolbar.scss */
+        app-root main app-analyze .app-analyze-wrapper app-toolbar .row .col {
           padding: 0 1rem; }
-      /* line 23, /Users/petr.kudela/Projects/ntk/github/toc_ntk/src/main/ng-client/src/sass/_app-analyze.scss */
+          /* line 16, /Users/petr.kudela/Projects/ntk/github/toc_ntk/src/main/ng-client/src/sass/_app-toolbar.scss */
+          app-root main app-analyze .app-analyze-wrapper app-toolbar .row .col:first-child span {
+            font-size: 0.8rem;
+            margin-right: 1rem;
+            color: #009c89; }
+          /* line 25, /Users/petr.kudela/Projects/ntk/github/toc_ntk/src/main/ng-client/src/sass/_app-toolbar.scss */
+          app-root main app-analyze .app-analyze-wrapper app-toolbar .row .col:first-child .input-field input[type=text] {
+            width: auto;
+            height: 36px; }
+      /* line 10, /Users/petr.kudela/Projects/ntk/github/toc_ntk/src/main/ng-client/src/sass/_app-analyze.scss */
       app-root main app-analyze .app-analyze-wrapper .app-sroll-wrapper {
         height: calc(100% - 55px);
         width: 100%;
         overflow: auto;
-        padding: 20px 0; }
-        /* line 30, /Users/petr.kudela/Projects/ntk/github/toc_ntk/src/main/ng-client/src/sass/_app-analyze.scss */
-        app-root main app-analyze .app-analyze-wrapper .app-sroll-wrapper .row .col {
-          padding: 0 1rem;
-          position: relative; }
-          /* line 35, /Users/petr.kudela/Projects/ntk/github/toc_ntk/src/main/ng-client/src/sass/_app-analyze.scss */
-          app-root main app-analyze .app-analyze-wrapper .app-sroll-wrapper .row .col .input-field.inline {
-            margin-left: 0 !important;
-            margin-right: 20px; }
-          /* line 41, /Users/petr.kudela/Projects/ntk/github/toc_ntk/src/main/ng-client/src/sass/_app-analyze.scss */
-          app-root main app-analyze .app-analyze-wrapper .app-sroll-wrapper .row .col .checkbox-field {
-            display: inline-block;
-            margin-right: 20px;
-            margin-top: 0; }
-          /* line 47, /Users/petr.kudela/Projects/ntk/github/toc_ntk/src/main/ng-client/src/sass/_app-analyze.scss */
-          app-root main app-analyze .app-analyze-wrapper .app-sroll-wrapper .row .col .app-spinner {
-            position: absolute;
-            left: 0;
-            width: 100%; }
-          /* line 53, /Users/petr.kudela/Projects/ntk/github/toc_ntk/src/main/ng-client/src/sass/_app-analyze.scss */
-          app-root main app-analyze .app-analyze-wrapper .app-sroll-wrapper .row .col table {
+        padding-top: 2rem; }
+        /* line 16, /Users/petr.kudela/Projects/ntk/github/toc_ntk/src/main/ng-client/src/sass/_app-analyze.scss */
+        app-root main app-analyze .app-analyze-wrapper .app-sroll-wrapper .row {
+          height: calc(100% - 2rem); }
+          /* line 19, /Users/petr.kudela/Projects/ntk/github/toc_ntk/src/main/ng-client/src/sass/_app-analyze.scss */
+          app-root main app-analyze .app-analyze-wrapper .app-sroll-wrapper .row .col {
+            height: 100%;
+            padding: 0 1rem;
             position: relative; }
-            /* line 58, /Users/petr.kudela/Projects/ntk/github/toc_ntk/src/main/ng-client/src/sass/_app-analyze.scss */
-            app-root main app-analyze .app-analyze-wrapper .app-sroll-wrapper .row .col table.highlight > tbody > tr:hover {
-              background-color: #e0e0e0; }
-            /* line 64, /Users/petr.kudela/Projects/ntk/github/toc_ntk/src/main/ng-client/src/sass/_app-analyze.scss */
-            app-root main app-analyze .app-analyze-wrapper .app-sroll-wrapper .row .col table thead {
-              border: none; }
-              /* line 67, /Users/petr.kudela/Projects/ntk/github/toc_ntk/src/main/ng-client/src/sass/_app-analyze.scss */
-              app-root main app-analyze .app-analyze-wrapper .app-sroll-wrapper .row .col table thead tr {
-                height: 100%; }
-                /* line 70, /Users/petr.kudela/Projects/ntk/github/toc_ntk/src/main/ng-client/src/sass/_app-analyze.scss */
-                app-root main app-analyze .app-analyze-wrapper .app-sroll-wrapper .row .col table thead tr th {
-                  vertical-align: top;
-                  height: 100%;
-                  z-index: 300; }
-                  /* line 76, /Users/petr.kudela/Projects/ntk/github/toc_ntk/src/main/ng-client/src/sass/_app-analyze.scss */
-                  app-root main app-analyze .app-analyze-wrapper .app-sroll-wrapper .row .col table thead tr th span {
-                    display: block;
-                    padding: 20px 0;
-                    position: relative;
+            /* line 24, /Users/petr.kudela/Projects/ntk/github/toc_ntk/src/main/ng-client/src/sass/_app-analyze.scss */
+            app-root main app-analyze .app-analyze-wrapper .app-sroll-wrapper .row .col > div:not(.app-spinner) {
+              height: calc(100% - 2rem); }
+            /* line 29, /Users/petr.kudela/Projects/ntk/github/toc_ntk/src/main/ng-client/src/sass/_app-analyze.scss */
+            app-root main app-analyze .app-analyze-wrapper .app-sroll-wrapper .row .col .input-field.inline {
+              margin-left: 0 !important;
+              margin-right: 20px; }
+            /* line 35, /Users/petr.kudela/Projects/ntk/github/toc_ntk/src/main/ng-client/src/sass/_app-analyze.scss */
+            app-root main app-analyze .app-analyze-wrapper .app-sroll-wrapper .row .col .checkbox-field {
+              display: inline-block;
+              margin-right: 20px;
+              margin-top: 0; }
+              /* line 40, /Users/petr.kudela/Projects/ntk/github/toc_ntk/src/main/ng-client/src/sass/_app-analyze.scss */
+              app-root main app-analyze .app-analyze-wrapper .app-sroll-wrapper .row .col .checkbox-field .app-mdi-cancel {
+                margin-right: 10px; }
+            /* line 46, /Users/petr.kudela/Projects/ntk/github/toc_ntk/src/main/ng-client/src/sass/_app-analyze.scss */
+            app-root main app-analyze .app-analyze-wrapper .app-sroll-wrapper .row .col .app-spinner {
+              position: absolute;
+              left: 0;
+              width: 100%; }
+            /* line 52, /Users/petr.kudela/Projects/ntk/github/toc_ntk/src/main/ng-client/src/sass/_app-analyze.scss */
+            app-root main app-analyze .app-analyze-wrapper .app-sroll-wrapper .row .col table {
+              position: relative; }
+              /* line 57, /Users/petr.kudela/Projects/ntk/github/toc_ntk/src/main/ng-client/src/sass/_app-analyze.scss */
+              app-root main app-analyze .app-analyze-wrapper .app-sroll-wrapper .row .col table.highlight > tbody > tr:hover {
+                background-color: #e0e0e0; }
+              /* line 63, /Users/petr.kudela/Projects/ntk/github/toc_ntk/src/main/ng-client/src/sass/_app-analyze.scss */
+              app-root main app-analyze .app-analyze-wrapper .app-sroll-wrapper .row .col table thead {
+                border: none; }
+                /* line 66, /Users/petr.kudela/Projects/ntk/github/toc_ntk/src/main/ng-client/src/sass/_app-analyze.scss */
+                app-root main app-analyze .app-analyze-wrapper .app-sroll-wrapper .row .col table thead tr {
+                  height: 100%; }
+                  /* line 69, /Users/petr.kudela/Projects/ntk/github/toc_ntk/src/main/ng-client/src/sass/_app-analyze.scss */
+                  app-root main app-analyze .app-analyze-wrapper .app-sroll-wrapper .row .col table thead tr th {
+                    vertical-align: top;
                     height: 100%;
-                    border-width: 0 0 1px 0;
-                    border-style: solid;
-                    border-color: #bdbdbd; }
-            /* line 88, /Users/petr.kudela/Projects/ntk/github/toc_ntk/src/main/ng-client/src/sass/_app-analyze.scss */
-            app-root main app-analyze .app-analyze-wrapper .app-sroll-wrapper .row .col table tbody tr {
-              border-width: 0 0 1px 0;
-              border-style: solid;
-              border-color: #FFFFFF; }
-              /* line 90, /Users/petr.kudela/Projects/ntk/github/toc_ntk/src/main/ng-client/src/sass/_app-analyze.scss */
-              app-root main app-analyze .app-analyze-wrapper .app-sroll-wrapper .row .col table tbody tr td {
-                padding: 5px;
-                vertical-align: top; }
-                /* line 98, /Users/petr.kudela/Projects/ntk/github/toc_ntk/src/main/ng-client/src/sass/_app-analyze.scss */
-                app-root main app-analyze .app-analyze-wrapper .app-sroll-wrapper .row .col table tbody tr td.app-score-1 {
-                  background-color: #ffeb3b; }
-                /* line 101, /Users/petr.kudela/Projects/ntk/github/toc_ntk/src/main/ng-client/src/sass/_app-analyze.scss */
-                app-root main app-analyze .app-analyze-wrapper .app-sroll-wrapper .row .col table tbody tr td.app-score-2 {
-                  background-color: #fff176; }
-                /* line 104, /Users/petr.kudela/Projects/ntk/github/toc_ntk/src/main/ng-client/src/sass/_app-analyze.scss */
-                app-root main app-analyze .app-analyze-wrapper .app-sroll-wrapper .row .col table tbody tr td.app-score-3 {
-                  background-color: #fff9c4; }
-                /* line 107, /Users/petr.kudela/Projects/ntk/github/toc_ntk/src/main/ng-client/src/sass/_app-analyze.scss */
-                app-root main app-analyze .app-analyze-wrapper .app-sroll-wrapper .row .col table tbody tr td.app-score-4 {
-                  background-color: #fffde7; }
+                    z-index: 300; }
+                    /* line 75, /Users/petr.kudela/Projects/ntk/github/toc_ntk/src/main/ng-client/src/sass/_app-analyze.scss */
+                    app-root main app-analyze .app-analyze-wrapper .app-sroll-wrapper .row .col table thead tr th span {
+                      display: block;
+                      padding: 20px 10px;
+                      position: relative;
+                      height: 100%;
+                      border-width: 0 0 1px 0;
+                      border-style: solid;
+                      border-color: #bdbdbd; }
+              /* line 87, /Users/petr.kudela/Projects/ntk/github/toc_ntk/src/main/ng-client/src/sass/_app-analyze.scss */
+              app-root main app-analyze .app-analyze-wrapper .app-sroll-wrapper .row .col table tbody tr {
+                border-width: 0 0 1px 0;
+                border-style: solid;
+                border-color: #FFFFFF; }
+                /* line 89, /Users/petr.kudela/Projects/ntk/github/toc_ntk/src/main/ng-client/src/sass/_app-analyze.scss */
+                app-root main app-analyze .app-analyze-wrapper .app-sroll-wrapper .row .col table tbody tr td {
+                  padding: 5px 10px;
+                  vertical-align: top; }
+                  /* line 97, /Users/petr.kudela/Projects/ntk/github/toc_ntk/src/main/ng-client/src/sass/_app-analyze.scss */
+                  app-root main app-analyze .app-analyze-wrapper .app-sroll-wrapper .row .col table tbody tr td.app-score-1 {
+                    background-color: #ffeb3b; }
+                  /* line 100, /Users/petr.kudela/Projects/ntk/github/toc_ntk/src/main/ng-client/src/sass/_app-analyze.scss */
+                  app-root main app-analyze .app-analyze-wrapper .app-sroll-wrapper .row .col table tbody tr td.app-score-2 {
+                    background-color: #fff176; }
+                  /* line 103, /Users/petr.kudela/Projects/ntk/github/toc_ntk/src/main/ng-client/src/sass/_app-analyze.scss */
+                  app-root main app-analyze .app-analyze-wrapper .app-sroll-wrapper .row .col table tbody tr td.app-score-3 {
+                    background-color: #fff9c4; }
+                  /* line 106, /Users/petr.kudela/Projects/ntk/github/toc_ntk/src/main/ng-client/src/sass/_app-analyze.scss */
+                  app-root main app-analyze .app-analyze-wrapper .app-sroll-wrapper .row .col table tbody tr td.app-score-4 {
+                    background-color: #fffde7; }
   /* line 37, /Users/petr.kudela/Projects/ntk/github/toc_ntk/src/main/ng-client/src/sass/_app-layout.scss */
   app-root main app-blacklist {
     height: 100%;
     flex: 5;
     order: 2; }
+    /* line 3, /Users/petr.kudela/Projects/ntk/github/toc_ntk/src/main/ng-client/src/sass/_app-blacklist.scss */
+    app-root main app-blacklist .app-blacklist-wrapper {
+      height: 100%; }
+      /* line 6, /Users/petr.kudela/Projects/ntk/github/toc_ntk/src/main/ng-client/src/sass/_app-blacklist.scss */
+      app-root main app-blacklist .app-blacklist-wrapper .app-sroll-wrapper {
+        height: calc(100% - 55px);
+        overflow: auto;
+        padding: 20px 0; }
+        /* line 12, /Users/petr.kudela/Projects/ntk/github/toc_ntk/src/main/ng-client/src/sass/_app-blacklist.scss */
+        app-root main app-blacklist .app-blacklist-wrapper .app-sroll-wrapper .row .col {
+          padding: 0 1rem;
+          position: relative; }
+          /* line 17, /Users/petr.kudela/Projects/ntk/github/toc_ntk/src/main/ng-client/src/sass/_app-blacklist.scss */
+          app-root main app-blacklist .app-blacklist-wrapper .app-sroll-wrapper .row .col .input-field.inline {
+            margin-left: 0 !important;
+            margin-right: 20px; }
+          /* line 23, /Users/petr.kudela/Projects/ntk/github/toc_ntk/src/main/ng-client/src/sass/_app-blacklist.scss */
+          app-root main app-blacklist .app-blacklist-wrapper .app-sroll-wrapper .row .col .checkbox-field {
+            display: inline-block;
+            margin-right: 20px;
+            margin-top: 0; }
+          /* line 29, /Users/petr.kudela/Projects/ntk/github/toc_ntk/src/main/ng-client/src/sass/_app-blacklist.scss */
+          app-root main app-blacklist .app-blacklist-wrapper .app-sroll-wrapper .row .col .app-spinner {
+            position: absolute;
+            left: 0;
+            width: 100%; }
 
 /* line 3, /Users/petr.kudela/Projects/ntk/github/toc_ntk/src/main/ng-client/src/sass/_app-global.scss */
 * {
@@ -18570,26 +18613,32 @@ app-root main {
 /* line 7, /Users/petr.kudela/Projects/ntk/github/toc_ntk/src/main/ng-client/src/sass/_app-global.scss */
 h1, h2, h3, h4, h5 {
   color: #009c89;
+  font-family: 'Roboto-Condensed-Light';
   margin-top: 0 !important; }
 
-/* line 12, /Users/petr.kudela/Projects/ntk/github/toc_ntk/src/main/ng-client/src/sass/_app-global.scss */
+/* line 13, /Users/petr.kudela/Projects/ntk/github/toc_ntk/src/main/ng-client/src/sass/_app-global.scss */
+h5 {
+  font-size: 1.4rem; }
+
+/* line 17, /Users/petr.kudela/Projects/ntk/github/toc_ntk/src/main/ng-client/src/sass/_app-global.scss */
 a,
-.app-cursor-pointer {
+.app-cursor-pointer,
+app-root main app-analyze .app-analyze-wrapper .app-sroll-wrapper .row .col .checkbox-field .app-mdi-cancel {
   cursor: pointer !important; }
 
-/* line 19, /Users/petr.kudela/Projects/ntk/github/toc_ntk/src/main/ng-client/src/sass/_app-global.scss */
+/* line 24, /Users/petr.kudela/Projects/ntk/github/toc_ntk/src/main/ng-client/src/sass/_app-global.scss */
 .app-font-bold, app-root main app-analyze app-aside .app-sroll-wrapper .collection .collection-item.active {
   font-family: 'Roboto-Condensed-Bold'; }
 
-/* line 25, /Users/petr.kudela/Projects/ntk/github/toc_ntk/src/main/ng-client/src/sass/_app-global.scss */
-.app-clean-mg, app-root main app-analyze app-aside .app-sroll-wrapper .collection, app-root main app-analyze .app-analyze-wrapper .app-sroll-wrapper .row .col table tbody tr td ul, app-root main app-analyze .app-analyze-wrapper .app-sroll-wrapper .row .col table tbody tr td p {
+/* line 30, /Users/petr.kudela/Projects/ntk/github/toc_ntk/src/main/ng-client/src/sass/_app-global.scss */
+.app-clean-mg, app-root main app-analyze app-aside .app-sroll-wrapper .collection, app-root main app-analyze .app-analyze-wrapper app-toolbar .row .col:first-child .input-field, app-root main app-analyze .app-analyze-wrapper app-toolbar .row .col:first-child .input-field input[type=text], app-root main app-analyze .app-analyze-wrapper .app-sroll-wrapper .row .col table tbody tr td ul, app-root main app-analyze .app-analyze-wrapper .app-sroll-wrapper .row .col table tbody tr td p {
   margin: 0 !important; }
 
-/* line 29, /Users/petr.kudela/Projects/ntk/github/toc_ntk/src/main/ng-client/src/sass/_app-global.scss */
+/* line 34, /Users/petr.kudela/Projects/ntk/github/toc_ntk/src/main/ng-client/src/sass/_app-global.scss */
 .app-clean-pd {
   padding: 0 !important; }
 
-/* line 33, /Users/petr.kudela/Projects/ntk/github/toc_ntk/src/main/ng-client/src/sass/_app-global.scss */
+/* line 38, /Users/petr.kudela/Projects/ntk/github/toc_ntk/src/main/ng-client/src/sass/_app-global.scss */
 .app-clean-radius, app-root main app-analyze app-aside .app-sroll-wrapper .collection {
   border-radius: 0 !important; }
 
@@ -18602,15 +18651,15 @@ a,
 .clearfix:after {
   clear: both; }
 
-/* line 45, /Users/petr.kudela/Projects/ntk/github/toc_ntk/src/main/ng-client/src/sass/_app-global.scss */
+/* line 50, /Users/petr.kudela/Projects/ntk/github/toc_ntk/src/main/ng-client/src/sass/_app-global.scss */
 .app-preloader-wrapper {
   margin-top: 100px; }
 
-/* line 54, /Users/petr.kudela/Projects/ntk/github/toc_ntk/src/main/ng-client/src/sass/_app-global.scss */
+/* line 59, /Users/petr.kudela/Projects/ntk/github/toc_ntk/src/main/ng-client/src/sass/_app-global.scss */
 button i.left {
   margin-right: 5px; }
 
-/* line 57, /Users/petr.kudela/Projects/ntk/github/toc_ntk/src/main/ng-client/src/sass/_app-global.scss */
+/* line 62, /Users/petr.kudela/Projects/ntk/github/toc_ntk/src/main/ng-client/src/sass/_app-global.scss */
 button i.right {
   margin-left: 5px; }
 

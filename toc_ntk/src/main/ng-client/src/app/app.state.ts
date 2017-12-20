@@ -19,7 +19,7 @@ export class AppState {
 
   sysno: string;
   
-  showSideBar: boolean = true;
+  showAside: boolean = true;
   showScoreConfig: boolean = false;
   showMatched: boolean = true;
   showFree: boolean = true;
@@ -43,5 +43,10 @@ export class AppState {
     };
 
     this._configSubject.next(cfg);
+  }
+  
+  // aside bar
+  showAsideBar() {
+    this.showAside = !this.showAside;
   }
 }

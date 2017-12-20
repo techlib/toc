@@ -1,5 +1,3 @@
-
-
 import {Component, OnInit, ViewChild, ElementRef} from '@angular/core';
 import {Router, ActivatedRoute} from '@angular/router';
 import {Subscription} from 'rxjs/Subscription';
@@ -25,7 +23,7 @@ export class AnalyzeComponent implements OnInit {
 
     subscriptions: Subscription[] = [];
 
-error: string = '';
+    error: string = '';
     toc_text: string;
 
     info: any = {};
@@ -242,5 +240,9 @@ error: string = '';
         this.service.addToBlackList(c.text).subscribe(res => {
             console.log(res);
         });
+    }
+  
+    toogleAsideBar() {
+      this.state.showAsideBar();
     }
 }
