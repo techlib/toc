@@ -32,7 +32,7 @@ export class AppService {
     processSysno(sysno: string, config: ScoreConfig): Observable<any> {
 
         var url = 'candidates';
-        url = '/assets/F21395f_000170834.json'; // comment
+        //url = '/assets/F21395f_000170834.json'; // comment
         let params: URLSearchParams = new URLSearchParams();
         params.set('action', 'FIND');
         params.set('sysno', sysno);
@@ -58,7 +58,7 @@ export class AppService {
     getBalicky(): Observable<any> {
 
         var url = 'candidates';
-        url = '/assets/balicky.json'; // comment
+        //url = '/assets/balicky.json'; // comment
         let params: URLSearchParams = new URLSearchParams();
         params.set('action', 'BALICKY');
         return this.http.get(url, {search: params})
@@ -70,7 +70,7 @@ export class AppService {
     getBlacklist(): Observable<any> {
 
         var url = 'search/blacklist/select';
-        url = '/assets/blacklist.json'; // comment
+        //url = '/assets/blacklist.json'; // comment
         let params: URLSearchParams = new URLSearchParams();
         params.set('q', '*');
         params.set('rows', '50');
