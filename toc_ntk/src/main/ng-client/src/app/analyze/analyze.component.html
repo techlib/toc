@@ -71,7 +71,7 @@
             </tr>
           </thead>
           <tbody>
-            <ng-container *ngFor="let c of candidates; let idx = index">
+            <ng-container *ngFor="let c of state.candidates; let idx = index">
               <tr *ngIf="(state.showMatched && c.isMatched) || (state.showFree && !c.isMatched) || (state.showBlacklisted && c.blacklisted) ">
                 <!-- Dodrz prefix class, muze jich byt vice, tohle je jen priklad, barvy prahu se definuje ve variables -->
                 <td class="app-cursor-pointer" [class.app-score-1]="c.score > maxScore * state.threshold" mz-tooltip [tooltip]="formatTooltip(c)" [html]="true" [position]="'top'">
@@ -87,7 +87,7 @@
                 <td>
                   <mz-checkbox-container *ngIf="!c.isMatched" >
                     <i class="app-mdi-cancel red-text" (click)="addToBlackList(c)" mz-tooltip [tooltip]="'Add to blacklist'"></i>
-                    <input [id]="'ch_'+c.text" type="checkbox" [(ngModel)]="c.selected" mz-checkbox [label]="c.text" (click)="select(c.text)" />
+                    <input [id]="'ch_'+idx+'_'+c.text" type="checkbox" [(ngModel)]="c.selected" mz-checkbox [label]="c.text" (click)="select(c.text)" />
                   </mz-checkbox-container>
                 </td>
               </tr>
@@ -99,21 +99,4 @@
     </div><!--/.row -->
   </div><!--/.app-sroll-wrapper -->
 </section>  
-  
-
-<!-- Modals -->
-
-
-<mz-modal #exportModal [fixedFooter]="true"  >
-  <mz-modal-header>Exported candidates</mz-modal-header>
-  <mz-modal-content>
-    <div class="input-field col s12">
-      <textarea id="exportArea" class="materialize-textarea" style="height: 100vh;" #exportArea>{{exported}}</textarea>
-    </div>
-  </mz-modal-content>
-  <mz-modal-footer>
-    <button mz-button [flat]="true" mz-modal-close>close</button>
-  </mz-modal-footer>
-</mz-modal>
-<!-- end Modals -->
   

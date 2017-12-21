@@ -20,6 +20,7 @@ import { AnalyzeComponent } from './analyze/analyze.component';
 import { HelpComponent } from './help/help.component';
 import { ToolbarComponent } from './toolbar/toolbar.component';
 import { TocModalComponent } from './toc-modal/toc-modal.component';
+import { ExportModalComponent } from './export-modal/export-modal.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import { TocModalComponent } from './toc-modal/toc-modal.component';
     AnalyzeComponent,
     HelpComponent,
     ToolbarComponent,
-    TocModalComponent
+    TocModalComponent,
+    ExportModalComponent
   ],
   imports: [
     BrowserModule,
@@ -50,7 +52,7 @@ import { TocModalComponent } from './toc-modal/toc-modal.component';
       { path: '', redirectTo: 'home', pathMatch: 'full' }
     ])
   ],
-  entryComponents: [TocModalComponent],
+  entryComponents: [TocModalComponent, ExportModalComponent],
   providers: [DecimalPipe, AppState, AppService],
   bootstrap: [AppComponent]
 })

@@ -85,7 +85,7 @@ public class CandidatesServlet extends HttpServlet {
                 response.setContentType("application/json;charset=UTF-8");
                 PrintWriter out = response.getWriter();
 
-                String csStr = request.getParameter("canditates");
+                String csStr = request.getParameter("candidates");
 
                 out.print(new JSONArray(csStr).toString(2));
 

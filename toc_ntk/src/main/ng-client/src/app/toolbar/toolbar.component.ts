@@ -9,6 +9,7 @@ import {ScoreConfig} from '../models/score-config';
 import {Candidate} from '../models/candidate';
 import {DictionaryMatch} from '../models/dictionary-match';
 import {TocModalComponent} from 'app/toc-modal/toc-modal.component';
+import {ExportModalComponent} from 'app/export-modal/export-modal.component';
 
 @Component({
   selector: 'app-toolbar',
@@ -26,12 +27,7 @@ export class ToolbarComponent implements OnInit {
   error: string = '';
   toc_text: string;
 
-  info: any = {};
-  title: string = "";
-  author: string = "";
-  candidates: Candidate[] = [];
-  selected: DictionaryMatch[] = [];
-  exported: string;
+  
   loading: boolean = false;
   hasToc: boolean = false;
 
@@ -44,7 +40,6 @@ export class ToolbarComponent implements OnInit {
   constructor(
   private modalService: MzModalService,
       private router: Router,
-      private route: ActivatedRoute,
       public state: AppState,
       private service: AppService) {
   }
@@ -64,119 +59,41 @@ export class ToolbarComponent implements OnInit {
       this.state.setSysno(this.state.sysno, 'tool');
   }
 
-  select(c: string) {
-      //this.selected = this.candidates.filter((c: Candidate) => {return c['selected'] !== 'undefined' && c['selected']});
-      this.service.copyTextToClipboard(c);
-  }
-
   showExport() {
       //this.loading = true;
       //this.selected = this.candidates.filter((c: Candidate) => {return c['selected']});
-      this.selected = [];
-      this.candidates.forEach((c: Candidate) => {
+      this.state.selected = [];
+      this.state.candidates.forEach((c: Candidate) => {
           if (c.dictionaries) {
               c.dictionaries.forEach((dm: DictionaryMatch) => {
                   if (dm['selected']) {
-                      this.selected.push(dm)
+                      this.state.selected.push(dm);
                   }
               });
           }
+          if (c['selected']) {
+              let dm2 : DictionaryMatch = new DictionaryMatch();
+              dm2.name = 'nerizene';
+              dm2.matched_text = c.text;
+              dm2.selected = true;
+              this.state.selected.push(dm2);
+          }
 
       });
-      this.service.getExport(this.selected).subscribe(res => {
-          this.exported = JSON.stringify(res);
-          this.exportModal.open();
-          console.log(this.exportArea);
-          setTimeout(() => {
-              this.exportArea.nativeElement.select();
-              let a = document.execCommand('copy');
-              console.log(a);
-          }, 10);
+      this.service.getExport(this.state.selected).subscribe(res => {
+          //this.exported = JSON.stringify(res);
+          //this.exportModal.open();
+          
+          this.modalService.open(ExportModalComponent, {exported: JSON.stringify(res)});
+          
+//          console.log(this.exportArea);
+//          setTimeout(() => {
+//              this.exportArea.nativeElement.select();
+//              let a = document.execCommand('copy');
+//              console.log(a);
+//          }, 10);
           this.loading = false;
       });
-  }
-
-  selectElementText(el) {
-      var doc = window.document;
-      if (window.getSelection && doc.createRange) {
-          let sel = window.getSelection();
-          let range = doc.createRange();
-          range.selectNodeContents(el);
-          sel.removeAllRanges();
-          sel.addRange(range);
-      } else {
-          el.select();
-          //    } else if (doc.body.createTextRange) {
-          //      let range = doc.body.createTextRange();
-          //      range.moveToElementText(el);
-          //      range.select();
-      }
-  }
-
-
-
-  rescore() {
-      this.maxScore = 0;
-      this.candidates.forEach((c: Candidate) => {
-          c.explain = [];
-          if (c.blacklisted) {
-              c.score = 0;
-              c.explain.push('is in blaclist');
-          } else {
-              let sc: ScoreConfig = this.state.scoreConfig;
-              c.score = 1;
-              if (c.isMatched) {
-                  c.score = c.score * sc.matched;
-                  c.explain.push('matched in dictionaries ( ' + sc.matched + ' ) = ' + c.score);
-                  if (c.text.split(" ").length > 1) {
-                      c.score = c.score * sc.multiple;
-                      c.explain.push('is a mulpitle word keyword ( ' + sc.multiple + ' ) = ' + c.score);
-                  }
-
-                  for (let i in c.dictionaries) {
-                      let dm = c.dictionaries[i];
-                      if (sc.dictionaries.hasOwnProperty(dm['name'])) {
-                          c.score = c.score * sc.dictionaries[dm['name']];
-                          c.explain.push('matched in ' + dm['name'] + ' dictionary ( ' + sc.dictionaries[dm['name']] + ' ) = ' + c.score);
-                      }
-                  }
-
-
-              }
-              if (c.hasProperNoun) {
-                  c.score = c.score * sc.hasProperNoun;
-                      c.explain.push('keyword has proper noun ( ' + sc.hasProperNoun + ' ) = ' + c.score);
-              }
-
-//                if (c.type == 'DICTIONARY_WORD') {
-//                    c.score = c.score * sc.isDictionaryWord;
-//                    c.explain.push('is a dictionary word keyword ( ' + sc.isDictionaryWord + ' ) = ' + c.score);
-//                }
-              if (c.inTitle) {
-                  c.score = c.score * sc.inTitle;
-                  c.explain.push('keyword found in title ( ' + sc.inTitle + ' ) = ' + c.score);
-              }
-              c.score += c.found * sc.found;
-              c.explain.push('key word found ' + c.found + ' times ( ' + sc.found + ' ) = ' + c.score);
-              c.score += c.extent * sc.extent;
-              c.explain.push('keyword has a extent of ' + c.extent + ' pages ( ' + sc.extent + ' ) = ' + c.score);
-              this.maxScore = Math.max(this.maxScore, c.score);
-          }
-      });
-      this.candidates.sort((a, b) => {return b.score - a.score})
-
-  }
-
-  formatInfo(c: Candidate): string{
-      let ret: string = c.text + '\n\n';
-      for(let e in c.explain){
-          ret += c.explain[e] + '\n';
-      }
-      return ret;
-  }
-
-  sp(e, d) {
-      console.log(e, d);
   }
 
   openToc() {
@@ -185,12 +102,6 @@ export class ToolbarComponent implements OnInit {
           //this.tocModal.open();
           this.modalService.open(TocModalComponent, {toc_text: this.toc_text, sysno: this.state.sysno, title: this.state.title});
           this.loading = false;
-      });
-  }
-
-  addToBlackList(c: Candidate) {
-      this.service.addToBlackList(c.text).subscribe(res => {
-          console.log(res);
       });
   }
 }

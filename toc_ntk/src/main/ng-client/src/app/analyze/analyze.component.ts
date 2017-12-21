@@ -7,7 +7,6 @@ import {AppState} from '../app.state';
 import {AppService} from '../app.service';
 import {ScoreConfig} from '../models/score-config';
 import {Candidate} from '../models/candidate';
-import {DictionaryMatch} from '../models/dictionary-match';
 import {DecimalPipe} from '@angular/common';
 
 
@@ -29,9 +28,7 @@ export class AnalyzeComponent implements OnInit {
 
     info: any = {};
     author: string = "";
-    candidates: Candidate[] = [];
-    selected: DictionaryMatch[] = [];
-    exported: string;
+    //exported: string;
     loading: boolean = false;
 
     showMatched: boolean = true;
@@ -84,8 +81,8 @@ export class AnalyzeComponent implements OnInit {
         this.state.hasToc = false;
         this.error = '';
         this.author = '';
-        this.candidates = [];
-        this.selected = [];
+        this.state.candidates = [];
+        this.state.selected = [];
         this.service.processSysno(this.state.sysno, this.state.scoreConfig).subscribe(res => {
             
             if(res.hasOwnProperty('error')){
@@ -94,7 +91,7 @@ export class AnalyzeComponent implements OnInit {
                 this.loading = false;
             }else{
                 
-                this.candidates = res['candidates'];
+                this.state.candidates = res['candidates'];
                 this.info = res['info'];
                 this.setInfo();
                 this.rescore();
@@ -120,33 +117,6 @@ export class AnalyzeComponent implements OnInit {
         }
     }
 
-    showExport() {
-        //this.loading = true;
-        //this.selected = this.candidates.filter((c: Candidate) => {return c['selected']});
-        this.selected = [];
-        this.candidates.forEach((c: Candidate) => {
-            if (c.dictionaries) {
-                c.dictionaries.forEach((dm: DictionaryMatch) => {
-                    if (dm['selected']) {
-                        this.selected.push(dm)
-                    }
-                });
-            }
-
-        });
-        this.service.getExport(this.selected).subscribe(res => {
-            this.exported = JSON.stringify(res);
-            this.exportModal.open();
-            console.log(this.exportArea);
-            setTimeout(() => {
-                this.exportArea.nativeElement.select();
-                let a = document.execCommand('copy');
-                console.log(a);
-            }, 10);
-            this.loading = false;
-        });
-    }
-
     selectElementText(el) {
         var doc = window.document;
         if (window.getSelection && doc.createRange) {
@@ -163,12 +133,9 @@ export class AnalyzeComponent implements OnInit {
             //      range.select();
         }
     }
-
-
-
     rescore() {
         this.maxScore = 0;
-        this.candidates.forEach((c: Candidate) => {
+        this.state.candidates.forEach((c: Candidate) => {
             c.explain = [];
             if (c.blacklisted) {
                 c.score = 0;
@@ -214,7 +181,7 @@ export class AnalyzeComponent implements OnInit {
                 this.maxScore = Math.max(this.maxScore, c.score);
             }
         });
-        this.candidates.sort((a, b) => {return b.score - a.score})
+        this.state.candidates.sort((a, b) => {return b.score - a.score})
 
     }
     

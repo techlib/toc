@@ -3,6 +3,8 @@ import {Observable} from 'rxjs/Observable';
 import {Subject} from 'rxjs/Subject';
 
 import {ScoreConfig} from './models/score-config';
+import {Candidate} from 'app/models/candidate';
+import {DictionaryMatch} from 'app/models/dictionary-match';
 
 @Injectable()
 export class AppState {
@@ -19,7 +21,10 @@ export class AppState {
 
   sysno: string;
   title: string = "";
-    hasToc: boolean = false;
+  hasToc: boolean = false;
+  
+  candidates: Candidate[] = [];
+  selected: DictionaryMatch[] = [];
   
   showAside: boolean = true;
   showScoreConfig: boolean = false;

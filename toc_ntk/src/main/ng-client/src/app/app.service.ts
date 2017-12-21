@@ -48,7 +48,7 @@ export class AppService {
         var url = 'candidates';
         let params: URLSearchParams = new URLSearchParams();
         params.set('action', 'EXPORT');
-        params.set('canditates', JSON.stringify(cs));
+        params.set('candidates', JSON.stringify(cs));
         return this.http.get(url, {search: params})
             .map((response: Response) => {
                 return response.json();
