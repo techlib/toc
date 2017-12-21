@@ -95,7 +95,7 @@ public class Options {
       String[] directories = dir.list(new FilenameFilter() {
         @Override
         public boolean accept(File current, String name) {
-          return new File(current, name).isDirectory();
+          return name.startsWith("DONE_") && new File(current, name).isDirectory();
         }
       });
       for(String d: directories){

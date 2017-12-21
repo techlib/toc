@@ -27,18 +27,26 @@ export class BlacklistComponent implements OnInit {
     ngOnInit() {
         this.getWords();
     }
-    getWords(){
-        
-        this.subscriptions.push(this.service.getBlacklist().subscribe(res => {
+    getWords() {
+        this.words = [];
+        this.service.getBlacklist().subscribe(res => {
             this.words = res['response']['docs'];
-            console.log(this.words);
-        }));
+        });
     }
-    removeFromBlackList(key: string){
-    this.service.removeFromBlackList(key).subscribe(res => {
-        console.log(res);
-         this.getWords();
-    });
+
+    removeFromBlackList(key: string) {
+        this.service.removeFromBlackList(key).subscribe(res => {
+            this.state.removedFromBlacklist.push(key);
+            this.getWords();
+        });
+    }
+
+    restore(key: string) {
+        this.service.addToBlackList(key).subscribe(res => {
+            this.getWords();
+            let idx = this.state.removedFromBlacklist.indexOf(key);
+            this.state.removedFromBlacklist.splice(idx, 1);
+        });
     }
 
 }

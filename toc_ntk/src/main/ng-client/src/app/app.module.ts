@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { CommonModule } from '@angular/common';
+import { CommonModule, DecimalPipe } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms'; 
@@ -19,6 +19,7 @@ import { BlacklistComponent } from './blacklist/blacklist.component';
 import { AnalyzeComponent } from './analyze/analyze.component';
 import { HelpComponent } from './help/help.component';
 import { ToolbarComponent } from './toolbar/toolbar.component';
+import { TocModalComponent } from './toc-modal/toc-modal.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { ToolbarComponent } from './toolbar/toolbar.component';
     BlacklistComponent,
     AnalyzeComponent,
     HelpComponent,
-    ToolbarComponent
+    ToolbarComponent,
+    TocModalComponent
   ],
   imports: [
     BrowserModule,
@@ -48,7 +50,8 @@ import { ToolbarComponent } from './toolbar/toolbar.component';
       { path: '', redirectTo: 'home', pathMatch: 'full' }
     ])
   ],
-  providers: [AppState, AppService],
+  entryComponents: [TocModalComponent],
+  providers: [DecimalPipe, AppState, AppService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

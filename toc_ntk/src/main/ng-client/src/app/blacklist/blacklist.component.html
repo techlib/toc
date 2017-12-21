@@ -3,18 +3,18 @@
     <div class="col s2">
       <h5>Blacklist</h5>
       <mz-collection>
-        <a mz-collection-link *ngFor="let w of words">
+        <a mz-collection-link *ngFor="let w of words" (click)="removeFromBlackList(w.key)" mz-tooltip [tooltip]="'Remove from blacklist'" [position]="'top'">
           <span>{{w.key}}</span>
-          <i mz-icon-mdi [icon]="'delete-forever'" class="red-text app-cursor-pointer right" mz-tooltip [tooltip]="'Remove from blacklist'" [position]="'top'"></i>
+          <i mz-icon-mdi [icon]="'delete-forever'" class="red-text app-cursor-pointer right"></i>
         </a>
       </mz-collection>
     </div><!--/.col -->
     <div class="col s2">
       <h5>Odstraněné položky</h5>
       <mz-collection>
-        <a mz-collection-link *ngFor="let w of words">
-          <span>{{w.key}}</span>
-          <i mz-icon-mdi [icon]="'delete-empty'" class="grey-text text-darken-2 app-cursor-pointer right" mz-tooltip [tooltip]="'Restore deleted item back to the blacklist'"  [position]="'top'"></i>
+        <a mz-collection-link *ngFor="let w of state.removedFromBlacklist" (click)="restore(w)" mz-tooltip [tooltip]="'Restore deleted item back to the blacklist'"  [position]="'top'">
+          <span>{{w}}</span>
+          <i mz-icon-mdi [icon]="'delete-empty'" class="grey-text text-darken-2 app-cursor-pointer right"></i>
         </a>
       </mz-collection>
     </div><!--/.col -->

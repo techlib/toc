@@ -73,7 +73,7 @@ export class AppService {
         //url = '/assets/blacklist.json'; // comment
         let params: URLSearchParams = new URLSearchParams();
         params.set('q', '*');
-        params.set('rows', '50');
+        params.set('rows', '100');
         params.set('sort', 'key asc');
         return this.http.get(url, {search: params})
             .map((response: Response) => {

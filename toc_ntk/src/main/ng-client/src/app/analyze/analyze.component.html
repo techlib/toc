@@ -48,21 +48,33 @@
     
     <div class="row">
       <div class="col s12">
-        <h5>{{title}}</h5>
+        <div class="app-spinner center-align">
+          <mz-spinner *ngIf="loading" [size]="'small'"></mz-spinner>
+        </div>
+        <div *ngIf="error !== ''">
+            
+            <mz-card class="blue-grey darken-1"
+                [hoverable]="true">
+                <mz-card-content>
+                  {{error}}
+                </mz-card-content>
+              </mz-card>
+        </div>
+        <h5>{{state.title}}</h5>
         <!--<table *ngIf="!loading" class="striped highlight" id="app-table-score">-->
-        <table class="striped highlight" id="app-table-score" *ngIf="!loading">
+        <table class="striped highlight" id="app-table-score" *ngIf="!loading && !error">
           <thead>
             <tr>
-              <th><span>score</span></th>
-              <th *ngFor="let d of state.scoreConfig.dicts"><span>{{d}}</span></th>
-              <th><span>nerizene</span></th>
+              <th style="width: 60px;"><span>score</span></th>
+              <th *ngFor="let d of state.scoreConfig.dicts" style="width: 24%;"><span>{{d}}</span></th>
+              <th style="width: auto;"><span>nerizene</span></th>
             </tr>
           </thead>
           <tbody>
             <ng-container *ngFor="let c of candidates; let idx = index">
               <tr *ngIf="(state.showMatched && c.isMatched) || (state.showFree && !c.isMatched) || (state.showBlacklisted && c.blacklisted) ">
                 <!-- Dodrz prefix class, muze jich byt vice, tohle je jen priklad, barvy prahu se definuje ve variables -->
-                <td class="app-cursor-pointer" [class.app-score-1]="c.score > maxScore * state.threshold" mz-tooltip [tooltip]="formatInfo(c)" [position]="'top'">
+                <td class="app-cursor-pointer" [class.app-score-1]="c.score > maxScore * state.threshold" mz-tooltip [tooltip]="formatTooltip(c)" [html]="true" [position]="'top'">
                   {{c.score | number: '1.1-3'}}
                 </td>
                 <td *ngFor="let d of state.scoreConfig.dicts">
@@ -83,18 +95,6 @@
           </tbody>
         </table>
         
-        <div class="app-spinner center-align">
-          <mz-spinner *ngIf="loading" [size]="'small'"></mz-spinner>
-        </div>
-        <div *ngIf="error !== ''">
-            
-            <mz-card class="blue-grey darken-1"
-                [hoverable]="true">
-                <mz-card-content>
-                  {{error}}
-                </mz-card-content>
-              </mz-card>
-        </div>
       </div><!--/.col -->
     </div><!--/.row -->
   </div><!--/.app-sroll-wrapper -->
@@ -102,17 +102,7 @@
   
 
 <!-- Modals -->
-<mz-modal #tocModal [fixedFooter]="true"  >
-  <mz-modal-header>{{state.sysno}}: {{title}}</mz-modal-header>
-  <mz-modal-content>
-    <div class="input-field col s12">
-      <textarea id="textarea1"  style="height: 40vh;">{{toc_text}}</textarea>
-    </div>
-  </mz-modal-content>
-  <mz-modal-footer>
-    <button mz-button [flat]="true" mz-modal-close>close</button>
-  </mz-modal-footer>
-</mz-modal>
+
 
 <mz-modal #exportModal [fixedFooter]="true"  >
   <mz-modal-header>Exported candidates</mz-modal-header>

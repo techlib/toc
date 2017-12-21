@@ -1,13 +1,14 @@
 import {Component, OnInit, ViewChild, ElementRef} from '@angular/core';
 import {Router, ActivatedRoute} from '@angular/router';
 import {Subscription} from 'rxjs/Subscription';
-import {MzBaseModal, MzModalComponent} from 'ng2-materialize';
+import {MzBaseModal, MzModalComponent, MzModalService} from 'ng2-materialize';
 
 import {AppState} from '../app.state';
 import {AppService} from '../app.service';
 import {ScoreConfig} from '../models/score-config';
 import {Candidate} from '../models/candidate';
 import {DictionaryMatch} from '../models/dictionary-match';
+import {TocModalComponent} from 'app/toc-modal/toc-modal.component';
 
 @Component({
   selector: 'app-toolbar',
@@ -41,6 +42,7 @@ export class ToolbarComponent implements OnInit {
 
 
   constructor(
+  private modalService: MzModalService,
       private router: Router,
       private route: ActivatedRoute,
       public state: AppState,
@@ -55,66 +57,16 @@ export class ToolbarComponent implements OnInit {
   }
 
   ngOnInit() {
-
-      this.subscriptions.push(this.state.stateChanged.subscribe(st => {
-          this.analyze();
-      }));
-
-      let sysno = this.route.snapshot.paramMap.get('sysno');
-      if (sysno) {
-          setTimeout(() => this.state.setSysno(sysno), 100);
-      }
   }
 
   setSysno() {
       this.router.navigate(['/sysno', this.state.sysno]);
-      this.analyze();
+      this.state.setSysno(this.state.sysno, 'tool');
   }
 
   select(c: string) {
       //this.selected = this.candidates.filter((c: Candidate) => {return c['selected'] !== 'undefined' && c['selected']});
       this.service.copyTextToClipboard(c);
-  }
-
-  analyze() {
-      this.loading = true;
-      this.info = {};
-      this.title = '';
-      this.error = '';
-      this.author = '';
-      this.candidates = [];
-      this.selected = [];
-      this.service.processSysno(this.state.sysno, this.state.scoreConfig).subscribe(res => {
-
-          if(res.hasOwnProperty('error')){
-              this.error = res['error'];
-              this.hasToc = false;
-              this.loading = false;
-          }else{
-
-              this.candidates = res['candidates'];
-              this.info = res['info'];
-              this.setInfo();
-              this.rescore();
-              this.hasToc = true;
-              this.loading = false;
-
-              setTimeout(() => {
-                  $("#app-table-score").tableHeadFixer();
-              }, 1);
-          }
-      });
-  }
-
-  setInfo() {
-      for (let i in this.info['varfield']) {
-          let vf = this.info['varfield'][i];
-          if (vf['id'] === 245) {
-              for (let sb in vf['subfield']) {
-                  this.title += vf['subfield'][sb]['content'] + ' ';
-              }
-          }
-      }
   }
 
   showExport() {
@@ -230,7 +182,8 @@ export class ToolbarComponent implements OnInit {
   openToc() {
       this.service.getTocText(this.state.sysno).subscribe(res => {
           this.toc_text = res + '\n';
-          this.tocModal.open();
+          //this.tocModal.open();
+          this.modalService.open(TocModalComponent, {toc_text: this.toc_text, sysno: this.state.sysno, title: this.state.title});
           this.loading = false;
       });
   }

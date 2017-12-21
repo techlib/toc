@@ -18,6 +18,8 @@ export class AppState {
   scoreConfig: ScoreConfig = new ScoreConfig();
 
   sysno: string;
+  title: string = "";
+    hasToc: boolean = false;
   
   showAside: boolean = true;
   showScoreConfig: boolean = false;
@@ -27,9 +29,11 @@ export class AppState {
   showDetails: boolean = false;
   
   threshold: number = .5;
+  
+  removedFromBlacklist: string[] = [];
 
 
-  setSysno(f: string) {
+  setSysno(f: string, kdo: string) {
     this.sysno = f;
     this._stateSubject.next(this);
   }

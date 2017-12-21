@@ -195,7 +195,7 @@ public class TocAnalizer {
 //        line = line.trim();
             for (String line : strlines) {
                 if(!line.trim().contains(" ") && !line.trim().contains("\t")){
-                    LOGGER.log(Level.INFO, "Skiping line {0}", line);
+                    LOGGER.log(Level.FINE, "Skiping line {0}", line);
                     continue;
                 }
                 if (Character.isDigit(line.charAt(line.length() - 1))) {
@@ -352,7 +352,7 @@ public class TocAnalizer {
         List<File> files = (List<File>) FileUtils.listFiles(dir, extensions, false);
         int totalPages = 0;
         for (File f : files) {
-            totalPages += analyze(f, candidates);
+            totalPages = analyze(f, candidates);
         }
         addCandidatesFromInfo(candidates, info, totalPages);
         return candidates;

@@ -7,7 +7,7 @@
   </div><!--/.col -->
   <div class="col s6 right-align">
     <button mz-button (click)="rescore()">re-score</button>
-    <button mz-button [disabled]="!hasToc" (click)="openToc()" >view toc</button>
+    <button mz-button [disabled]="!state.hasToc" (click)="openToc()" >view toc</button>
     <button mz-button  (click)="showExport()">export</button>
   </div><!--/.col -->
 </div><!--/.row -->

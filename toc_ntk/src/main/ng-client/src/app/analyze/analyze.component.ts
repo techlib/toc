@@ -8,6 +8,7 @@ import {AppService} from '../app.service';
 import {ScoreConfig} from '../models/score-config';
 import {Candidate} from '../models/candidate';
 import {DictionaryMatch} from '../models/dictionary-match';
+import {DecimalPipe} from '@angular/common';
 
 
 @Component({
@@ -27,13 +28,11 @@ export class AnalyzeComponent implements OnInit {
     toc_text: string;
 
     info: any = {};
-    title: string = "";
     author: string = "";
     candidates: Candidate[] = [];
     selected: DictionaryMatch[] = [];
     exported: string;
     loading: boolean = false;
-    hasToc: boolean = false;
 
     showMatched: boolean = true;
     showFree: boolean = true;
@@ -42,6 +41,7 @@ export class AnalyzeComponent implements OnInit {
 
 
     constructor(
+    private numberPipe: DecimalPipe,
         private router: Router,
         private route: ActivatedRoute,
         public state: AppState,
@@ -57,18 +57,18 @@ export class AnalyzeComponent implements OnInit {
 
     ngOnInit() {
 
+        let sysno = this.route.snapshot.paramMap.get('sysno');
+        if (sysno) {
+            setTimeout(() => this.state.setSysno(sysno, 'analyze'), 100);
+        }
+
         this.subscriptions.push(this.state.stateChanged.subscribe(st => {
             this.analyze();
         }));
-
-        let sysno = this.route.snapshot.paramMap.get('sysno');
-        if (sysno) {
-            setTimeout(() => this.state.setSysno(sysno), 100);
-        }
     }
 
     setSysno() {
-        this.router.navigate(['/sysno', this.state.sysno]);
+//        this.router.navigate(['/sysno', this.state.sysno]);
         this.analyze();
     }
 
@@ -80,7 +80,8 @@ export class AnalyzeComponent implements OnInit {
     analyze() {
         this.loading = true;
         this.info = {};
-        this.title = '';
+        this.state.title = '';
+        this.state.hasToc = false;
         this.error = '';
         this.author = '';
         this.candidates = [];
@@ -89,7 +90,7 @@ export class AnalyzeComponent implements OnInit {
             
             if(res.hasOwnProperty('error')){
                 this.error = res['error'];
-                this.hasToc = false;
+                this.state.hasToc = false;
                 this.loading = false;
             }else{
                 
@@ -97,7 +98,7 @@ export class AnalyzeComponent implements OnInit {
                 this.info = res['info'];
                 this.setInfo();
                 this.rescore();
-                this.hasToc = true;
+                this.state.hasToc = true;
                 this.loading = false;
 
                 setTimeout(() => {
@@ -108,11 +109,12 @@ export class AnalyzeComponent implements OnInit {
     }
 
     setInfo() {
+        this.state.title = '';
         for (let i in this.info['varfield']) {
             let vf = this.info['varfield'][i];
             if (vf['id'] === 245) {
                 for (let sb in vf['subfield']) {
-                    this.title += vf['subfield'][sb]['content'] + ' ';
+                    this.state.title += vf['subfield'][sb]['content'] + ' ';
                 }
             }
         }
@@ -176,17 +178,17 @@ export class AnalyzeComponent implements OnInit {
                 c.score = 1;
                 if (c.isMatched) {
                     c.score = c.score * sc.matched;
-                    c.explain.push('matched in dictionaries ( ' + sc.matched + ' ) = ' + c.score);
+                    c.explain.push('matched in dictionaries ( ' + sc.matched + ' ) = ' + this.numberPipe.transform(c.score, '1.1-3'));
                     if (c.text.split(" ").length > 1) {
                         c.score = c.score * sc.multiple;
-                        c.explain.push('is a mulpitle word keyword ( ' + sc.multiple + ' ) = ' + c.score);
+                        c.explain.push('is a mulpitle word keyword ( ' + sc.multiple + ' ) = ' + this.numberPipe.transform(c.score, '1.1-3'));
                     }
 
                     for (let i in c.dictionaries) {
                         let dm = c.dictionaries[i];
                         if (sc.dictionaries.hasOwnProperty(dm['name'])) {
                             c.score = c.score * sc.dictionaries[dm['name']];
-                            c.explain.push('matched in ' + dm['name'] + ' dictionary ( ' + sc.dictionaries[dm['name']] + ' ) = ' + c.score);
+                            c.explain.push('matched in ' + dm['name'] + ' dictionary ( ' + sc.dictionaries[dm['name']] + ' ) = ' + this.numberPipe.transform(c.score, '1.1-3'));
                         }
                     }
 
@@ -194,7 +196,7 @@ export class AnalyzeComponent implements OnInit {
                 }
                 if (c.hasProperNoun) {
                     c.score = c.score * sc.hasProperNoun;
-                        c.explain.push('keyword has proper noun ( ' + sc.hasProperNoun + ' ) = ' + c.score);
+                        c.explain.push('keyword has proper noun ( ' + sc.hasProperNoun + ' ) = ' + this.numberPipe.transform(c.score, '1.1-3'));
                 }
 
 //                if (c.type == 'DICTIONARY_WORD') {
@@ -203,12 +205,12 @@ export class AnalyzeComponent implements OnInit {
 //                }
                 if (c.inTitle) {
                     c.score = c.score * sc.inTitle;
-                    c.explain.push('keyword found in title ( ' + sc.inTitle + ' ) = ' + c.score);
+                    c.explain.push('keyword found in title ( ' + sc.inTitle + ' ) = ' + this.numberPipe.transform(c.score, '1.1-3'));
                 }
                 c.score += c.found * sc.found;
-                c.explain.push('key word found ' + c.found + ' times ( ' + sc.found + ' ) = ' + c.score);
+                c.explain.push('key word found ' + c.found + ' times ( ' + sc.found + ' ) = ' + this.numberPipe.transform(c.score, '1.1-3'));
                 c.score += c.extent * sc.extent;
-                c.explain.push('keyword has a extent of ' + c.extent + ' pages ( ' + sc.extent + ' ) = ' + c.score);
+                c.explain.push('keyword has a extent of ' + c.extent + ' pages ( ' + sc.extent + ' ) = ' + this.numberPipe.transform(c.score, '1.1-3'));
                 this.maxScore = Math.max(this.maxScore, c.score);
             }
         });
@@ -220,6 +222,14 @@ export class AnalyzeComponent implements OnInit {
         let ret: string = c.text + '\n\n';
         for(let e in c.explain){
             ret += c.explain[e] + '\n';
+        }
+        return ret;
+    }
+    
+    formatTooltip(c: Candidate): string{
+        let ret: string = c.text + '<br/><br/>';
+        for(let e in c.explain){
+            ret += c.explain[e] + '<br/>';
         }
         return ret;
     }
