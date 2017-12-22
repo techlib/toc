@@ -8,6 +8,7 @@
     "isDictionaryWord": 2.0,
     "extent": 0.1,
     "inTitle": 1.5,
+    "addExtentForTitle": false,
     "dictionaries": {
       "PSH": 3.0,
       "keywords": 1.2,
