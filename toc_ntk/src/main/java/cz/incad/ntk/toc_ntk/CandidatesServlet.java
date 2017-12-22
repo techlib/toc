@@ -39,7 +39,6 @@ public class CandidatesServlet extends HttpServlet {
 
         try {
 
-
             String actionNameParam = request.getParameter(ACTION_NAME);
             if (actionNameParam != null) {
 
@@ -146,6 +145,10 @@ public class CandidatesServlet extends HttpServlet {
             void doPerform(HttpServletRequest request, HttpServletResponse response) throws Exception {
                 response.setContentType("application/json;charset=UTF-8");
                 PrintWriter out = response.getWriter();
+                if (request.getParameter("update") != null) {
+                    Options.resetInstance();
+                }
+
                 JSONObject ret = Options.getInstance().getFolders();
                 out.print(ret.toString(2));
             }
@@ -165,7 +168,14 @@ public class CandidatesServlet extends HttpServlet {
                     if (jfolders.has(sysno)) {
                         foldername = Options.getInstance().getString("balicky_dir", "~/.ntk/balicky/") + jfolders.optString(sysno);
                     } else {
-                        ret.put("error", "balik neexistuje");
+                        //Mozna pridan pozdeji
+                        Options.resetInstance();
+                        jfolders = Options.getInstance().getFolders();
+                        if (jfolders.has(sysno)) {
+                            foldername = Options.getInstance().getString("balicky_dir", "~/.ntk/balicky/") + jfolders.optString(sysno);
+                        } else {
+                            ret.put("error", "balik neexistuje");
+                        }
                     }
 
                     if (foldername == null || !new File(foldername).exists()) {

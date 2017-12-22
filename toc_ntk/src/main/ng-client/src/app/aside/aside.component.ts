@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
+import {Subscription} from 'rxjs/Subscription';
 import {AppState} from '../app.state';
 import {AppService} from '../app.service';
 
@@ -9,6 +10,7 @@ import {AppService} from '../app.service';
     styleUrls: ['./aside.component.css']
 })
 export class AsideComponent implements OnInit {
+    subscriptions: Subscription[] = [];
     //  folders: string[] = [
     //  'F21944z_000661318', 'F22117z_000678390',
     //  'F10107_1z_000152680', 'F21945z_000661333', 'F22118z_000678039',
@@ -23,6 +25,7 @@ export class AsideComponent implements OnInit {
     //  'F21935z_000660965', 'F22100z_000675629', 'F22224z_000948535', 'F21936z_000660967', 'F22107z_000678226', 'F22240z_000952734', 'F21937z_000660971', 'F22109z_000678031', 'F22242z_000953276', 'F21938z_000660972', 'F22110z_000678036', 'F22243z_000953275', 'F21939z_000660973', 'F22111z_000678040', 'F21940z_000660756', 'F22112z_000678038', 'F21941z_000660913', 'F22114z_000678391', 'F21943z_000661373', 'F22115z_000678388'
     //  ];
     folders: string[] = [];
+    sysno: string;
     constructor(
         private router: Router,
         public state: AppState,
@@ -30,27 +33,48 @@ export class AsideComponent implements OnInit {
 
     }
 
+    ngOnDestroy() {
+        this.subscriptions.forEach((s: Subscription) => {
+            s.unsubscribe();
+        });
+        this.subscriptions = [];
+    }
+
     ngOnInit() {
         if (this.state.config) {
             this.setFolders();
         } else {
-            this.state.configSubject.subscribe(st => {
+            this.subscriptions.push(this.state.configSubject.subscribe(st => {
                 this.setFolders();
-            });
+            }));
         }
+        
+
+        this.subscriptions.push(this.state.stateChanged.subscribe(st => {
+            this.sysno = this.state.sysno;
+        }));
 
     }
+    
+    updateFolders(){
+        this.setFolders(true);
+    }
 
-    setFolders() {
+    setFolders(update: boolean = false) {
 
         this.folders = [];
-        this.service.getBalicky().subscribe(res => {
-            let fs = Object.keys(res);
-            fs.sort((a, b) => {
-                return a.localeCompare(b);
+            
+            this.service.getBalicky(update).subscribe(res => {
+                let fs = Object.keys(res);
+                fs.sort((a, b) => {
+                    return a.localeCompare(b);
+                });
+                this.folders = fs;
             });
-            this.folders = fs;
-        });
+        
+        setTimeout(() => {
+            this.sysno = this.state.sysno;
+        }, 100);
     }
 
     setSysno(sysno: string) {

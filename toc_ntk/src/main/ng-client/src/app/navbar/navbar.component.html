@@ -4,6 +4,12 @@
     <mz-navbar-item><a routerLink="help">Help</a></mz-navbar-item>
     <mz-navbar-item><a routerLink="analyze">Analyze</a></mz-navbar-item>
     <mz-navbar-item><a routerLink="blacklist">Blacklist</a></mz-navbar-item>
+    <mz-navbar-item>
+      <a id="app-navbar-item-settings" (click)="state.showScoreConfig = !state.showScoreConfig">
+        <i class="app-mdi-settings"></i>
+        Settings
+      </a>
+    </mz-navbar-item>
     <!-- Temporary commented
     <mz-navbar-item>
       <a id="app-navbar-item-settings" href="#">

@@ -10,4 +10,5 @@ export class ScoreConfig {
   dicts: any[] = ['PSH', "keywords", "konspekt"];
   dictionaries: any = {PSH: 3.0, "keywords": 1.2, "konspekt": 4.0};
   inTitle: number = 2.0;
+  addExtentForTitle: boolean = false;
 }

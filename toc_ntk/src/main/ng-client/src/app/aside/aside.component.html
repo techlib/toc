@@ -1,6 +1,7 @@
-<section class="app-sroll-wrapper">
+<section class="app-sroll-wrapper" *ngIf="folders.length > 0">
+  <button mz-button (click)="updateFolders()">update folders</button>
   <mz-collection>
-    <a mz-collection-link  *ngFor="let f of folders" (click)="setSysno(f)" [class.active]="f === state.sysno">
+    <a mz-collection-link  *ngFor="let f of folders" (click)="setSysno(f)" [class.active]="f === state.sysno || f === sysno">
       <span>{{f}}</span>
     </a>
   </mz-collection>

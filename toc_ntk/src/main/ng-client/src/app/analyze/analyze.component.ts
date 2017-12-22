@@ -7,7 +7,6 @@ import {AppState} from '../app.state';
 import {AppService} from '../app.service';
 import {ScoreConfig} from '../models/score-config';
 import {Candidate} from '../models/candidate';
-import {DecimalPipe} from '@angular/common';
 
 
 @Component({
@@ -34,11 +33,8 @@ export class AnalyzeComponent implements OnInit {
     showMatched: boolean = true;
     showFree: boolean = true;
 
-    maxScore: number = 0;
-
 
     constructor(
-    private numberPipe: DecimalPipe,
         private router: Router,
         private route: ActivatedRoute,
         public state: AppState,
@@ -94,7 +90,7 @@ export class AnalyzeComponent implements OnInit {
                 this.state.candidates = res['candidates'];
                 this.info = res['info'];
                 this.setInfo();
-                this.rescore();
+                this.state.rescore();
                 this.state.hasToc = true;
                 this.loading = false;
 
@@ -133,57 +129,8 @@ export class AnalyzeComponent implements OnInit {
             //      range.select();
         }
     }
-    rescore() {
-        this.maxScore = 0;
-        this.state.candidates.forEach((c: Candidate) => {
-            c.explain = [];
-            if (c.blacklisted) {
-                c.score = 0;
-                c.explain.push('is in blaclist');
-            } else {
-                let sc: ScoreConfig = this.state.scoreConfig;
-                c.score = 1;
-                if (c.isMatched) {
-                    c.score = c.score * sc.matched;
-                    c.explain.push('matched in dictionaries ( ' + sc.matched + ' ) = ' + this.numberPipe.transform(c.score, '1.1-3'));
-                    if (c.text.split(" ").length > 1) {
-                        c.score = c.score * sc.multiple;
-                        c.explain.push('is a mulpitle word keyword ( ' + sc.multiple + ' ) = ' + this.numberPipe.transform(c.score, '1.1-3'));
-                    }
-
-                    for (let i in c.dictionaries) {
-                        let dm = c.dictionaries[i];
-                        if (sc.dictionaries.hasOwnProperty(dm['name'])) {
-                            c.score = c.score * sc.dictionaries[dm['name']];
-                            c.explain.push('matched in ' + dm['name'] + ' dictionary ( ' + sc.dictionaries[dm['name']] + ' ) = ' + this.numberPipe.transform(c.score, '1.1-3'));
-                        }
-                    }
-
-
-                }
-                if (c.hasProperNoun) {
-                    c.score = c.score * sc.hasProperNoun;
-                        c.explain.push('keyword has proper noun ( ' + sc.hasProperNoun + ' ) = ' + this.numberPipe.transform(c.score, '1.1-3'));
-                }
-
-//                if (c.type == 'DICTIONARY_WORD') {
-//                    c.score = c.score * sc.isDictionaryWord;
-//                    c.explain.push('is a dictionary word keyword ( ' + sc.isDictionaryWord + ' ) = ' + c.score);
-//                }
-                if (c.inTitle) {
-                    c.score = c.score * sc.inTitle;
-                    c.explain.push('keyword found in title ( ' + sc.inTitle + ' ) = ' + this.numberPipe.transform(c.score, '1.1-3'));
-                }
-                c.score += c.found * sc.found;
-                c.explain.push('key word found ' + c.found + ' times ( ' + sc.found + ' ) = ' + this.numberPipe.transform(c.score, '1.1-3'));
-                c.score += c.extent * sc.extent;
-                c.explain.push('keyword has a extent of ' + c.extent + ' pages ( ' + sc.extent + ' ) = ' + this.numberPipe.transform(c.score, '1.1-3'));
-                this.maxScore = Math.max(this.maxScore, c.score);
-            }
-        });
-        this.state.candidates.sort((a, b) => {return b.score - a.score})
-
-    }
+    
+    
     
     formatInfo(c: Candidate): string{
         let ret: string = c.text + '\n\n';

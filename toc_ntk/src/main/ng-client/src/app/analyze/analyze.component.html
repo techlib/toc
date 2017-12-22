@@ -13,9 +13,7 @@
   
   <div class="app-sroll-wrapper">
     <!-- Podminku na zobrazeni aplikuj na element s class "row" -->
-    <div class="row" *ngIf="state.showScoreConfig">
-      <div class="col s12">
-        <form >
+    <div class="row" *ngIf="state.showScoreConfig" style="height: auto;">
           <mz-input-container  [inline]="'true'">
             <input name="found" type="number" [(ngModel)]="state.scoreConfig.found" mz-input [label]="'Found'">
           </mz-input-container>
@@ -41,8 +39,9 @@
           <mz-input-container  [inline]="'true'">
             <input name="inTitle" type="number" [(ngModel)]="state.scoreConfig.inTitle" mz-input [label]="'Term in title'">
           </mz-input-container>
-        </form>
-      </div><!--/.col -->
+          <mz-checkbox-container >
+            <input name="addExtentForTitle" id="addExtentForTitle" type="checkbox" [(ngModel)]="state.scoreConfig.addExtentForTitle" mz-checkbox [label]="'Add extent for title terms'"  />
+          </mz-checkbox-container>
     </div><!--/.row -->
    
     

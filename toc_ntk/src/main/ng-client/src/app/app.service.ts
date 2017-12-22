@@ -54,13 +54,28 @@ export class AppService {
                 return response.json();
             });
     }
-
-    getBalicky(): Observable<any> {
+    
+    updateFolders(): Observable<any> {
 
         var url = 'candidates';
         //url = '/assets/balicky.json'; // comment
         let params: URLSearchParams = new URLSearchParams();
         params.set('action', 'BALICKY');
+        return this.http.get(url, {search: params})
+            .map((response: Response) => {
+                return response.json();
+            });
+    }
+
+    getBalicky(update: boolean = false): Observable<any> {
+
+        var url = 'candidates';
+        //url = '/assets/balicky.json'; // comment
+        let params: URLSearchParams = new URLSearchParams();
+        params.set('action', 'BALICKY');
+        if(update){
+            params.set('update', 'true');
+        }
         return this.http.get(url, {search: params})
             .map((response: Response) => {
                 return response.json();
