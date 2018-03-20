@@ -8,6 +8,12 @@
   "users":{
     "test": "test"
   },
+    "dictionaries": [
+      {"name": "keywords", "mm": "100%"},
+      {"name": "nerizene", "mm": "100%"},
+      {"name": "psh", "mm": "80%"},
+      {"name": "konspekt", "mm": "100%"}
+    ],
   "cleanBeforeMorphoTag": true,
   "useCacheForTocLines": false,
   "saveTocLines": true,

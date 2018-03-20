@@ -123,6 +123,25 @@ public class CandidatesServlet extends HttpServlet {
                 }
             }
         },
+        ADD_TO_NERIZENE {
+            @Override
+            void doPerform(HttpServletRequest request, HttpServletResponse response) throws Exception {
+              
+
+                response.setContentType("application/json;charset=UTF-8");
+                PrintWriter out = response.getWriter();
+                String[] text = request.getParameterValues("key");
+                JSONObject ret = new JSONObject();
+                try {
+                    SolrService.addToNerizene(text);
+                    out.print(ret.put("code", 0).toString());
+                } catch (Exception ex) {
+                    out.print(ret.put("code", 1).put("error", ex).toString());
+                }
+
+            
+            }
+        },
         ADD_TO_DICTIONARY {
             @Override
             void doPerform(HttpServletRequest request, HttpServletResponse response) throws Exception {

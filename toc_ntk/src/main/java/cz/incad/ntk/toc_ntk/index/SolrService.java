@@ -7,6 +7,7 @@ package cz.incad.ntk.toc_ntk.index;
 
 import cz.incad.ntk.toc_ntk.Candidate;
 import cz.incad.ntk.toc_ntk.DictionaryMatch;
+import cz.incad.ntk.toc_ntk.Options;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -49,13 +50,15 @@ public class SolrService {
         solr.close();
     }
 
-    public static void addToNerizene(String key) throws SolrServerException, IOException {
+    public static void addToNerizene(String[] keys) throws SolrServerException, IOException {
 
         SolrClient solr = new HttpSolrClient.Builder(urlString).build();
-        SolrInputDocument idoc = new SolrInputDocument();
-        idoc.addField("key", key);
-        LOGGER.info(idoc.toString());
-        solr.add("nerizene", idoc, 100);
+        for(String key : keys){
+          SolrInputDocument idoc = new SolrInputDocument();
+          idoc.addField("key", key);
+          LOGGER.info(idoc.toString());
+          solr.add("nerizene", idoc, 100);
+        }
         solr.close();
     }
 
@@ -101,6 +104,12 @@ public class SolrService {
         SolrDocumentList docs = new SolrDocumentList();
         try {
             SolrClient solr = new HttpSolrClient.Builder(urlString).build();
+            JSONArray dicts = Options.getInstance().getJSONArray("dictionaries");
+            for(int i=0; i<dicts.length(); i++){
+              docs.addAll(findInDictionary(solr, dicts.getJSONObject(i), text));
+            }
+            
+            /*
             SolrQuery query = new SolrQuery();
 
             //Search in keywords
@@ -165,7 +174,35 @@ public class SolrService {
             if (response.getResults().getNumFound() > 0) {
                 docs.add(response.getResults().get(0));
             }
+*/
             solr.close();
+        } catch (IOException ex) {
+            LOGGER.log(Level.SEVERE, null, ex);
+        }
+        return docs;
+    }
+
+    public static SolrDocumentList findInDictionary(SolrClient solr, JSONObject jo, String text) {
+        SolrDocumentList docs = new SolrDocumentList();
+        try {
+          String name = jo.getString("name");
+            SolrQuery query = new SolrQuery();
+
+            query.setQuery("\"" + text.toLowerCase() + "\"");
+            query.set("defType", "edismax");
+            if (text.indexOf(" ") > 0) {
+                query.set("qf", "key_cz");
+            } else {
+                query.set("qf", "key_lower");
+            }
+            query.set("mm", jo.getString("mm"));
+            QueryResponse response = solr.query(name, query);
+            if (response.getResults().getNumFound() > 0) {
+              SolrDocument doc = response.getResults().get(0);
+              doc.put("slovnik", name);
+                docs.add(doc);
+            }
+
         } catch (SolrServerException | IOException ex) {
             LOGGER.log(Level.SEVERE, null, ex);
         }
