@@ -1,6 +1,6 @@
 export class DictionaryMatch {
   name: string;
-  matched_text: string;
+  text: string;
   selected: boolean;
 }
 

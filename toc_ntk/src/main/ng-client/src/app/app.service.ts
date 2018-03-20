@@ -55,6 +55,23 @@ export class AppService {
             });
     }
     
+    saveNewKeys(cs: DictionaryMatch[]): Observable<any> {
+
+        var url = 'candidates';
+        let params: URLSearchParams = new URLSearchParams();
+        params.set('action', 'ADD_TO_NERIZENE');
+        cs.forEach(dm => {
+          if (dm.name === 'novy'){
+            params.append('key', dm.text);
+          }
+        })
+        //params.set('candidates', JSON.stringify(cs));
+        return this.http.get(url, {search: params})
+            .map((response: Response) => {
+                return response.json();
+            });
+    }
+    
     updateFolders(): Observable<any> {
 
         var url = 'candidates';

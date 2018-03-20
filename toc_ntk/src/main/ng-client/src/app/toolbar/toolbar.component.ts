@@ -59,7 +59,7 @@ export class ToolbarComponent implements OnInit {
       this.state.setSysno(this.state.sysno, 'tool');
   }
 
-  showExport() {
+  add() {
       //this.loading = true;
       //this.selected = this.candidates.filter((c: Candidate) => {return c['selected']});
       this.state.selected = [];
@@ -73,8 +73,9 @@ export class ToolbarComponent implements OnInit {
           }
           if (c['selected']) {
               let dm2 : DictionaryMatch = new DictionaryMatch();
-              dm2.name = 'nerizene';
-              dm2.matched_text = c.text;
+              dm2.name = 'novy';
+              dm2.text = c.text;
+              //dm2.text = c.text;
               dm2.selected = true;
               this.state.selected.push(dm2);
           }
@@ -84,7 +85,11 @@ export class ToolbarComponent implements OnInit {
           //this.exported = JSON.stringify(res);
           //this.exportModal.open();
           
-          this.modalService.open(ExportModalComponent, {exported: JSON.stringify(res)});
+          this.modalService.open(ExportModalComponent,
+           {service: this.service, 
+             selected: this.state.selected,
+           exported: JSON.stringify(res)}
+           );
           
 //          console.log(this.exportArea);
 //          setTimeout(() => {
