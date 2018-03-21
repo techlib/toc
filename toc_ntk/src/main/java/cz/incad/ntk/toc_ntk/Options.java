@@ -87,6 +87,9 @@ public class Options {
 
   public JSONObject getFolders() {
     if (!server_conf.has("folders")) {
+      
+      String tocs_dir = server_conf.getString("saved_tocs_dir");
+    
       JSONObject dirs = new JSONObject();
 
       String foldername = server_conf.optString("balicky_dir", "~/.ntk/balicky/");
@@ -115,10 +118,11 @@ public class Options {
         }
       
         if(sysno != null){
-            dirs.put(sysno, d);
+            dirs.put(sysno, new JSONObject().put("name", d).put("saved", new File(tocs_dir + sysno).exists()));
         }
       }
-
+      
+      
       server_conf.put("folders", dirs);
     }
     return server_conf.optJSONObject("folders");

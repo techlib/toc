@@ -52,7 +52,7 @@ export class AnalyzeComponent implements OnInit {
 
         let sysno = this.route.snapshot.paramMap.get('sysno');
         if (sysno) {
-            setTimeout(() => this.state.setSysno(sysno, 'analyze'), 100);
+            setTimeout(() => this.state.setSysno(sysno, 'analyze'), 10);
         }
 
         this.subscriptions.push(this.state.stateChanged.subscribe(st => {
@@ -87,6 +87,7 @@ export class AnalyzeComponent implements OnInit {
                 this.loading = false;
             }else{
                 
+                this.state.currentToc = res;
                 this.state.candidates = res['candidates'];
                 this.info = res['info'];
                 this.setInfo();

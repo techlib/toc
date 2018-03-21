@@ -3,7 +3,7 @@ import { CommonModule, DecimalPipe } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms'; 
-import { HttpModule } from '@angular/http';
+import {HttpClientModule, HttpClient} from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 
 import { MaterializeModule } from 'ng2-materialize';
@@ -41,7 +41,7 @@ import { ExportModalComponent } from './export-modal/export-modal.component';
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpModule,
+    HttpClientModule,
     MaterializeModule.forRoot(),
     RouterModule.forRoot([
       { path: 'home', component: HomeComponent },
@@ -53,7 +53,7 @@ import { ExportModalComponent } from './export-modal/export-modal.component';
     ])
   ],
   entryComponents: [TocModalComponent, ExportModalComponent],
-  providers: [DecimalPipe, AppState, AppService],
+  providers: [HttpClient, DecimalPipe, AppState, AppService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

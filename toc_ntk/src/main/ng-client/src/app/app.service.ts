@@ -1,5 +1,6 @@
 import {Injectable} from '@angular/core';
-import {Http, Response, URLSearchParams} from '@angular/http';
+//import {Http, Response, URLSearchParams} from '@angular/http';
+import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
 import {Observable} from 'rxjs/Rx';
 
 import {AppState} from './app.state';
@@ -11,7 +12,7 @@ export class AppService {
 
     //basefolder: string = '/home/kudela/.ntk/balicky/';
     constructor(
-        private http: Http,
+        private http: HttpClient,
         private state: AppState) {}
 
 
@@ -19,136 +20,113 @@ export class AppService {
 
         var url = 'candidates';
         //url = '/assets/F21395f_000170834.json';
-        let params: URLSearchParams = new URLSearchParams();
-        params.set('action', 'FIND');
-        params.set('foldername', this.state.config['basefolder'] + foldername);
-        params.set('scoreconfig', JSON.stringify(config));
-        return this.http.get(url, {search: params})
-            .map((response: Response) => {
-                return response.json();
-            });
+        let params: HttpParams = new HttpParams()
+        .set('action', 'FIND')
+        .set('foldername', this.state.config['basefolder'] + foldername)
+        .set('scoreconfig', JSON.stringify(config));
+        return this.http.get(url, {params: params});
     }
 
     processSysno(sysno: string, config: ScoreConfig): Observable<any> {
 
         var url = 'candidates';
         //url = '/assets/F21395f_000170834.json'; // comment
-        let params: URLSearchParams = new URLSearchParams();
-        params.set('action', 'FIND');
-        params.set('sysno', sysno);
-        params.set('scoreconfig', JSON.stringify(config));
-        return this.http.get(url, {search: params})
-            .map((response: Response) => {
-                return response.json();
-            });
+        let params: HttpParams = new HttpParams()
+        .set('action', 'FIND')
+        .set('sysno', sysno)
+        .set('scoreconfig', JSON.stringify(config));
+        return this.http.get(url, {params: params});
     }
 
     getExport(cs: DictionaryMatch[]): Observable<any> {
 
         var url = 'candidates';
-        let params: URLSearchParams = new URLSearchParams();
-        params.set('action', 'EXPORT');
-        params.set('candidates', JSON.stringify(cs));
-        return this.http.get(url, {search: params})
-            .map((response: Response) => {
-                return response.json();
-            });
+        let params: HttpParams = new HttpParams().set('action', 'EXPORT').set('candidates', JSON.stringify(cs));
+        return this.http.get(url, {params: params});
     }
     
     saveNewKeys(cs: DictionaryMatch[]): Observable<any> {
 
         var url = 'candidates';
-        let params: URLSearchParams = new URLSearchParams();
-        params.set('action', 'ADD_TO_NERIZENE');
+        let params: HttpParams = new HttpParams().set('action', 'ADD_TO_NERIZENE');
         cs.forEach(dm => {
           if (dm.name === 'novy'){
-            params.append('key', dm.text);
+            params = params.append('key', dm.text);
           }
         })
         //params.set('candidates', JSON.stringify(cs));
-        return this.http.get(url, {search: params})
-            .map((response: Response) => {
-                return response.json();
-            });
+        return this.http.get(url, {params: params});
+    }
+    
+    saveToc(): Observable<any> {
+      
+      
+
+    let headers = new HttpHeaders({ 'Content-Type': 'text/plain;charset=UTF-8' });
+    const options = { headers: headers };
+    
+    
+
+      var url = 'candidates?action=SAVE_TOC&sysno=' + this.state.sysno;
+      //let params: HttpParams = new HttpParams();
+
+      //params.set('sysno', this.state.sysno);
+      //params.set('toc', JSON.stringify(this.state.currentToc));
+        
+      return this.http.post<string>(url, JSON.stringify(this.state.currentToc), options);
     }
     
     updateFolders(): Observable<any> {
 
         var url = 'candidates';
         //url = '/assets/balicky.json'; // comment
-        let params: URLSearchParams = new URLSearchParams();
-        params.set('action', 'BALICKY');
-        return this.http.get(url, {search: params})
-            .map((response: Response) => {
-                return response.json();
-            });
+        let params: HttpParams = new HttpParams().set('action', 'BALICKY');
+        return this.http.get(url, {params: params});
     }
 
     getBalicky(update: boolean = false): Observable<any> {
 
         var url = 'candidates';
         //url = '/assets/balicky.json'; // comment
-        let params: URLSearchParams = new URLSearchParams();
-        params.set('action', 'BALICKY');
+        let params: HttpParams = new HttpParams().set('action', 'BALICKY');
         if(update){
             params.set('update', 'true');
         }
-        return this.http.get(url, {search: params})
-            .map((response: Response) => {
-                return response.json();
-            });
+        return this.http.get(url, {params: params});
     }
 
     getBlacklist(): Observable<any> {
 
         var url = 'search/blacklist/select';
         //url = '/assets/blacklist.json'; // comment
-        let params: URLSearchParams = new URLSearchParams();
-        params.set('q', '*');
-        params.set('rows', '100');
-        params.set('sort', 'key asc');
-        return this.http.get(url, {search: params})
-            .map((response: Response) => {
-                return response.json();
-            });
+        let params: HttpParams = new HttpParams().set('q', '*').set('rows', '100').set('sort', 'key asc');
+        return this.http.get(url, {params: params});
     }
 
     addToBlackList(key: string): Observable<any> {
 
         var url = 'candidates';
-        let params: URLSearchParams = new URLSearchParams();
-        params.set('action', 'ADD_TO_BLACKLIST');
-        params.set('key', key);
-        console.log(key);
-        return this.http.get(url, {search: params})
-            .map((response: Response) => {
-                return response.json();
-            });
+        let params: HttpParams = new HttpParams().set('action', 'ADD_TO_BLACKLIST').set('key', key);
+        return this.http.get(url, {params: params});
     }
 
     removeFromBlackList(key: string): Observable<any> {
 
         var url = 'candidates';
-        let params: URLSearchParams = new URLSearchParams();
-        params.set('action', 'REMOVE_FROM_BLACKLIST');
-        params.set('key', key);
-        return this.http.get(url, {search: params})
-            .map((response: Response) => {
-                return response.json();
-            });
+        let params: HttpParams = new HttpParams()
+        .set('action', 'REMOVE_FROM_BLACKLIST')
+        .set('key', key);
+        return this.http.get(url, {params: params});
     }
 
     getTocText(sysno: string): Observable<any> {
 
         var url = 'mdt';
         //url = '/assets/toc.txt';
-        let params: URLSearchParams = new URLSearchParams();
-        params.set('action', 'VIEW_TOC');
-        params.set('sysno', sysno);
-        return this.http.get(url, {search: params})
-            .map((response: Response) => {
-                return response.text();
-            });
+        let params: HttpParams = new HttpParams()
+        .set('action', 'VIEW_TOC')
+        .set('sysno', sysno);
+        return this.http.get(url, {params: params});
     }
 
     copyTextToClipboard(text) {

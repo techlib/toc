@@ -20,10 +20,12 @@ export class AppState {
   config: any = {};
   scoreConfig: ScoreConfig = new ScoreConfig();
 
+  balicky: any[] = [];
   sysno: string;
   title: string = "";
   hasToc: boolean = false;
   
+  currentToc: any;
   candidates: Candidate[] = [];
   selected: DictionaryMatch[] = [];
   maxScore: number = 0;

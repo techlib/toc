@@ -85,6 +85,10 @@ export class ToolbarComponent implements OnInit {
       this.setSelected();
       this.service.saveNewKeys(this.state.selected).subscribe(res => {
         console.log(res);
+        this.service.saveToc().subscribe(res => {
+          this.state.balicky[this.state.sysno]['saved'] = true;
+          console.log(res);
+        });
       });
     }
 
@@ -97,7 +101,7 @@ export class ToolbarComponent implements OnInit {
           //this.exportModal.open();
           
           this.modalService.open(ExportModalComponent,
-           {service: this.service, 
+           {service: this.service, state: this.state,
              selected: this.state.selected,
            exported: JSON.stringify(res)}
            );

@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import {MzBaseModal} from 'ng2-materialize';
 import {AppService} from 'app/app.service';
 import {DictionaryMatch} from 'app/models/dictionary-match';
+import {AppState} from 'app/app.state';
 
 @Component({
   selector: 'app-export-modal',
@@ -10,6 +11,7 @@ import {DictionaryMatch} from 'app/models/dictionary-match';
 })
 export class ExportModalComponent  extends MzBaseModal{
     service: AppService;
+    state: AppState;
     selected: DictionaryMatch[];
     exported: string;
     alephFormat : boolean;
@@ -18,7 +20,10 @@ export class ExportModalComponent  extends MzBaseModal{
     
     save(){
       this.service.saveNewKeys(this.selected).subscribe(res => {
-        console.log(res);
+        this.service.saveToc().subscribe(res => {
+          this.state.balicky[this.state.sysno]['saved'] = true;
+          console.log(res);
+        });
       });
     }
     

@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.stream.Collectors;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -142,6 +143,28 @@ public class CandidatesServlet extends HttpServlet {
             
             }
         },
+        SAVE_TOC {
+            @Override
+            void doPerform(HttpServletRequest request, HttpServletResponse response) throws Exception {
+
+                response.setContentType("application/json;charset=UTF-8");
+                PrintWriter out = response.getWriter();
+                String sysno = request.getParameter("sysno");
+                //String json = request.getParameter("toc");
+                String json = request.getReader().lines().collect(Collectors.joining(System.lineSeparator()));
+                LOGGER.log(Level.INFO, "sysno: {0}, json: {1}", new Object[]{sysno, json});
+                JSONObject ret = new JSONObject();
+                try {
+//                    SolrService.saveToc(sysno, json);
+                    FileService.save(sysno, json);
+                    out.print(ret.put("code", 0).toString());
+                } catch (Exception ex) {
+                    out.print(ret.put("code", 1).put("error", ex).toString());
+                }
+
+            
+            }
+        },
         ADD_TO_DICTIONARY {
             @Override
             void doPerform(HttpServletRequest request, HttpServletResponse response) throws Exception {
@@ -167,7 +190,7 @@ public class CandidatesServlet extends HttpServlet {
                 if (request.getParameter("update") != null) {
                     Options.resetInstance();
                 }
-
+                
                 JSONObject ret = Options.getInstance().getFolders();
                 out.print(ret.toString(2));
             }
@@ -183,15 +206,21 @@ public class CandidatesServlet extends HttpServlet {
                     String foldername = request.getParameter("foldername");
 
                     String sysno = request.getParameter("sysno");
+//                    String toc = SolrService.getToc(sysno);
+                    String toc = FileService.getToc(sysno);
+                    if(toc != null){
+                      out.print(toc);
+                      return;
+                    }
                     JSONObject jfolders = Options.getInstance().getFolders();
                     if (jfolders.has(sysno)) {
-                        foldername = Options.getInstance().getString("balicky_dir", "~/.ntk/balicky/") + jfolders.optString(sysno);
+                        foldername = Options.getInstance().getString("balicky_dir", "~/.ntk/balicky/") + jfolders.getJSONObject(sysno).optString("name");
                     } else {
                         //Mozna pridan pozdeji
                         Options.resetInstance();
                         jfolders = Options.getInstance().getFolders();
                         if (jfolders.has(sysno)) {
-                            foldername = Options.getInstance().getString("balicky_dir", "~/.ntk/balicky/") + jfolders.optString(sysno);
+                            foldername = Options.getInstance().getString("balicky_dir", "~/.ntk/balicky/") + jfolders.getJSONObject(sysno).optString("name");
                         } else {
                             ret.put("error", "balik neexistuje");
                         }

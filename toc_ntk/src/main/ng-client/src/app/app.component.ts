@@ -1,8 +1,9 @@
 import {Component, OnInit} from '@angular/core';
-import {Http} from '@angular/http';
-import {Observable} from 'rxjs/Observable';
-import {Subscription} from 'rxjs/Subscription';
-import {Subject} from 'rxjs/Subject';
+//import {Http} from '@angular/http';
+import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
+//import {Observable} from 'rxjs/Observable';
+//import {Subscription} from 'rxjs/Subscription';
+//import {Subject} from 'rxjs/Subject';
 //import {ActivatedRoute, Router, NavigationStart, NavigationEnd, NavigationExtras} from '@angular/router';
 
 import {AppService} from './app.service';
@@ -18,7 +19,7 @@ export class AppComponent implements OnInit {
   constructor(
     public state: AppState,
     private service: AppService,
-    private http: Http) {
+    private http: HttpClient) {
 
   }
 
@@ -34,7 +35,7 @@ export class AppComponent implements OnInit {
 
   getConfig() {
     return this.http.get("assets/config.json").map(res => {
-      let cfg = res.json();
+      let cfg = res;
 
       this.state.setConfig(cfg);
       var userLang = navigator.language.split('-')[0]; // use navigator lang if available
