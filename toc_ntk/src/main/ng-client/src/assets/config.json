@@ -10,10 +10,10 @@
     "inTitle": 1.5,
     "addExtentForTitle": false,
     "dictionaries": {
-      "psh": 3.0,
+      "psh": 1.4,
       "keywords": 1.2,
       "nerizene": 1.2,
-      "konspekt": 4.0
+      "konspekt": 1.3
     }
   }
 }

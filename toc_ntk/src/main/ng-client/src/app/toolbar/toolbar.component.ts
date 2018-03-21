@@ -58,11 +58,9 @@ export class ToolbarComponent implements OnInit {
       this.router.navigate(['/sysno', this.state.sysno]);
       this.state.setSysno(this.state.sysno, 'tool');
   }
-
-  add() {
-      //this.loading = true;
-      //this.selected = this.candidates.filter((c: Candidate) => {return c['selected']});
-      this.state.selected = [];
+  
+  setSelected(){
+    this.state.selected = [];
       this.state.candidates.forEach((c: Candidate) => {
           if (c.dictionaries) {
               c.dictionaries.forEach((dm: DictionaryMatch) => {
@@ -81,6 +79,19 @@ export class ToolbarComponent implements OnInit {
           }
 
       });
+  }
+    
+    saveNew(){
+      this.setSelected();
+      this.service.saveNewKeys(this.state.selected).subscribe(res => {
+        console.log(res);
+      });
+    }
+
+  add() {
+      //this.loading = true;
+      //this.selected = this.candidates.filter((c: Candidate) => {return c['selected']});
+    this.setSelected();
       this.service.getExport(this.state.selected).subscribe(res => {
           //this.exported = JSON.stringify(res);
           //this.exportModal.open();

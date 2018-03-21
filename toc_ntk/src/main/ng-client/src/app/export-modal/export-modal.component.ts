@@ -31,4 +31,8 @@ export class ExportModalComponent  extends MzBaseModal{
       this.selected.push(dm2);
       this.newkey = '';
     }
+    
+    remove(idx: number){
+      this.selected.splice(idx, 1);
+    }
 }
