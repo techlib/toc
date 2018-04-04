@@ -126,7 +126,7 @@ export class AppService {
         let params: HttpParams = new HttpParams()
         .set('action', 'VIEW_TOC')
         .set('sysno', sysno);
-        return this.http.get(url, {params: params});
+        return this.http.get(url, {responseType: 'text', params: params});
     }
 
     copyTextToClipboard(text) {

@@ -259,7 +259,7 @@ public class TocAnalizer {
     }
 
     private void setTocFile(String filename) throws IOException {
-        String dir = Options.getInstance().getString("saved_tocs_dir");
+        String dir = Options.getInstance().getString("saved_morpho_dir");
         tocFile = new File(dir + filename);
     }
 

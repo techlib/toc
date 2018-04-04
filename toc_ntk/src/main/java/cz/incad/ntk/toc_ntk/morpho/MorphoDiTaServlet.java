@@ -107,7 +107,7 @@ public class MorphoDiTaServlet extends HttpServlet {
         String sysno = request.getParameter("sysno");
         JSONObject jfolders = Options.getInstance().getFolders();
         if (jfolders.has(sysno)) {
-          String foldername = Options.getInstance().getString("balicky_dir", "~/.ntk/balicky/") + jfolders.getString(sysno);
+          String foldername = Options.getInstance().getString("balicky_dir", "~/.ntk/balicky/") + jfolders.getJSONObject(sysno).getString("name");
 
           File dir = new File(foldername);
           String[] extensions = new String[]{"txt"};
@@ -120,6 +120,7 @@ public class MorphoDiTaServlet extends HttpServlet {
             }
           });
           for (File f : files) {
+            
             out.println(FileUtils.readFileToString(f, Charset.forName("UTF-8")));
           }
 

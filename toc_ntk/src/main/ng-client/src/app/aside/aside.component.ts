@@ -65,7 +65,7 @@ export class AsideComponent implements OnInit {
     this.sysnos = [];
 
     this.service.getBalicky(update).subscribe(res => {
-        this.sysno = this.state.sysno;
+      this.sysno = this.state.sysno;
       this.state.balicky = res;
       let fs = Object.keys(res);
       fs.sort((a, b) => {

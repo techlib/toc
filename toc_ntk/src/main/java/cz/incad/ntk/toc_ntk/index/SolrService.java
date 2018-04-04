@@ -56,10 +56,33 @@ public class SolrService {
         for(String key : keys){
           SolrInputDocument idoc = new SolrInputDocument();
           idoc.addField("key", key);
-          LOGGER.info(idoc.toString());
           solr.add("nerizene", idoc, 100);
         }
         solr.close();
+    }
+
+    public static void saveToc(String sysno, String toc) throws SolrServerException, IOException {
+        SolrClient solr = new HttpSolrClient.Builder(urlString).build();
+          SolrInputDocument idoc = new SolrInputDocument();
+          idoc.addField("sysno", sysno);
+          idoc.addField("toc", toc);
+          solr.add("tocs", idoc, 100);
+        solr.close();
+    }
+
+    public static String getToc(String sysno) throws SolrServerException, IOException {
+        SolrClient solr = new HttpSolrClient.Builder(urlString).build();
+        SolrQuery query = new SolrQuery();
+        query.setQuery("sysno:\"" + sysno + "\"");
+        QueryResponse response = solr.query("tocs", query);
+            solr.close();
+            if (response.getResults().getNumFound() > 0) {
+              String toc = (String) response.getResults().get(0).getFirstValue("toc");
+              
+              LOGGER.info(toc);
+                return toc;
+            }
+            return null;
     }
 
     public static boolean isInBlackList(String text) {

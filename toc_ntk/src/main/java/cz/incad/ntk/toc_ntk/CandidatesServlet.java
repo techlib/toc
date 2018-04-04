@@ -152,11 +152,12 @@ public class CandidatesServlet extends HttpServlet {
                 String sysno = request.getParameter("sysno");
                 //String json = request.getParameter("toc");
                 String json = request.getReader().lines().collect(Collectors.joining(System.lineSeparator()));
-                LOGGER.log(Level.INFO, "sysno: {0}, json: {1}", new Object[]{sysno, json});
+                LOGGER.log(Level.FINE, "sysno: {0}, json: {1}", new Object[]{sysno, json});
                 JSONObject ret = new JSONObject();
                 try {
 //                    SolrService.saveToc(sysno, json);
                     FileService.save(sysno, json);
+                    Options.resetInstance();
                     out.print(ret.put("code", 0).toString());
                 } catch (Exception ex) {
                     out.print(ret.put("code", 1).put("error", ex).toString());
