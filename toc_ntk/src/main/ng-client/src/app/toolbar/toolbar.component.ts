@@ -68,14 +68,14 @@ export class ToolbarComponent implements OnInit {
                       this.state.selected.push(dm);
                   }
               });
-          }
-          if (c['selected']) {
-              let dm2 : DictionaryMatch = new DictionaryMatch();
-              dm2.name = 'novy';
-              dm2.text = c.text;
-              //dm2.text = c.text;
-              dm2.selected = true;
-              this.state.selected.push(dm2);
+          } else if (c['selected']) {
+                let dm2 : DictionaryMatch = new DictionaryMatch();
+                dm2.name = 'novy';
+                dm2.text = c.text;
+                //dm2.text = c.text;
+                dm2.selected = true;
+                this.state.selected.push(dm2);
+            
           }
 
       });

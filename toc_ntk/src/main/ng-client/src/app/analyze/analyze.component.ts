@@ -67,6 +67,7 @@ export class AnalyzeComponent implements OnInit {
 
     select(c: string) {
         //this.selected = this.candidates.filter((c: Candidate) => {return c['selected'] !== 'undefined' && c['selected']});
+      
         this.service.copyTextToClipboard(c);
     }
 

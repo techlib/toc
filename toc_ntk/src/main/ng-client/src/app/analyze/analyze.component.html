@@ -71,20 +71,25 @@
           </thead>
           <tbody>
             <ng-container *ngFor="let c of state.candidates; let idx = index">
-              <tr *ngIf="(state.showMatched && c.isMatched) || (state.showFree && !c.isMatched) || (state.showBlacklisted && c.blacklisted) ">
+              <tr *ngIf="(state.showMatched && c.isMatched) || (state.showFree && !c.isMatched)  || (state.showFree && c.selected) || (state.showBlacklisted && c.blacklisted) ">
                 <!-- Dodrz prefix class, muze jich byt vice, tohle je jen priklad, barvy prahu se definuje ve variables -->
                 <td class="app-cursor-pointer" [class.app-score-1]="c.score > maxScore * state.threshold" mz-tooltip [tooltip]="formatTooltip(c)" [html]="true" [position]="'top'">
                   {{c.score | number: '1.1-3'}}
                 </td>
                 <td *ngFor="let d of state.scoreConfig.dicts">
                 <ng-container *ngFor="let cd of c.dictionaries; let idx2 = index">
-                  <mz-checkbox-container *ngIf="cd.name === d">
+                  <mz-checkbox-container *ngIf="cd.name === d || (cd.name === 'nerizene' && d === 'nerizene' && c.isMatched)">
                     <input [id]="'ch_'+idx+'_'+d" type="checkbox" [(ngModel)]="cd.selected" mz-checkbox [label]="cd.text"  (click)="select(cd.text)" />
+                  </mz-checkbox-container>
+                </ng-container>
+                <ng-container *ngIf="!c.dictionaries || c.dictionaries.length === 0">  
+                  <mz-checkbox-container *ngIf="d === 'nerizene' && (c.isMatched || c.selected)">
+                    <input [id]="'ch_0_'+d" type="checkbox" [(ngModel)]="c.selected" mz-checkbox [label]="c.text"  (click)="select(c.text)" />
                   </mz-checkbox-container>
                 </ng-container>
                 </td>
                 <td>
-                  <mz-checkbox-container *ngIf="!c.isMatched" >
+                  <mz-checkbox-container *ngIf="!c.isMatched && !c.selected " >
                     <i class="app-mdi-cancel red-text" (click)="addToBlackList(c)" mz-tooltip [tooltip]="'Add to blacklist'"></i>
                     <input [id]="'ch_'+idx+'_'+c.text" type="checkbox" [(ngModel)]="c.selected" mz-checkbox [label]="c.text" (click)="select(c.text)" />
                   </mz-checkbox-container>

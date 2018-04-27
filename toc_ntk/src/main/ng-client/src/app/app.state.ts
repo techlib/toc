@@ -25,7 +25,7 @@ export class AppState {
   title: string = "";
   hasToc: boolean = false;
   
-  currentToc: any;
+  currentToc: {'candidates':Candidate[]};
   candidates: Candidate[] = [];
   selected: DictionaryMatch[] = [];
   maxScore: number = 0;

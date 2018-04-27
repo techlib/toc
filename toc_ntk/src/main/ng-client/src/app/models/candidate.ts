@@ -15,5 +15,7 @@ export class Candidate {
   deeps: number[];
   inTitle: boolean;
   explain: string[];
+  
+  selected: boolean;
 }
 
