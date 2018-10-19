@@ -1,0 +1,84 @@
+<mz-navbar>
+  <a href="./" class="brand-logo">Automatická klasifikace s využitím ToC dokumentů</a>
+  <mz-navbar-item-container [align]="'right'">
+    <mz-navbar-item><a routerLink="help">Help</a></mz-navbar-item>
+    <mz-navbar-item><a routerLink="analyze">Analyze</a></mz-navbar-item>
+    <mz-navbar-item><a routerLink="blacklist">Blacklist</a></mz-navbar-item>
+    <mz-navbar-item>
+      <a id="app-navbar-item-settings" (click)="state.showScoreConfig = !state.showScoreConfig">
+        <i class="app-mdi-settings"></i>
+        Settings
+      </a>
+    </mz-navbar-item>
+    <!-- Temporary commented
+    <mz-navbar-item>
+      <a id="app-navbar-item-settings" href="#">
+        <i class="app-mdi-settings"></i>
+        Settings
+      </a>
+    </mz-navbar-item>
+    -->
+  </mz-navbar-item-container>
+</mz-navbar>
+
+
+<!-- Temporary commented
+<mz-sidenav [id]="'navbar-item-settings'" [collapseButtonId]="'app-navbar-item-settings'" [edge]="'right'">
+  <mz-sidenav-header>
+    <i class="app-mdi-settings"></i> Settings
+  </mz-sidenav-header>
+  <mz-sidenav-link>
+    <a href="#!">
+      <mz-checkbox-container>
+        <input mz-checkbox [label]="'Show score'" id="show-score" type="checkbox" [(ngModel)]="state.showScoreConfig" />
+      </mz-checkbox-container>
+    </a>
+  </mz-sidenav-link>
+  <mz-sidenav-link>
+    <a routerLink="/blacklist">manage blacklist</a>
+  </mz-sidenav-link>
+  <mz-sidenav-link>
+      <mz-checkbox-container>
+        <input mz-checkbox [label]="'Show sysno list'" id="show-sysnolist" type="checkbox" [(ngModel)]="state.showSideBar" />
+      </mz-checkbox-container>
+  </mz-sidenav-link>
+  <mz-sidenav-link>
+    <a href="#!">
+      <mz-checkbox-container>
+        <input mz-checkbox [label]="'Show matched'" id="show-matched" type="checkbox" [(ngModel)]="state.showMatched">
+      </mz-checkbox-container>
+    </a>
+  </mz-sidenav-link>
+  <mz-sidenav-link>
+    <a href="#!">
+      <mz-checkbox-container>
+        <input mz-checkbox [label]="'Show not matched'" id="show-no-matched" type="checkbox" [(ngModel)]="state.showFree">
+      </mz-checkbox-container>
+    </a>
+  </mz-sidenav-link>
+  <mz-sidenav-link>
+    <a href="#!">
+      <mz-checkbox-container>
+        <input mz-checkbox [label]="'Show candidates in blacklist'" id="show-blacklisted" type="checkbox" [(ngModel)]="state.showBlacklisted">
+      </mz-checkbox-container>
+    </a>
+  </mz-sidenav-link>
+  <mz-sidenav-link>
+    <a href="#!">
+      <mz-checkbox-container>
+        <input mz-checkbox [label]="'Show details in the table'" id="show-detail" type="checkbox" [(ngModel)]="state.showDetails">
+      </mz-checkbox-container>
+    </a>
+  </mz-sidenav-link>
+  <mz-sidenav-divider></mz-sidenav-divider>
+  <mz-sidenav-link>
+    <a href="#!">
+      <mz-input-container>
+        <input mz-input id="threshold" placeholder="Set threshold in percent" type="text" 
+               [ngModel]="state.threshold | percent:'.0-0'"
+               (ngModelChange)="setThreshold($event)">
+      </mz-input-container>
+    </a>
+  </mz-sidenav-link>
+</mz-sidenav>
+-->

@@ -1,18 +1,15 @@
 package cz.incad.ntk.toc_ntk.morpho;
 
-import cz.incad.ntk.toc_ntk.Candidate;
+import cz.cuni.mff.ufal.morphodita.Tagger;
+import cz.incad.ntk.toc_ntk.InitServlet;
 import cz.incad.ntk.toc_ntk.Options;
-import cz.incad.ntk.toc_ntk.ScoreConfig;
-import cz.incad.ntk.toc_ntk.TocAnalizer;
 import cz.incad.ntk.toc_ntk.TocLine;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.nio.charset.Charset;
-import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
-import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
@@ -120,7 +117,7 @@ public class MorphoDiTaServlet extends HttpServlet {
             }
           });
           for (File f : files) {
-            
+
             out.println(FileUtils.readFileToString(f, Charset.forName("UTF-8")));
           }
 
@@ -141,6 +138,27 @@ public class MorphoDiTaServlet extends HttpServlet {
         ret.put("data", data);
         TocLine tc = new TocLine(data);
         ret.put("tocline", tc.toJSON());
+        out.print(ret.toString(2));
+      }
+    },
+    RELOAD_TAGGER {
+      @Override
+      void doPerform(HttpServletRequest request, HttpServletResponse response) throws Exception {
+
+        response.setContentType("text/json;charset=UTF-8");
+        PrintWriter out = response.getWriter();
+        JSONObject ret = new JSONObject();
+        try {
+          LOGGER.log(Level.INFO, "loading tagger: {0}", request.getParameter("file"));
+          InitServlet.tagger = Tagger.load(request.getParameter("file"));
+          if(InitServlet.tagger != null){
+          ret.put("msg", "success");
+          } else {
+            ret.put("msg", "error");
+          }
+        } catch (Exception ex) {
+          ret.put("msg", ex);
+        }
         out.print(ret.toString(2));
       }
     };

@@ -56,14 +56,9 @@ public class MorphoTagger {
           jotoken.put("lemma", lemma.getLemma())
                   .put("tag", lemma.getTag())
                   .put("space", space)
-                  .put("token", text.substring(token_start, token_end));
-//          jatokens.put("%s%s<token lemma=\"%s\" tag=\"%s\">%s</token>%s",
-//                            encodeEntities(text.substring(t, token_start)),
-//                            i == 0 ? "<sentence>" : "",
-//                            encodeEntities(lemma.getLemma()),
-//                            encodeEntities(lemma.getTag()),
-//                            encodeEntities(text.substring(token_start, token_end)),
-//                            i + 1 == lemmas.size() ? "</sentence>" : "");
+                  .put("token", text.substring(token_start, token_end))
+                  .put("token_start", token_start)
+                  .put("token_end", token_end);
           t = token_end;
           ret.append("result", jotoken);
           

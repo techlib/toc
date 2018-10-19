@@ -1,0 +1,8 @@
+<section class="app-sroll-wrapper" *ngIf="sysnos.length > 0">
+  <button mz-button (click)="updateFolders()">update folders</button>
+  <mz-collection>
+    <a mz-collection-link  *ngFor="let f of sysnos" (click)="setSysno(f)" [class.active]="f === state.sysno || f === sysno">
+      <span>{{f}}</span><i *ngIf="state.balicky[f].saved" mz-icon-mdi [icon]="'content-save'" class="grey-text text-darken-2 app-cursor-pointer right"></i>
+    </a>
+  </mz-collection>
+</section>

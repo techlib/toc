@@ -1,0 +1,14 @@
+<div class="row app-clean-mg">
+  <div class="col s6">
+    <mz-input-container>
+      <span>Sysno:</span>
+      <input mz-input id="sysno" placeholder="sysno number" type="text" [(ngModel)]="state.sysno" (keyup.enter)="setSysno()" name="sysno" />
+    </mz-input-container>
+  </div><!--/.col -->
+  <div class="col s6 right-align">
+    <button mz-button mz-tooltip [tooltip]="'otevre dialog, kde je mozne pridat hesla, a ulozit do slovniku nerizene'" (click)="add()">add</button>
+    <button mz-button mz-tooltip [tooltip]="'ulozi vybrane nova hesla (bez slovniku) do slovniku nerizene'" (click)="saveNew()">save</button>
+    <button mz-button mz-tooltip [tooltip]="'pocita score pro jiz nalezene kandidaty. Pouzit po zmene nastaveni vah'" (click)="state.rescore()">re-score</button>
+    <button mz-button mz-tooltip [tooltip]="'zobrazi obsah'" [disabled]="!state.hasToc" (click)="openToc()" >view toc</button>
+  </div><!--/.col -->
+</div><!--/.row -->

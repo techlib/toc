@@ -1,0 +1,36 @@
+// --- TOOLBAR ---
+
+app-toolbar {
+ .row {
+    height: $app-toolbar-height;
+    line-height: $app-toolbar-height;
+    background-color: color("grey", "lighten-4");
+    @include set-border(bottom, 1, solid, lighten(grey, 34%));
+    box-shadow: 0 2px 2px 0 rgba(38, 50, 56, 0), 0 1px 5px 0 rgba(38, 50, 56, 0.12), 0 3px 1px -20px rgba(38, 50, 56, 0.4);
+    color: $collection-active-color;
+
+    .col {
+      padding: 0 1rem;
+      
+      &:first-child {
+        padding-left: 2rem !important;
+        
+        span {
+          font-size: 0.8rem;
+          margin-right: 1rem;
+          color: $secondary-color;
+        }
+        
+        .input-field {
+          @extend .app-clean-mg;
+          
+          input[type=text] {
+            @extend .app-clean-mg;
+            width: auto;
+            height: $button-height;
+          }
+        }
+      }
+    }
+  } 
+}

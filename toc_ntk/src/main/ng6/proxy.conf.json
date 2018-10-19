@@ -1,0 +1,32 @@
+{
+  "/search/**": {
+    "target": "http://localhost:8983/solr/",
+    "ignorePath": false,
+    "logLevel": "debug",
+    "pathRewrite": {
+      "^/search":""
+    },
+    "changeOrigin": false,
+    "secure": false
+  },
+  "/mdt": {
+    "target": "http://localhost:8082/ntk_toc/mdt",
+    "ignorePath": false,
+    "logLevel": "debug",
+    "pathRewrite": {
+      "^/mdt":""
+    },
+    "changeOrigin": false,
+    "secure": false
+  },
+  "/candidates": {
+    "target": "http://localhost:8082/ntk_toc/candidates",
+    "ignorePath": false,
+    "logLevel": "debug",
+    "pathRewrite": {
+      "^/candidates":""
+    },
+    "changeOrigin": false,
+    "secure": false
+  }
+}

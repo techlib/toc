@@ -112,8 +112,13 @@ public class MorphoTag {
   
    */
   public MorphoTag(String str) {
+    
+    //Muze byt english:
+    //https://www.ling.upenn.edu/courses/Fall_2003/ling001/penn_treebank_pos.html
+    
+    
     if (str.length() != 15) {
-      LOGGER.log(Level.WARNING, "invalid tag string");
+      LOGGER.log(Level.WARNING, "invalid tag string: {0}", str);
       this.isValid = false;
     } else {
       this.isValid = true;

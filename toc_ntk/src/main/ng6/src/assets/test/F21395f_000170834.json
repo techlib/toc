@@ -1,0 +1,2693 @@
+{
+  "candidates": [
+    {
+      "extent": [2],
+      "hasProperNoun": false,
+      "score": 1.399999976158142,
+      "blacklisted": false,
+      "found": 2,
+      "isMatched": false,
+      "inTitle": false,
+      "deeps": [3],
+      "text": "Vliv mlecího tlaku",
+      "type": "ADJETIVES_NOUN"
+    },
+    {
+      "extent": [9],
+      "hasProperNoun": false,
+      "score": 4.699999809265137,
+      "blacklisted": false,
+      "found": 1,
+      "isMatched": false,
+      "inTitle": false,
+      "deeps": [3],
+      "text": "Příprava látky pro papírenský stroj",
+      "type": "ADJETIVES_NOUN"
+    },
+    {
+      "extent": [8],
+      "hasProperNoun": false,
+      "score": 4.199999809265137,
+      "blacklisted": false,
+      "found": 1,
+      "isMatched": false,
+      "inTitle": false,
+      "deeps": [2],
+      "text": "na sítě papírenského stroje",
+      "type": "ADJETIVES_NOUN"
+    },
+    {
+      "extent": [4],
+      "hasProperNoun": false,
+      "score": 2.200000047683716,
+      "blacklisted": false,
+      "found": 1,
+      "isMatched": false,
+      "inTitle": false,
+      "deeps": [2],
+      "text": "do konstrukce papírenského stroje",
+      "type": "ADJETIVES_NOUN"
+    },
+    {
+      "extent": [4],
+      "hasProperNoun": false,
+      "score": 2.200000047683716,
+      "blacklisted": false,
+      "found": 1,
+      "isMatched": false,
+      "inTitle": false,
+      "deeps": [2],
+      "text": "Okruhové voda",
+      "type": "ADJETIVES_NOUN"
+    },
+    {
+      "extent": [6],
+      "hasProperNoun": false,
+      "score": 3.9600000381469727,
+      "blacklisted": false,
+      "found": 2,
+      "isMatched": true,
+      "inTitle": false,
+      "deeps": [2],
+      "text": "přehled",
+      "type": "NOUN",
+      "dictionaries": [{
+        "name": "keywords",
+        "text": "přehled"
+      }]
+    },
+    {
+      "extent": [1],
+      "hasProperNoun": false,
+      "score": 1.7000000476837158,
+      "blacklisted": false,
+      "found": 1,
+      "isMatched": true,
+      "inTitle": false,
+      "deeps": [2],
+      "text": "děj",
+      "type": "NOUN",
+      "dictionaries": [{
+        "name": "PSH",
+        "text": "vratné děje"
+      }]
+    },
+    {
+      "extent": [4],
+      "hasProperNoun": false,
+      "score": 5.600000381469727,
+      "blacklisted": false,
+      "found": 3,
+      "isMatched": true,
+      "inTitle": false,
+      "deeps": [3],
+      "text": "vlákno",
+      "type": "NOUN",
+      "dictionaries": [{
+        "name": "PSH",
+        "text": "textilní vlákna"
+      }]
+    },
+    {
+      "extent": [5],
+      "hasProperNoun": false,
+      "score": 2.700000047683716,
+      "blacklisted": false,
+      "found": 1,
+      "isMatched": false,
+      "inTitle": false,
+      "deeps": [3],
+      "text": "cesta do nátoku",
+      "type": "NOUN_GENITIVES"
+    },
+    {
+      "extent": [3],
+      "hasProperNoun": false,
+      "score": 1.7000000476837158,
+      "blacklisted": false,
+      "found": 1,
+      "isMatched": false,
+      "inTitle": false,
+      "deeps": [3],
+      "text": "Zvláštnosti technologie výroby papíru",
+      "type": "NOUN_GENITIVES"
+    },
+    {
+      "extent": [1],
+      "hasProperNoun": false,
+      "score": 0.699999988079071,
+      "blacklisted": false,
+      "found": 1,
+      "isMatched": false,
+      "inTitle": false,
+      "deeps": [2],
+      "text": "při některých dějích v papírenské technologii",
+      "type": "ADJETIVES_NOUN"
+    },
+    {
+      "extent": [9],
+      "hasProperNoun": false,
+      "score": 8.100000381469727,
+      "blacklisted": false,
+      "found": 3,
+      "isMatched": true,
+      "inTitle": false,
+      "deeps": [3],
+      "text": "válec",
+      "type": "NOUN",
+      "dictionaries": [{
+        "name": "PSH",
+        "text": "kalibrace válců"
+      }]
+    },
+    {
+      "extent": [4],
+      "hasProperNoun": false,
+      "score": 2.200000047683716,
+      "blacklisted": false,
+      "found": 1,
+      "isMatched": false,
+      "inTitle": false,
+      "deeps": [3],
+      "text": "Možnosti docílení turbulence",
+      "type": "NOUN_GENITIVES"
+    },
+    {
+      "extent": [1],
+      "hasProperNoun": false,
+      "score": 1.940000057220459,
+      "blacklisted": false,
+      "found": 1,
+      "isMatched": true,
+      "inTitle": false,
+      "deeps": [2],
+      "text": "hospodaření",
+      "type": "NOUN",
+      "dictionaries": [
+        {
+          "name": "keywords",
+          "text": "hospodaření"
+        },
+        {
+          "name": "PSH",
+          "text": "hospodaření"
+        }
+      ]
+    },
+    {
+      "extent": [4],
+      "hasProperNoun": false,
+      "score": 3.200000047683716,
+      "blacklisted": false,
+      "found": 1,
+      "isMatched": true,
+      "inTitle": false,
+      "deeps": [3],
+      "text": "proces",
+      "type": "NOUN",
+      "dictionaries": [{
+        "name": "PSH",
+        "text": "procesy"
+      }]
+    },
+    {
+      "extent": [104],
+      "hasProperNoun": false,
+      "score": 52.20000076293945,
+      "blacklisted": false,
+      "found": 1,
+      "isMatched": false,
+      "inTitle": false,
+      "deeps": [2],
+      "text": "Sušení papíru",
+      "type": "NOUN_GENITIVES"
+    },
+    {
+      "extent": [8],
+      "hasProperNoun": false,
+      "score": 5.199999809265137,
+      "blacklisted": false,
+      "found": 1,
+      "isMatched": true,
+      "inTitle": false,
+      "deeps": [2],
+      "text": "element",
+      "type": "NOUN",
+      "dictionaries": [{
+        "name": "PSH",
+        "text": "geomagnetické elementy"
+      }]
+    },
+    {
+      "extent": [5],
+      "hasProperNoun": false,
+      "score": 3.940000057220459,
+      "blacklisted": false,
+      "found": 1,
+      "isMatched": true,
+      "inTitle": false,
+      "deeps": [2],
+      "text": "míchání",
+      "type": "NOUN",
+      "dictionaries": [
+        {
+          "name": "keywords",
+          "text": "míchání"
+        },
+        {
+          "name": "PSH",
+          "text": "míchání"
+        }
+      ]
+    },
+    {
+      "extent": [5],
+      "hasProperNoun": false,
+      "score": 2.700000047683716,
+      "blacklisted": false,
+      "found": 1,
+      "isMatched": false,
+      "inTitle": false,
+      "deeps": [2],
+      "text": "Vazebný systém",
+      "type": "ADJETIVES_NOUN"
+    },
+    {
+      "extent": [2],
+      "hasProperNoun": false,
+      "score": 2.200000047683716,
+      "blacklisted": false,
+      "found": 1,
+      "isMatched": true,
+      "inTitle": false,
+      "deeps": [3],
+      "text": "doba",
+      "type": "NOUN",
+      "dictionaries": [{
+        "name": "PSH",
+        "text": "předoperační doba"
+      }]
+    },
+    {
+      "extent": [104],
+      "hasProperNoun": true,
+      "score": 52.380001068115234,
+      "blacklisted": false,
+      "found": 1,
+      "isMatched": false,
+      "inTitle": false,
+      "deeps": [2],
+      "text": "Io",
+      "type": "PROPERNOUN"
+    },
+    {
+      "extent": [2],
+      "hasProperNoun": false,
+      "score": 1.2000000476837158,
+      "blacklisted": false,
+      "found": 1,
+      "isMatched": false,
+      "inTitle": false,
+      "deeps": [2],
+      "text": "čisticí zařízení",
+      "type": "ADJETIVES_NOUN"
+    },
+    {
+      "extent": [1],
+      "hasProperNoun": false,
+      "score": 2.9000000953674316,
+      "blacklisted": false,
+      "found": 2,
+      "isMatched": true,
+      "inTitle": false,
+      "deeps": [1],
+      "text": "úprava",
+      "type": "NOUN",
+      "dictionaries": [{
+        "name": "PSH",
+        "text": "úprava"
+      }]
+    },
+    {
+      "extent": [4],
+      "hasProperNoun": false,
+      "score": 3.440000057220459,
+      "blacklisted": false,
+      "found": 1,
+      "isMatched": true,
+      "inTitle": false,
+      "deeps": [3],
+      "text": "turbulence",
+      "type": "NOUN",
+      "dictionaries": [
+        {
+          "name": "keywords",
+          "text": "turbulence"
+        },
+        {
+          "name": "PSH",
+          "text": "turbulence"
+        }
+      ]
+    },
+    {
+      "extent": [5],
+      "hasProperNoun": false,
+      "score": 6.100000381469727,
+      "blacklisted": false,
+      "found": 3,
+      "isMatched": true,
+      "inTitle": false,
+      "deeps": [2],
+      "text": "mletí",
+      "type": "NOUN",
+      "dictionaries": [{
+        "name": "PSH",
+        "text": "mletí"
+      }]
+    },
+    {
+      "extent": [5],
+      "hasProperNoun": false,
+      "score": 3.940000057220459,
+      "blacklisted": false,
+      "found": 1,
+      "isMatched": true,
+      "inTitle": false,
+      "deeps": [3],
+      "text": "Filtrace vody",
+      "type": "NOUN_GENITIVES",
+      "dictionaries": [{
+        "name": "keywords",
+        "text": "filtrace vody"
+      }]
+    },
+    {
+      "extent": [2],
+      "hasProperNoun": false,
+      "score": 1.2000000476837158,
+      "blacklisted": false,
+      "found": 1,
+      "isMatched": false,
+      "inTitle": false,
+      "deeps": [3],
+      "text": "doby působení mlecího orgánu",
+      "type": "NOUN_GENITIVES"
+    },
+    {
+      "extent": [4],
+      "hasProperNoun": false,
+      "score": 2.200000047683716,
+      "blacklisted": false,
+      "found": 1,
+      "isMatched": false,
+      "inTitle": false,
+      "deeps": [3],
+      "text": "Prûhyb válců",
+      "type": "NOUN_GENITIVES"
+    },
+    {
+      "extent": [9],
+      "hasProperNoun": false,
+      "score": 4.699999809265137,
+      "blacklisted": false,
+      "found": 1,
+      "isMatched": false,
+      "inTitle": false,
+      "deeps": [3],
+      "text": "skříň",
+      "type": "NOUN"
+    },
+    {
+      "extent": [5],
+      "hasProperNoun": false,
+      "score": 4.900000095367432,
+      "blacklisted": false,
+      "found": 2,
+      "isMatched": true,
+      "inTitle": false,
+      "deeps": [2],
+      "text": "systém",
+      "type": "NOUN",
+      "dictionaries": [{
+        "name": "PSH",
+        "text": "rezervační systém"
+      }]
+    },
+    {
+      "extent": [2],
+      "hasProperNoun": false,
+      "score": 1.2000000476837158,
+      "blacklisted": false,
+      "found": 1,
+      "isMatched": false,
+      "inTitle": false,
+      "deeps": [3],
+      "text": "mechanické úpravy",
+      "type": "ADJETIVES_NOUN"
+    },
+    {
+      "extent": [9],
+      "hasProperNoun": false,
+      "score": 4.699999809265137,
+      "blacklisted": false,
+      "found": 1,
+      "isMatched": false,
+      "inTitle": false,
+      "deeps": [3],
+      "text": "a sací válec",
+      "type": "ADJETIVES_NOUN"
+    },
+    {
+      "extent": [4],
+      "hasProperNoun": false,
+      "score": 3.200000047683716,
+      "blacklisted": false,
+      "found": 1,
+      "isMatched": true,
+      "inTitle": false,
+      "deeps": [2],
+      "text": "rozměr",
+      "type": "NOUN",
+      "dictionaries": [{
+        "name": "PSH",
+        "text": "rozměry Země"
+      }]
+    },
+    {
+      "extent": [2],
+      "hasProperNoun": false,
+      "score": 1.2000000476837158,
+      "blacklisted": false,
+      "found": 1,
+      "isMatched": false,
+      "inTitle": false,
+      "deeps": [2],
+      "text": "Odvodnění papíroviny",
+      "type": "NOUN_GENITIVES"
+    },
+    {
+      "extent": [1],
+      "hasProperNoun": false,
+      "score": 0.699999988079071,
+      "blacklisted": false,
+      "found": 1,
+      "isMatched": false,
+      "inTitle": false,
+      "deeps": [2],
+      "text": "Plasticko - elastické deformace",
+      "type": "ADJETIVES_NOUN"
+    },
+    {
+      "extent": [4],
+      "hasProperNoun": false,
+      "score": 2.200000047683716,
+      "blacklisted": false,
+      "found": 1,
+      "isMatched": false,
+      "inTitle": false,
+      "deeps": [3],
+      "text": "Prûhyb",
+      "type": "NOUN"
+    },
+    {
+      "extent": [2],
+      "hasProperNoun": false,
+      "score": 1.399999976158142,
+      "blacklisted": false,
+      "found": 2,
+      "isMatched": false,
+      "inTitle": false,
+      "deeps": [3],
+      "text": "Vznik vazebného systému",
+      "type": "ADJETIVES_NOUN"
+    },
+    {
+      "extent": [1],
+      "hasProperNoun": false,
+      "score": 0.699999988079071,
+      "blacklisted": false,
+      "found": 1,
+      "isMatched": false,
+      "inTitle": false,
+      "deeps": [2],
+      "text": "Děje na sítě papírenského stroje",
+      "type": "ADJETIVES_NOUN"
+    },
+    {
+      "extent": [5],
+      "hasProperNoun": false,
+      "score": 2.700000047683716,
+      "blacklisted": false,
+      "found": 1,
+      "isMatched": false,
+      "inTitle": false,
+      "deeps": [3],
+      "text": "vznik sítoviny",
+      "type": "NOUN_GENITIVES"
+    },
+    {
+      "extent": [9],
+      "hasProperNoun": false,
+      "score": 14.100000381469727,
+      "blacklisted": false,
+      "found": 8,
+      "isMatched": true,
+      "inTitle": false,
+      "deeps": [3],
+      "text": "stroj",
+      "type": "NOUN",
+      "dictionaries": [{
+        "name": "PSH",
+        "text": "stroje"
+      }]
+    },
+    {
+      "extent": [5],
+      "hasProperNoun": false,
+      "score": 2.9000000953674316,
+      "blacklisted": false,
+      "found": 2,
+      "isMatched": false,
+      "inTitle": false,
+      "deeps": [3],
+      "text": "nátok",
+      "type": "NOUN"
+    },
+    {
+      "extent": [1],
+      "hasProperNoun": false,
+      "score": 2.9000000953674316,
+      "blacklisted": false,
+      "found": 2,
+      "isMatched": true,
+      "inTitle": false,
+      "deeps": [2],
+      "text": "pohyb",
+      "type": "NOUN",
+      "dictionaries": [{
+        "name": "PSH",
+        "text": "pohyb"
+      }]
+    },
+    {
+      "extent": [8],
+      "hasProperNoun": false,
+      "score": 4.199999809265137,
+      "blacklisted": false,
+      "found": 1,
+      "isMatched": false,
+      "inTitle": false,
+      "deeps": [3],
+      "text": "Únik plnidel a pevných podílů",
+      "type": "ADJETIVES_NOUN"
+    },
+    {
+      "extent": [-138],
+      "hasProperNoun": false,
+      "score": -67.55999755859375,
+      "blacklisted": false,
+      "found": 1,
+      "isMatched": true,
+      "inTitle": false,
+      "deeps": [1],
+      "text": "literatura",
+      "type": "NOUN",
+      "dictionaries": [
+        {
+          "name": "keywords",
+          "text": "literatura"
+        },
+        {
+          "name": "PSH",
+          "text": "literatura"
+        }
+      ]
+    },
+    {
+      "extent": [8],
+      "hasProperNoun": false,
+      "score": 4.199999809265137,
+      "blacklisted": false,
+      "found": 1,
+      "isMatched": false,
+      "inTitle": false,
+      "deeps": [3],
+      "text": "Únik plnidel",
+      "type": "NOUN_GENITIVES"
+    },
+    {
+      "extent": [5],
+      "hasProperNoun": false,
+      "score": 3.700000047683716,
+      "blacklisted": false,
+      "found": 1,
+      "isMatched": true,
+      "inTitle": false,
+      "deeps": [3],
+      "text": "vrstva",
+      "type": "NOUN",
+      "dictionaries": [{
+        "name": "PSH",
+        "text": "mezní vrstva"
+      }]
+    },
+    {
+      "extent": [2],
+      "hasProperNoun": false,
+      "score": 2.200000047683716,
+      "blacklisted": false,
+      "found": 1,
+      "isMatched": true,
+      "inTitle": false,
+      "deeps": [3],
+      "text": "tok",
+      "type": "NOUN",
+      "dictionaries": [{
+        "name": "PSH",
+        "text": "finanční toky"
+      }]
+    },
+    {
+      "extent": [9],
+      "hasProperNoun": false,
+      "score": 10.5,
+      "blacklisted": false,
+      "found": 5,
+      "isMatched": true,
+      "inTitle": false,
+      "deeps": [3],
+      "text": "vliv",
+      "type": "NOUN",
+      "dictionaries": [{
+        "name": "PSH",
+        "text": "povětrnostní vlivy"
+      }]
+    },
+    {
+      "extent": [4],
+      "hasProperNoun": false,
+      "score": 3.200000047683716,
+      "blacklisted": false,
+      "found": 1,
+      "isMatched": true,
+      "inTitle": false,
+      "deeps": [3],
+      "text": "možnost",
+      "type": "NOUN",
+      "dictionaries": [{
+        "name": "PSH",
+        "text": "možnosti migrace"
+      }]
+    },
+    {
+      "extent": [4],
+      "hasProperNoun": false,
+      "score": 2.200000047683716,
+      "blacklisted": false,
+      "found": 1,
+      "isMatched": false,
+      "inTitle": false,
+      "deeps": [3],
+      "text": "docílení",
+      "type": "NOUN"
+    },
+    {
+      "extent": [7],
+      "hasProperNoun": false,
+      "score": 3.700000047683716,
+      "blacklisted": false,
+      "found": 1,
+      "isMatched": false,
+      "inTitle": false,
+      "deeps": [3],
+      "text": "Nátok papíroviny na síto papírenského stroje",
+      "type": "ADJETIVES_NOUN"
+    },
+    {
+      "extent": [130],
+      "hasProperNoun": false,
+      "score": 88.04000091552734,
+      "blacklisted": false,
+      "found": 16,
+      "isMatched": true,
+      "inTitle": true,
+      "deeps": [1],
+      "text": "papír",
+      "type": "NOUN",
+      "dictionaries": [
+        {
+          "name": "keywords",
+          "text": "papír"
+        },
+        {
+          "name": "PSH",
+          "text": "papír"
+        }
+      ]
+    },
+    {
+      "extent": [1],
+      "hasProperNoun": false,
+      "score": 1.940000057220459,
+      "blacklisted": false,
+      "found": 1,
+      "isMatched": true,
+      "inTitle": false,
+      "deeps": [2],
+      "text": "sedimentace",
+      "type": "NOUN",
+      "dictionaries": [
+        {
+          "name": "keywords",
+          "text": "sedimentace"
+        },
+        {
+          "name": "PSH",
+          "text": "sedimentace"
+        }
+      ]
+    },
+    {
+      "extent": [4],
+      "hasProperNoun": false,
+      "score": 3.440000057220459,
+      "blacklisted": false,
+      "found": 1,
+      "isMatched": true,
+      "inTitle": false,
+      "deeps": [2],
+      "text": "vlhkost",
+      "type": "NOUN",
+      "dictionaries": [
+        {
+          "name": "keywords",
+          "text": "vlhkost"
+        },
+        {
+          "name": "PSH",
+          "text": "vlhkost"
+        }
+      ]
+    },
+    {
+      "extent": [1],
+      "hasProperNoun": false,
+      "score": 1.100000023841858,
+      "blacklisted": false,
+      "found": 3,
+      "isMatched": false,
+      "inTitle": false,
+      "deeps": [3],
+      "text": "hlazení",
+      "type": "NOUN"
+    },
+    {
+      "extent": [4],
+      "hasProperNoun": false,
+      "score": 2.4000000953674316,
+      "blacklisted": false,
+      "found": 2,
+      "isMatched": false,
+      "inTitle": false,
+      "deeps": [3],
+      "text": "Vliv vysoušeného papíru",
+      "type": "ADJETIVES_NOUN"
+    },
+    {
+      "extent": [5],
+      "hasProperNoun": false,
+      "score": 2.700000047683716,
+      "blacklisted": false,
+      "found": 1,
+      "isMatched": false,
+      "inTitle": false,
+      "deeps": [3],
+      "text": "sítovina",
+      "type": "NOUN"
+    },
+    {
+      "extent": [2],
+      "hasProperNoun": false,
+      "score": 2.200000047683716,
+      "blacklisted": false,
+      "found": 1,
+      "isMatched": true,
+      "inTitle": false,
+      "deeps": [2],
+      "text": "pojem",
+      "type": "NOUN",
+      "dictionaries": [{
+        "name": "PSH",
+        "text": "pojem"
+      }]
+    },
+    {
+      "extent": [1],
+      "hasProperNoun": false,
+      "score": 0.8999999761581421,
+      "blacklisted": false,
+      "found": 2,
+      "isMatched": false,
+      "inTitle": false,
+      "deeps": [2],
+      "text": "sítě papírenského stroje",
+      "type": "NOUN_GENITIVES"
+    },
+    {
+      "extent": [2],
+      "hasProperNoun": false,
+      "score": 2.440000057220459,
+      "blacklisted": false,
+      "found": 1,
+      "isMatched": true,
+      "inTitle": false,
+      "deeps": [3],
+      "text": "teplo",
+      "type": "NOUN",
+      "dictionaries": [
+        {
+          "name": "keywords",
+          "text": "teplo"
+        },
+        {
+          "name": "PSH",
+          "text": "teplo"
+        }
+      ]
+    },
+    {
+      "extent": [9],
+      "hasProperNoun": false,
+      "score": 5.699999809265137,
+      "blacklisted": false,
+      "found": 1,
+      "isMatched": true,
+      "inTitle": false,
+      "deeps": [3],
+      "text": "intenzita",
+      "type": "NOUN",
+      "dictionaries": [{
+        "name": "PSH",
+        "text": "světelná intenzita"
+      }]
+    },
+    {
+      "extent": [2],
+      "hasProperNoun": false,
+      "score": 1.2000000476837158,
+      "blacklisted": false,
+      "found": 1,
+      "isMatched": false,
+      "inTitle": false,
+      "deeps": [2],
+      "text": "Úptava",
+      "type": "NOUN"
+    },
+    {
+      "extent": [5],
+      "hasProperNoun": false,
+      "score": 4.900000095367432,
+      "blacklisted": false,
+      "found": 2,
+      "isMatched": true,
+      "inTitle": false,
+      "deeps": [2],
+      "text": "příprava",
+      "type": "NOUN",
+      "dictionaries": [{
+        "name": "PSH",
+        "text": "příprava"
+      }]
+    },
+    {
+      "extent": [2],
+      "hasProperNoun": false,
+      "score": 1.2000000476837158,
+      "blacklisted": false,
+      "found": 1,
+      "isMatched": false,
+      "inTitle": false,
+      "deeps": [3],
+      "text": "navíjení",
+      "type": "NOUN"
+    },
+    {
+      "extent": [5],
+      "hasProperNoun": false,
+      "score": 2.700000047683716,
+      "blacklisted": false,
+      "found": 1,
+      "isMatched": false,
+      "inTitle": false,
+      "deeps": [2],
+      "text": "Příprava papíroviny",
+      "type": "NOUN_GENITIVES"
+    },
+    {
+      "extent": [4],
+      "hasProperNoun": false,
+      "score": 2.200000047683716,
+      "blacklisted": false,
+      "found": 1,
+      "isMatched": false,
+      "inTitle": false,
+      "deeps": [2],
+      "text": "Modernizační zásahy",
+      "type": "ADJETIVES_NOUN"
+    },
+    {
+      "extent": [2],
+      "hasProperNoun": false,
+      "score": 1.2000000476837158,
+      "blacklisted": false,
+      "found": 1,
+      "isMatched": false,
+      "inTitle": false,
+      "deeps": [3],
+      "text": "a doby působení mlecího orgánu",
+      "type": "ADJETIVES_NOUN"
+    },
+    {
+      "extent": [8],
+      "hasProperNoun": false,
+      "score": 4.199999809265137,
+      "blacklisted": false,
+      "found": 1,
+      "isMatched": false,
+      "inTitle": false,
+      "deeps": [3],
+      "text": "podíl",
+      "type": "NOUN"
+    },
+    {
+      "extent": [5],
+      "hasProperNoun": false,
+      "score": 5.380000114440918,
+      "blacklisted": false,
+      "found": 2,
+      "isMatched": true,
+      "inTitle": false,
+      "deeps": [3],
+      "text": "vznik",
+      "type": "NOUN",
+      "dictionaries": [
+        {
+          "name": "keywords",
+          "text": "vznik"
+        },
+        {
+          "name": "PSH",
+          "text": "vznik konkrecí"
+        }
+      ]
+    },
+    {
+      "extent": [130],
+      "hasProperNoun": false,
+      "score": 70.76000213623047,
+      "blacklisted": false,
+      "found": 4,
+      "isMatched": true,
+      "inTitle": true,
+      "deeps": [1],
+      "text": "výroba",
+      "type": "NOUN",
+      "dictionaries": [
+        {
+          "name": "keywords",
+          "text": "výroba"
+        },
+        {
+          "name": "PSH",
+          "text": "výroba"
+        }
+      ]
+    },
+    {
+      "extent": [9],
+      "hasProperNoun": false,
+      "score": 4.699999809265137,
+      "blacklisted": false,
+      "found": 1,
+      "isMatched": false,
+      "inTitle": false,
+      "deeps": [3],
+      "text": "třesení",
+      "type": "NOUN"
+    },
+    {
+      "extent": [1],
+      "hasProperNoun": false,
+      "score": 0.8999999761581421,
+      "blacklisted": false,
+      "found": 2,
+      "isMatched": false,
+      "inTitle": false,
+      "deeps": [2],
+      "text": "Pohyb vláknitých suspenzí",
+      "type": "ADJETIVES_NOUN"
+    },
+    {
+      "extent": [5],
+      "hasProperNoun": false,
+      "score": 3.0999999046325684,
+      "blacklisted": false,
+      "found": 3,
+      "isMatched": false,
+      "inTitle": false,
+      "deeps": [2],
+      "text": "papírovina",
+      "type": "NOUN"
+    },
+    {
+      "extent": [4],
+      "hasProperNoun": false,
+      "score": 2.200000047683716,
+      "blacklisted": false,
+      "found": 1,
+      "isMatched": false,
+      "inTitle": false,
+      "deeps": [3],
+      "text": "Satinování",
+      "type": "NOUN"
+    },
+    {
+      "extent": [2],
+      "hasProperNoun": false,
+      "score": 1.2000000476837158,
+      "blacklisted": false,
+      "found": 1,
+      "isMatched": false,
+      "inTitle": false,
+      "deeps": [3],
+      "text": "Navíjení papíru",
+      "type": "NOUN_GENITIVES"
+    },
+    {
+      "extent": [8],
+      "hasProperNoun": false,
+      "score": 5.199999809265137,
+      "blacklisted": false,
+      "found": 1,
+      "isMatched": true,
+      "inTitle": false,
+      "deeps": [3],
+      "text": "typ",
+      "type": "NOUN",
+      "dictionaries": [{
+        "name": "PSH",
+        "text": "typ dat"
+      }]
+    },
+    {
+      "extent": [5],
+      "hasProperNoun": false,
+      "score": 2.700000047683716,
+      "blacklisted": false,
+      "found": 1,
+      "isMatched": false,
+      "inTitle": false,
+      "deeps": [3],
+      "text": "Sedění látky",
+      "type": "NOUN_GENITIVES"
+    },
+    {
+      "extent": [1],
+      "hasProperNoun": false,
+      "score": 0.699999988079071,
+      "blacklisted": false,
+      "found": 1,
+      "isMatched": false,
+      "inTitle": false,
+      "deeps": [3],
+      "text": "Hlazení papíru na sušících válcích",
+      "type": "ADJETIVES_NOUN"
+    },
+    {
+      "extent": [2],
+      "hasProperNoun": false,
+      "score": 1.2000000476837158,
+      "blacklisted": false,
+      "found": 1,
+      "isMatched": false,
+      "inTitle": false,
+      "deeps": [2],
+      "text": "Pojem technologie",
+      "type": "NOUN_GENITIVES"
+    },
+    {
+      "extent": [4],
+      "hasProperNoun": false,
+      "score": 3.200000047683716,
+      "blacklisted": false,
+      "found": 1,
+      "isMatched": true,
+      "inTitle": false,
+      "deeps": [3],
+      "text": "hustota",
+      "type": "NOUN",
+      "dictionaries": [{
+        "name": "PSH",
+        "text": "hustota"
+      }]
+    },
+    {
+      "extent": [2],
+      "hasProperNoun": false,
+      "score": 2.440000057220459,
+      "blacklisted": false,
+      "found": 1,
+      "isMatched": true,
+      "inTitle": false,
+      "deeps": [3],
+      "text": "tlak",
+      "type": "NOUN",
+      "dictionaries": [
+        {
+          "name": "keywords",
+          "text": "tlak"
+        },
+        {
+          "name": "PSH",
+          "text": "tlak"
+        }
+      ]
+    },
+    {
+      "extent": [8],
+      "hasProperNoun": false,
+      "score": 5.199999809265137,
+      "blacklisted": false,
+      "found": 1,
+      "isMatched": true,
+      "inTitle": false,
+      "deeps": [3],
+      "text": "plnidlo",
+      "type": "NOUN",
+      "dictionaries": [{
+        "name": "PSH",
+        "text": "plnidla"
+      }]
+    },
+    {
+      "extent": [104],
+      "hasProperNoun": false,
+      "score": 53.439998626708984,
+      "blacklisted": false,
+      "found": 1,
+      "isMatched": true,
+      "inTitle": false,
+      "deeps": [2],
+      "text": "sušení",
+      "type": "NOUN",
+      "dictionaries": [
+        {
+          "name": "keywords",
+          "text": "sušení"
+        },
+        {
+          "name": "PSH",
+          "text": "sušení"
+        }
+      ]
+    },
+    {
+      "extent": [4],
+      "hasProperNoun": false,
+      "score": 2.200000047683716,
+      "blacklisted": false,
+      "found": 1,
+      "isMatched": false,
+      "inTitle": false,
+      "deeps": [3],
+      "text": "Pohyb vláken",
+      "type": "NOUN_GENITIVES"
+    },
+    {
+      "extent": [9],
+      "hasProperNoun": false,
+      "score": 4.699999809265137,
+      "blacklisted": false,
+      "found": 1,
+      "isMatched": false,
+      "inTitle": false,
+      "deeps": [3],
+      "text": "Vliv intenzity mletí",
+      "type": "NOUN_GENITIVES"
+    },
+    {
+      "extent": [5],
+      "hasProperNoun": false,
+      "score": 3.940000057220459,
+      "blacklisted": false,
+      "found": 1,
+      "isMatched": true,
+      "inTitle": false,
+      "deeps": [2],
+      "text": "buničina",
+      "type": "NOUN",
+      "dictionaries": [
+        {
+          "name": "keywords",
+          "text": "buničina"
+        },
+        {
+          "name": "PSH",
+          "text": "buničina"
+        }
+      ]
+    },
+    {
+      "extent": [4],
+      "hasProperNoun": false,
+      "score": 2.200000047683716,
+      "blacklisted": false,
+      "found": 1,
+      "isMatched": false,
+      "inTitle": false,
+      "deeps": [2],
+      "text": "zásahy do konstrukce papírenského stroje",
+      "type": "NOUN_GENITIVES"
+    },
+    {
+      "extent": [8],
+      "hasProperNoun": false,
+      "score": 4.199999809265137,
+      "blacklisted": false,
+      "found": 1,
+      "isMatched": false,
+      "inTitle": false,
+      "deeps": [2],
+      "text": "Odvodňovací elementy",
+      "type": "ADJETIVES_NOUN"
+    },
+    {
+      "extent": [2],
+      "hasProperNoun": false,
+      "score": 1.2000000476837158,
+      "blacklisted": false,
+      "found": 1,
+      "isMatched": false,
+      "inTitle": false,
+      "deeps": [2],
+      "text": "odvodnění",
+      "type": "NOUN"
+    },
+    {
+      "extent": [3],
+      "hasProperNoun": false,
+      "score": 1.7000000476837158,
+      "blacklisted": false,
+      "found": 1,
+      "isMatched": false,
+      "inTitle": false,
+      "deeps": [2],
+      "text": "Technologie na strojích s válcovým sítem",
+      "type": "ADJETIVES_NOUN"
+    },
+    {
+      "extent": [1],
+      "hasProperNoun": false,
+      "score": 6.260000228881836,
+      "blacklisted": false,
+      "found": 4,
+      "isMatched": true,
+      "inTitle": false,
+      "deeps": [2],
+      "text": "suspenze",
+      "type": "NOUN",
+      "dictionaries": [
+        {
+          "name": "keywords",
+          "text": "suspenze"
+        },
+        {
+          "name": "PSH",
+          "text": "suspenze"
+        }
+      ]
+    },
+    {
+      "extent": [4],
+      "hasProperNoun": false,
+      "score": 3.440000057220459,
+      "blacklisted": false,
+      "found": 1,
+      "isMatched": true,
+      "inTitle": false,
+      "deeps": [2],
+      "text": "konstrukce",
+      "type": "NOUN",
+      "dictionaries": [
+        {
+          "name": "keywords",
+          "text": "konstrukce"
+        },
+        {
+          "name": "PSH",
+          "text": "konstrukce"
+        }
+      ]
+    },
+    {
+      "extent": [4],
+      "hasProperNoun": false,
+      "score": 2.200000047683716,
+      "blacklisted": false,
+      "found": 1,
+      "isMatched": false,
+      "inTitle": false,
+      "deeps": [3],
+      "text": "Mletí při vysoké hustotě",
+      "type": "ADJETIVES_NOUN"
+    },
+    {
+      "extent": [8],
+      "hasProperNoun": false,
+      "score": 5.199999809265137,
+      "blacklisted": false,
+      "found": 1,
+      "isMatched": true,
+      "inTitle": false,
+      "deeps": [3],
+      "text": "únik",
+      "type": "NOUN",
+      "dictionaries": [{
+        "name": "PSH",
+        "text": "hry na únik"
+      }]
+    },
+    {
+      "extent": [130],
+      "hasProperNoun": false,
+      "score": 65.4000015258789,
+      "blacklisted": false,
+      "found": 2,
+      "isMatched": false,
+      "inTitle": true,
+      "deeps": [1],
+      "text": "Technologie výroby papíru",
+      "type": "NOUN_GENITIVES"
+    },
+    {
+      "extent": [1],
+      "hasProperNoun": false,
+      "score": 0.699999988079071,
+      "blacklisted": false,
+      "found": 1,
+      "isMatched": false,
+      "inTitle": false,
+      "deeps": [2],
+      "text": "Ovlivnění sedimentace",
+      "type": "NOUN_GENITIVES"
+    },
+    {
+      "extent": [2],
+      "hasProperNoun": false,
+      "score": 1.2000000476837158,
+      "blacklisted": false,
+      "found": 1,
+      "isMatched": false,
+      "inTitle": false,
+      "deeps": [2],
+      "text": "Úptava povrchu papíru",
+      "type": "NOUN_GENITIVES"
+    },
+    {
+      "extent": [-94],
+      "hasProperNoun": false,
+      "score": -45.79999923706055,
+      "blacklisted": false,
+      "found": 1,
+      "isMatched": true,
+      "inTitle": false,
+      "deeps": [2],
+      "text": "část",
+      "type": "NOUN",
+      "dictionaries": [{
+        "name": "PSH",
+        "text": "části"
+      }]
+    },
+    {
+      "extent": [6],
+      "hasProperNoun": false,
+      "score": 3.200000047683716,
+      "blacklisted": false,
+      "found": 1,
+      "isMatched": false,
+      "inTitle": false,
+      "deeps": [2],
+      "text": "Přehled výroby papíru",
+      "type": "NOUN_GENITIVES"
+    },
+    {
+      "extent": [5],
+      "hasProperNoun": false,
+      "score": 2.700000047683716,
+      "blacklisted": false,
+      "found": 1,
+      "isMatched": false,
+      "inTitle": false,
+      "deeps": [2],
+      "text": "Mletí buničiny",
+      "type": "NOUN_GENITIVES"
+    },
+    {
+      "extent": [9],
+      "hasProperNoun": false,
+      "score": 4.699999809265137,
+      "blacklisted": false,
+      "found": 1,
+      "isMatched": false,
+      "inTitle": false,
+      "deeps": [3],
+      "text": "Příprava látky",
+      "type": "NOUN_GENITIVES"
+    },
+    {
+      "extent": [2],
+      "hasProperNoun": false,
+      "score": 1.2000000476837158,
+      "blacklisted": false,
+      "found": 1,
+      "isMatched": false,
+      "inTitle": false,
+      "deeps": [3],
+      "text": "Ostatní způsoby",
+      "type": "ADJETIVES_NOUN"
+    },
+    {
+      "extent": [1],
+      "hasProperNoun": false,
+      "score": 1.7000000476837158,
+      "blacklisted": false,
+      "found": 1,
+      "isMatched": true,
+      "inTitle": false,
+      "deeps": [2],
+      "text": "sediment",
+      "type": "NOUN",
+      "dictionaries": [{
+        "name": "PSH",
+        "text": "sedimenty"
+      }]
+    },
+    {
+      "extent": [2],
+      "hasProperNoun": false,
+      "score": 1.2000000476837158,
+      "blacklisted": false,
+      "found": 1,
+      "isMatched": false,
+      "inTitle": false,
+      "deeps": [3],
+      "text": "Navíjení papíru za papírenským strojem",
+      "type": "ADJETIVES_NOUN"
+    },
+    {
+      "extent": [1],
+      "hasProperNoun": false,
+      "score": 1.940000057220459,
+      "blacklisted": false,
+      "found": 1,
+      "isMatched": true,
+      "inTitle": false,
+      "deeps": [2],
+      "text": "deformace",
+      "type": "NOUN",
+      "dictionaries": [
+        {
+          "name": "keywords",
+          "text": "deformace"
+        },
+        {
+          "name": "PSH",
+          "text": "deformace"
+        }
+      ]
+    },
+    {
+      "extent": [1],
+      "hasProperNoun": false,
+      "score": 0.699999988079071,
+      "blacklisted": false,
+      "found": 1,
+      "isMatched": false,
+      "inTitle": false,
+      "deeps": [1],
+      "text": "Voda v papírenské technologii",
+      "type": "ADJETIVES_NOUN"
+    },
+    {
+      "extent": [2],
+      "hasProperNoun": false,
+      "score": 3.4000000953674316,
+      "blacklisted": false,
+      "found": 2,
+      "isMatched": true,
+      "inTitle": false,
+      "deeps": [3],
+      "text": "orgán",
+      "type": "NOUN",
+      "dictionaries": [{
+        "name": "PSH",
+        "text": "orgánové kultury"
+      }]
+    },
+    {
+      "extent": [5],
+      "hasProperNoun": false,
+      "score": 6.820000171661377,
+      "blacklisted": false,
+      "found": 3,
+      "isMatched": true,
+      "inTitle": false,
+      "deeps": [3],
+      "text": "voda",
+      "type": "NOUN",
+      "dictionaries": [
+        {
+          "name": "keywords",
+          "text": "voda"
+        },
+        {
+          "name": "PSH",
+          "text": "voda"
+        }
+      ]
+    },
+    {
+      "extent": [8],
+      "hasProperNoun": false,
+      "score": 4.400000095367432,
+      "blacklisted": false,
+      "found": 2,
+      "isMatched": false,
+      "inTitle": false,
+      "deeps": [3],
+      "text": "Vliv typu mlecích orgánů",
+      "type": "ADJETIVES_NOUN"
+    },
+    {
+      "extent": [4],
+      "hasProperNoun": false,
+      "score": 2.200000047683716,
+      "blacklisted": false,
+      "found": 1,
+      "isMatched": false,
+      "inTitle": false,
+      "deeps": [3],
+      "text": "na sušící proces",
+      "type": "ADJETIVES_NOUN"
+    },
+    {
+      "extent": [2],
+      "hasProperNoun": false,
+      "score": 2.200000047683716,
+      "blacklisted": false,
+      "found": 1,
+      "isMatched": true,
+      "inTitle": false,
+      "deeps": [3],
+      "text": "působení",
+      "type": "NOUN",
+      "dictionaries": [{
+        "name": "PSH",
+        "text": "vzájemné působení vodičů"
+      }]
+    },
+    {
+      "extent": [1],
+      "hasProperNoun": false,
+      "score": 0.699999988079071,
+      "blacklisted": false,
+      "found": 1,
+      "isMatched": false,
+      "inTitle": false,
+      "deeps": [2],
+      "text": "ovlivnění",
+      "type": "NOUN"
+    },
+    {
+      "extent": [4],
+      "hasProperNoun": false,
+      "score": 3.440000057220459,
+      "blacklisted": false,
+      "found": 1,
+      "isMatched": true,
+      "inTitle": false,
+      "deeps": [2],
+      "text": "klimatizace",
+      "type": "NOUN",
+      "dictionaries": [
+        {
+          "name": "keywords",
+          "text": "klimatizace"
+        },
+        {
+          "name": "PSH",
+          "text": "klimatizace"
+        }
+      ]
+    },
+    {
+      "extent": [8],
+      "hasProperNoun": false,
+      "score": 5.199999809265137,
+      "blacklisted": false,
+      "found": 1,
+      "isMatched": true,
+      "inTitle": false,
+      "deeps": [2],
+      "text": "síť",
+      "type": "NOUN",
+      "dictionaries": [{
+        "name": "PSH",
+        "text": "napětí na zemní síti"
+      }]
+    },
+    {
+      "extent": [-94],
+      "hasProperNoun": true,
+      "score": -46.619998931884766,
+      "blacklisted": false,
+      "found": 1,
+      "isMatched": false,
+      "inTitle": false,
+      "deeps": [2],
+      "text": "Lisová",
+      "type": "PROPERNOUN"
+    },
+    {
+      "extent": [4],
+      "hasProperNoun": false,
+      "score": 2.200000047683716,
+      "blacklisted": false,
+      "found": 1,
+      "isMatched": false,
+      "inTitle": false,
+      "deeps": [2],
+      "text": "zásah",
+      "type": "NOUN"
+    },
+    {
+      "extent": [2],
+      "hasProperNoun": false,
+      "score": 2.440000057220459,
+      "blacklisted": false,
+      "found": 1,
+      "isMatched": true,
+      "inTitle": false,
+      "deeps": [2],
+      "text": "zařízení",
+      "type": "NOUN",
+      "dictionaries": [
+        {
+          "name": "keywords",
+          "text": "zařízení"
+        },
+        {
+          "name": "PSH",
+          "text": "zařízení"
+        }
+      ]
+    },
+    {
+      "extent": [2],
+      "hasProperNoun": false,
+      "score": 2.200000047683716,
+      "blacklisted": false,
+      "found": 1,
+      "isMatched": true,
+      "inTitle": false,
+      "deeps": [2],
+      "text": "řezání",
+      "type": "NOUN",
+      "dictionaries": [{
+        "name": "PSH",
+        "text": "řezání"
+      }]
+    },
+    {
+      "extent": [1],
+      "hasProperNoun": false,
+      "score": 0.8999999761581421,
+      "blacklisted": false,
+      "found": 2,
+      "isMatched": false,
+      "inTitle": false,
+      "deeps": [3],
+      "text": "Hlazení papíru",
+      "type": "NOUN_GENITIVES"
+    },
+    {
+      "extent": [2],
+      "hasProperNoun": false,
+      "score": 3.4000000953674316,
+      "blacklisted": false,
+      "found": 2,
+      "isMatched": true,
+      "inTitle": false,
+      "deeps": [2],
+      "text": "povrch",
+      "type": "NOUN",
+      "dictionaries": [{
+        "name": "PSH",
+        "text": "povrch"
+      }]
+    },
+    {
+      "extent": [7],
+      "hasProperNoun": false,
+      "score": 3.700000047683716,
+      "blacklisted": false,
+      "found": 1,
+      "isMatched": false,
+      "inTitle": false,
+      "deeps": [3],
+      "text": "Nátok papíroviny",
+      "type": "NOUN_GENITIVES"
+    },
+    {
+      "extent": [5],
+      "hasProperNoun": false,
+      "score": 3.940000057220459,
+      "blacklisted": false,
+      "found": 1,
+      "isMatched": true,
+      "inTitle": false,
+      "deeps": [3],
+      "text": "filtrace",
+      "type": "NOUN",
+      "dictionaries": [
+        {
+          "name": "keywords",
+          "text": "filtrace"
+        },
+        {
+          "name": "PSH",
+          "text": "filtrace"
+        }
+      ]
+    },
+    {
+      "extent": [-138],
+      "hasProperNoun": false,
+      "score": -68.5999984741211,
+      "blacklisted": false,
+      "found": 2,
+      "isMatched": false,
+      "inTitle": false,
+      "deeps": [1],
+      "text": "Přehled vybrané literatury",
+      "type": "ADJETIVES_NOUN"
+    },
+    {
+      "extent": [1],
+      "hasProperNoun": true,
+      "score": 0.8799999952316284,
+      "blacklisted": false,
+      "found": 1,
+      "isMatched": false,
+      "inTitle": false,
+      "deeps": [2],
+      "text": "oe",
+      "type": "PROPERNOUN"
+    },
+    {
+      "extent": [2],
+      "hasProperNoun": false,
+      "score": 1.2000000476837158,
+      "blacklisted": false,
+      "found": 1,
+      "isMatched": false,
+      "inTitle": false,
+      "deeps": [2],
+      "text": "převíjení",
+      "type": "NOUN"
+    },
+    {
+      "extent": [9],
+      "hasProperNoun": false,
+      "score": 4.699999809265137,
+      "blacklisted": false,
+      "found": 1,
+      "isMatched": false,
+      "inTitle": false,
+      "deeps": [3],
+      "text": "Třesení 9 I 1.7 . 6 . Sací skříně",
+      "type": "ADJETIVES_NOUN"
+    },
+    {
+      "extent": [5],
+      "hasProperNoun": false,
+      "score": 3.700000047683716,
+      "blacklisted": false,
+      "found": 1,
+      "isMatched": true,
+      "inTitle": false,
+      "deeps": [3],
+      "text": "cesta",
+      "type": "NOUN",
+      "dictionaries": [{
+        "name": "PSH",
+        "text": "cesty"
+      }]
+    },
+    {
+      "extent": [3],
+      "hasProperNoun": false,
+      "score": 2.700000047683716,
+      "blacklisted": false,
+      "found": 1,
+      "isMatched": true,
+      "inTitle": false,
+      "deeps": [3],
+      "text": "zvláštnost",
+      "type": "NOUN",
+      "dictionaries": [{
+        "name": "PSH",
+        "text": "zvláštní sklady"
+      }]
+    },
+    {
+      "extent": [130],
+      "hasProperNoun": false,
+      "score": 75.08000183105469,
+      "blacklisted": false,
+      "found": 7,
+      "isMatched": true,
+      "inTitle": true,
+      "deeps": [1],
+      "text": "technologie",
+      "type": "NOUN",
+      "dictionaries": [
+        {
+          "name": "keywords",
+          "text": "technologie"
+        },
+        {
+          "name": "PSH",
+          "text": "technologie"
+        }
+      ]
+    },
+    {
+      "extent": [7],
+      "hasProperNoun": false,
+      "score": 9.5,
+      "blacklisted": false,
+      "found": 5,
+      "isMatched": true,
+      "inTitle": false,
+      "deeps": [3],
+      "text": "síto",
+      "type": "NOUN",
+      "dictionaries": [{
+        "name": "PSH",
+        "text": "odvodňovací síta"
+      }]
+    },
+    {
+      "extent": [2],
+      "hasProperNoun": false,
+      "score": 1.2000000476837158,
+      "blacklisted": false,
+      "found": 1,
+      "isMatched": false,
+      "inTitle": false,
+      "deeps": [3],
+      "text": "partie",
+      "type": "NOUN"
+    },
+    {
+      "extent": [1],
+      "hasProperNoun": false,
+      "score": 0.699999988079071,
+      "blacklisted": false,
+      "found": 1,
+      "isMatched": false,
+      "inTitle": false,
+      "deeps": [1],
+      "text": "Úprava papíru",
+      "type": "NOUN_GENITIVES"
+    },
+    {
+      "extent": [5],
+      "hasProperNoun": false,
+      "score": 2.700000047683716,
+      "blacklisted": false,
+      "found": 1,
+      "isMatched": false,
+      "inTitle": false,
+      "deeps": [2],
+      "text": "Míchání suspenze vláken",
+      "type": "NOUN_GENITIVES"
+    },
+    {
+      "extent": [9],
+      "hasProperNoun": false,
+      "score": 6.900000095367432,
+      "blacklisted": false,
+      "found": 2,
+      "isMatched": true,
+      "inTitle": false,
+      "deeps": [3],
+      "text": "látka",
+      "type": "NOUN",
+      "dictionaries": [{
+        "name": "PSH",
+        "text": "látky"
+      }]
+    },
+    {
+      "extent": [4],
+      "hasProperNoun": false,
+      "score": 2.200000047683716,
+      "blacklisted": false,
+      "found": 1,
+      "isMatched": false,
+      "inTitle": false,
+      "deeps": [2],
+      "text": "Klimatizace papíru",
+      "type": "NOUN_GENITIVES"
+    },
+    {
+      "extent": [2],
+      "hasProperNoun": false,
+      "score": 1.2000000476837158,
+      "blacklisted": false,
+      "found": 1,
+      "isMatched": false,
+      "inTitle": false,
+      "deeps": [3],
+      "text": "způsob",
+      "type": "NOUN"
+    },
+    {
+      "extent": [2],
+      "hasProperNoun": false,
+      "score": 1.2000000476837158,
+      "blacklisted": false,
+      "found": 1,
+      "isMatched": false,
+      "inTitle": false,
+      "deeps": [3],
+      "text": "v sušící partii",
+      "type": "ADJETIVES_NOUN"
+    },
+    {
+      "extent": [4],
+      "hasProperNoun": false,
+      "score": 2.200000047683716,
+      "blacklisted": false,
+      "found": 1,
+      "isMatched": false,
+      "inTitle": false,
+      "deeps": [3],
+      "text": "Satinování papíru",
+      "type": "NOUN_GENITIVES"
+    },
+    {
+      "extent": [5],
+      "hasProperNoun": false,
+      "score": 3.700000047683716,
+      "blacklisted": false,
+      "found": 1,
+      "isMatched": true,
+      "inTitle": false,
+      "deeps": [3],
+      "text": "vločkování",
+      "type": "NOUN",
+      "dictionaries": [{
+        "name": "PSH",
+        "text": "vločkování odpadních vod"
+      }]
+    },
+    {
+      "extent": [5],
+      "hasProperNoun": false,
+      "score": 2.700000047683716,
+      "blacklisted": false,
+      "found": 1,
+      "isMatched": false,
+      "inTitle": false,
+      "deeps": [3],
+      "text": "sedění",
+      "type": "NOUN"
+    },
+    {
+      "extent": [2],
+      "hasProperNoun": false,
+      "score": 1.2000000476837158,
+      "blacklisted": false,
+      "found": 1,
+      "isMatched": false,
+      "inTitle": false,
+      "deeps": [3],
+      "text": "způsoby mechanické úpravy povrchu papíru",
+      "type": "NOUN_GENITIVES"
+    },
+    {
+      "extent": [5],
+      "hasProperNoun": false,
+      "score": 2.700000047683716,
+      "blacklisted": false,
+      "found": 1,
+      "isMatched": false,
+      "inTitle": false,
+      "deeps": [2],
+      "text": "káď",
+      "type": "NOUN"
+    },
+    {
+      "extent": [7],
+      "hasProperNoun": false,
+      "score": 3.700000047683716,
+      "blacklisted": false,
+      "found": 1,
+      "isMatched": false,
+      "inTitle": false,
+      "deeps": [3],
+      "text": "síto papírenského stroje",
+      "type": "NOUN_GENITIVES"
+    },
+    {
+      "extent": [4],
+      "hasProperNoun": false,
+      "score": 2.200000047683716,
+      "blacklisted": false,
+      "found": 1,
+      "isMatched": false,
+      "inTitle": false,
+      "deeps": [2],
+      "text": "na papírenském stroji",
+      "type": "ADJETIVES_NOUN"
+    },
+    {
+      "extent": [2],
+      "hasProperNoun": false,
+      "score": 1.2000000476837158,
+      "blacklisted": false,
+      "found": 1,
+      "isMatched": false,
+      "inTitle": false,
+      "deeps": [2],
+      "text": "řezání papíru",
+      "type": "NOUN_GENITIVES"
+    },
+    {
+      "extent": [2],
+      "hasProperNoun": false,
+      "score": 1.2000000476837158,
+      "blacklisted": false,
+      "found": 1,
+      "isMatched": false,
+      "inTitle": false,
+      "deeps": [3],
+      "text": "Laminární a turbulentní tok",
+      "type": "ADJETIVES_NOUN"
+    }
+  ],
+  "foldername": "c:\\Users\\alberto.a.hernandez\\Projects\\NTK\\balicky\\F10107_1z_000152680",
+  "info": {
+    "varfield": [
+      {
+        "subfield": {
+          "label": "a",
+          "content": "cnb000418556"
+        },
+        "i1": " ",
+        "i2": " ",
+        "id": "015"
+      },
+      {
+        "subfield": [
+          {
+            "label": "a",
+            "content": "ABA013"
+          },
+          {
+            "label": "b",
+            "content": "cze"
+          }
+        ],
+        "i1": " ",
+        "i2": " ",
+        "id": "040"
+      },
+      {
+        "subfield": [
+          {
+            "label": "a",
+            "content": "TS1105"
+          },
+          {
+            "label": "b",
+            "content": ".L43 1978"
+          }
+        ],
+        "i1": " ",
+        "i2": 4,
+        "id": "050"
+      },
+      {
+        "subfield": [
+          {
+            "label": "a",
+            "content": "TS1105"
+          },
+          {
+            "label": "b",
+            "content": ".L43 1978 1"
+          }
+        ],
+        "i1": " ",
+        "i2": " ",
+        "id": "LCC"
+      },
+      {
+        "subfield": {
+          "label": "a",
+          "content": "678.2(075.8)"
+        },
+        "i1": " ",
+        "i2": " ",
+        "id": "080"
+      },
+      {
+        "subfield": [
+          {
+            "label": "a",
+            "content": "Lébr, František,"
+          },
+          {
+            "label": "d",
+            "content": "1927-1983"
+          },
+          {
+            "label": 7,
+            "content": "jk01071730"
+          },
+          {
+            "label": 4,
+            "content": "aut"
+          }
+        ],
+        "i1": 1,
+        "i2": " ",
+        "id": 100
+      },
+      {
+        "subfield": [
+          {
+            "label": "a",
+            "content": "Technologie výroby papíru."
+          },
+          {
+            "label": "n",
+            "content": "1 /"
+          },
+          {
+            "label": "c",
+            "content": "František Lébr, Čestmír Skalický"
+          }
+        ],
+        "i1": 1,
+        "i2": 0,
+        "id": 245
+      },
+      {
+        "subfield": {
+          "label": "a",
+          "content": "1. vyd."
+        },
+        "i1": " ",
+        "i2": " ",
+        "id": 250
+      },
+      {
+        "subfield": [
+          {
+            "label": "a",
+            "content": "Pardubice :"
+          },
+          {
+            "label": "b",
+            "content": "Vysoká škola chemicko-technologická,"
+          },
+          {
+            "label": "c",
+            "content": 1978
+          }
+        ],
+        "i1": " ",
+        "i2": " ",
+        "id": 260
+      },
+      {
+        "subfield": [
+          {
+            "label": "a",
+            "content": "140 s. :"
+          },
+          {
+            "label": "b",
+            "content": "il."
+          }
+        ],
+        "i1": " ",
+        "i2": " ",
+        "id": 300
+      },
+      {
+        "subfield": {
+          "label": "a",
+          "content": "[Učební texty]: Pardubice, VŠCHT"
+        },
+        "i1": " ",
+        "i2": " ",
+        "id": 500
+      },
+      {
+        "subfield": {
+          "label": "a",
+          "content": "Obsahuje bibliografii"
+        },
+        "i1": " ",
+        "i2": " ",
+        "id": 504
+      },
+      {
+        "subfield": [
+          {
+            "label": "a",
+            "content": "Skalický, Čestmír,"
+          },
+          {
+            "label": "d",
+            "content": "1925-"
+          },
+          {
+            "label": 7,
+            "content": "jk01111453"
+          },
+          {
+            "label": 4,
+            "content": "aut"
+          }
+        ],
+        "i1": 1,
+        "i2": " ",
+        "id": 700
+      },
+      {
+        "subfield": [
+          {
+            "label": "u",
+            "content": "https://kramerius.techlib.cz/search/handle/uuid:2ed80500-5c56-11e5-a837-0800200c9a66"
+          },
+          {
+            "label": "y",
+            "content": "Digitalizovaný dokument"
+          }
+        ],
+        "i1": 4,
+        "i2": 0,
+        "id": 856
+      },
+      {
+        "subfield": [
+          {
+            "label": "a",
+            "content": "ABA013"
+          },
+          {
+            "label": "b",
+            "content": "F 10107/1"
+          }
+        ],
+        "i1": " ",
+        "i2": " ",
+        "id": 910
+      },
+      {
+        "subfield": {
+          "label": "a",
+          "content": "Papír - výroba - technologie"
+        },
+        "i1": " ",
+        "i2": " ",
+        "id": 964
+      },
+      {
+        "subfield": {
+          "label": "a",
+          "content": "PUBLIC"
+        },
+        "i1": " ",
+        "i2": " ",
+        "id": "OWN"
+      },
+      {
+        "subfield": [
+          {
+            "label": "c",
+            "content": 20070102
+          },
+          {
+            "label": "l",
+            "content": "STK01"
+          },
+          {
+            "label": "h",
+            "content": "0705"
+          }
+        ],
+        "i1": " ",
+        "i2": " ",
+        "id": "CAT"
+      },
+      {
+        "subfield": [
+          {
+            "label": "c",
+            "content": 20090107
+          },
+          {
+            "label": "l",
+            "content": "STK01"
+          },
+          {
+            "label": "h",
+            "content": "0501"
+          }
+        ],
+        "i1": " ",
+        "i2": " ",
+        "id": "CAT"
+      },
+      {
+        "subfield": [
+          {
+            "label": "c",
+            "content": 20090115
+          },
+          {
+            "label": "l",
+            "content": "STK01"
+          },
+          {
+            "label": "h",
+            "content": "0500"
+          }
+        ],
+        "i1": " ",
+        "i2": " ",
+        "id": "CAT"
+      },
+      {
+        "subfield": [
+          {
+            "label": "a",
+            "content": "SMUTNY"
+          },
+          {
+            "label": "b",
+            "content": 10
+          },
+          {
+            "label": "c",
+            "content": 20120903
+          },
+          {
+            "label": "l",
+            "content": "STK01"
+          },
+          {
+            "label": "h",
+            "content": 1617
+          }
+        ],
+        "i1": " ",
+        "i2": " ",
+        "id": "CAT"
+      },
+      {
+        "subfield": [
+          {
+            "label": "a",
+            "content": "SMUTNY"
+          },
+          {
+            "label": "b",
+            "content": 10
+          },
+          {
+            "label": "c",
+            "content": 20120903
+          },
+          {
+            "label": "l",
+            "content": "STK01"
+          },
+          {
+            "label": "h",
+            "content": 1618
+          }
+        ],
+        "i1": " ",
+        "i2": " ",
+        "id": "CAT"
+      },
+      {
+        "subfield": [
+          {
+            "label": "a",
+            "content": "SMUTNY"
+          },
+          {
+            "label": "b",
+            "content": 10
+          },
+          {
+            "label": "c",
+            "content": 20120903
+          },
+          {
+            "label": "l",
+            "content": "STK01"
+          },
+          {
+            "label": "h",
+            "content": 1619
+          }
+        ],
+        "i1": " ",
+        "i2": " ",
+        "id": "CAT"
+      },
+      {
+        "subfield": [
+          {
+            "label": "a",
+            "content": "SMUTNY"
+          },
+          {
+            "label": "b",
+            "content": 10
+          },
+          {
+            "label": "c",
+            "content": 20120903
+          },
+          {
+            "label": "l",
+            "content": "STK01"
+          },
+          {
+            "label": "h",
+            "content": 1619
+          }
+        ],
+        "i1": " ",
+        "i2": " ",
+        "id": "CAT"
+      },
+      {
+        "subfield": [
+          {
+            "label": "a",
+            "content": "SMUTNY"
+          },
+          {
+            "label": "b",
+            "content": 10
+          },
+          {
+            "label": "c",
+            "content": 20120903
+          },
+          {
+            "label": "l",
+            "content": "STK01"
+          },
+          {
+            "label": "h",
+            "content": 1621
+          }
+        ],
+        "i1": " ",
+        "i2": " ",
+        "id": "CAT"
+      },
+      {
+        "subfield": [
+          {
+            "label": "a",
+            "content": "SMUTNY"
+          },
+          {
+            "label": "b",
+            "content": 10
+          },
+          {
+            "label": "c",
+            "content": 20120903
+          },
+          {
+            "label": "l",
+            "content": "STK01"
+          },
+          {
+            "label": "h",
+            "content": 1622
+          }
+        ],
+        "i1": " ",
+        "i2": " ",
+        "id": "CAT"
+      },
+      {
+        "subfield": [
+          {
+            "label": "a",
+            "content": "ZILVAROVA"
+          },
+          {
+            "label": "b",
+            "content": 10
+          },
+          {
+            "label": "c",
+            "content": 20120917
+          },
+          {
+            "label": "l",
+            "content": "STK01"
+          },
+          {
+            "label": "h",
+            "content": "0902"
+          }
+        ],
+        "i1": " ",
+        "i2": " ",
+        "id": "CAT"
+      },
+      {
+        "subfield": [
+          {
+            "label": "c",
+            "content": 20151026
+          },
+          {
+            "label": "l",
+            "content": "STK01"
+          },
+          {
+            "label": "h",
+            "content": 1116
+          }
+        ],
+        "i1": " ",
+        "i2": " ",
+        "id": "CAT"
+      },
+      {
+        "subfield": [
+          {
+            "label": "c",
+            "content": 20170608
+          },
+          {
+            "label": "l",
+            "content": "STK01"
+          },
+          {
+            "label": "h",
+            "content": 1552
+          }
+        ],
+        "i1": " ",
+        "i2": " ",
+        "id": "CAT"
+      },
+      {
+        "subfield": [
+          {
+            "label": "c",
+            "content": 20170627
+          },
+          {
+            "label": "l",
+            "content": "STK01"
+          },
+          {
+            "label": "h",
+            "content": 2254
+          }
+        ],
+        "i1": " ",
+        "i2": " ",
+        "id": "CAT"
+      }
+    ],
+    "fixfield": [
+      {
+        "id": "FMT",
+        "content": "BK"
+      },
+      {
+        "id": "LDR",
+        "content": "00000nam-a22------a-4500"
+      },
+      {
+        "id": "001",
+        "content": "000152680"
+      },
+      {
+        "id": "003",
+        "content": "CZ-PrSTK"
+      },
+      {
+        "id": "005",
+        "content": "20120917090221.0"
+      },
+      {
+        "id": "008",
+        "content": "780714s1978----xr-a---f------000-0-cze-d"
+      },
+      {
+        "id": "KPW",
+        "content": "kpw283285"
+      },
+      {
+        "id": "BAS",
+        "content": "di"
+      }
+    ]
+  }
+}

@@ -1,0 +1,19 @@
+<mz-modal #exportModal [fixedFooter]="true"  >
+  <mz-modal-header>Exported candidates</mz-modal-header>
+  <mz-modal-content>
+    <div class="input-field col s12" *ngFor="let dm of selected; let idx = index;">
+         <div>{{dm.text}} <span *ngIf="dm.name === 'novy'" mz-tooltip [tooltip]="'odstranit'" (click)="remove(idx)"><i mz-icon-mdi [icon]="'delete-empty'" class="grey-text text-darken-2 app-cursor-pointer right"></i></span></div>
+    </div>
+    <div class="input-field col s12">
+      <input mz-input id="newkey" placeholder="Add new keyword" type="text" [(ngModel)]="newkey" (keyup.enter)="add()" name="newkey" />
+      <button (click)="add()">add</button>
+    </div>
+    <div *ngIf="alephFormat" class="input-field col s12">
+      <textarea id="exportArea" class="materialize-textarea" style="height: 100vh;" #exportArea>{{exported}}</textarea>
+    </div>
+  </mz-modal-content>
+  <mz-modal-footer>
+    <button mz-button [flat]="true" mz-tooltip [tooltip]="'ulozi vybrane nova hesla do slovniku nerizene'" (click)="save()">save</button>
+    <button mz-button [flat]="true" mz-modal-close>close</button>
+  </mz-modal-footer>
+</mz-modal>

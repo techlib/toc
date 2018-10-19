@@ -53,6 +53,8 @@ public class Indexer {
     try {
       client = getClient("psh");
       psh.readFromXML(Indexer.class.getResourceAsStream("psh-skos.rdf"), client);
+      client.commit();
+      client.close();
     } catch (IOException | XMLStreamException | SolrServerException ex) {
       ret.put("error", ex);
       Logger.getLogger(Indexer.class.getName()).log(Level.SEVERE, null, ex);
@@ -67,7 +69,9 @@ public class Indexer {
     try {
       client = getClient("keywords");
       r.readFromTxt(Indexer.class.getResourceAsStream("653_klicova_slova_b.txt"), client);
-    } catch (IOException ex) {
+      client.commit();
+      client.close();
+    } catch (IOException | SolrServerException ex) {
       ret.put("error", ex);
       Logger.getLogger(Indexer.class.getName()).log(Level.SEVERE, null, ex);
     }
@@ -82,6 +86,8 @@ public class Indexer {
     try {
       client = getClient("konspekt");
       k.readFromTxt(Indexer.class.getResourceAsStream("konsp_uni.txt"), client);
+      client.commit();
+      client.close();
     } catch (Exception ex) {
       ret.put("error", ex);
       Logger.getLogger(Indexer.class.getName()).log(Level.SEVERE, null, ex);

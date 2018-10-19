@@ -1,0 +1,13 @@
+// --- BLACKLIST ---
+
+.app-blacklist-wrapper {
+  height: 100%;
+  
+  .row {
+    .col {
+      &:first-child {
+        padding-left: 0;
+      }
+    }
+  }
+}

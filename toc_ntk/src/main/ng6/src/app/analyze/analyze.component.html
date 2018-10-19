@@ -1,0 +1,106 @@
+<app-aside [class.app-aside-hide]="!state.showAside"></app-aside>
+
+<section class="app-analyze-wrapper">
+  <!-- Aside btn -->
+  <span *ngIf="state.showAside" class="app-btn-aside valign-wrapper" (click)="toogleAsideBar()" mz-tooltip [tooltip]="'Skýt side bar'" [position]="'top'">
+    <i class="app-mdi-menu-left"></i>
+  </span>
+  <span *ngIf="!state.showAside" class="app-btn-aside valign-wrapper" (click)="toogleAsideBar()" mz-tooltip [tooltip]="'Zobrazit side bar'" [position]="'top'">
+    <i class="app-mdi-menu-right"></i>
+  </span>
+  
+  <app-toolbar></app-toolbar>
+  
+  <div class="app-sroll-wrapper">
+    <!-- Podminku na zobrazeni aplikuj na element s class "row" -->
+    <div class="row" *ngIf="state.showScoreConfig" style="height: auto;">
+          <mz-input-container  [inline]="'true'">
+            <input name="found" type="number" [(ngModel)]="state.scoreConfig.found" mz-input [label]="'Found'">
+          </mz-input-container>
+          <mz-input-container  [inline]="'true'">
+            <input name="multiple" type="number" [(ngModel)]="state.scoreConfig.multiple" mz-input [label]="'Multiple'">
+          </mz-input-container>
+          <mz-input-container  [inline]="'true'">
+            <input name="hasProperNoun" type="number" [(ngModel)]="state.scoreConfig.hasProperNoun" mz-input [label]="'Proper noun'">
+          </mz-input-container>
+          <br/>
+          <mz-input-container  [inline]="'false'">
+            <input name="matched" type="number" [(ngModel)]="state.scoreConfig.matched" mz-input [label]="'Matched'">
+          </mz-input-container>
+          <mz-input-container  [inline]="'true'" *ngFor="let d of state.scoreConfig.dicts">
+            <input [id]="'dict_' + d" type="number" [name]="'dict_' + d" mz-input [label]="d" [(ngModel)]="state.scoreConfig.dictionaries[d]">
+          </mz-input-container>
+          <mz-input-container  [inline]="'true'">
+            <input name="isDictionaryWord" type="number" [(ngModel)]="state.scoreConfig.isDictionaryWord" mz-input [label]="'isDictionaryWord'">
+          </mz-input-container>
+          <mz-input-container  [inline]="'true'">
+            <input name="extent" type="number" [(ngModel)]="state.scoreConfig.extent" mz-input [label]="'Extent'">
+          </mz-input-container>
+          <mz-input-container  [inline]="'true'">
+            <input name="inTitle" type="number" [(ngModel)]="state.scoreConfig.inTitle" mz-input [label]="'Term in title'">
+          </mz-input-container>
+          <mz-checkbox-container >
+            <input name="addExtentForTitle" id="addExtentForTitle" type="checkbox" [(ngModel)]="state.scoreConfig.addExtentForTitle" mz-checkbox [label]="'Add extent for title terms'"  />
+          </mz-checkbox-container>
+    </div><!--/.row -->
+   
+    
+    <div class="row">
+      <div class="col s12">
+        <div class="app-spinner center-align">
+          <mz-spinner *ngIf="loading" [size]="'small'"></mz-spinner>
+        </div>
+        <div *ngIf="error !== ''">
+            
+            <mz-card class="blue-grey darken-1"
+                [hoverable]="true">
+                <mz-card-content>
+                  {{error}}
+                </mz-card-content>
+              </mz-card>
+        </div>
+        <h5>{{state.title}}</h5>
+        <!--<table *ngIf="!loading" class="striped highlight" id="app-table-score">-->
+        <table class="striped highlight" id="app-table-score" *ngIf="!loading && !error">
+          <thead>
+            <tr>
+              <th style="width: 60px;"><span>score</span></th>
+              <th *ngFor="let d of state.scoreConfig.dicts" style="width: 20%;"><span>{{d}}</span></th>
+              <th style="width: auto;"><span>bez slovniku</span></th>
+            </tr>
+          </thead>
+          <tbody>
+            <ng-container *ngFor="let c of state.candidates; let idx = index">
+              <tr *ngIf="(state.showMatched && c.isMatched) || (state.showFree && !c.isMatched)  || (state.showFree && c.selected) || (state.showBlacklisted && c.blacklisted) ">
+                <!-- Dodrz prefix class, muze jich byt vice, tohle je jen priklad, barvy prahu se definuje ve variables -->
+                <td class="app-cursor-pointer" [class.app-score-1]="c.score > maxScore * state.threshold" mz-tooltip [tooltip]="formatTooltip(c)" [html]="true" [position]="'top'">
+                  {{c.score | number: '1.1-3'}}
+                </td>
+                <td *ngFor="let d of state.scoreConfig.dicts">
+                <ng-container *ngFor="let cd of c.dictionaries; let idx2 = index">
+                  <mz-checkbox-container *ngIf="cd.name === d || (cd.name === 'nerizene' && d === 'nerizene' && c.isMatched)">
+                    <input [id]="'ch_'+idx+'_'+d" type="checkbox" [(ngModel)]="cd.selected" mz-checkbox [label]="cd.text"  (click)="select(cd.text)" />
+                  </mz-checkbox-container>
+                </ng-container>
+                <ng-container *ngIf="!c.dictionaries || c.dictionaries.length === 0">  
+                  <mz-checkbox-container *ngIf="d === 'nerizene' && (c.isMatched || c.selected)">
+                    <input [id]="'ch_0_'+d" type="checkbox" [(ngModel)]="c.selected" mz-checkbox [label]="c.text"  (click)="select(c.text)" />
+                  </mz-checkbox-container>
+                </ng-container>
+                </td>
+                <td>
+                  <mz-checkbox-container *ngIf="!c.isMatched && !c.selected " >
+                    <i class="app-mdi-cancel red-text" (click)="addToBlackList(c)" mz-tooltip [tooltip]="'Add to blacklist'"></i>
+                    <input [id]="'ch_'+idx+'_'+c.text" type="checkbox" [(ngModel)]="c.selected" mz-checkbox [label]="c.text" (click)="select(c.text)" />
+                  </mz-checkbox-container>
+                </td>
+              </tr>
+            </ng-container>
+          </tbody>
+        </table>
+        
+      </div><!--/.col -->
+    </div><!--/.row -->
+  </div><!--/.app-sroll-wrapper -->
+</section>  
+  

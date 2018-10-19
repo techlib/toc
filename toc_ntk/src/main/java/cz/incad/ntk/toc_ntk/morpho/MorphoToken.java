@@ -16,6 +16,8 @@ public class MorphoToken {
   MorphoTag tag;
   String lemma;
   String token;
+  int token_start;
+  int token_end;
   String lemmaSimple;
 
   public MorphoToken(JSONObject token) {
@@ -23,6 +25,8 @@ public class MorphoToken {
     this.tag = new MorphoTag(this.mtoken.getString("tag"));
     this.lemma = this.mtoken.getString("lemma");
     this.token = this.mtoken.getString("token");
+    this.token_start = this.mtoken.getInt("token_start");
+    this.token_end = this.mtoken.getInt("token_end");
     int pos = lemma.indexOf("-");
     if (pos > -1) {
       lemmaSimple = lemma.substring(0, pos);
@@ -51,6 +55,14 @@ public class MorphoToken {
 
   public String getToken() {
     return this.mtoken.getString("token");
+  }
+
+  public int getTokenStart() {
+    return this.mtoken.getInt("token_start");
+  }
+
+  public int getTokenEnd() {
+    return this.mtoken.getInt("token_end");
   }
 
   public String getLemma() {
