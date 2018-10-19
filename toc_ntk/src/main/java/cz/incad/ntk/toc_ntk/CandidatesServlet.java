@@ -196,6 +196,24 @@ public class CandidatesServlet extends HttpServlet {
                 out.print(ret.toString(2));
             }
         },
+        GET_TOC {
+            @Override
+            void doPerform(HttpServletRequest request, HttpServletResponse response) throws Exception {
+                response.setContentType("text/plain;charset=UTF-8");
+                PrintWriter out = response.getWriter();
+                String text = FileService.getToc(request.getParameter("sysno"));
+                out.print(text);
+            }
+        },
+        GET_RAW_TOC {
+            @Override
+            void doPerform(HttpServletRequest request, HttpServletResponse response) throws Exception {
+                response.setContentType("text/plain;charset=UTF-8");
+                PrintWriter out = response.getWriter();
+                String text = FileService.getRawToc(request.getParameter("sysno"));
+                out.print(text);
+            }
+        },
         FIND {
             @Override
             void doPerform(HttpServletRequest request, HttpServletResponse response) throws Exception {
