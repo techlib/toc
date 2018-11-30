@@ -24,14 +24,17 @@ public class PSHConcept {
     
     @Field
     String uri;
+    
+    @Field("dict")
+    String dict = "PSH";
 
-    @Field
+    @Field("key_cs")
     List<String> csPrefLabel = new ArrayList<>();
     
     @Field("csAltLabel")
     List<String> csAltLabel = new ArrayList<>();
 
-    @Field
+    @Field("key_en")
     List<String> enPrefLabel = new ArrayList<>();
 
     @Field("enAltLabel")

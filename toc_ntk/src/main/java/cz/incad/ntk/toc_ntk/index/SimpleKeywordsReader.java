@@ -9,6 +9,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.text.Normalizer;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.apache.solr.client.solrj.SolrClient;
@@ -37,8 +38,10 @@ public class SimpleKeywordsReader {
     
     this.client = client;
     try (BufferedReader br = new BufferedReader(new InputStreamReader(is, "UTF-8"))) {
+      int n = 0;
       for (String line; (line = br.readLine()) != null;) {
-        processLine(line);
+        n++;
+        processLine(line, String.format("%09d", n));
       }
       client.commit();
     } catch (IOException | SolrServerException ex) {
@@ -46,12 +49,17 @@ public class SimpleKeywordsReader {
     }
   }
   
-  private void processLine(String line) throws IOException, SolrServerException{
+  private void processLine(String line, String lineNumber) throws IOException, SolrServerException{
     SolrInputDocument doc = new SolrInputDocument();
    
-    doc.addField("id", line.substring(0,ID_LENGTH));
-    doc.addField("key", line.substring(ID_LENGTH + 1));
-    doc.addField("slovnik", slovnik);
+    //doc.addField("id", slovnik + "_" + lineNumber);
+    
+    String key = line.substring(ID_LENGTH + 1);
+    doc.addField("id", slovnik + "_" + Normalizer.normalize(key, Normalizer.Form.NFD)
+            .replaceAll("\\p{InCombiningDiacriticalMarks}+", "").replaceAll(" ", "_")
+            .toLowerCase());
+    doc.addField("key_cs", key);
+    doc.addField("dict", slovnik);
     client.add(doc);
   }
 

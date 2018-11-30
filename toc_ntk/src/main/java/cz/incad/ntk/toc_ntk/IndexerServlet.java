@@ -150,7 +150,7 @@ public class IndexerServlet extends HttpServlet {
         JSONObject json = new JSONObject();
         try {
           String sysno = req.getParameter("sysno");
-          json.put("results", SolrService.getTags(sysno, req.getParameter("field"), "psh"));
+          json.put("results", SolrService.getTags(sysno, req.getParameter("field"), "dictionaries"));
 
         } catch (Exception ex) {
           LOGGER.log(Level.SEVERE, null, ex);

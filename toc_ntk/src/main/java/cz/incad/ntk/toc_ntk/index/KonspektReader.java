@@ -46,7 +46,7 @@ public class KonspektReader {
   
   private void addCurrentRecord() throws IOException, SolrServerException{
     if(currentRecord != null){
-      client.addBean(currentRecord, 100);
+      client.addBean(currentRecord);
     }
     currentRecord = new KospektRecord();
   }
@@ -59,7 +59,7 @@ public class KonspektReader {
       //Get line tag
       String tag = line.substring(0, 6);
       if("001   ".equals(tag)){
-        currentRecord.setId(line.substring(6));
+        currentRecord.setId("konspekt" + line.substring(6));
       } else if(TAG_CS.equals(tag)){
         currentRecord.setKeyCs(getCleanValue(line.substring(6)));
       } else if(TAG_EN.equals(tag)){

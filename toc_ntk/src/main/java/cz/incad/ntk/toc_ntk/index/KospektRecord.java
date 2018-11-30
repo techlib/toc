@@ -16,11 +16,14 @@ class KospektRecord {
     @Field
     String id;
     
+    @Field("dict")
+    String dict = "konspekt";
+    
     @Field
     String key_en;
     
     @Field
-    String key_cz;
+    String key_cs;
 
   void setId(String id) {
     this.id = id;
@@ -31,7 +34,7 @@ class KospektRecord {
   }
 
   void setKeyCs(String key) {
-    this.key_cz = key;
+    this.key_cs = key;
   }
   
 }

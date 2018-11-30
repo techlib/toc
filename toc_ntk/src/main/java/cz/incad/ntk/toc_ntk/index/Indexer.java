@@ -51,7 +51,9 @@ public class Indexer {
     JSONObject ret = new JSONObject();
     PSHReader psh = new PSHReader();
     try {
-      client = getClient("psh");
+      //client = getClient("psh");
+      client = getClient("dictionaries");
+      
       psh.readFromXML(Indexer.class.getResourceAsStream("psh-skos.rdf"), client);
       client.commit();
       client.close();
@@ -67,7 +69,8 @@ public class Indexer {
     JSONObject ret = new JSONObject();
     SimpleKeywordsReader r = new SimpleKeywordsReader("keywords");
     try {
-      client = getClient("keywords");
+      client = getClient("dictionaries");
+      //client = getClient("keywords");
       r.readFromTxt(Indexer.class.getResourceAsStream("653_klicova_slova_b.txt"), client);
       client.commit();
       client.close();
@@ -84,7 +87,8 @@ public class Indexer {
     JSONObject ret = new JSONObject();
     KonspektReader k = new KonspektReader();
     try {
-      client = getClient("konspekt");
+      client = getClient("dictionaries");
+      //client = getClient("konspekt");
       k.readFromTxt(Indexer.class.getResourceAsStream("konsp_uni.txt"), client);
       client.commit();
       client.close();
