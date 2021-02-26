@@ -334,37 +334,47 @@ public class SolrService {
       }
       
       JSONObject broaders = new JSONObject();
+      ret.put("broaders", new JSONObject());
 
       SolrDocumentList docs = (SolrDocumentList) nlr.get("response");
       for (Iterator it = docs.iterator(); it.hasNext();) {
         SolrDocument doc = (SolrDocument) it.next();
-        String broader = (String) doc.getFirstValue("broader");
-        if (broader == null) {
-          // Broader itself
-          broader = (String) doc.getFirstValue(outputLang + "PrefLabel");
-        } else {
-          SolrDocument sdoc = getById(solr, dict, broader);
-          if (sdoc.containsKey("broader")) {
-            
-          } else {
-            
+        String[] path = ((String) doc.getFirstValue("path_" + outputLang)).split("/");
+        broaders = ret.getJSONObject("broaders");
+        for (String broader : path) {
+          if (!broaders.has(broader)) {
+            broaders.put(broader, new JSONObject()).put("count", 0);
           }
-          broader = (String) sdoc.getFirstValue(outputLang + "PrefLabel");
+          broaders.put("count", broaders.optInt("count", 0)+1);
+          broaders = broaders.getJSONObject(broader);
         }
-        if (!broaders.has(broader)) {
-          broaders.put(broader, new JSONObject());
-        }
-        String label = (String)doc.getFirstValue(outputLang + "PrefLabel");
-        //if (broaders.getJSONObject(broader).has(label)) {
-        //  broaders.getJSONObject(broader).put(label, broaders.getJSONObject(broader).getInt(label) + 1);
-        //} else {
-          broaders.getJSONObject(broader).put(label, ids.get((String)doc.getFirstValue("id")));
-        //}
+        broaders.put("count", broaders.optInt("count", 0)+1);
+        
+//        String broader = (String) doc.getFirstValue("broader");
+//        if (broader == null) {
+//          // Broader itself
+//          broader = (String) doc.getFirstValue(outputLang + "PrefLabel");
+//        } else {
+//          SolrDocument sdoc = getById(solr, dict, broader);
+//          if (sdoc.containsKey("broader")) {
+//            
+//          } else {
+//            
+//          }
+//          broader = (String) sdoc.getFirstValue(outputLang + "PrefLabel");
+//        }
+//        if (!broaders.has(broader)) {
+//          broaders.put(broader, new JSONObject());
+//        }
+//        String label = (String)doc.getFirstValue(outputLang + "PrefLabel");
+//        //if (broaders.getJSONObject(broader).has(label)) {
+//        //  broaders.getJSONObject(broader).put(label, broaders.getJSONObject(broader).getInt(label) + 1);
+//        //} else {
+//          broaders.getJSONObject(broader).put(label, ids.get((String)doc.getFirstValue("id")));
+//        //}
         
         ret.append("docs", doc);
       }
-      
-      ret.put("broaders", broaders);
 
       solr.close();
     } catch (IOException | SolrServerException ex) {

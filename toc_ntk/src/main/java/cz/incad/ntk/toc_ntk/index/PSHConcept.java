@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.apache.solr.client.solrj.beans.Field;
+import org.json.JSONObject;
 
 /**
  *
@@ -22,20 +23,17 @@ public class PSHConcept {
     @Field
     String id;
     
-    @Field
-    String uri;
-    
     @Field("dict")
     String dict = "PSH";
 
     @Field("csPrefLabel")
-    List<String> csPrefLabel = new ArrayList<>();
+    String csPrefLabel;
     
     @Field("csAltLabel")
     List<String> csAltLabel = new ArrayList<>();
 
     @Field("enPrefLabel")
-    List<String> enPrefLabel = new ArrayList<>();
+    String enPrefLabel;
 
     @Field("enAltLabel")
     List<String> enAltLabel = new ArrayList<>() ;
@@ -48,17 +46,33 @@ public class PSHConcept {
     
     @Field
     String path;
+    
+    @Field("path_cs")
+    public String path_cs;
+    
+    @Field("path_en")
+    public String path_en;
+    
+    JSONObject toJSON() {
+      JSONObject ret = new JSONObject();
+      ret.put("id", id);
+      ret.put("broader", broader);
+      ret.put("narrower", narrower);
+      ret.put("csPrefLabel", csPrefLabel);
+      ret.put("enPrefLabel", enPrefLabel);
+      ret.put("path", path);
+      ret.put("path_en", path_en);
+      ret.put("path_cs", path_cs);
+      return ret;
+    }
 
-  void setUri(String uri) {
-    this.uri = uri;
-  }
 
   void setId(String id) {
     this.id = id;
   }
   
 
-  void addAltLabel(String lang, String label) {
+  void setAltLabel(String lang, String label) {
     if("en".equals(lang)){
       enAltLabel.add(label) ;
     } else {
@@ -66,11 +80,11 @@ public class PSHConcept {
     }
   }
 
-  void addPrefLabel(String lang, String label) {
+  void setPrefLabel(String lang, String label) {
     if("en".equals(lang)){
-      enPrefLabel.add(label) ;
+      enPrefLabel = label ;
     } else {
-      csPrefLabel.add(label) ;
+      csPrefLabel = label ;
     }
   }
   

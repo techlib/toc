@@ -69,11 +69,6 @@ int i = 0;
           //LOGGER.log(Level.INFO, "eventType: {0}, elementName: {1}", new Object[]{eventType, elementName});
           if (elementName.equals("Concept")) {
             PSHConcept pshC = readPSHConcept(reader);
-            if (pshC.broader != null) {
-              // Get path
-              // reader.
-              // System.out.println(pshC.id + " -> " + pshC.broader);
-            }
             client.addBean(pshC, 10);
           } else {
             skipElement(reader, elementName);
@@ -88,7 +83,6 @@ int i = 0;
 
   private PSHConcept readPSHConcept(XMLStreamReader reader) throws XMLStreamException {
     PSHConcept pshC = new PSHConcept();
-    pshC.setUri(reader.getAttributeValue(0));
 
     while (reader.hasNext()) {
       int eventType = reader.next();
@@ -99,9 +93,9 @@ int i = 0;
           if (elementName.equals("identifier")) {
             pshC.setId(reader.getElementText());
           } else if (elementName.equals("altLabel")) {
-            pshC.addAltLabel(reader.getAttributeValue(0), reader.getElementText());
+            pshC.setAltLabel(reader.getAttributeValue(0), reader.getElementText());
           } else if (elementName.equals("prefLabel")) {
-            pshC.addPrefLabel(reader.getAttributeValue(0), reader.getElementText());
+            pshC.setPrefLabel(reader.getAttributeValue(0), reader.getElementText());
           } else if (elementName.equals("narrower")) {
             pshC.narrower.add(reader.getAttributeValue(0).substring(reader.getAttributeValue(0).lastIndexOf("/")+1));
           } else if (elementName.equals("broader")) {
