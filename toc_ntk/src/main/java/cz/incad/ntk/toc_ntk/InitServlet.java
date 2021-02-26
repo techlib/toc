@@ -88,12 +88,12 @@ public class InitServlet extends HttpServlet {
 
         try {
             TAGGER_MODEL_FILE = Options.getInstance().getString("tagger_model_file", TAGGER_MODEL_FILE);
-        } catch (IOException | JSONException ex) {
+          LOGGER.log(Level.INFO, "Loading tagger from file {0}", TAGGER_MODEL_FILE);
+          tagger = Tagger.load(TAGGER_MODEL_FILE);
+          LOGGER.log(Level.INFO, "Tagger LOADED!!");
+        } catch (Exception ex) {
             LOGGER.log(Level.SEVERE, null, ex);
         }
-        LOGGER.log(Level.INFO, "Loading tagger from file {0}", TAGGER_MODEL_FILE);
-
-        tagger = Tagger.load(TAGGER_MODEL_FILE);
         if (tagger == null) {
             LOGGER.log(Level.SEVERE, "Cannot load tagger from file {0}", TAGGER_MODEL_FILE);
         }

@@ -1,12 +1,14 @@
 package cz.incad.ntk.toc_ntk;
 
 import cz.incad.ntk.toc_ntk.index.Indexer;
+import cz.incad.ntk.toc_ntk.index.PSHIndexer;
 import cz.incad.ntk.toc_ntk.index.SolrService;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -14,8 +16,9 @@ import org.json.JSONObject;
 
 /**
  *
- * @author alberto
+ * @author alberto 
  */
+@WebServlet(value = "/index/*")
 public class IndexerServlet extends HttpServlet {
 
   public static final Logger LOGGER = Logger.getLogger(IndexerServlet.class.getName());
@@ -32,23 +35,25 @@ public class IndexerServlet extends HttpServlet {
    */
   protected void processRequest(HttpServletRequest request, HttpServletResponse response)
           throws ServletException, IOException {
+    response.setContentType("application/json;charset=UTF-8");
+    response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate"); // HTTP 1.1
+    response.setHeader("Pragma", "no-cache"); // HTTP 1.0
+    response.setDateHeader("Expires", 0); // Proxies.
+    PrintWriter out = response.getWriter();
     try {
-
-      String actionNameParam = request.getParameter(ACTION_NAME);
+      String actionNameParam = request.getPathInfo().substring(1);
       if (actionNameParam != null) {
-
         Actions actionToDo = Actions.valueOf(actionNameParam.toUpperCase());
-        actionToDo.doPerform(request, response);
-
+        JSONObject json = actionToDo.doPerform(request, response);
+        out.println(json.toString(2));
       } else {
-        PrintWriter out = response.getWriter();
-        out.print("Action missing");
+
+        out.print("actionNameParam -> " + actionNameParam);
       }
     } catch (IOException e1) {
       LOGGER.log(Level.SEVERE, e1.getMessage(), e1);
       response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
       response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, e1.toString());
-      PrintWriter out = response.getWriter();
       out.print(e1.toString());
     } catch (SecurityException e1) {
       LOGGER.log(Level.SEVERE, e1.getMessage(), e1);
@@ -56,7 +61,6 @@ public class IndexerServlet extends HttpServlet {
     } catch (Exception e1) {
       LOGGER.log(Level.SEVERE, e1.getMessage(), e1);
       response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
-      PrintWriter out = response.getWriter();
       response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, e1.toString());
       out.print(e1.toString());
     }
@@ -66,11 +70,7 @@ public class IndexerServlet extends HttpServlet {
   enum Actions {
     INDEX_PSH {
       @Override
-      void doPerform(HttpServletRequest req, HttpServletResponse response) throws Exception {
-
-        response.setContentType("application/json;charset=UTF-8");
-
-        PrintWriter out = response.getWriter();
+      JSONObject doPerform(HttpServletRequest req, HttpServletResponse response) throws Exception {
         JSONObject json = new JSONObject();
         try {
           Indexer indexer = new Indexer();
@@ -80,16 +80,28 @@ public class IndexerServlet extends HttpServlet {
           LOGGER.log(Level.SEVERE, null, ex);
           json.put("error", ex.toString());
         }
-        out.println(json.toString(2));
+        return json;
+      }
+    },
+    PSH {
+      @Override
+      JSONObject doPerform(HttpServletRequest req, HttpServletResponse response) throws Exception {
+        JSONObject json = new JSONObject();
+        try {
+          PSHIndexer indexer = new PSHIndexer();
+          json.put("psh", indexer.full());
+
+        } catch (Exception ex) {
+          LOGGER.log(Level.SEVERE, null, ex);
+          json.put("error", ex.toString());
+        }
+        return json;
       }
     },
     INDEX_KONSPEKT {
       @Override
-      void doPerform(HttpServletRequest req, HttpServletResponse response) throws Exception {
+      JSONObject doPerform(HttpServletRequest req, HttpServletResponse response) throws Exception {
 
-        response.setContentType("application/json;charset=UTF-8");
-
-        PrintWriter out = response.getWriter();
         JSONObject json = new JSONObject();
         try {
           Indexer indexer = new Indexer();
@@ -99,16 +111,13 @@ public class IndexerServlet extends HttpServlet {
           LOGGER.log(Level.SEVERE, null, ex);
           json.put("error", ex.toString());
         }
-        out.println(json.toString(2));
+        return json;
       }
     },
     INDEX_SIMPLE_KEYWORDS {
       @Override
-      void doPerform(HttpServletRequest req, HttpServletResponse response) throws Exception {
+      JSONObject doPerform(HttpServletRequest req, HttpServletResponse response) throws Exception {
 
-        response.setContentType("application/json;charset=UTF-8");
-
-        PrintWriter out = response.getWriter();
         JSONObject json = new JSONObject();
         try {
           Indexer indexer = new Indexer();
@@ -118,16 +127,12 @@ public class IndexerServlet extends HttpServlet {
           LOGGER.log(Level.SEVERE, null, ex);
           json.put("error", ex.toString());
         }
-        out.println(json.toString(2));
+        return json;
       }
     },
     FIND {
       @Override
-      void doPerform(HttpServletRequest req, HttpServletResponse response) throws Exception {
-
-        response.setContentType("application/json;charset=UTF-8");
-
-        PrintWriter out = response.getWriter();
+      JSONObject doPerform(HttpServletRequest req, HttpServletResponse response) throws Exception {
         JSONObject json = new JSONObject();
         try {
           String text = req.getParameter("text");
@@ -137,30 +142,43 @@ public class IndexerServlet extends HttpServlet {
           LOGGER.log(Level.SEVERE, null, ex);
           json.put("error", ex.toString());
         }
-        out.println(json.toString(2));
+        return json;
       }
     },
     TAG {
       @Override
-      void doPerform(HttpServletRequest req, HttpServletResponse response) throws Exception {
-
-        response.setContentType("application/json;charset=UTF-8");
-
-        PrintWriter out = response.getWriter();
+      JSONObject doPerform(HttpServletRequest req, HttpServletResponse response) throws Exception {
         JSONObject json = new JSONObject();
         try {
           String sysno = req.getParameter("sysno");
-          json.put("results", SolrService.getTags(sysno, req.getParameter("field"), "dictionaries"));
+          String dictionary = req.getParameter("dictionary");
+          json = SolrService.getTags(sysno, req.getParameter("field"), dictionary, req.getParameter("outputLang"));
 
         } catch (Exception ex) {
           LOGGER.log(Level.SEVERE, null, ex);
           json.put("error", ex.toString());
         }
-        out.println(json.toString(2));
+        return json;
+      }
+    },
+    TAGRAW {
+      @Override
+      JSONObject doPerform(HttpServletRequest req, HttpServletResponse response) throws Exception {
+        JSONObject json = new JSONObject();
+        try {
+          String sysno = req.getParameter("sysno");
+          String dictionary = req.getParameter("dictionary");
+          json = SolrService.getTagsJSON(sysno, req.getParameter("field"), dictionary);
+
+        } catch (Exception ex) {
+          LOGGER.log(Level.SEVERE, null, ex);
+          json.put("error", ex.toString());
+        }
+        return json;
       }
     };
 
-    abstract void doPerform(HttpServletRequest request, HttpServletResponse response) throws Exception;
+    abstract JSONObject doPerform(HttpServletRequest request, HttpServletResponse response) throws Exception;
   }
 
   // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

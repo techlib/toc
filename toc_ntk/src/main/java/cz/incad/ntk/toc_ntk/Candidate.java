@@ -8,6 +8,7 @@ import java.util.logging.Logger;
 import org.apache.solr.common.SolrDocument;
 import org.apache.solr.common.SolrDocumentList;
 import org.json.JSONObject;
+import org.noggit.JSONUtil;
 
 /**
  *
@@ -111,7 +112,8 @@ public class Candidate {
         for (SolrDocument doc : docs) {
           this.matches.add(
                   new DictionaryMatch(doc.getFirstValue("slovnik").toString(),
-                          doc.getFirstValue("key_cz").toString()));
+                          doc.getFirstValue("key_cz").toString(),
+                  new JSONObject(JSONUtil.toJSON(doc))));
         }
       }
     } catch (Exception ex) {
@@ -134,6 +136,7 @@ public class Candidate {
 
       for (DictionaryMatch dm : this.matches) {
         if (sc.dictionaries.containsKey(dm.name)) {
+          
           this.score = (float) (this.score * sc.dictionaries.get(dm.name));
         }
       }

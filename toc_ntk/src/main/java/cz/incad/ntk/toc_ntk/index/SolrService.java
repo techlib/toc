@@ -10,20 +10,28 @@ import cz.incad.ntk.toc_ntk.DictionaryMatch;
 import cz.incad.ntk.toc_ntk.FileService;
 import cz.incad.ntk.toc_ntk.Options;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import org.apache.commons.io.IOUtils;
 import org.apache.solr.client.solrj.SolrClient;
 import org.apache.solr.client.solrj.SolrQuery;
 import org.apache.solr.client.solrj.SolrRequest;
 import org.apache.solr.client.solrj.SolrServerException;
 import org.apache.solr.client.solrj.impl.HttpSolrClient;
+import org.apache.solr.client.solrj.impl.InputStreamResponseParser;
+import org.apache.solr.client.solrj.impl.NoOpResponseParser;
+import org.apache.solr.client.solrj.request.ContentStreamUpdateRequest;
 import org.apache.solr.client.solrj.request.QueryRequest;
 import org.apache.solr.client.solrj.response.QueryResponse;
+import org.apache.solr.client.solrj.response.UpdateResponse;
 import org.apache.solr.common.SolrDocument;
 import org.apache.solr.common.SolrDocumentList;
 import org.apache.solr.common.SolrInputDocument;
@@ -35,6 +43,7 @@ import org.apache.solr.common.util.NamedList;
 import org.apache.solr.common.util.SimpleOrderedMap;
 import org.json.JSONArray;
 import org.json.JSONObject;
+import org.noggit.JSONUtil;
 
 /**
  *
@@ -130,7 +139,8 @@ public class SolrService {
       for (SolrDocument doc : docs) {
         ret.put(
                 new DictionaryMatch(doc.getFirstValue("slovnik").toString(),
-                        doc.getFirstValue("key_cz").toString()).toJSON());
+                        doc.getFirstValue("key_cz").toString(),
+                        new JSONObject(JSONUtil.toJSON(doc))).toJSON());
       }
 
     }
@@ -245,8 +255,9 @@ public class SolrService {
     }
     return docs;
   }
-
-  public static JSONObject getTags(String sysno,String field,String dict) {
+  
+  
+  public static JSONObject getTagsJSON(String sysno, String field, String dict) {
     JSONObject ret = new JSONObject();
     try (SolrClient solr = new HttpSolrClient.Builder(urlString).build()) {
       SolrQuery query = new SolrQuery();
@@ -257,26 +268,104 @@ public class SolrService {
               .set("field", field)
               .set("matchText", true)
               .set("skipAltTokens", true)
+              .set("fl", "*,score")
+              .set("tagsLimit", "5000");
+      String text = FileService.getRawToc(sysno);
+      
+     
+       ContentStreamUpdateRequest req = new ContentStreamUpdateRequest("");
+    req.addContentStream(new ContentStreamBase.StringStream(text));
+    req.setMethod(SolrRequest.METHOD.POST);
+    NoOpResponseParser rawJsonResponseParser = new NoOpResponseParser();
+      rawJsonResponseParser.setWriterType("json");
+    req.setResponseParser(rawJsonResponseParser);
+    req.setPath("/tag");
+    req.setParams(query);
+    UpdateResponse rsp = req.process(solr, dict);
+    NamedList nlr = rsp.getResponse();
+            
+    ret = new JSONObject((String) nlr.get("response"));
+      
+      solr.close();
+    } catch (IOException | SolrServerException ex) {
+      LOGGER.log(Level.SEVERE, null, ex);
+      ret.put("error", ex);
+    }
+    return ret;
+   }
+
+  public static JSONObject getTags(String sysno, String field, String dict, String outputLang) {
+    JSONObject ret = new JSONObject();
+    try (SolrClient solr = new HttpSolrClient.Builder(urlString).build()) {
+      SolrQuery query = new SolrQuery();
+      query.setRequestHandler("/tag");
+      query.set("overlaps", "NO_SUB")
+              .set("wt", "json")
+              .set("indent", "on")
+              .set("field", field)
+              .set("matchText", true)
+              .set("skipAltTokens", true)
+              .set("fl", "*,score")
               .set("tagsLimit", "5000");
       String text = FileService.getRawToc(sysno);
       QueryRequest queryRequest = new SolrTaggerRequest(query, text);
-              
-      NamedList nlr = solr.request(queryRequest, dict);
-      //System.out.println(nlr);
+
+//      NoOpResponseParser rawJsonResponseParser = new NoOpResponseParser();
+//      rawJsonResponseParser.setWriterType("json");
+//      queryRequest.setResponseParser(rawJsonResponseParser);
       
-        ret.put("tagsCount", nlr.get("tagsCount"));
+      NamedList nlr = solr.request(queryRequest, dict);
+      
+      // ret = new JSONObject((String) nlr.get("response"));
+
+
+      ret.put("tagsCount", nlr.get("tagsCount")); 
       ArrayList tags = (ArrayList) nlr.get("tags");
+      Map<String, Integer> ids = new HashMap<>();
       for (Iterator it = tags.iterator(); it.hasNext();) {
         NamedList tag = (NamedList) it.next();
+        String id = ((ArrayList<String>)tag.get("ids")).get(0);
+        if (ids.containsKey(id)) {
+          ids.put(id, ids.get(id) + 1);
+        } else {
+          ids.put(id, 1);
+        }
         ret.append("tags", tag.asShallowMap());
       }
       
+      JSONObject broaders = new JSONObject();
+
       SolrDocumentList docs = (SolrDocumentList) nlr.get("response");
       for (Iterator it = docs.iterator(); it.hasNext();) {
         SolrDocument doc = (SolrDocument) it.next();
+        String broader = (String) doc.getFirstValue("broader");
+        if (broader == null) {
+          // Broader itself
+          broader = (String) doc.getFirstValue(outputLang + "PrefLabel");
+        } else {
+          SolrDocument sdoc = getById(solr, dict, broader);
+          if (sdoc.containsKey("broader")) {
+            
+          } else {
+            
+          }
+          broader = (String) sdoc.getFirstValue(outputLang + "PrefLabel");
+        }
+        if (!broaders.has(broader)) {
+          broaders.put(broader, new JSONObject());
+        }
+        String label = (String)doc.getFirstValue(outputLang + "PrefLabel");
+        //if (broaders.getJSONObject(broader).has(label)) {
+        //  broaders.getJSONObject(broader).put(label, broaders.getJSONObject(broader).getInt(label) + 1);
+        //} else {
+          broaders.getJSONObject(broader).put(label, ids.get((String)doc.getFirstValue("id")));
+        //}
+        
         ret.append("docs", doc);
       }
       
+      ret.put("broaders", broaders);
+
       solr.close();
     } catch (IOException | SolrServerException ex) {
       LOGGER.log(Level.SEVERE, null, ex);
@@ -285,6 +374,16 @@ public class SolrService {
     return ret;
   }
   
+  public static SolrDocument getById(SolrClient solr, String collection, String val, String... fl) {
+    try {
+      SolrQuery q = new SolrQuery("id:\"" + val + "\"");
+      return solr.query(collection, q).getResults().get(0);
+    } catch (SolrServerException | IOException ex) {
+      LOGGER.log(Level.SEVERE, null, ex);
+      return null;
+    }
+  }
+
   @SuppressWarnings("serial")
   public static class SolrTaggerRequest extends QueryRequest {
 
@@ -297,8 +396,7 @@ public class SolrService {
 
     @Override
     public Collection<ContentStream> getContentStreams() {
-      return Collections.singleton((ContentStream) new ContentStreamBase
-          .StringStream(input));
+      return Collections.singleton((ContentStream) new ContentStreamBase.StringStream(input));
     }
   }
 

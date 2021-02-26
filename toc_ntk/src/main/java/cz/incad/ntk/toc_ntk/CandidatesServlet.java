@@ -11,6 +11,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -21,6 +22,8 @@ import org.json.JSONObject;
  *
  * @author alberto
  */
+
+@WebServlet(value = "/candidates")
 public class CandidatesServlet extends HttpServlet {
 
     public static final Logger LOGGER = Logger.getLogger(CandidatesServlet.class.getName());
@@ -212,6 +215,24 @@ public class CandidatesServlet extends HttpServlet {
                 PrintWriter out = response.getWriter();
                 String text = FileService.getRawToc(request.getParameter("sysno"));
                 out.print(text);
+            }
+        },
+        XSERVER{
+            @Override
+            void doPerform(HttpServletRequest request, HttpServletResponse response) throws Exception {
+
+                response.setContentType("application/json;charset=UTF-8");
+                PrintWriter out = response.getWriter();
+                JSONObject ret = new JSONObject();
+                try {
+                    
+                    String sysno = request.getParameter("sysno");
+
+                        ret.put("info", XServer.find(sysno));
+                } catch (Exception ex) {
+                    ret.put("error", ex.toString());
+                }
+                out.print(ret.toString(2));
             }
         },
         FIND {

@@ -28,17 +28,26 @@ public class PSHConcept {
     @Field("dict")
     String dict = "PSH";
 
-    @Field("key_cs")
+    @Field("csPrefLabel")
     List<String> csPrefLabel = new ArrayList<>();
     
     @Field("csAltLabel")
     List<String> csAltLabel = new ArrayList<>();
 
-    @Field("key_en")
+    @Field("enPrefLabel")
     List<String> enPrefLabel = new ArrayList<>();
 
     @Field("enAltLabel")
     List<String> enAltLabel = new ArrayList<>() ;
+
+    @Field("broader")
+    String broader;
+
+    @Field("narrower")
+    List<String> narrower = new ArrayList<>() ;
+    
+    @Field
+    String path;
 
   void setUri(String uri) {
     this.uri = uri;

@@ -27,8 +27,9 @@ public class KonspektReader {
   SolrClient client;
   KospektRecord currentRecord;
   
-  final String TAG_CS = "290   ";
-  final String TAG_EN = "290   ";
+  final String TAG_CS      = "290   ";
+  final String TAG_EN      = "490 0 ";
+  final String TAG_BROADER = "5909  ";
 
   public void readFromTxt(InputStream is, SolrClient client) {
     
@@ -62,8 +63,11 @@ public class KonspektReader {
         currentRecord.setId("konspekt" + line.substring(6));
       } else if(TAG_CS.equals(tag)){
         currentRecord.setKeyCs(getCleanValue(line.substring(6)));
+        currentRecord.setKeyEn(getCleanValue(line.substring(6)));
       } else if(TAG_EN.equals(tag)){
         currentRecord.setKeyEn(getCleanValue(line.substring(6)));
+      } else if(TAG_BROADER.equals(tag)){
+        currentRecord.broader = getCleanValue(line.substring(6));
       } 
     }
   }

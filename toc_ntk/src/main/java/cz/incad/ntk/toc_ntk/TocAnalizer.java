@@ -19,6 +19,7 @@ import org.apache.solr.common.SolrDocumentList;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.noggit.JSONUtil;
 
 /**
  * Methods to analyzing files using MorphoDiTa API
@@ -27,207 +28,209 @@ import org.json.JSONObject;
  */
 public class TocAnalizer {
 
-    public static final Logger LOGGER = Logger.getLogger(TocAnalizer.class.getName());
+  public static final Logger LOGGER = Logger.getLogger(TocAnalizer.class.getName());
 
-    File tocFile;
-    JSONObject tocFileData;
+  File tocFile;
+  JSONObject tocFileData;
 
-    public void processFolder(String path) {
+  public void processFolder(String path) {
 
+  }
+
+  /**
+   * Find the keyword candidates for the Ordered list of tokens
+   *
+   * @param line
+   * @return A list of candidates
+   */
+  public List<Candidate> findCandidates(TocLine line, int next_start_page) {
+
+    List<Candidate> candidates = new ArrayList<>();
+    boolean skypSingle;
+    try {
+      skypSingle = Options.getInstance().getBoolean("skypSingleWordTokens", true);
+    } catch (IOException | JSONException ex) {
+      LOGGER.log(Level.SEVERE, null, ex);
+      return candidates;
     }
 
-    /**
-     * Find the keyword candidates for the Ordered list of tokens
-     *
-     * @param line
-     * @return A list of candidates
-     */
-    public List<Candidate> findCandidates(TocLine line, int next_start_page) {
-
-        List<Candidate> candidates = new ArrayList<>();
-        boolean skypSingle;
-        try {
-            skypSingle = Options.getInstance().getBoolean("skypSingleWordTokens", true);
-        } catch (IOException | JSONException ex) {
-            LOGGER.log(Level.SEVERE, null, ex);
-            return candidates;
+    //First case: we propose all nouns
+    for (MorphoToken token : line.mtokens) {
+      if (skypSingle && token.isSingleWord()) {
+        continue;
+      }
+      if (token.getTag().isNoun()) {
+        Candidate c;
+        if (token.isProperNoun()) {
+          c = new Candidate(token.getLemmaSimple(), CandidateType.PROPERNOUN, true);
+        } else {
+          c = new Candidate(token.getLemmaSimple(), CandidateType.NOUN);
         }
+        c.addDeep(line.deep);
+        c.addExtent(next_start_page - line.start_page);
+        candidates.add(c);
 
-        //First case: we propose all nouns
-        for (MorphoToken token : line.mtokens) {
-            if (skypSingle && token.isSingleWord()) {
-                continue;
-            }
-            if (token.getTag().isNoun()) {
-                Candidate c;
-                if (token.isProperNoun()) {
-                    c = new Candidate(token.getLemmaSimple(), CandidateType.PROPERNOUN, true);
-                } else {
-                    c = new Candidate(token.getLemmaSimple(), CandidateType.NOUN);
-                }
-                c.addDeep(line.deep);
-                c.addExtent(next_start_page - line.start_page);
-                candidates.add(c);
+      }
+    }
 
-            }
-        }
-
-        //All adjectives followed by nouns
-        String str = "";
-        boolean hasAdjective = false;
-        boolean hasProperNoun = false;
-        for (MorphoToken token : line.mtokens) {
-            if (token.getTag().isAdjective()) {
-                str += token.getToken() + " ";
-                hasAdjective = true;
-                hasProperNoun = token.isProperNoun() || hasProperNoun;
-            } else if (token.getTag().isNoun() && hasAdjective) {
-                str += token.getToken() + " ";
-                hasProperNoun = token.isProperNoun() || hasProperNoun;
-                Candidate c = new Candidate(str, CandidateType.ADJETIVES_NOUN, hasProperNoun);
-                candidates.add(c);
-                c.addDeep(line.deep);
-                c.addExtent(next_start_page - line.start_page);
-                str = "";
-                hasAdjective = false;
-                hasProperNoun = false;
-            } else if (token.isParenthesis()) {
-                //Tady bychom mely dat dohromady vsechno v zavorkach
-            } else {
-                str += token.getToken() + " ";
-                //hasAdjective = false;
-                //hasProperNoun = false;
-            }
-        }
-
-        //Nouns followed by words in genitive
+    //All adjectives followed by nouns
+    String str = "";
+    boolean hasAdjective = false;
+    boolean hasProperNoun = false;
+    for (MorphoToken token : line.mtokens) {
+      if (token.getTag().isAdjective()) {
+        str += token.getToken() + " ";
+        hasAdjective = true;
+        hasProperNoun = token.isProperNoun() || hasProperNoun;
+      } else if (token.getTag().isNoun() && hasAdjective) {
+        str += token.getToken() + " ";
+        hasProperNoun = token.isProperNoun() || hasProperNoun;
+        Candidate c = new Candidate(str, CandidateType.ADJETIVES_NOUN, hasProperNoun);
+        candidates.add(c);
+        c.addDeep(line.deep);
+        c.addExtent(next_start_page - line.start_page);
         str = "";
-        boolean hasNoun = false;
+        hasAdjective = false;
         hasProperNoun = false;
-        boolean hasGenitive = false;
-        for (MorphoToken token : line.mtokens) {
-            if (token.getTag().isNoun() && !hasNoun) {
-                str = token.getToken();
-                hasNoun = true;
-                hasProperNoun = token.isProperNoun() || hasProperNoun;
-            } else if (token.getTag().isGenitive() && hasNoun) {
-                hasProperNoun = token.isProperNoun() || hasProperNoun;
-                str += " " + token.getToken();
-                hasGenitive = true;
-            } else {
-                if (str.length() > 0 && hasGenitive) {
-                    Candidate c = new Candidate(str, CandidateType.NOUN_GENITIVES, hasProperNoun);
-                    candidates.add(c);
-                    c.addDeep(line.deep);
-                    c.addExtent(next_start_page - line.start_page);
-
-                    hasGenitive = false;
-                }
-                str = "";
-                hasNoun = false;
-                hasProperNoun = false;
-            }
-        }
-        if (str.length() > 0 && hasGenitive) {
-            //candidates.add(new Candidate(str, CandidateType.NOUN_GENITIVES, hasProperNoun));
-            Candidate c = new Candidate(str, CandidateType.NOUN_GENITIVES, hasProperNoun);
-            candidates.add(c);
-            c.addDeep(line.deep);
-            c.addExtent(next_start_page - line.start_page);
-        }
-
-        addDictionaryWords(line, candidates, next_start_page);
-        return candidates;
+      } else if (token.isParenthesis()) {
+        //Tady bychom mely dat dohromady vsechno v zavorkach
+      } else {
+        str += token.getToken() + " ";
+        //hasAdjective = false;
+        //hasProperNoun = false;
+      }
     }
 
-    private void addDictionaryWords(TocLine line, List<Candidate> candidates, int next_start_page) {
-        //MorphoDiTa split some abbreviations (acronyns). So we will 
-        // search words distinct than tokens in our keywords dictionary
-        String[] words = line.text.split(" ");
-        for (String s : words) {
-            //Cistime tecky, zavorky
-            String word = s.replaceAll("\\.+", "").replaceAll("\\(", "").replaceAll("\\)", "");
-            if (!hasWord(line, word)) {
-                //Try to find
-                SolrDocumentList docs = SolrService.findInDictionaries(word);
-                if (!docs.isEmpty()) {
-                    Candidate c = new Candidate(word, CandidateType.DICTIONARY_WORD);
-                    c.addDeep(line.deep);
-                    c.addExtent(next_start_page - line.start_page);
-                    c.isMatched = true;
+    //Nouns followed by words in genitive
+    str = "";
+    boolean hasNoun = false;
+    hasProperNoun = false;
+    boolean hasGenitive = false;
+    for (MorphoToken token : line.mtokens) {
+      if (token.getTag().isNoun() && !hasNoun) {
+        str = token.getToken();
+        hasNoun = true;
+        hasProperNoun = token.isProperNoun() || hasProperNoun;
+      } else if (token.getTag().isGenitive() && hasNoun) {
+        hasProperNoun = token.isProperNoun() || hasProperNoun;
+        str += " " + token.getToken();
+        hasGenitive = true;
+      } else {
+        if (str.length() > 0 && hasGenitive) {
+          Candidate c = new Candidate(str, CandidateType.NOUN_GENITIVES, hasProperNoun);
+          candidates.add(c);
+          c.addDeep(line.deep);
+          c.addExtent(next_start_page - line.start_page);
+
+          hasGenitive = false;
+        }
+        str = "";
+        hasNoun = false;
+        hasProperNoun = false;
+      }
+    }
+    if (str.length() > 0 && hasGenitive) {
+      //candidates.add(new Candidate(str, CandidateType.NOUN_GENITIVES, hasProperNoun));
+      Candidate c = new Candidate(str, CandidateType.NOUN_GENITIVES, hasProperNoun);
+      candidates.add(c);
+      c.addDeep(line.deep);
+      c.addExtent(next_start_page - line.start_page);
+    }
+
+    addDictionaryWords(line, candidates, next_start_page);
+    return candidates;
+  }
+
+  private void addDictionaryWords(TocLine line, List<Candidate> candidates, int next_start_page) {
+    //MorphoDiTa split some abbreviations (acronyns). So we will 
+    // search words distinct than tokens in our keywords dictionary
+    String[] words = line.text.split(" ");
+    for (String s : words) {
+      //Cistime tecky, zavorky
+      String word = s.replaceAll("\\.+", "").replaceAll("\\(", "").replaceAll("\\)", "");
+      if (!hasWord(line, word)) {
+        //Try to find
+        SolrDocumentList docs = SolrService.findInDictionaries(word);
+        if (!docs.isEmpty()) {
+          Candidate c = new Candidate(word, CandidateType.DICTIONARY_WORD);
+          c.addDeep(line.deep);
+          c.addExtent(next_start_page - line.start_page);
+          c.isMatched = true;
 //          c.matched_text = docs.get(0).getFirstValue("key").toString();
 //          c.dictionary = docs.get(0).getFirstValue("slovnik").toString();
-                    for (SolrDocument doc : docs) {
-                        c.matches.add(
-                                new DictionaryMatch(doc.getFirstValue("slovnik").toString(),
-                                        doc.getFirstValue("key_cz").toString()));
-                    }
+          for (SolrDocument doc : docs) {
 
-                    candidates.add(c);
-                }
-            }
+            c.matches.add(
+                    new DictionaryMatch(doc.getFirstValue("slovnik").toString(),
+                            doc.getFirstValue("key_cz").toString(),
+                            new JSONObject(JSONUtil.toJSON(doc))));
+          }
+
+          candidates.add(c);
         }
+      }
     }
+  }
 
-    private boolean hasWord(TocLine line, String word) {
+  private boolean hasWord(TocLine line, String word) {
 
-        for (MorphoToken token : line.mtokens) {
-            if (word.equals(token.getToken())) {
-                return true;
-            }
-        }
-        return false;
+    for (MorphoToken token : line.mtokens) {
+      if (word.equals(token.getToken())) {
+        return true;
+      }
     }
+    return false;
+  }
 
-    //Parse file and get lines.
-    //Line should starts and ends with digit
-    //In other case we join the lines 
-    public List<TocLine> getLines(File f) {
+  //Parse file and get lines.
+  //Line should starts and ends with digit
+  //In other case we join the lines 
+  public List<TocLine> getLines(File f) {
 //    FileReader in = null;
-        List<TocLine> lines = new ArrayList<>();
-        try {
-            List<String> strlines = FileUtils.readLines(f, Charset.forName("UTF-8"));
-            String previous = "";
+    List<TocLine> lines = new ArrayList<>();
+    try {
+      List<String> strlines = FileUtils.readLines(f, Charset.forName("UTF-8"));
+      String previous = "";
 //      in = new FileReader(f);
 //      BufferedReader br = new BufferedReader(in);
 //      String line = br.readLine();
 //      while (line != null) {
 //        line = line.trim();
-            for (String line : strlines) {
-                if(!line.trim().contains(" ") && !line.trim().contains("\t")){
-                    LOGGER.log(Level.FINE, "Skiping line {0}", line);
-                    continue;
-                }
-                if (Character.isDigit(line.charAt(line.length() - 1))) {
-                    //This is the end
-                    line = previous + " " + line;
-                    lines.add(new TocLine(line.trim()));
-                    
-                    previous = "";
-                } else if (Character.isDigit(line.charAt(0))) {
-                    // This is the begining or we are continuing
-                    if (previous.equals("")) {
-                        // new line
-                        previous = line;
-                    } else {
-                        // continuing
-                        previous += line;
-                    }
-                } else {
-                    previous += line;
+      for (String line : strlines) {
+        if (!line.trim().contains(" ") && !line.trim().contains("\t")) {
+          LOGGER.log(Level.FINE, "Skiping line {0}", line);
+          continue;
+        }
+        if (Character.isDigit(line.charAt(line.length() - 1))) {
+          //This is the end
+          line = previous + " " + line;
+          lines.add(new TocLine(line.trim()));
+
+          previous = "";
+        } else if (Character.isDigit(line.charAt(0))) {
+          // This is the begining or we are continuing
+          if (previous.equals("")) {
+            // new line
+            previous = line;
+          } else {
+            // continuing
+            previous += line;
+          }
+        } else {
+          previous += line;
 //          line = lines.get(lines.size() - 1) + line;
 //          lines.set(lines.size() - 1, line);
-                }
+        }
 //        line = br.readLine();
-            }
-            if (!previous.equals("")) {
-                lines.add(new TocLine(previous));
-            }
+      }
+      if (!previous.equals("")) {
+        lines.add(new TocLine(previous));
+      }
 //      in.close();
-        } catch (FileNotFoundException ex) {
-            LOGGER.log(Level.SEVERE, null, ex);
-        } catch (IOException ex) {
-            LOGGER.log(Level.SEVERE, null, ex);
+    } catch (FileNotFoundException ex) {
+      LOGGER.log(Level.SEVERE, null, ex);
+    } catch (IOException ex) {
+      LOGGER.log(Level.SEVERE, null, ex);
 //    } finally {
 //      try {
 //        if (in != null) {
@@ -236,163 +239,185 @@ public class TocAnalizer {
 //      } catch (IOException ex) {
 //        Logger.getLogger(TocAnalizer.class.getName()).log(Level.SEVERE, null, ex);
 //      }
-        }
-        return lines;
     }
+    return lines;
+  }
 
-    public List<TocLine> getLinesFromSaved() {
-        List<TocLine> lines = new ArrayList<>();
-        try {
-            String t = FileUtils.readFileToString(tocFile, Charset.forName("UTF-8"));
-            tocFileData = new JSONObject(t);
-            JSONArray jalines = tocFileData.getJSONArray("lines");
-            for (int i = 0; i < jalines.length(); i++) {
-                lines.add(new TocLine(jalines.getJSONObject(i)));
+  public List<TocLine> getLinesFromSaved() {
+    List<TocLine> lines = new ArrayList<>();
+    try {
+      String t = FileUtils.readFileToString(tocFile, Charset.forName("UTF-8"));
+      tocFileData = new JSONObject(t);
+      JSONArray jalines = tocFileData.getJSONArray("lines");
+      for (int i = 0; i < jalines.length(); i++) {
+        lines.add(new TocLine(jalines.getJSONObject(i)));
+      }
+
+    } catch (FileNotFoundException ex) {
+      LOGGER.log(Level.SEVERE, null, ex);
+    } catch (IOException ex) {
+      LOGGER.log(Level.SEVERE, null, ex);
+    }
+    return lines;
+  }
+
+  private void setTocFile(String filename) throws IOException {
+    String dir = Options.getInstance().getString("saved_morpho_dir");
+    tocFile = new File(dir + filename);
+  }
+
+  private boolean loadFromSaved(String filename) {
+    try {
+      setTocFile(filename);
+      return tocFile.exists();
+    } catch (IOException | JSONException ex) {
+      LOGGER.log(Level.SEVERE, null, ex);
+    }
+    return false;
+  }
+
+  private void save(List<TocLine> lines) {
+    try {
+      tocFileData = new JSONObject();
+      for (TocLine line : lines) {
+        tocFileData.append("lines", line.toJSON());
+      }
+      FileUtils.writeStringToFile(tocFile, tocFileData.toString(2), Charset.forName("UTF-8"));
+    } catch (IOException ex) {
+      LOGGER.log(Level.SEVERE, null, ex);
+    }
+  }
+
+  /**
+   * *
+   *
+   * @param f the file to analize
+   * @param candidates Map of candidates to fill
+   * @return the total pages extent
+   */
+  public int analyze(File f, Map<String, Candidate> candidates) {
+    int next_start_page = 0;
+    try {
+      List<TocLine> lines;
+
+      if (Options.getInstance().getBoolean("useCacheForTocLines", true)) {
+        if (loadFromSaved(f.getName())) {
+          lines = getLinesFromSaved();
+        } else {
+          lines = getLines(f);
+          save(lines);
+        }
+      } else {
+        lines = getLines(f);
+        if (Options.getInstance().getBoolean("saveTocLines", true)) {
+          setTocFile(f.getName());
+          save(lines);
+        }
+      }
+      //for (TocLine line : lines) {
+      for (int i = 0; i < lines.size(); i++) {
+        TocLine line = lines.get(i);
+        if (i + 1 < lines.size()) {
+          next_start_page = lines.get(i + 1).start_page;
+        } else {
+          //TODO: total pages
+          next_start_page = lines.get(i).start_page;
+        }
+        for (MorphoToken token : line.mtokens) {
+
+        }
+        for (Candidate c : findCandidates(line, next_start_page)) {
+          if (candidates.containsKey(c.text.toLowerCase())) {
+            candidates.get(c.text.toLowerCase()).found++;
+          } else {
+            candidates.put(c.text.toLowerCase(), c);
+            c.setBlackListed();
+            if (!c.blackListed) {
+              c.match();
             }
-
-        } catch (FileNotFoundException ex) {
-            LOGGER.log(Level.SEVERE, null, ex);
-        } catch (IOException ex) {
-            LOGGER.log(Level.SEVERE, null, ex);
+          }
         }
-        return lines;
+      }
+    } catch (IOException | JSONException ex) {
+      LOGGER.log(Level.SEVERE, null, ex);
     }
+    return next_start_page;
+  }
 
-    private void setTocFile(String filename) throws IOException {
-        String dir = Options.getInstance().getString("saved_morpho_dir");
-        tocFile = new File(dir + filename);
+  /**
+   *
+   * @param foldername Name of the folder containing ocr
+   * @param info: JSON returned from XServer
+   * @return Map of candidates
+   */
+  public Map<String, Candidate> analyzeFolder(String foldername, JSONObject info) {
+    Map<String, Candidate> candidates = new HashMap<>();
+    File dir = new File(foldername);
+    String[] extensions = new String[]{"txt"};
+    List<File> files = (List<File>) FileUtils.listFiles(dir, extensions, false);
+    int totalPages = 0;
+    for (File f : files) {
+      totalPages = analyze(f, candidates);
     }
+    addCandidatesFromInfo(candidates, info, totalPages);
+    return candidates;
+  }
 
-    private boolean loadFromSaved(String filename) {
-        try {
-            setTocFile(filename);
-            return tocFile.exists();
-        } catch (IOException | JSONException ex) {
-            LOGGER.log(Level.SEVERE, null, ex);
-        }
-        return false;
-    }
+  private void addCandidatesFromInfo(Map<String, Candidate> candidates, JSONObject info, int totalPages) {
+    JSONArray varfield = info.optJSONArray("varfield");
+    String title = " ";
+    for (int i = 0; i < varfield.length(); i++) {
+      JSONObject vf = varfield.getJSONObject(i);
+      if ("245".equals(vf.optString("id"))) {
 
-    private void save(List<TocLine> lines) {
-        try {
-            tocFileData = new JSONObject();
-            for (TocLine line : lines) {
-                tocFileData.append("lines", line.toJSON());
+        JSONArray sb = vf.optJSONArray("subfield");
+        if (sb != null) {
+          for (int j = 0; j < sb.length(); j++) {
+            //Exclude author label = c
+            if (!sb.getJSONObject(j).getString("label").equals("c")) {
+              title += sb.getJSONObject(j).getString("content") + " ";
             }
-            FileUtils.writeStringToFile(tocFile, tocFileData.toString(2), Charset.forName("UTF-8"));
-        } catch (IOException ex) {
-            LOGGER.log(Level.SEVERE, null, ex);
+          }
         }
+      }
+
     }
-/***
- * 
- * @param f the file to analize
- * @param candidates Map of candidates to fill
- * @return the total pages extent
- */
-    public int analyze(File f, Map<String, Candidate> candidates) {
-            int next_start_page = 0;
-        try {
-            List<TocLine> lines;
+    TocLine tc = new TocLine(title);
 
-            if (Options.getInstance().getBoolean("useCacheForTocLines", true)) {
-                if (loadFromSaved(f.getName())) {
-                    lines = getLinesFromSaved();
-                } else {
-                    lines = getLines(f);
-                    save(lines);
-                }
-            } else {
-                lines = getLines(f);
-                if (Options.getInstance().getBoolean("saveTocLines", true)) {
-                    setTocFile(f.getName());
-                    save(lines);
-                }
-            }
-            //for (TocLine line : lines) {
-            for (int i = 0; i < lines.size(); i++) {
-                TocLine line = lines.get(i);
-                if (i + 1 < lines.size()) {
-                    next_start_page = lines.get(i + 1).start_page;
-                } else {
-                    //TODO: total pages
-                    next_start_page = lines.get(i).start_page;
-                }
-                for (MorphoToken token : line.mtokens) {
-
-                }
-                for (Candidate c : findCandidates(line, next_start_page)) {
-                    if (candidates.containsKey(c.text.toLowerCase())) {
-                        candidates.get(c.text.toLowerCase()).found++;
-                    } else {
-                        candidates.put(c.text.toLowerCase(), c);
-                        c.setBlackListed();
-                        if (!c.blackListed) {
-                            c.match();
-                        }
-                    }
-                }
-            }
-        } catch (IOException | JSONException ex) {
-            LOGGER.log(Level.SEVERE, null, ex);
+    for (Candidate c : findCandidates(tc, totalPages)) {
+      if (candidates.containsKey(c.text.toLowerCase())) {
+        candidates.get(c.text.toLowerCase()).found++;
+        candidates.get(c.text.toLowerCase()).inTitle = true;
+        candidates.get(c.text.toLowerCase()).setExtent(totalPages);
+      } else {
+        c.inTitle = true;
+        candidates.put(c.text.toLowerCase(), c);
+        c.setBlackListed();
+        if (!c.blackListed) {
+          c.match();
         }
-            return next_start_page;
+      }
     }
-
-    /**
-     *
-     * @param foldername Name of the folder containing ocr
-     * @param info: JSON returned from XServer
-     * @return Map of candidates
-     */
-    public Map<String, Candidate> analyzeFolder(String foldername, JSONObject info) {
-        Map<String, Candidate> candidates = new HashMap<>();
-        File dir = new File(foldername);
-        String[] extensions = new String[]{"txt"};
-        List<File> files = (List<File>) FileUtils.listFiles(dir, extensions, false);
-        int totalPages = 0;
-        for (File f : files) {
-            totalPages = analyze(f, candidates);
-        }
-        addCandidatesFromInfo(candidates, info, totalPages);
-        return candidates;
+  }
+  
+  private void setLanguage() {
+    /*
+    Ve formátu MARC 21 jsou jako povinné - tzn. nelze použít výplňový znak - definovány jen pozice (0-5),
+    datum uložení záznamu ve tvaru rrmmdd). 
+    Na pozici M008 (15-17) se uvádí kód země podle kódovníku MARC code list for countries 
+    (liší se od kódovníku UNIMARC, např. kód pro Českou republiku je xr). 
+    Pozice (35-37) se používají pouze pro první jazyk textu, není možné označit, 
+    zda jde o vícejazyčnou publikace, originál či překlad. 
+    Pro SK Caslin je povinné i použití indikátoru, proto je třeba v komplikovanějším případu použít i pole 041 (viz dále).
+    
+    "fixfield": [
+    ...
+    {
+      "id": "008",
+      "content": "191209s2019----xxkabd-f------001-0-eng-d"
     }
-
-    private void addCandidatesFromInfo(Map<String, Candidate> candidates, JSONObject info, int totalPages) {
-        JSONArray varfield = info.optJSONArray("varfield");
-        String title = " ";
-        for (int i = 0; i < varfield.length(); i++) {
-            JSONObject vf = varfield.getJSONObject(i);
-            if ("245".equals(vf.optString("id"))) {
-
-                JSONArray sb = vf.optJSONArray("subfield");
-                if (sb != null) {
-                    for (int j = 0; j < sb.length(); j++) {
-                        //Exclude author label = c
-                        if(!sb.getJSONObject(j).getString("label").equals("c")){
-                            title += sb.getJSONObject(j).getString("content") + " ";
-                        }
-                    }
-                }
-            }
-
-        }
-        TocLine tc = new TocLine(title);
-
-        for (Candidate c : findCandidates(tc, totalPages)) {
-            if (candidates.containsKey(c.text.toLowerCase())) {
-                candidates.get(c.text.toLowerCase()).found++;
-                candidates.get(c.text.toLowerCase()).inTitle = true;
-                candidates.get(c.text.toLowerCase()).setExtent(totalPages);
-            } else {
-                c.inTitle = true;
-                candidates.put(c.text.toLowerCase(), c);
-                c.setBlackListed();
-                if (!c.blackListed) {
-                    c.match();
-                }
-            }
-        }
-    }
+  ]
+    */
+  }
 
 }

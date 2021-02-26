@@ -3,14 +3,10 @@ package cz.incad.ntk.toc_ntk;
 import java.io.File;
 import java.io.FilenameFilter;
 import java.io.IOException;
-import java.nio.charset.Charset;
-import java.util.Comparator;
 import java.util.Iterator;
-import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.apache.commons.io.FileUtils;
-import org.apache.commons.io.filefilter.FileFilterUtils;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -89,7 +85,6 @@ public class Options {
     if (!server_conf.has("folders")) {
       
       String tocs_dir = server_conf.getString("saved_tocs_dir");
-    
       JSONObject dirs = new JSONObject();
 
       String foldername = server_conf.optString("balicky_dir", "~/.ntk/balicky/");
@@ -117,8 +112,10 @@ public class Options {
             sysno = jpgs[0].substring(0, jpgs[0].indexOf("."));
         }
       
-        if(sysno != null){
+        if(sysno != null  && sysno.length() == 9){
             dirs.put(sysno, new JSONObject().put("name", d).put("saved", new File(tocs_dir + sysno).exists()));
+        } else {
+          LOGGER.log(Level.INFO, "Invalid folder. Folder {0} has sysno {1}", new String[]{d, sysno});
         }
       }
       
