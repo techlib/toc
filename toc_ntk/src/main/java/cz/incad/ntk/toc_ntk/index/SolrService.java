@@ -340,6 +340,9 @@ public class SolrService {
       
       JSONObject broaders = new JSONObject();
       ret.put("broaders", new JSONObject());
+      JSONObject themes = new JSONObject();
+      ret.put("themes", themes);
+      
 
       SolrDocumentList docs = (SolrDocumentList) nlr.get("response");
       for (Iterator it = docs.iterator(); it.hasNext();) {
@@ -347,6 +350,12 @@ public class SolrService {
         String[] path = ((String) doc.getFirstValue("path_" + lang)).split("/");
         broaders = ret.getJSONObject("broaders");
         for (String broader : path) {
+          if (!themes.has(broader)) {
+            themes.put(broader, 1);
+          } else {
+            themes.put(broader, themes.getInt(broader) + 1);
+          }
+          
           if (!broaders.has(broader)) {
             broaders.put(broader, (new JSONObject()).put("count", 0));
           }
