@@ -290,7 +290,7 @@ public class CandidatesServlet extends HttpServlet {
                         ret.put("foldername", foldername);
 
                         TocAnalizer t = new TocAnalizer();
-                        Map<String, Candidate> cs = t.analyzeFolder(foldername, ret.getJSONObject("info"), solrTagger);
+                        Map<String, Candidate> cs = t.analyzeFolder(sysno, foldername, ret.getJSONObject("info"), solrTagger);
 
                         List<Candidate> sorted = new ArrayList<>();
                         for (String key : cs.keySet()) {

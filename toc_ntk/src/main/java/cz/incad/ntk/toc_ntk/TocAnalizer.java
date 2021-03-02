@@ -312,11 +312,9 @@ public class TocAnalizer {
    * @param candidates Map of candidates to fill
    * @return the total pages extent
    */
-  public int analyze(File f, Map<String, Candidate> candidates, boolean solrTagger) {
-    int next_start_page = 0;
+  public int analyzeFile(File f, Map<String, Candidate> candidates, boolean solrTagger) {
+    List<TocLine> lines;
     try {
-      List<TocLine> lines;
-
       if (Options.getInstance().getBoolean("useCacheForTocLines", true)) {
         if (loadFromSaved(f.getName())) {
           lines = getLinesFromSaved();
@@ -331,6 +329,22 @@ public class TocAnalizer {
           save(lines);
         }
       }
+      return analyzeLines(lines, candidates, solrTagger);
+    } catch (IOException | JSONException ex) {
+      LOGGER.log(Level.SEVERE, null, ex);
+      return 0;
+    }
+  }
+  
+  public int analyzeText(String text, Map<String, Candidate> candidates, boolean solrTagger) {
+    List<TocLine> lines = getLines(text);
+    return analyzeLines(lines, candidates, solrTagger);
+  }
+
+  public int analyzeLines(List<TocLine> lines, Map<String, Candidate> candidates, boolean solrTagger) {
+    int next_start_page = 0;
+    try {
+
       //for (TocLine line : lines) {
       for (int i = 0; i < lines.size(); i++) {
         TocLine line = lines.get(i);
@@ -358,7 +372,7 @@ public class TocAnalizer {
           }
         }
       }
-    } catch (IOException | JSONException ex) {
+    } catch (JSONException ex) {
       LOGGER.log(Level.SEVERE, null, ex);
     }
     return next_start_page;
@@ -370,19 +384,27 @@ public class TocAnalizer {
    * @param info: JSON returned from XServer
    * @return Map of candidates
    */
-  public Map<String, Candidate> analyzeFolder(String foldername, JSONObject info, boolean solrTagger) {
+  public Map<String, Candidate> analyzeFolder(String sysno, String foldername, JSONObject info, boolean solrTagger) {
     Map<String, Candidate> candidates = new HashMap<>();
     lang = XServer.getLanguage(info);
     if (lang == null) {
       lang = "cze";
     }
-    File dir = new File(foldername);
-    String[] extensions = new String[]{"txt"};
-    List<File> files = (List<File>) FileUtils.listFiles(dir, extensions, false);
+    
     int totalPages = 0;
-    for (File f : files) {
-      totalPages = analyze(f, candidates, solrTagger);
+    if (solrTagger) {
+      String text = FileService.getRawToc(sysno);
+      totalPages = analyzeText(text, candidates, solrTagger);
+    } else {
+      
+      File dir = new File(foldername);
+      String[] extensions = new String[]{"txt"};
+      List<File> files = (List<File>) FileUtils.listFiles(dir, extensions, false);
+      for (File f : files) {
+        totalPages = analyzeFile(f, candidates, solrTagger);
+      }
     }
+    
     addCandidatesFromInfo(candidates, info, totalPages, solrTagger);
     return candidates;
   }
