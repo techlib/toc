@@ -20,9 +20,14 @@ public class MorphoToken {
   int token_end;
   String lemmaSimple;
 
-  public MorphoToken(JSONObject token) {
+  public MorphoToken(JSONObject token, String lang) {
     this.mtoken = token;
-    this.tag = new MorphoTag(this.mtoken.getString("tag"));
+    if ("eng".equals(lang)) {
+      this.tag = new MorphoTagEng(this.mtoken.getString("tag"));
+    } else {
+      this.tag = new MorphoTagCze(this.mtoken.getString("tag"));
+    }
+    
     this.lemma = this.mtoken.getString("lemma");
     this.token = this.mtoken.getString("token");
     this.token_start = this.mtoken.getInt("token_start");

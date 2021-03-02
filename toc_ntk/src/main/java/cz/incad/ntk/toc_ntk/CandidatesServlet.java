@@ -235,6 +235,21 @@ public class CandidatesServlet extends HttpServlet {
                 out.print(ret.toString(2));
             }
         },
+        XSERVERFIELD{
+            @Override
+            void doPerform(HttpServletRequest request, HttpServletResponse response) throws Exception {
+
+                response.setContentType("application/json;charset=UTF-8");
+                PrintWriter out = response.getWriter();
+                JSONObject ret = new JSONObject();
+                try {
+                  ret.put("info", XServer.find(request.getParameter("field"), request.getParameter("val")));
+                } catch (Exception ex) {
+                    ret.put("error", ex.toString());
+                }
+                out.print(ret.toString(2));
+            }
+        },
         FIND {
             @Override
             void doPerform(HttpServletRequest request, HttpServletResponse response) throws Exception {
@@ -244,6 +259,7 @@ public class CandidatesServlet extends HttpServlet {
                 JSONObject ret = new JSONObject();
                 try {
                     String foldername = request.getParameter("foldername");
+                    boolean solrTagger = Boolean.parseBoolean(request.getParameter("solrTagger"));
 
                     String sysno = request.getParameter("sysno");
 //                    String toc = SolrService.getToc(sysno);
@@ -274,7 +290,7 @@ public class CandidatesServlet extends HttpServlet {
                         ret.put("foldername", foldername);
 
                         TocAnalizer t = new TocAnalizer();
-                        Map<String, Candidate> cs = t.analyzeFolder(foldername, ret.getJSONObject("info"));
+                        Map<String, Candidate> cs = t.analyzeFolder(foldername, ret.getJSONObject("info"), solrTagger);
 
                         List<Candidate> sorted = new ArrayList<>();
                         for (String key : cs.keySet()) {
@@ -295,6 +311,7 @@ public class CandidatesServlet extends HttpServlet {
                         }
                     }
                 } catch (Exception ex) {
+                  LOGGER.log(Level.SEVERE, null, ex);
                     ret.put("error", ex.toString());
                 }
                 out.print(ret.toString(2));

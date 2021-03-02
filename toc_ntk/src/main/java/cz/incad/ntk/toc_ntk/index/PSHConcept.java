@@ -47,11 +47,11 @@ public class PSHConcept {
     @Field
     String path;
     
-    @Field("path_cs")
-    public String path_cs;
+    @Field("path_cze")
+    public String path_cze;
     
-    @Field("path_en")
-    public String path_en;
+    @Field("path_eng")
+    public String path_eng;
     
     JSONObject toJSON() {
       JSONObject ret = new JSONObject();
@@ -61,8 +61,8 @@ public class PSHConcept {
       ret.put("csPrefLabel", csPrefLabel);
       ret.put("enPrefLabel", enPrefLabel);
       ret.put("path", path);
-      ret.put("path_en", path_en);
-      ret.put("path_cs", path_cs);
+      ret.put("path_eng", path_eng);
+      ret.put("path_cze", path_cze);
       return ret;
     }
 

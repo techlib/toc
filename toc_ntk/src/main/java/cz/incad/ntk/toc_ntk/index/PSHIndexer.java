@@ -9,12 +9,14 @@ import cz.incad.ntk.toc_ntk.Options;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Iterator;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.xml.namespace.NamespaceContext;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.stream.XMLStreamException;
 import javax.xml.xpath.XPath;
 import javax.xml.xpath.XPathConstants;
 import javax.xml.xpath.XPathFactory;
@@ -37,17 +39,21 @@ public class PSHIndexer {
   
   Document xmlDocument;
   JSONObject ret = new JSONObject();
+  Map<String, PSHConcept> conceptsMap;
   
   public JSONObject full() {
     Options opts = Options.getInstance();
     try (SolrClient solr = new HttpSolrClient.Builder(opts.getString("solr.host", "http://localhost:8983/solr/")).build()) {
-      InputStream is = PSHIndexer.class.getResourceAsStream("psh-skos.rdf");
+      PSHReader pshReader = new PSHReader();
+      conceptsMap = pshReader.getConceptsMap(PSHIndexer.class.getResourceAsStream("psh-skos.rdf"));
+      System.out.println(conceptsMap.keySet().size());
       DocumentBuilderFactory builderFactory = DocumentBuilderFactory.newInstance();
       builderFactory.setNamespaceAware(true);
       DocumentBuilder builder = builderFactory.newDocumentBuilder();
+      InputStream is = PSHIndexer.class.getResourceAsStream("psh-skos.rdf");
       xmlDocument = builder.parse(is);
       getTopNodes(solr);
-    } catch (ParserConfigurationException | SAXException | IOException ex) {
+    } catch (XMLStreamException | ParserConfigurationException | SAXException | IOException ex) {
       LOGGER.log(Level.SEVERE, null, ex);
     }    
     return ret;
@@ -84,10 +90,11 @@ public class PSHIndexer {
       xPath.setNamespaceContext(setCtx());
       String expression = "//skos:hasTopConcept";
       NodeList nodes = (NodeList) xPath.compile(expression).evaluate(xmlDocument, XPathConstants.NODESET);
-      System.out.println(nodes.getLength());
+      
       for (int i = 0; i < nodes.getLength(); i++) {
         Node node = nodes.item(i);
         String id = node.getAttributes().getNamedItem("rdf:resource").getNodeValue();
+        
         getConcept(solr, id, "", "", "");
         
         // ret.append("top", id.substring(id.lastIndexOf("/")+1));
@@ -98,7 +105,28 @@ public class PSHIndexer {
     }    
   }
   
+  
+  
   public void getConcept(SolrClient solr, String id, String path, String cspath, String enpath) {
+    try {
+      
+      PSHConcept pshC = conceptsMap.get(id.substring(id.lastIndexOf("/")+1));
+      pshC.path = path + "/" + pshC.id;
+      pshC.path_cze = cspath + "/" + pshC.csPrefLabel;
+      pshC.path_eng = enpath + "/" + pshC.enPrefLabel;
+      solr.addBean("psh", pshC);
+      //ret.put("number", ret.optInt("number", 0)+1);
+      for (String narrower : pshC.narrower) {
+        getConcept(solr, "http://psh.ntkcz.cz/skos/" + narrower, pshC.path, pshC.path_cze, pshC.path_eng);
+      }
+      //return pshC;
+    } catch (Exception ex) {
+      LOGGER.log(Level.SEVERE, null, ex);
+      //return null;
+    }    
+  }
+  
+  public void getConceptXML(SolrClient solr, String id, String path, String cspath, String enpath) {
     try {
       XPath xPath = XPathFactory.newInstance().newXPath();
       xPath.setNamespaceContext(setCtx());
@@ -124,12 +152,12 @@ public class PSHIndexer {
         }
       }
       pshC.path = path + "/" + pshC.id;
-      pshC.path_cs = cspath + "/" + pshC.csPrefLabel;
-      pshC.path_en = enpath + "/" + pshC.enPrefLabel;
+      pshC.path_cze = cspath + "/" + pshC.csPrefLabel;
+      pshC.path_eng = enpath + "/" + pshC.enPrefLabel;
       solr.addBean("psh", pshC);
       //ret.put("number", ret.optInt("number", 0)+1);
       for (String narrower : pshC.narrower) {
-        getConcept(solr, "http://psh.ntkcz.cz/skos/" + narrower, pshC.path, pshC.path_cs, pshC.path_en);
+        getConcept(solr, "http://psh.ntkcz.cz/skos/" + narrower, pshC.path, pshC.path_cze, pshC.path_eng);
       }
       //return pshC;
     } catch (Exception ex) {

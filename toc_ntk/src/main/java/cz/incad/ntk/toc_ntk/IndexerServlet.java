@@ -152,7 +152,7 @@ public class IndexerServlet extends HttpServlet {
         try {
           String sysno = req.getParameter("sysno");
           String dictionary = req.getParameter("dictionary");
-          json = SolrService.getTags(sysno, req.getParameter("field"), dictionary, req.getParameter("outputLang"));
+          json = SolrService.getTags(sysno, dictionary);
 
         } catch (Exception ex) {
           LOGGER.log(Level.SEVERE, null, ex);

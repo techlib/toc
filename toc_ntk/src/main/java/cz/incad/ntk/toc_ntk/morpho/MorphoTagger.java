@@ -24,13 +24,13 @@ public class MorphoTagger {
 
   public static final Logger LOGGER = Logger.getLogger(MorphoTagger.class.getName());
 
-  public static JSONObject getTags(String text) {
+  public static JSONObject getTags(String text, String lang) {
     JSONObject ret = new JSONObject();
     Forms forms = new Forms();
     TaggedLemmas lemmas = new TaggedLemmas();
     TokenRanges tokens = new TokenRanges();
 //    Scanner reader = new Scanner(System.in);
-    Tokenizer tokenizer = InitServlet.tagger.newTokenizer();
+    Tokenizer tokenizer = InitServlet.tagger.get(lang).newTokenizer();
     if (tokenizer == null) {
       LOGGER.log(Level.SEVERE, "No tokenizer is defined for the supplied model!");
       ret.put("error", "No tokenizer is defined for the supplied model!");
@@ -42,7 +42,7 @@ public class MorphoTagger {
       while (tokenizer.nextSentence(forms, tokens)) {
         
 
-        InitServlet.tagger.tag(forms, lemmas);
+        InitServlet.tagger.get(lang).tag(forms, lemmas);
 
         for (int i = 0; i < lemmas.size(); i++) {
           JSONObject jotoken = new JSONObject();

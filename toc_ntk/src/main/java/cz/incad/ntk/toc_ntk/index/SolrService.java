@@ -9,6 +9,7 @@ import cz.incad.ntk.toc_ntk.Candidate;
 import cz.incad.ntk.toc_ntk.DictionaryMatch;
 import cz.incad.ntk.toc_ntk.FileService;
 import cz.incad.ntk.toc_ntk.Options;
+import cz.incad.ntk.toc_ntk.XServer;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -285,8 +286,7 @@ public class SolrService {
     NamedList nlr = rsp.getResponse();
             
     ret = new JSONObject((String) nlr.get("response"));
-      
-      solr.close();
+    solr.close();
     } catch (IOException | SolrServerException ex) {
       LOGGER.log(Level.SEVERE, null, ex);
       ret.put("error", ex);
@@ -294,9 +294,14 @@ public class SolrService {
     return ret;
    }
 
-  public static JSONObject getTags(String sysno, String field, String dict, String outputLang) {
+  public static JSONObject getTags(String sysno, String dict) {
     JSONObject ret = new JSONObject();
     try (SolrClient solr = new HttpSolrClient.Builder(urlString).build()) {
+      JSONObject marc = XServer.find(sysno);
+      ret.put("marc", marc);
+      String lang = XServer.getLanguage(marc);
+      ret.put("lang", lang);
+      String field = "key_tagger_" + lang;
       SolrQuery query = new SolrQuery();
       query.setRequestHandler("/tag");
       query.set("overlaps", "NO_SUB")
@@ -339,11 +344,11 @@ public class SolrService {
       SolrDocumentList docs = (SolrDocumentList) nlr.get("response");
       for (Iterator it = docs.iterator(); it.hasNext();) {
         SolrDocument doc = (SolrDocument) it.next();
-        String[] path = ((String) doc.getFirstValue("path_" + outputLang)).split("/");
+        String[] path = ((String) doc.getFirstValue("path_" + lang)).split("/");
         broaders = ret.getJSONObject("broaders");
         for (String broader : path) {
           if (!broaders.has(broader)) {
-            broaders.put(broader, new JSONObject()).put("count", 0);
+            broaders.put(broader, (new JSONObject()).put("count", 0));
           }
           broaders.put("count", broaders.optInt("count", 0)+1);
           broaders = broaders.getJSONObject(broader);

@@ -14,8 +14,10 @@ import java.util.logging.Logger;
  *
  * @author alberto
  */
-public abstract class MorphoTag {
-  String tag = "";
+public class MorphoTagEng extends MorphoTag {
+
+  public static final Logger LOGGER = Logger.getLogger(MorphoTagEng.class.getName());
+
 
   public enum posHuman {
 
@@ -86,9 +88,39 @@ public abstract class MorphoTag {
     
   };
 
-  public MorphoTag(String str){
-    this.tag = str;
-  };
+  boolean isValid;
+
+  /*
+  http://ufal.mff.cuni.cz/pdt2.0/doc/manuals/en/m-layer/html/ch02s02s01.html
+  Position	Name	Description
+1	POS	Part of speech
+2	SubPOS	Detailed part of speech
+3	Gender	Gender
+4	Number	Number
+5	Case	Case
+6	PossGender	Possessor's gender
+7	PossNumber	Possessor's number
+8	Person	Person
+9	Tense	Tense
+10	Grade	Degree of comparison
+11	Negation	Negation
+12	Voice	Voice
+13	Reserve1	Reserve
+14	Reserve2	Reserve
+15	Var	Variant, style
+  
+   */
+  public MorphoTagEng(String str) {
+    
+    //Muze byt english:
+    //https://www.ling.upenn.edu/courses/Fall_2003/ling001/penn_treebank_pos.html
+    super(str);
+    if (str.length() < 2) {
+      this.isValid = false;
+    } else {
+      this.isValid = true;
+    }
+  }
 
   /**
    * get the Part of speech
@@ -97,16 +129,34 @@ public abstract class MorphoTag {
    * P	Pronoun V	Verb R	Preposition T	Particle X	Unknown, Not Determined,
    * Unclassifiable Z	Punctuation (also used for the Sentence Boundary token)
    */
-  public abstract String getPos();
+  @Override
+  public String getPos() {
+    return this.tag.substring(0, 1);
+  }
   
-  public abstract boolean isNoun();
+  @Override
+  public boolean isNoun(){
+    return "N".equals(this.getPos());
+  }
   
-  public abstract boolean isNeutral();
+  @Override
+  public boolean isNeutral(){
+    return false;
+  }
   
-  public abstract boolean isAdjective();
+  @Override
+  public boolean isAdjective(){
+    return "A".equals(this.getPos());
+  }
   
-  public abstract boolean isGenitive();
+  @Override
+  public boolean isGenitive(){
+    return false;
+  }
   
+  
+
+  @Override
   public String getPosHuman() {
     return posHuman.valueOf(this.getPos()).humanName();
   }

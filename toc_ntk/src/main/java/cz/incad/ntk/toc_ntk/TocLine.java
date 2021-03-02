@@ -30,6 +30,7 @@ public class TocLine {
   public static final Logger LOGGER = Logger.getLogger(TocLine.class.getName());
 
   String raw;
+  String lang;
   Integer deep = 0;
   String deep_str;
   String text;
@@ -39,6 +40,7 @@ public class TocLine {
 
   public TocLine(JSONObject json) {
     this.raw = json.getString("raw");
+    this.lang = json.getString("lang");
     this.deep = json.optInt("deep");
     this.deep_str = json.optString("deep_str");
     this.text = json.getString("text");
@@ -47,7 +49,7 @@ public class TocLine {
     this.jaTokens = json.optJSONArray("mtokens");
     if(this.jaTokens != null){
       for (int i = 0; i < this.jaTokens.length(); i++) {
-        mtokens.add(new MorphoToken(this.jaTokens.getJSONObject(i)));
+        mtokens.add(new MorphoToken(this.jaTokens.getJSONObject(i), lang));
       }
     }
   }
@@ -55,6 +57,7 @@ public class TocLine {
   public JSONObject toJSON(){
     JSONObject json = new JSONObject();
     json.put("raw", this.raw);
+    json.put("lang", this.lang);
     json.put("deep", this.deep);
     json.put("deep_str", this.deep_str);
     json.put("text", this.text);
@@ -63,7 +66,8 @@ public class TocLine {
     return json;
   }
   
-  public TocLine(String rawStr) {
+  public TocLine(String rawStr, String lang) {
+    this.lang = lang;
     this.raw = rawStr;
     String str = rawStr.trim();
     if(str.codePointAt(0) == 65279){
@@ -132,18 +136,18 @@ public class TocLine {
       if(Options.getInstance().getBoolean("cleanBeforeMorphoTag", true)){
         String s = cleanText(text);
         LOGGER.log(Level.FINE, s);
-        js = MorphoTagger.getTags(s);
+        js = MorphoTagger.getTags(s, lang);
       } else {
-        js = MorphoTagger.getTags(text);
+        js = MorphoTagger.getTags(text, lang);
       }
       LOGGER.log(Level.FINE, js.toString());
       if(js.has("result")){
         this.jaTokens = js.getJSONArray("result");
         for (int i = 0; i < this.jaTokens.length(); i++) {
-          mtokens.add(new MorphoToken(this.jaTokens.getJSONObject(i)));
+          mtokens.add(new MorphoToken(this.jaTokens.getJSONObject(i), lang));
         }
       }
-    } catch (IOException | JSONException ex) {
+    } catch (JSONException ex) {
       LOGGER.log(Level.SEVERE, null,ex);
     }
   }
@@ -173,7 +177,7 @@ public class TocLine {
       this.jaTokens = js.getJSONArray("result").getJSONArray(0);
 
       for (int i = 0; i < this.jaTokens.length(); i++) {
-        mtokens.add(new MorphoToken(this.jaTokens.getJSONObject(i)));
+        mtokens.add(new MorphoToken(this.jaTokens.getJSONObject(i), lang));
       }
     } catch (IOException | JSONException | URISyntaxException ex) {
       LOGGER.log(Level.SEVERE, null, ex);

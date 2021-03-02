@@ -7,6 +7,8 @@ package cz.incad.ntk.toc_ntk.index;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.xml.stream.XMLInputFactory;
@@ -23,10 +25,11 @@ public class PSHReader {
 
   public static final Logger LOGGER = Logger.getLogger(PSHReader.class.getName());
   SolrClient client;
+  public Map<String, PSHConcept> map = new HashMap<>();
 
   public void readFromXML(InputStream is, SolrClient client) throws XMLStreamException, IOException, SolrServerException {
     this.client = client;
-            
+
     XMLInputFactory inputFactory = XMLInputFactory.newInstance();
     XMLStreamReader reader = null;
     try {
@@ -40,7 +43,22 @@ public class PSHReader {
 
   }
 
-  private void readDocument(XMLStreamReader reader) throws XMLStreamException, IOException, SolrServerException {
+  public Map getConceptsMap(InputStream is) throws XMLStreamException, IOException {
+
+    XMLInputFactory inputFactory = XMLInputFactory.newInstance();
+    XMLStreamReader reader = null;
+    try {
+      reader = inputFactory.createXMLStreamReader(is);
+      readDocument(reader);
+    } finally {
+      if (reader != null) {
+        reader.close();
+      }
+    }
+    return map;
+  }
+
+  private void readDocument(XMLStreamReader reader) throws XMLStreamException, IOException {
     while (reader.hasNext()) {
       int eventType = reader.next();
       switch (eventType) {
@@ -59,8 +77,8 @@ public class PSHReader {
     //throw new XMLStreamException("Premature end of file");
   }
 
-  private void readPSHConcepts(XMLStreamReader reader) throws XMLStreamException, IOException, SolrServerException {
-int i = 0;
+  private void readPSHConcepts(XMLStreamReader reader) throws XMLStreamException, IOException {
+    int i = 0;
     while (reader.hasNext()) {
       int eventType = reader.next();
       switch (eventType) {
@@ -69,7 +87,8 @@ int i = 0;
           //LOGGER.log(Level.INFO, "eventType: {0}, elementName: {1}", new Object[]{eventType, elementName});
           if (elementName.equals("Concept")) {
             PSHConcept pshC = readPSHConcept(reader);
-            client.addBean(pshC, 10);
+            // client.addBean(pshC, 10);
+            map.put(pshC.id, pshC);
           } else {
             skipElement(reader, elementName);
           }
@@ -97,9 +116,9 @@ int i = 0;
           } else if (elementName.equals("prefLabel")) {
             pshC.setPrefLabel(reader.getAttributeValue(0), reader.getElementText());
           } else if (elementName.equals("narrower")) {
-            pshC.narrower.add(reader.getAttributeValue(0).substring(reader.getAttributeValue(0).lastIndexOf("/")+1));
+            pshC.narrower.add(reader.getAttributeValue(0).substring(reader.getAttributeValue(0).lastIndexOf("/") + 1));
           } else if (elementName.equals("broader")) {
-            pshC.broader = reader.getAttributeValue(0).substring(reader.getAttributeValue(0).lastIndexOf("/")+1);
+            pshC.broader = reader.getAttributeValue(0).substring(reader.getAttributeValue(0).lastIndexOf("/") + 1);
           }
         case XMLStreamReader.END_ELEMENT:
           elementName = reader.getLocalName();
@@ -108,7 +127,7 @@ int i = 0;
           }
       }
     }
-      
+
     throw new XMLStreamException("Premature end of PSHConcept");
   }
 

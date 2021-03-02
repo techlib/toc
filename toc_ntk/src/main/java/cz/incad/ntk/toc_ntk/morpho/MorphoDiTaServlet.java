@@ -91,7 +91,7 @@ public class MorphoDiTaServlet extends HttpServlet {
 
         String text = request.getParameter("text");
 
-        out.print(MorphoTagger.getTags(text).toString(2));
+        out.print(MorphoTagger.getTags(text, request.getParameter("lang")).toString(2));
 
       }
     },
@@ -136,7 +136,7 @@ public class MorphoDiTaServlet extends HttpServlet {
         String data = request.getParameter("data");
 
         ret.put("data", data);
-        TocLine tc = new TocLine(data);
+        TocLine tc = new TocLine(data, request.getParameter("lang"));
         ret.put("tocline", tc.toJSON());
         out.print(ret.toString(2));
       }
@@ -150,8 +150,8 @@ public class MorphoDiTaServlet extends HttpServlet {
         JSONObject ret = new JSONObject();
         try {
           LOGGER.log(Level.INFO, "loading tagger: {0}", request.getParameter("file"));
-          InitServlet.tagger = Tagger.load(request.getParameter("file"));
-          if(InitServlet.tagger != null){
+          InitServlet.tagger.put(request.getParameter("lang"),Tagger.load(request.getParameter("file")));
+          if(InitServlet.tagger.get(request.getParameter("lang")) != null){
           ret.put("msg", "success");
           } else {
             ret.put("msg", "error");

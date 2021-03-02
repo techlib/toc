@@ -50,16 +50,21 @@ public class Candidate {
   
   //Pages extents
   Integer extent = 0;
+  
+  int token_start;
+  int token_end;
 
-  public Candidate(String text, CandidateType type) {
-    this(text, type, false);
+  public Candidate(String text, CandidateType type, int token_start, int token_end) {
+    this(text, type, false, token_start, token_end);
   }
 
-  public Candidate(String text, CandidateType type, boolean hasProperNoun) {
+  public Candidate(String text, CandidateType type, boolean hasProperNoun, int token_start, int token_end) {
     this.text = text.trim();
     this.type = type;
     this.found = 1;
     this.hasProperNoun = hasProperNoun;
+    this.token_start = token_start;
+    this.token_end = token_end;
   }
   
   public void addDeep(Integer deep){
@@ -93,13 +98,15 @@ public class Candidate {
     ret.put("hasProperNoun", hasProperNoun);
     ret.put("score", score);
     ret.put("found", found);
+    ret.put("token_start", token_start);
+    ret.put("token_end", token_end);
     return ret;
   }
   
   public void setBlackListed(){
     this.blackListed = SolrService.isInBlackList(this.text);;
   }
-
+  
   public void match() {
     if (type == CandidateType.DICTIONARY_WORD) {
       return;

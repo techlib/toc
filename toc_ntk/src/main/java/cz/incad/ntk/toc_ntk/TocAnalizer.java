@@ -8,6 +8,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -32,6 +33,7 @@ public class TocAnalizer {
 
   File tocFile;
   JSONObject tocFileData;
+  String lang = "cs";
 
   public void processFolder(String path) {
 
@@ -43,13 +45,13 @@ public class TocAnalizer {
    * @param line
    * @return A list of candidates
    */
-  public List<Candidate> findCandidates(TocLine line, int next_start_page) {
+  public List<Candidate> findCandidates(TocLine line, int next_start_page, boolean solrTagger) {
 
     List<Candidate> candidates = new ArrayList<>();
     boolean skypSingle;
     try {
       skypSingle = Options.getInstance().getBoolean("skypSingleWordTokens", true);
-    } catch (IOException | JSONException ex) {
+    } catch (JSONException ex) {
       LOGGER.log(Level.SEVERE, null, ex);
       return candidates;
     }
@@ -62,9 +64,9 @@ public class TocAnalizer {
       if (token.getTag().isNoun()) {
         Candidate c;
         if (token.isProperNoun()) {
-          c = new Candidate(token.getLemmaSimple(), CandidateType.PROPERNOUN, true);
+          c = new Candidate(token.getLemmaSimple(), CandidateType.PROPERNOUN, true, token.getTokenStart(), token.getTokenEnd());
         } else {
-          c = new Candidate(token.getLemmaSimple(), CandidateType.NOUN);
+          c = new Candidate(token.getLemmaSimple(), CandidateType.NOUN, token.getTokenStart(), token.getTokenEnd());
         }
         c.addDeep(line.deep);
         c.addExtent(next_start_page - line.start_page);
@@ -85,7 +87,7 @@ public class TocAnalizer {
       } else if (token.getTag().isNoun() && hasAdjective) {
         str += token.getToken() + " ";
         hasProperNoun = token.isProperNoun() || hasProperNoun;
-        Candidate c = new Candidate(str, CandidateType.ADJETIVES_NOUN, hasProperNoun);
+        Candidate c = new Candidate(str, CandidateType.ADJETIVES_NOUN, hasProperNoun, token.getTokenStart(), token.getTokenEnd());
         candidates.add(c);
         c.addDeep(line.deep);
         c.addExtent(next_start_page - line.start_page);
@@ -106,18 +108,22 @@ public class TocAnalizer {
     boolean hasNoun = false;
     hasProperNoun = false;
     boolean hasGenitive = false;
+    int token_start = -1;
+    int token_end = -1;
     for (MorphoToken token : line.mtokens) {
+      token_start = token.getTokenStart();
       if (token.getTag().isNoun() && !hasNoun) {
         str = token.getToken();
         hasNoun = true;
         hasProperNoun = token.isProperNoun() || hasProperNoun;
       } else if (token.getTag().isGenitive() && hasNoun) {
         hasProperNoun = token.isProperNoun() || hasProperNoun;
+        token_end = token.getTokenEnd();
         str += " " + token.getToken();
         hasGenitive = true;
       } else {
         if (str.length() > 0 && hasGenitive) {
-          Candidate c = new Candidate(str, CandidateType.NOUN_GENITIVES, hasProperNoun);
+          Candidate c = new Candidate(str, CandidateType.NOUN_GENITIVES, hasProperNoun, token.getTokenStart(), token.getTokenEnd());
           candidates.add(c);
           c.addDeep(line.deep);
           c.addExtent(next_start_page - line.start_page);
@@ -131,13 +137,15 @@ public class TocAnalizer {
     }
     if (str.length() > 0 && hasGenitive) {
       //candidates.add(new Candidate(str, CandidateType.NOUN_GENITIVES, hasProperNoun));
-      Candidate c = new Candidate(str, CandidateType.NOUN_GENITIVES, hasProperNoun);
+      Candidate c = new Candidate(str, CandidateType.NOUN_GENITIVES, hasProperNoun, token_start, token_end);
       candidates.add(c);
       c.addDeep(line.deep);
       c.addExtent(next_start_page - line.start_page);
     }
 
-    addDictionaryWords(line, candidates, next_start_page);
+    if (!solrTagger) {
+      addDictionaryWords(line, candidates, next_start_page);
+    }
     return candidates;
   }
 
@@ -152,7 +160,7 @@ public class TocAnalizer {
         //Try to find
         SolrDocumentList docs = SolrService.findInDictionaries(word);
         if (!docs.isEmpty()) {
-          Candidate c = new Candidate(word, CandidateType.DICTIONARY_WORD);
+          Candidate c = new Candidate(word, CandidateType.DICTIONARY_WORD, -1, -1);
           c.addDeep(line.deep);
           c.addExtent(next_start_page - line.start_page);
           c.isMatched = true;
@@ -186,51 +194,12 @@ public class TocAnalizer {
   //Line should starts and ends with digit
   //In other case we join the lines 
   public List<TocLine> getLines(File f) {
-//    FileReader in = null;
-    List<TocLine> lines = new ArrayList<>();
     try {
       List<String> strlines = FileUtils.readLines(f, Charset.forName("UTF-8"));
-      String previous = "";
-//      in = new FileReader(f);
-//      BufferedReader br = new BufferedReader(in);
-//      String line = br.readLine();
-//      while (line != null) {
-//        line = line.trim();
-      for (String line : strlines) {
-        if (!line.trim().contains(" ") && !line.trim().contains("\t")) {
-          LOGGER.log(Level.FINE, "Skiping line {0}", line);
-          continue;
-        }
-        if (Character.isDigit(line.charAt(line.length() - 1))) {
-          //This is the end
-          line = previous + " " + line;
-          lines.add(new TocLine(line.trim()));
-
-          previous = "";
-        } else if (Character.isDigit(line.charAt(0))) {
-          // This is the begining or we are continuing
-          if (previous.equals("")) {
-            // new line
-            previous = line;
-          } else {
-            // continuing
-            previous += line;
-          }
-        } else {
-          previous += line;
-//          line = lines.get(lines.size() - 1) + line;
-//          lines.set(lines.size() - 1, line);
-        }
-//        line = br.readLine();
-      }
-      if (!previous.equals("")) {
-        lines.add(new TocLine(previous));
-      }
-//      in.close();
-    } catch (FileNotFoundException ex) {
-      LOGGER.log(Level.SEVERE, null, ex);
+      return getLines(strlines);
     } catch (IOException ex) {
       LOGGER.log(Level.SEVERE, null, ex);
+      return new ArrayList<>();
 //    } finally {
 //      try {
 //        if (in != null) {
@@ -240,6 +209,54 @@ public class TocAnalizer {
 //        Logger.getLogger(TocAnalizer.class.getName()).log(Level.SEVERE, null, ex);
 //      }
     }
+  }
+
+  public List<TocLine> getLines(String tocText) {
+    String lines[] = tocText.split("\\r\\n|\\n|\\r");
+    return getLines(Arrays.asList(lines));
+  }
+
+  public List<TocLine> getLines(List<String> strlines) {
+    List<TocLine> lines = new ArrayList<>();
+    // List<String> strlines = FileUtils.readLines(f, Charset.forName("UTF-8"));
+    String previous = "";
+//      in = new FileReader(f);
+//      BufferedReader br = new BufferedReader(in);
+//      String line = br.readLine();
+//      while (line != null) {
+//        line = line.trim();
+    for (String line : strlines) {
+      if (!line.trim().contains(" ") && !line.trim().contains("\t")) {
+        LOGGER.log(Level.FINE, "Skiping line {0}", line);
+        continue;
+      }
+      if (Character.isDigit(line.charAt(line.length() - 1))) {
+        //This is the end
+        line = previous + " " + line;
+        lines.add(new TocLine(line.trim(), lang));
+
+        previous = "";
+      } else if (Character.isDigit(line.charAt(0))) {
+        // This is the begining or we are continuing
+        if (previous.equals("")) {
+          // new line
+          previous = line;
+        } else {
+          // continuing
+          previous += line;
+        }
+      } else {
+        previous += line;
+//          line = lines.get(lines.size() - 1) + line;
+//          lines.set(lines.size() - 1, line);
+      }
+//        line = br.readLine();
+    }
+    if (!previous.equals("")) {
+      lines.add(new TocLine(previous, lang));
+    }
+//      in.close();
+
     return lines;
   }
 
@@ -295,7 +312,7 @@ public class TocAnalizer {
    * @param candidates Map of candidates to fill
    * @return the total pages extent
    */
-  public int analyze(File f, Map<String, Candidate> candidates) {
+  public int analyze(File f, Map<String, Candidate> candidates, boolean solrTagger) {
     int next_start_page = 0;
     try {
       List<TocLine> lines;
@@ -326,15 +343,18 @@ public class TocAnalizer {
         for (MorphoToken token : line.mtokens) {
 
         }
-        for (Candidate c : findCandidates(line, next_start_page)) {
+        for (Candidate c : findCandidates(line, next_start_page, solrTagger)) {
           if (candidates.containsKey(c.text.toLowerCase())) {
             candidates.get(c.text.toLowerCase()).found++;
           } else {
             candidates.put(c.text.toLowerCase(), c);
-            c.setBlackListed();
-            if (!c.blackListed) {
-              c.match();
+            if (!solrTagger) {
+              c.setBlackListed();
+              if (!c.blackListed) {
+                c.match();
+              }
             }
+
           }
         }
       }
@@ -350,20 +370,24 @@ public class TocAnalizer {
    * @param info: JSON returned from XServer
    * @return Map of candidates
    */
-  public Map<String, Candidate> analyzeFolder(String foldername, JSONObject info) {
+  public Map<String, Candidate> analyzeFolder(String foldername, JSONObject info, boolean solrTagger) {
     Map<String, Candidate> candidates = new HashMap<>();
+    lang = XServer.getLanguage(info);
+    if (lang == null) {
+      lang = "cze";
+    }
     File dir = new File(foldername);
     String[] extensions = new String[]{"txt"};
     List<File> files = (List<File>) FileUtils.listFiles(dir, extensions, false);
     int totalPages = 0;
     for (File f : files) {
-      totalPages = analyze(f, candidates);
+      totalPages = analyze(f, candidates, solrTagger);
     }
-    addCandidatesFromInfo(candidates, info, totalPages);
+    addCandidatesFromInfo(candidates, info, totalPages, solrTagger);
     return candidates;
   }
 
-  private void addCandidatesFromInfo(Map<String, Candidate> candidates, JSONObject info, int totalPages) {
+  private void addCandidatesFromInfo(Map<String, Candidate> candidates, JSONObject info, int totalPages, boolean solrTagger) {
     JSONArray varfield = info.optJSONArray("varfield");
     String title = " ";
     for (int i = 0; i < varfield.length(); i++) {
@@ -382,9 +406,9 @@ public class TocAnalizer {
       }
 
     }
-    TocLine tc = new TocLine(title);
+    TocLine tc = new TocLine(title, lang);
 
-    for (Candidate c : findCandidates(tc, totalPages)) {
+    for (Candidate c : findCandidates(tc, totalPages, solrTagger)) {
       if (candidates.containsKey(c.text.toLowerCase())) {
         candidates.get(c.text.toLowerCase()).found++;
         candidates.get(c.text.toLowerCase()).inTitle = true;
@@ -392,32 +416,14 @@ public class TocAnalizer {
       } else {
         c.inTitle = true;
         candidates.put(c.text.toLowerCase(), c);
-        c.setBlackListed();
-        if (!c.blackListed) {
-          c.match();
+        if (!solrTagger) {
+          c.setBlackListed();
+          if (!c.blackListed) {
+            c.match();
+          }
         }
       }
     }
-  }
-  
-  private void setLanguage() {
-    /*
-    Ve formátu MARC 21 jsou jako povinné - tzn. nelze použít výplňový znak - definovány jen pozice (0-5),
-    datum uložení záznamu ve tvaru rrmmdd). 
-    Na pozici M008 (15-17) se uvádí kód země podle kódovníku MARC code list for countries 
-    (liší se od kódovníku UNIMARC, např. kód pro Českou republiku je xr). 
-    Pozice (35-37) se používají pouze pro první jazyk textu, není možné označit, 
-    zda jde o vícejazyčnou publikace, originál či překlad. 
-    Pro SK Caslin je povinné i použití indikátoru, proto je třeba v komplikovanějším případu použít i pole 041 (viz dále).
-    
-    "fixfield": [
-    ...
-    {
-      "id": "008",
-      "content": "191209s2019----xxkabd-f------001-0-eng-d"
-    }
-  ]
-    */
   }
 
 }
