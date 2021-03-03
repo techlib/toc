@@ -93,28 +93,28 @@ public class InitServlet extends HttpServlet {
     }
     LOGGER.log(Level.INFO, "app dir is {0}", CONFIG_DIR);
 
-    try {
-      TAGGER_MODEL_FILE_CS = Options.getInstance().getString("tagger_model_file_cze", TAGGER_MODEL_FILE_CS); 
-      LOGGER.log(Level.INFO, "Loading tagger from file {0}", TAGGER_MODEL_FILE_CS);
-      tagger.put("cze", Tagger.load(TAGGER_MODEL_FILE_CS));
-      if (tagger.get("cze") == null) {
-        LOGGER.log(Level.SEVERE, "Cannot load czech tagger from file {0}", TAGGER_MODEL_FILE_CS);
-      } else {
-        LOGGER.log(Level.INFO, "Czech tagger LOADED!!");
-      }
-      
-      TAGGER_MODEL_FILE_EN = Options.getInstance().getString("tagger_model_file_eng", TAGGER_MODEL_FILE_EN);
-      LOGGER.log(Level.INFO, "Loading tagger from file {0}", TAGGER_MODEL_FILE_EN);
-      tagger.put("eng", Tagger.load(TAGGER_MODEL_FILE_EN));
-      if (tagger.get("eng") == null) {
-        LOGGER.log(Level.SEVERE, "Cannot load english tagger from file {0}", TAGGER_MODEL_FILE_EN);
-      } else {
-        LOGGER.log(Level.INFO, "English tagger LOADED!!");
-      }
-       
-    } catch (Exception ex) {
-      LOGGER.log(Level.SEVERE, null, ex);
-    }
+//    try {
+//      TAGGER_MODEL_FILE_CS = Options.getInstance().getString("tagger_model_file_cze", TAGGER_MODEL_FILE_CS); 
+//      LOGGER.log(Level.INFO, "Loading tagger from file {0}", TAGGER_MODEL_FILE_CS);
+//      tagger.put("cze", Tagger.load(TAGGER_MODEL_FILE_CS));
+//      if (tagger.get("cze") == null) {
+//        LOGGER.log(Level.SEVERE, "Cannot load czech tagger from file {0}", TAGGER_MODEL_FILE_CS);
+//      } else {
+//        LOGGER.log(Level.INFO, "Czech tagger LOADED!!");
+//      }
+//      
+//      TAGGER_MODEL_FILE_EN = Options.getInstance().getString("tagger_model_file_eng", TAGGER_MODEL_FILE_EN);
+//      LOGGER.log(Level.INFO, "Loading tagger from file {0}", TAGGER_MODEL_FILE_EN);
+//      tagger.put("eng", Tagger.load(TAGGER_MODEL_FILE_EN));
+//      if (tagger.get("eng") == null) {
+//        LOGGER.log(Level.SEVERE, "Cannot load english tagger from file {0}", TAGGER_MODEL_FILE_EN);
+//      } else {
+//        LOGGER.log(Level.INFO, "English tagger LOADED!!");
+//      }
+//       
+//    } catch (Exception ex) {
+//      LOGGER.log(Level.SEVERE, null, ex);
+//    }
 
   }
 

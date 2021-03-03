@@ -122,7 +122,6 @@ public class MorphoDiTaServlet extends HttpServlet {
           }
 
         }
-
       }
     },
     PROCESS_PHRASE {
@@ -136,7 +135,7 @@ public class MorphoDiTaServlet extends HttpServlet {
         String data = request.getParameter("data");
 
         ret.put("data", data);
-        TocLine tc = new TocLine(data, request.getParameter("lang"));
+        TocLine tc = new TocLine(data, 0, request.getParameter("lang"));
         ret.put("tocline", tc.toJSON());
         out.print(ret.toString(2));
       }

@@ -10,7 +10,7 @@
     "secure": false
   },
   "/mdt": {
-    "target": "http://localhost:8082/ntk_toc/mdt",
+    "target": "http://localhost:8080/ntk_toc_new/mdt",
     "ignorePath": false,
     "logLevel": "debug",
     "pathRewrite": {
@@ -20,7 +20,7 @@
     "secure": false
   },
   "/candidates": {
-    "target": "http://localhost:8082/ntk_toc/candidates",
+    "target": "http://localhost:8080/ntk_toc_new/candidates",
     "ignorePath": false,
     "logLevel": "debug",
     "pathRewrite": {

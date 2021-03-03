@@ -2,10 +2,11 @@
   "solr.host": "http://localhost:8983/solr/",
   "morpho.host": "lindat.mff.cuni.cz/services/morphodita/api",
   "balicky_dir": "/home/alberto/Projects/NTK/balicky/",
-  "xserver": "http://aleph.techlib.cz/X?op=find-doc&base=stk01",
+  "xserver": "http://aleph.techlib.cz/X?base=stk01",
   "saved_morpho_dir": "/home/alberto/Projects/NTK/morpho/",
   "saved_tocs_dir": "/home/alberto/Projects/NTK/tocs/",
-  "tagger_model_file": "/home/alberto/Projects/NTK/czech-morfflex-pdt-161115/czech-morfflex-pdt-161115.tagger",
+  "tagger_model_file_cze": "/home/alberto/Projects/NTK/czech-morfflex-pdt-161115/czech-morfflex-pdt-161115.tagger",
+  "tagger_model_file_eng": "/home/alberto/Projects/NTK/english-morphium-wsj-140407/english-morphium-wsj-140407.tagger",
   "users":{
     "test": "test"
   },

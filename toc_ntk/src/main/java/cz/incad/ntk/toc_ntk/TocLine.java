@@ -31,6 +31,7 @@ public class TocLine {
 
   String raw;
   String lang;
+  int lineNumber;
   Integer deep = 0;
   String deep_str;
   String text;
@@ -41,6 +42,7 @@ public class TocLine {
   public TocLine(JSONObject json) {
     this.raw = json.getString("raw");
     this.lang = json.getString("lang");
+    this.lineNumber = json.getInt("lineNumber");
     this.deep = json.optInt("deep");
     this.deep_str = json.optString("deep_str");
     this.text = json.getString("text");
@@ -58,17 +60,19 @@ public class TocLine {
     JSONObject json = new JSONObject();
     json.put("raw", this.raw);
     json.put("lang", this.lang);
+    json.put("lineNumber", lineNumber);
     json.put("deep", this.deep);
     json.put("deep_str", this.deep_str);
     json.put("text", this.text);
     json.put("start_page", this.start_page);
     json.put("mtokens", this.jaTokens);
     return json;
-  }
+  } 
   
-  public TocLine(String rawStr, String lang) {
+  public TocLine(String rawStr, int lineNumber, String lang) {
     this.lang = lang;
     this.raw = rawStr;
+    this.lineNumber = lineNumber;
     String str = rawStr.trim();
     if(str.codePointAt(0) == 65279){
       str = str.substring(1);

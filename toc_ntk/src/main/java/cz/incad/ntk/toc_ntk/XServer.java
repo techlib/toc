@@ -3,6 +3,7 @@ package cz.incad.ntk.toc_ntk;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.json.JSONArray;
@@ -97,6 +98,47 @@ public class XServer {
       }
     }
     return lang;
+  }
+  
+  public static String getTitle(JSONObject info) {
+    JSONArray varfield = info.optJSONArray("varfield");
+    String title = "";
+    for (int i = 0; i < varfield.length(); i++) {
+      JSONObject vf = varfield.getJSONObject(i);
+      if ("245".equals(vf.optString("id"))) {
+
+        JSONArray sb = vf.optJSONArray("subfield");
+        if (sb != null) {
+          for (int j = 0; j < sb.length(); j++) {
+            //Exclude author label = c
+            if (!sb.getJSONObject(j).get("label").equals("c")) {
+              title += sb.getJSONObject(j).getString("content") + " ";
+            }
+          }
+        }
+      }
+    }
+    return title;
+  }
+  
+  public static String getAuthor(JSONObject info) {
+    JSONArray varfield = info.optJSONArray("varfield");
+    String author = "";
+    for (int i = 0; i < varfield.length(); i++) {
+      JSONObject vf = varfield.getJSONObject(i);
+      if ("100".equals(vf.optString("id"))) {
+
+        JSONArray sb = vf.optJSONArray("subfield");
+        if (sb != null) {
+          for (int j = 0; j < sb.length(); j++) {
+            if (sb.getJSONObject(j).get("label").equals("a")) {
+              author += sb.getJSONObject(j).getString("content") + " ";
+            }
+          }
+        }
+      }
+    }
+    return author;
   }
   
 }

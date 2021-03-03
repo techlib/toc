@@ -1,0 +1,53 @@
+<div class="app-display-table app-container">
+  <div class="app-table-cell app-left">
+    <div fxLayout="row" fxFlexFill>
+      <div fxFlex class="app-facets">
+        <app-aside *ngIf="state.showAside"></app-aside>
+      </div>
+    </div>
+  </div>
+  <div class="app-table-cell app-right">
+    <!-- Aside btn -->
+    <button mat-icon-button color="primary" (click)="toogleAsideBar()">
+      <mat-icon *ngIf="state.showAside">first_page</mat-icon>
+      <mat-icon *ngIf="!state.showAside">last_page</mat-icon>
+    </button>
+
+    <app-toolbar></app-toolbar>
+
+    <table mat-table [dataSource]="state.candidates" class="mat-elevation-z8">
+
+      <!--- Note that these columns can be defined in any order.
+          The actual rendered columns are set as a property on the row definition" -->
+
+      <!-- Name Column -->
+      <ng-container matColumnDef="score">
+        <th mat-header-cell *matHeaderCellDef> Score </th>
+        <td mat-cell *matCellDef="let element"> {{element.score | number : '1.1-3'}} </td>
+      </ng-container>
+
+      <!-- Weight Column -->
+      <ng-container *ngFor="let d of state.scoreConfig.dicts" [matColumnDef]="d">
+        <th mat-header-cell *matHeaderCellDef> {{d}} </th>
+        <td mat-cell *matCellDef="let element">
+          <ng-container *ngFor="let cd of element.dictionaries; let idx2 = index">
+            <mat-checkbox *ngIf="cd.name.toUpperCase() === d.toUpperCase() || (cd.name === 'nerizene' && d === 'nerizene' && element.isMatched)">{{element.text}} </mat-checkbox>
+          </ng-container>
+           
+        </td>
+      </ng-container>
+
+      <!-- Symbol Column -->
+      <ng-container matColumnDef="noslovnik">
+        <th mat-header-cell *matHeaderCellDef> Bez slovniku </th>
+        <td mat-cell *matCellDef="let element">
+          <mat-checkbox *ngIf="!element.dictionaries || element.dictionaries.length === 0">{{element.text}} </mat-checkbox>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+
+  </div>
+</div>

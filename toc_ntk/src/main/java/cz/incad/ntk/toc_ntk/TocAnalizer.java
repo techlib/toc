@@ -220,20 +220,29 @@ public class TocAnalizer {
     List<TocLine> lines = new ArrayList<>();
     // List<String> strlines = FileUtils.readLines(f, Charset.forName("UTF-8"));
     String previous = "";
-//      in = new FileReader(f);
-//      BufferedReader br = new BufferedReader(in);
-//      String line = br.readLine();
-//      while (line != null) {
-//        line = line.trim();
+    int lineNumber = 0;
     for (String line : strlines) {
-      if (!line.trim().contains(" ") && !line.trim().contains("\t")) {
+      // if (!line.trim().contains(" ") && !line.trim().contains("\t")) {
+      if ("".equals(line.trim())) {
+        // Only spaces line
         LOGGER.log(Level.FINE, "Skiping line {0}", line);
         continue;
       }
-      if (Character.isDigit(line.charAt(line.length() - 1))) {
+      if (!line.trim().contains(" ") && !line.trim().contains("\t")) {
+        // One word line
+        LOGGER.log(Level.INFO, "One word line {0}, {1}", new String[]{previous, line});
+        previous += " " + line;
+//        if (previous.equals("")) {
+//          // new line
+//          
+//          lines.add(new TocLine(line, ++lineNumber, lang));
+//        }
+        continue;
+      }
+      if (Character.isDigit(line.trim().charAt(line.length() - 1))) {
         //This is the end
         line = previous + " " + line;
-        lines.add(new TocLine(line.trim(), lang));
+        lines.add(new TocLine(line, ++lineNumber, lang));
 
         previous = "";
       } else if (Character.isDigit(line.charAt(0))) {
@@ -243,17 +252,17 @@ public class TocAnalizer {
           previous = line;
         } else {
           // continuing
-          previous += line;
+          previous += " " + line;
         }
       } else {
-        previous += line;
+        previous += " " + line;
 //          line = lines.get(lines.size() - 1) + line;
 //          lines.set(lines.size() - 1, line);
       }
 //        line = br.readLine();
     }
     if (!previous.equals("")) {
-      lines.add(new TocLine(previous, lang));
+      lines.add(new TocLine(previous, ++lineNumber, lang));
     }
 //      in.close();
 
@@ -377,6 +386,10 @@ public class TocAnalizer {
     }
     return next_start_page;
   }
+  
+  public void setLang(String lang) {
+    this.lang = lang;
+  }
 
   /**
    *
@@ -410,25 +423,8 @@ public class TocAnalizer {
   }
 
   private void addCandidatesFromInfo(Map<String, Candidate> candidates, JSONObject info, int totalPages, boolean solrTagger) {
-    JSONArray varfield = info.optJSONArray("varfield");
-    String title = " ";
-    for (int i = 0; i < varfield.length(); i++) {
-      JSONObject vf = varfield.getJSONObject(i);
-      if ("245".equals(vf.optString("id"))) {
-
-        JSONArray sb = vf.optJSONArray("subfield");
-        if (sb != null) {
-          for (int j = 0; j < sb.length(); j++) {
-            //Exclude author label = c
-            if (!sb.getJSONObject(j).getString("label").equals("c")) {
-              title += sb.getJSONObject(j).getString("content") + " ";
-            }
-          }
-        }
-      }
-
-    }
-    TocLine tc = new TocLine(title, lang);
+    String title = XServer.getTitle(info); 
+    TocLine tc = new TocLine(title, 0, lang);
 
     for (Candidate c : findCandidates(tc, totalPages, solrTagger)) {
       if (candidates.containsKey(c.text.toLowerCase())) {

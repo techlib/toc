@@ -3,6 +3,7 @@ package cz.incad.ntk.toc_ntk;
 import cz.incad.ntk.toc_ntk.index.Indexer;
 import cz.incad.ntk.toc_ntk.index.PSHIndexer;
 import cz.incad.ntk.toc_ntk.index.SolrService;
+import cz.incad.ntk.toc_ntk.index.SolrTaggerAnalyzer;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.logging.Level;
@@ -151,9 +152,7 @@ public class IndexerServlet extends HttpServlet {
         JSONObject json = new JSONObject();
         try {
           String sysno = req.getParameter("sysno");
-          String dictionary = req.getParameter("dictionary");
-          json = SolrService.getTags(sysno, dictionary);
-
+          json = SolrTaggerAnalyzer.getTags(sysno);
         } catch (Exception ex) {
           LOGGER.log(Level.SEVERE, null, ex);
           json.put("error", ex.toString());
@@ -167,9 +166,7 @@ public class IndexerServlet extends HttpServlet {
         JSONObject json = new JSONObject();
         try {
           String sysno = req.getParameter("sysno");
-          String dictionary = req.getParameter("dictionary");
-          json = SolrService.getTagsJSON(sysno, req.getParameter("field"), dictionary);
-
+          json = SolrTaggerAnalyzer.getTagsJSON(sysno, req.getParameter("field"));
         } catch (Exception ex) {
           LOGGER.log(Level.SEVERE, null, ex);
           json.put("error", ex.toString());
