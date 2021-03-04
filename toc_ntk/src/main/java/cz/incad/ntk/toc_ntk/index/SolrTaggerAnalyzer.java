@@ -6,12 +6,9 @@
 package cz.incad.ntk.toc_ntk.index;
 
 import cz.incad.ntk.toc_ntk.FileService;
+import cz.incad.ntk.toc_ntk.Options;
 import cz.incad.ntk.toc_ntk.TagCandidate;
-import cz.incad.ntk.toc_ntk.TocAnalizer;
-import cz.incad.ntk.toc_ntk.TocLine;
 import cz.incad.ntk.toc_ntk.XServer;
-import static cz.incad.ntk.toc_ntk.index.SolrService.LOGGER;
-import static cz.incad.ntk.toc_ntk.index.SolrService.urlString;
 import java.io.IOException;
 import java.util.AbstractMap.SimpleEntry;
 import java.util.ArrayList;
@@ -22,8 +19,8 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
 import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.apache.solr.client.solrj.SolrClient;
 import org.apache.solr.client.solrj.SolrQuery;
 import org.apache.solr.client.solrj.SolrRequest;
@@ -46,12 +43,12 @@ import org.json.JSONObject;
  * @author alberto
  */
 public class SolrTaggerAnalyzer {
-  
+  static final Logger LOGGER = Logger.getLogger(SolrTaggerAnalyzer.class.getName());
   public static String COLLECTION = "dictionaries";
 
   public static JSONObject getTagsJSON(String sysno, String field) {
     JSONObject ret = new JSONObject();
-    try (SolrClient solr = new HttpSolrClient.Builder(urlString).build()) {
+    try (SolrClient solr = new HttpSolrClient.Builder(Options.getInstance().getString("solr.host", "http://localhost:8983/solr/")).build()) {
       SolrQuery query = new SolrQuery();
       query.setRequestHandler("/tag");
       query.set("overlaps", "NO_SUB")
@@ -86,7 +83,7 @@ public class SolrTaggerAnalyzer {
 
   public static JSONObject getTags(String sysno) {
     JSONObject ret = new JSONObject();
-    try (SolrClient solr = new HttpSolrClient.Builder(urlString).build()) {
+    try (SolrClient solr = new HttpSolrClient.Builder(Options.getInstance().getString("solr.host", "http://localhost:8983/solr/")).build()) {
 
       JSONObject marc = XServer.find(sysno);
       // ret.put("marc", marc);

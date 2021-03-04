@@ -28,13 +28,13 @@ public class InitServlet extends HttpServlet {
   public static final Logger LOGGER = Logger.getLogger(InitServlet.class.getName());
 
   //Directory where cant override configuration  
-  public static final String APP_DIR_KEY = "ntk_app_dir";
+  public static final String APP_DIR_KEY = "toc_app_dir";
 
   //Directory where cant override configuration  
   public static String CONFIG_DIR = ".ntk";
 
   //Default config directory in webapp
-  public static String DEFAULT_CONFIG_DIR = "/assets";
+  public static String DEFAULT_CONFIG_DIR = "/assets"; 
 
   //Default configuration file 
   public static String DEFAULT_CONFIG_FILE = "config.json";

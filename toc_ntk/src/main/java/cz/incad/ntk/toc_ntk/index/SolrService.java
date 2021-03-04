@@ -7,44 +7,18 @@ package cz.incad.ntk.toc_ntk.index;
 
 import cz.incad.ntk.toc_ntk.Candidate;
 import cz.incad.ntk.toc_ntk.DictionaryMatch;
-import cz.incad.ntk.toc_ntk.FileService;
 import cz.incad.ntk.toc_ntk.Options;
-import cz.incad.ntk.toc_ntk.TocAnalizer;
-import cz.incad.ntk.toc_ntk.TocLine;
-import cz.incad.ntk.toc_ntk.XServer;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import org.apache.commons.io.IOUtils;
 import org.apache.solr.client.solrj.SolrClient;
 import org.apache.solr.client.solrj.SolrQuery;
-import org.apache.solr.client.solrj.SolrRequest;
 import org.apache.solr.client.solrj.SolrServerException;
 import org.apache.solr.client.solrj.impl.HttpSolrClient;
-import org.apache.solr.client.solrj.impl.InputStreamResponseParser;
-import org.apache.solr.client.solrj.impl.NoOpResponseParser;
-import org.apache.solr.client.solrj.request.ContentStreamUpdateRequest;
-import org.apache.solr.client.solrj.request.QueryRequest;
 import org.apache.solr.client.solrj.response.QueryResponse;
-import org.apache.solr.client.solrj.response.UpdateResponse;
 import org.apache.solr.common.SolrDocument;
 import org.apache.solr.common.SolrDocumentList;
 import org.apache.solr.common.SolrInputDocument;
-import org.apache.solr.common.params.CommonParams;
-import org.apache.solr.common.params.SolrParams;
-import org.apache.solr.common.util.ContentStream;
-import org.apache.solr.common.util.ContentStreamBase;
-import org.apache.solr.common.util.NamedList;
-import org.apache.solr.common.util.SimpleOrderedMap;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.noggit.JSONUtil;
@@ -56,11 +30,11 @@ import org.noggit.JSONUtil;
 public class SolrService {
 
   static final Logger LOGGER = Logger.getLogger(Candidate.class.getName());
-  static final String urlString = "http://localhost:8983/solr";
+  
 
   public static void addToBlackList(String key) throws SolrServerException, IOException {
 
-    SolrClient solr = new HttpSolrClient.Builder(urlString).build();
+    SolrClient solr = new HttpSolrClient.Builder(Options.getInstance().getString("solr.host", "http://localhost:8983/solr/")).build();
     SolrInputDocument idoc = new SolrInputDocument();
     idoc.addField("key", key);
     LOGGER.info(idoc.toString());
@@ -70,7 +44,7 @@ public class SolrService {
 
   public static void removeFromBlackList(String key) throws SolrServerException, IOException {
 
-    SolrClient solr = new HttpSolrClient.Builder(urlString).build();
+    SolrClient solr = new HttpSolrClient.Builder(Options.getInstance().getString("solr.host", "http://localhost:8983/solr/")).build();
     solr.deleteById("blacklist", key, 10);
 
     LOGGER.info("deleted");
@@ -79,7 +53,7 @@ public class SolrService {
 
   public static void addToNerizene(String[] keys) throws SolrServerException, IOException {
 
-    SolrClient solr = new HttpSolrClient.Builder(urlString).build();
+    SolrClient solr = new HttpSolrClient.Builder(Options.getInstance().getString("solr.host", "http://localhost:8983/solr/")).build();
     for (String key : keys) {
       SolrInputDocument idoc = new SolrInputDocument();
       idoc.addField("key", key);
@@ -89,7 +63,7 @@ public class SolrService {
   }
 
   public static void saveToc(String sysno, String toc) throws SolrServerException, IOException {
-    SolrClient solr = new HttpSolrClient.Builder(urlString).build();
+    SolrClient solr = new HttpSolrClient.Builder(Options.getInstance().getString("solr.host", "http://localhost:8983/solr/")).build();
     SolrInputDocument idoc = new SolrInputDocument();
     idoc.addField("sysno", sysno);
     idoc.addField("toc", toc);
@@ -98,7 +72,7 @@ public class SolrService {
   }
 
   public static String getToc(String sysno) throws SolrServerException, IOException {
-    SolrClient solr = new HttpSolrClient.Builder(urlString).build();
+    SolrClient solr = new HttpSolrClient.Builder(Options.getInstance().getString("solr.host", "http://localhost:8983/solr/")).build();
     SolrQuery query = new SolrQuery();
     query.setQuery("sysno:\"" + sysno + "\"");
     QueryResponse response = solr.query("tocs", query);
@@ -114,7 +88,7 @@ public class SolrService {
 
   public static boolean isInBlackList(String text) {
     try {
-      SolrClient solr = new HttpSolrClient.Builder(urlString).build();
+      SolrClient solr = new HttpSolrClient.Builder(Options.getInstance().getString("solr.host", "http://localhost:8983/solr/")).build();
       SolrQuery query = new SolrQuery();
 
       //Search in blacklist
@@ -154,7 +128,7 @@ public class SolrService {
   public static SolrDocumentList findInDictionaries(String text) {
     SolrDocumentList docs = new SolrDocumentList();
     try {
-      SolrClient solr = new HttpSolrClient.Builder(urlString).build();
+      SolrClient solr = new HttpSolrClient.Builder(Options.getInstance().getString("solr.host", "http://localhost:8983/solr/")).build();
       JSONArray dicts = Options.getInstance().getJSONArray("dictionaries");
       for (int i = 0; i < dicts.length(); i++) {
         docs.addAll(findInDictionary(solr, dicts.getJSONObject(i), text));
