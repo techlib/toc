@@ -27,6 +27,7 @@ public class KonspektReader {
   SolrClient client;
   KospektRecord currentRecord;
   
+  final String collection = "dictionaries";
   final String TAG_CS      = "290   ";
   final String TAG_EN      = "490 0 ";
   final String TAG_BROADER = "5909  ";
@@ -39,6 +40,7 @@ public class KonspektReader {
         processLine(line);
       }
       addCurrentRecord();
+      client.commit(collection);
       // line is not visible here.
     } catch (IOException | SolrServerException ex) {
       LOGGER.log(Level.SEVERE, null, ex);
@@ -47,7 +49,15 @@ public class KonspektReader {
   
   private void addCurrentRecord() throws IOException, SolrServerException{
     if(currentRecord != null){
-      client.addBean(currentRecord);
+      currentRecord.path = "/" + currentRecord.id;
+      currentRecord.path_cze = "/" + currentRecord.csPrefLabel;
+      currentRecord.path_eng = "/" + currentRecord.enPrefLabel;
+      if (currentRecord.broader != null) {
+        currentRecord.path = "/" + currentRecord.broaderId + currentRecord.path;
+        currentRecord.path_cze = "/" + currentRecord.broaderId + currentRecord.path_cze;
+        currentRecord.path_eng = "/" + currentRecord.broaderId + currentRecord.path_eng;
+      }
+      client.addBean(collection, currentRecord);
     }
     currentRecord = new KospektRecord();
   }
@@ -62,12 +72,12 @@ public class KonspektReader {
       if("001   ".equals(tag)){
         currentRecord.setId("konspekt" + line.substring(6));
       } else if(TAG_CS.equals(tag)){
-        currentRecord.setKeyCs(getCleanValue(line.substring(6)));
-        currentRecord.setKeyEn(getCleanValue(line.substring(6)));
+        currentRecord.csPrefLabel = getCleanValue(line.substring(6));
       } else if(TAG_EN.equals(tag)){
-        currentRecord.setKeyEn(getCleanValue(line.substring(6)));
+        currentRecord.enPrefLabel = getCleanValue(line.substring(6));
       } else if(TAG_BROADER.equals(tag)){
         currentRecord.broader = getCleanValue(line.substring(6));
+        currentRecord.broaderId = getCleanValue(line);
       } 
     }
   }

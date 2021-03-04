@@ -46,6 +46,8 @@ import org.json.JSONObject;
  * @author alberto
  */
 public class SolrTaggerAnalyzer {
+  
+  public static String COLLECTION = "dictionaries";
 
   public static JSONObject getTagsJSON(String sysno, String field) {
     JSONObject ret = new JSONObject();
@@ -70,7 +72,7 @@ public class SolrTaggerAnalyzer {
       req.setResponseParser(rawJsonResponseParser);
       req.setPath("/tag");
       req.setParams(query);
-      UpdateResponse rsp = req.process(solr, "psh");
+      UpdateResponse rsp = req.process(solr, COLLECTION);
       NamedList nlr = rsp.getResponse();
 
       ret = new JSONObject((String) nlr.get("response"));
@@ -106,7 +108,7 @@ public class SolrTaggerAnalyzer {
 
       String title = XServer.getTitle(marc);
       QueryRequest queryRequestTitle = new SolrTaggerRequest(query, title);
-      NamedList nlr2 = solr.request(queryRequestTitle, "psh");
+      NamedList nlr2 = solr.request(queryRequestTitle, COLLECTION);
       JSONObject jsTitle = processResponse(nlr2, lang, candidates, true);
       jsTitle.put("title", title);
       jsTitle.put("autor", XServer.getAuthor(marc));
@@ -114,7 +116,7 @@ public class SolrTaggerAnalyzer {
 
       String text = FileService.getRawToc(sysno);
       QueryRequest queryRequest = new SolrTaggerRequest(query, text);
-      NamedList nlr = solr.request(queryRequest, "psh");
+      NamedList nlr = solr.request(queryRequest, COLLECTION);
       ret.put("body", processResponse(nlr, lang, candidates, false));
 
 //      
@@ -133,6 +135,11 @@ public class SolrTaggerAnalyzer {
       JSONObject t = ret.getJSONObject("info").getJSONObject("themes");
       for (Object theme : t.keySet()) {
         titleThemes.add(new SimpleEntry<>((String)theme, t.getInt((String) theme)));
+      }
+      
+      JSONObject tb = ret.getJSONObject("body").getJSONObject("themes");
+      for (Object theme : tb.keySet()) {
+        tocThemes.add(new SimpleEntry<>((String)theme, tb.getInt((String) theme)));
       }
       
       List<TagCandidate> list = new ArrayList<>(candidates.values());
@@ -185,39 +192,43 @@ public class SolrTaggerAnalyzer {
     for (Iterator it = docs.iterator(); it.hasNext();) {
       SolrDocument doc = (SolrDocument) it.next();
       String docId = (String) doc.getFirstValue("id");
-      String label = (String) doc.getFirstValue("enPrefLabel");
+      String label = (String) doc.getFirstValue("prefLabel_" + lang);
       TagCandidate c = candidates.get(docId);
       if (c == null) {
         c = new TagCandidate();
+        c.id = docId;
+        c.text = label;
+        c.text_eng = (String) doc.getFirstValue("prefLabel_eng");
+        c.text_cze = (String) doc.getFirstValue("prefLabel_cze");
+        for (Object val : doc.getFieldValues("path_" + lang)) {
+          c.path.add((String) val);
+        }
       }
-      c.id = docId;
-      c.text = label;
       c.count = ids.get(docId) + c.count;
       c.isInTitle = isInTitle || c.isInTitle;
-      c.path = (String) doc.getFirstValue("path_" + lang);
       candidates.put(docId, c);
-      String[] path = c.path.split("/");
-      broaders = ret.getJSONObject("broaders");
-      for (int i = 0; i < path.length - 1; i++) {
-        String broader = path[i];
-        if (!"".equals(broader)) {
-          if (!themes.has(broader)) {
-            themes.put(broader, ids.get(docId));
-          } else {
-            themes.put(broader, themes.getInt(broader) + 1);
-          }
+      String[] path = ((String)doc.getFirstValue("path_" + lang)).split("/");
+//      broaders = ret.getJSONObject("broaders");
+//      for (int i = 0; i < path.length - 1; i++) {
+//        String broader = path[i];
+//        if (!"".equals(broader)) {
+//          if (!themes.has(broader)) {
+//            themes.put(broader, 1);
+//          } else {
+//            themes.put(broader, themes.getInt(broader) + 1);
+//          }
+//
+//          if (!broaders.has(broader)) {
+//            broaders.put(broader, (new JSONObject()).put("count", ids.get(docId)));
+//          }
+//          broaders.put("count", broaders.optInt("count", ids.get(docId)) + 1);
+//          broaders = broaders.getJSONObject(broader);
+//        }
+//
+//      }
+//      broaders.put("count", broaders.optInt("count", 0) + 1);
 
-          if (!broaders.has(broader)) {
-            broaders.put(broader, (new JSONObject()).put("count", ids.get(docId)));
-          }
-          broaders.put("count", broaders.optInt("count", ids.get(docId)) + 1);
-          broaders = broaders.getJSONObject(broader);
-        }
-
-      }
-      broaders.put("count", broaders.optInt("count", 0) + 1);
-
-      // ret.append("docs", doc);
+      ret.append("docs", doc);
     }
 
     return ret;

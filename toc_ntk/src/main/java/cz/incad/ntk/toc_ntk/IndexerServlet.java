@@ -1,6 +1,7 @@
 package cz.incad.ntk.toc_ntk;
 
 import cz.incad.ntk.toc_ntk.index.Indexer;
+import cz.incad.ntk.toc_ntk.index.KonspektReader;
 import cz.incad.ntk.toc_ntk.index.PSHIndexer;
 import cz.incad.ntk.toc_ntk.index.SolrService;
 import cz.incad.ntk.toc_ntk.index.SolrTaggerAnalyzer;
@@ -13,11 +14,13 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import org.apache.solr.client.solrj.SolrClient;
+import org.apache.solr.client.solrj.impl.HttpSolrClient;
 import org.json.JSONObject;
 
 /**
  *
- * @author alberto 
+ * @author alberto
  */
 @WebServlet(value = "/index/*")
 public class IndexerServlet extends HttpServlet {
@@ -92,6 +95,26 @@ public class IndexerServlet extends HttpServlet {
           PSHIndexer indexer = new PSHIndexer();
           json.put("psh", indexer.full());
 
+        } catch (Exception ex) {
+          LOGGER.log(Level.SEVERE, null, ex);
+          json.put("error", ex.toString());
+        }
+        return json;
+      }
+    },
+    KONSPEKT {
+      @Override
+      JSONObject doPerform(HttpServletRequest req, HttpServletResponse response) throws Exception {
+        JSONObject json = new JSONObject();
+        try {
+          KonspektReader k = new KonspektReader();
+          try (SolrClient solr = new HttpSolrClient.Builder(Options.getInstance().getString("solr.host", "http://localhost:8983/solr/")).build()) {
+            k.readFromTxt(Indexer.class.getResourceAsStream("konsp_uni.txt"), solr);
+            solr.close();
+          } catch (Exception ex) {
+            json.put("error", ex);
+            Logger.getLogger(Indexer.class.getName()).log(Level.SEVERE, null, ex);
+          }
         } catch (Exception ex) {
           LOGGER.log(Level.SEVERE, null, ex);
           json.put("error", ex.toString());

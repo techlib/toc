@@ -26,16 +26,16 @@ public class PSHConcept {
     @Field("dict")
     String dict = "PSH";
 
-    @Field("csPrefLabel")
+    @Field("prefLabel_cze")
     String csPrefLabel;
     
-    @Field("csAltLabel")
+    @Field("altLabel_cze")
     List<String> csAltLabel = new ArrayList<>();
 
-    @Field("enPrefLabel")
+    @Field("prefLabel_eng")
     String enPrefLabel;
 
-    @Field("enAltLabel")
+    @Field("altLabel_eng")
     List<String> enAltLabel = new ArrayList<>() ;
 
     @Field("broader")
@@ -58,8 +58,8 @@ public class PSHConcept {
       ret.put("id", id);
       ret.put("broader", broader);
       ret.put("narrower", narrower);
-      ret.put("csPrefLabel", csPrefLabel);
-      ret.put("enPrefLabel", enPrefLabel);
+      ret.put("prefLabel_cze", csPrefLabel);
+      ret.put("prefLabel_eng", enPrefLabel);
       ret.put("path", path);
       ret.put("path_eng", path_eng);
       ret.put("path_cze", path_cze);

@@ -37,6 +37,7 @@ public class PSHIndexer {
 
   public static final Logger LOGGER = Logger.getLogger(PSHIndexer.class.getName());
   
+  final String collection = "dictionaries";
   Document xmlDocument;
   JSONObject ret = new JSONObject();
   Map<String, PSHConcept> conceptsMap;
@@ -114,15 +115,13 @@ public class PSHIndexer {
       pshC.path = path + "/" + pshC.id;
       pshC.path_cze = cspath + "/" + pshC.csPrefLabel;
       pshC.path_eng = enpath + "/" + pshC.enPrefLabel;
-      solr.addBean("psh", pshC);
+      solr.addBean(collection, pshC);
       //ret.put("number", ret.optInt("number", 0)+1);
       for (String narrower : pshC.narrower) {
         getConcept(solr, "http://psh.ntkcz.cz/skos/" + narrower, pshC.path, pshC.path_cze, pshC.path_eng);
       }
-      //return pshC;
     } catch (Exception ex) {
       LOGGER.log(Level.SEVERE, null, ex);
-      //return null;
     }    
   }
   
@@ -154,7 +153,7 @@ public class PSHIndexer {
       pshC.path = path + "/" + pshC.id;
       pshC.path_cze = cspath + "/" + pshC.csPrefLabel;
       pshC.path_eng = enpath + "/" + pshC.enPrefLabel;
-      solr.addBean("psh", pshC);
+      solr.addBean(collection, pshC);
       //ret.put("number", ret.optInt("number", 0)+1);
       for (String narrower : pshC.narrower) {
         getConcept(solr, "http://psh.ntkcz.cz/skos/" + narrower, pshC.path, pshC.path_cze, pshC.path_eng);
