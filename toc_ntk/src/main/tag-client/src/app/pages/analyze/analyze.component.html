@@ -1,0 +1,28 @@
+<div class="app-display-table app-container">
+  <div class="app-table-cell app-left">
+    <div fxLayout="row" fxFlexFill>
+      <div fxFlex class="app-facets">
+        <app-aside *ngIf="state.showAside"></app-aside>
+      </div>
+    </div>
+  </div>
+  <div class="app-table-cell app-right">
+
+    <app-toolbar></app-toolbar>
+    <ng-container *ngIf="info">
+        <div>{{info.title}}</div>
+        <div>{{info.author}}</div>
+
+        <div>Main themes</div>
+        <ul>
+          <li *ngFor="let th of themes">
+            <mat-checkbox [checked]="true">{{ th }}</mat-checkbox>
+          </li>
+        </ul>
+    </ng-container>
+    <mat-card *ngFor="let c of state.candidates">
+      <div>{{c.text}}</div>
+    </mat-card>
+
+  </div>
+</div>

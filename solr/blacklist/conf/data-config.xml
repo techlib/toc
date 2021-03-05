@@ -1,0 +1,20 @@
+<dataConfig>
+  <dataSource name="ds" type="FileDataSource" encoding="UTF-8"/>
+  <document>
+    
+    <entity name="ks"
+        processor="LineEntityProcessor"
+        url="/home/alberto/Projects/NTK/653_klicova_slova_b.txt"
+        rootEntity="true"
+        dataSource="ds"
+        transformer="RegexTransformer,TemplateTransformer"
+        >
+      <field column="rawLine"
+                 regex="^(\w*)\s(.*)"
+                 groupNames="id,key"
+          />
+      <field column="slovnik" template="653_klicova_slova_b.txt" />
+      </entity>
+  </document>
+</dataConfig>
+

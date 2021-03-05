@@ -1,0 +1,9 @@
+<section class="app-sroll-wrapper" *ngIf="sysnos.length > 0">
+  <button mat-button (click)="updateFolders()">update folders</button>
+  <mat-list>
+    <mat-list-item  *ngFor="let f of sysnos" (click)="setSysno(f)" [class.active]="f === state.sysno || f === sysno">
+      <span>{{f}}</span>
+      <button mat-icon-button *ngIf="state.balicky[f].saved"><mat-icon>save</mat-icon></button>
+    </mat-list-item>
+  </mat-list>
+</section>

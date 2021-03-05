@@ -1,8 +1,9 @@
-
 package cz.incad.ntk.toc_ntk;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -20,11 +21,11 @@ public class XServer {
   public static final Logger LOGGER = Logger.getLogger(XServer.class.getName());
 
   public static JSONObject find(String sysno) {
-      JSONObject ret= new JSONObject();
+    JSONObject ret = new JSONObject();
     try {
       String url = Options.getInstance().getString("xserver", "http://aleph.techlib.cz/X?base=stk01");
       InputStream inputStream = RESTHelper.inputStream(url + "&op=find-doc&doc_num=" + sysno);
-      
+
       String xml = org.apache.commons.io.IOUtils.toString(inputStream, "UTF8");
       ret = XML.toJSONObject(xml)
               .getJSONObject("find-doc")
@@ -36,36 +37,36 @@ public class XServer {
       LOGGER.log(Level.SEVERE, "error getting info from xserver for {0}", sysno);
       LOGGER.log(Level.SEVERE, null, ex);
     }
-      return ret;
+    return ret;
   }
-  
+
   public static JSONObject find(String field, String val) {
-      JSONObject ret= new JSONObject();
+    JSONObject ret = new JSONObject();
     try {
       String url = Options.getInstance().getString("xserver", "http://aleph.techlib.cz/X?base=stk01");
-      InputStream inputStream = RESTHelper.inputStream(url + "&op=find&code="+field+"&request=" + val);
-      
+      InputStream inputStream = RESTHelper.inputStream(url + "&op=find&code=" + field + "&request=" + val);
+
       String xml = org.apache.commons.io.IOUtils.toString(inputStream, "UTF8");
       JSONObject js = XML.toJSONObject(xml).getJSONObject("find");
-      String set_no = js.getString("set_number"); 
+      String set_no = js.getString("set_number");
       // http://aleph.net/X?op=present&set_no=000003&set_entry=000000011,000000032&format=marc
-      System.out.println(url + "&op=present&set_no="+set_no+"&entry=000000001");
-      InputStream is2 = RESTHelper.inputStream(url + "&op=present&set_no="+set_no+"&set_entry=000000001");
+      System.out.println(url + "&op=present&set_no=" + set_no + "&entry=000000001");
+      InputStream is2 = RESTHelper.inputStream(url + "&op=present&set_no=" + set_no + "&set_entry=000000001");
       xml = org.apache.commons.io.IOUtils.toString(is2, "UTF8");
-      
+
       ret = XML.toJSONObject(xml)
               .getJSONObject("present")
               .getJSONObject("record")
               .getJSONObject("metadata")
               .getJSONObject("oai_marc");
     } catch (IOException | JSONException ex) {
-      ret.put("error", "error getting info from xserver for " +field+"=" + val);
-      LOGGER.log(Level.SEVERE, "error getting info from xserver for {0}", field+"=" + val);
+      ret.put("error", "error getting info from xserver for " + field + "=" + val);
+      LOGGER.log(Level.SEVERE, "error getting info from xserver for {0}", field + "=" + val);
       LOGGER.log(Level.SEVERE, null, ex);
     }
-      return ret;
+    return ret;
   }
-  
+
   public static String getLanguage(JSONObject marc) {
     /*
     Ve formátu MARC 21 jsou jako povinné - tzn. nelze použít výplňový znak - definovány jen pozice (0-5),
@@ -84,7 +85,6 @@ public class XServer {
     }
   ]
      */
-
     JSONArray varfield = marc.optJSONArray("fixfield");
     String lang = "";
     for (int i = 0; i < varfield.length(); i++) {
@@ -99,7 +99,7 @@ public class XServer {
     }
     return lang;
   }
-  
+
   public static String getTitle(JSONObject info) {
     JSONArray varfield = info.optJSONArray("varfield");
     String title = "";
@@ -120,7 +120,7 @@ public class XServer {
     }
     return title;
   }
-  
+
   public static String getAuthor(JSONObject info) {
     JSONArray varfield = info.optJSONArray("varfield");
     String author = "";
@@ -140,5 +140,5 @@ public class XServer {
     }
     return author;
   }
-  
+
 }

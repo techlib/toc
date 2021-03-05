@@ -32,25 +32,36 @@ public class TagCandidate {
   // Path of broaders
   public List<String> path = new ArrayList<>();
   
+  public String explain;
+  
   // Computed score, for sorting results
   double score;
   
   public void setScore(List<AbstractMap.SimpleEntry<String, Integer>> titleThemes, List<AbstractMap.SimpleEntry<String, Integer>> body) {
     score = count * (isInTitle ? 6.5 : 1);
+    explain = "count:" + count + " * (is in title)(" + (isInTitle ? 6.5 : 1) + ")";
     for (Entry<String, Integer> e : titleThemes) {
-      if (path.contains(e.getKey()) && !"generalities".equals(e.getKey())) {
-        score = score * 5.5 * e.getValue();
+      for (String cpath: path) {
+        if (cpath.contains(e.getKey()) && !"generalities".equals(e.getKey())) {
+          score = score * 5.5 * e.getValue();
+          explain += " * (theme " + e.getKey() + " found " + e.getValue() + " times in title) * 5.5";
+        }
       }
     }
     for (Entry<String, Integer> e : body) {
       if (path.contains(e.getKey()) && !"generalities".equals(e.getKey())) {
         score = score * e.getValue();
+        explain += " * (theme " + e.getKey() + " found " + e.getValue() + " times in TOC)";
       }
     }
   }
   
   public String getText() {
     return text;
+  }
+  
+  public String getExplain() {
+    return explain;
   }
   
   public String getTextEng() {

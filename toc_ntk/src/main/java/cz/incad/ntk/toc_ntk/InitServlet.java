@@ -28,7 +28,7 @@ public class InitServlet extends HttpServlet {
   public static final Logger LOGGER = Logger.getLogger(InitServlet.class.getName());
 
   //Directory where cant override configuration  
-  public static final String APP_DIR_KEY = "toc_app_dir";
+  public static final String APP_DIR_KEY = "tagger_app_dir";
 
   //Directory where cant override configuration  
   public static String CONFIG_DIR = ".ntk";
@@ -79,7 +79,7 @@ public class InitServlet extends HttpServlet {
     if (getServletContext().getInitParameter("def_config_dir") != null) {
       DEFAULT_CONFIG_DIR = getServletContext().getInitParameter("def_config_dir");
     }
-
+ 
     DEFAULT_CONFIG_FILE = getServletContext().getRealPath(DEFAULT_CONFIG_DIR) + File.separator + DEFAULT_CONFIG_FILE;
 
     DEFAULT_I18N_DIR = getServletContext().getRealPath(DEFAULT_I18N_DIR);

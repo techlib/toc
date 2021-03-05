@@ -7,11 +7,13 @@
     <version>1.0-SNAPSHOT</version>
     <packaging>war</packaging>
 
-    <name>toc_ntk</name>
+    <name>tagger</name>
 
     <properties>
         <endorsed.dir>${project.build.directory}/endorsed</endorsed.dir>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+      <context.name>tagger</context.name>
+      <skipNg>false</skipNg>
     </properties>
     
     <dependencies>
@@ -53,7 +55,7 @@
         <dependency>
             <groupId>org.apache.solr</groupId>
             <artifactId>solr-solrj</artifactId>
-            <version>7.5.0</version>
+            <version>8.8.0</version>
             <type>jar</type>
         </dependency>
         <dependency>
@@ -77,8 +79,9 @@
             <id>exec-npm-install</id>
             <phase>generate-sources</phase>
             <configuration>
+              <skip>${skipNg}</skip>
               <executable>npm</executable>
-              <workingDirectory>${project.basedir}/src/main/ng-client</workingDirectory>  
+              <workingDirectory>${project.basedir}/src/main/client</workingDirectory>  
               <arguments>
                 <argument>run</argument>
                 <argument>build.prod</argument>
@@ -99,12 +102,13 @@
             <fileset>
               <directory>${project.basedir}/src/main/webapp</directory>
               <includes>
-                <include>*.bundle.css</include>
-                <include>*.bundle.js</include>
-                <include>*.bundle.js.gz</include>
-                <include>*.bundle.map</include>
+                <include>*.css</include>
+                <include>*.js</include>
+                <include>*.gz</include>
+                <include>*.map</include>
                 <include>index.html</include>
-                <include>assets/**/*</include>
+                <include>index.ssr.html</include>
+                <include>assets/*/**</include>
               </includes>
               <excludes>
                 <exclude>index.jsp</exclude>
@@ -131,7 +135,7 @@
               <outputDirectory>${project.basedir}/src/main/webapp</outputDirectory>
               <resources>
                 <resource>
-                  <directory>src/main/ng-client/dist</directory>
+                  <directory>src/main/client/dist/client</directory>
                   <includes>
                     <include>*/**</include>
                   </includes>
@@ -149,7 +153,7 @@
               <outputDirectory>${project.basedir}/src/main/webapp/app/assets/js/</outputDirectory>
               <resources>
                 <resource>
-                  <directory>src/main/ng-client/src/app/assets/js</directory>
+                  <directory>src/main/client/src/app/assets/js</directory>
                   <includes>
                     <include>*/**</include>
                   </includes>
@@ -180,12 +184,8 @@
               <file>${project.basedir}/src/main/webapp/assets/config.json</file> 
               <replacements> 
                 <replacement> 
-                  <token>&lt;!doctype html&gt;</token> 
-                  <value>&lt;%@page contentType="text/html" pageEncoding="UTF-8"%&gt;&lt;!doctype html&gt;</value> 
-                </replacement> 
-                <replacement> 
-                  <token>"context": "/",</token> 
-                  <value>"context": "/ntk_toc/",</value> 
+                  <token>"context": "",</token> 
+                  <value>"context": "/${context.name}",</value> 
                 </replacement> 
               </replacements> 
             </configuration> 
@@ -206,7 +206,24 @@
                 </replacement> 
                 <replacement> 
                   <token>base href="/"</token> 
-                  <value>base href="/ntk_toc/"</value> 
+                  <value>base href="/${context.name}/"</value> 
+                </replacement> 
+              </replacements> 
+            </configuration> 
+          </execution> 
+          
+          <execution> 
+            <id>replace-for-meta-inf</id>
+            <phase>prepare-package</phase> 
+            <goals> 
+              <goal>replace</goal> 
+            </goals>  
+            <configuration> 
+              <file>${project.basedir}/src/main/webapp/META-INF/context.xml</file> 
+              <replacements> 
+                <replacement> 
+                  <token>path="/(.)*"</token> 
+                  <value>path="/${context.name}"</value> 
                 </replacement> 
               </replacements> 
             </configuration> 
