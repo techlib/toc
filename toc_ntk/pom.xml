@@ -81,7 +81,7 @@
             <configuration>
               <skip>${skipNg}</skip>
               <executable>npm</executable>
-              <workingDirectory>${project.basedir}/src/main/client</workingDirectory>  
+              <workingDirectory>${project.basedir}/src/main/tag-client</workingDirectory>  
               <arguments>
                 <argument>run</argument>
                 <argument>build.prod</argument>
@@ -135,7 +135,7 @@
               <outputDirectory>${project.basedir}/src/main/webapp</outputDirectory>
               <resources>
                 <resource>
-                  <directory>src/main/client/dist/client</directory>
+                  <directory>src/main/tag-client/dist/tag-client</directory>
                   <includes>
                     <include>*/**</include>
                   </includes>

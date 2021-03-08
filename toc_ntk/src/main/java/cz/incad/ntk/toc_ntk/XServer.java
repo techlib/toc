@@ -134,6 +134,9 @@ public class XServer {
             if (sb.getJSONObject(j).get("label").equals("a")) {
               author += sb.getJSONObject(j).getString("content") + " ";
             }
+            if (sb.getJSONObject(j).get("label").equals("d")) {
+              author += sb.getJSONObject(j).getString("content") + " ";
+            }
           }
         }
       }

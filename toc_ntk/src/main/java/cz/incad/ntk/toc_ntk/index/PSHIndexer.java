@@ -21,6 +21,7 @@ import javax.xml.xpath.XPath;
 import javax.xml.xpath.XPathConstants;
 import javax.xml.xpath.XPathFactory;
 import org.apache.solr.client.solrj.SolrClient;
+import org.apache.solr.client.solrj.SolrServerException;
 import org.apache.solr.client.solrj.impl.HttpSolrClient;
 import org.json.JSONObject;
 import org.json.XML;
@@ -54,7 +55,9 @@ public class PSHIndexer {
       InputStream is = PSHIndexer.class.getResourceAsStream("psh-skos.rdf");
       xmlDocument = builder.parse(is);
       getTopNodes(solr);
-    } catch (XMLStreamException | ParserConfigurationException | SAXException | IOException ex) {
+      solr.commit(collection);
+      solr.close();
+    } catch (XMLStreamException | ParserConfigurationException | SAXException | SolrServerException | IOException ex) {
       LOGGER.log(Level.SEVERE, null, ex);
     }    
     return ret;

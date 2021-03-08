@@ -1,3 +1,4 @@
+import { ScoreConfig } from "./score-config";
 
 export interface Configuration {
 
@@ -7,6 +8,7 @@ export interface Configuration {
   snackDuration: number;
 
   basefolder: string;
+  scoreConfig: ScoreConfig;
   score: {
     found: number,
     matched: number,

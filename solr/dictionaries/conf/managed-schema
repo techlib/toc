@@ -79,9 +79,9 @@ Managed external dictionaries
     <field name="key_cze" type="text_cs" indexed="true" stored="true" multiValued="true" />
     <field name="key_eng" type="text_en" indexed="true" stored="true"/>
 	
-    <field name="key_tagger_cze" type="tag_cs" indexed="true" stored="true" />
+    <field name="key_tagger_cze" type="tag_cs" indexed="true" stored="true" multiValued="true" />
     <field name="key_tagger_engP" type="tag_en" indexed="true" stored="true" />
-    <field name="key_tagger_eng" type="tag_en_K" indexed="true" stored="true" />
+    <field name="key_tagger_eng" type="tag_en_K" indexed="true" stored="true" multiValued="true" />
   
 	
 
@@ -103,12 +103,14 @@ Managed external dictionaries
     <copyField source="prefLabel_cze" dest="key_lower_tokens"/>
     <copyField source="prefLabel_cze" dest="key_cze"/>
     <copyField source="prefLabel_cze" dest="key_tagger_cze"/>
+    <copyField source="altLabel_cze" dest="key_tagger_cze"/>
     
     <copyField source="prefLabel_eng" dest="key_lower"/>
     <copyField source="prefLabel_eng" dest="key_lower_tokens"/>
     <copyField source="prefLabel_eng" dest="key_eng"/>
     <copyField source="prefLabel_eng" dest="key_cze"/>
     <copyField source="prefLabel_eng" dest="key_tagger_eng"/>
+    <copyField source="altLabel_eng" dest="key_tagger_eng"/>
 
     <!-- field type definitions. The "name" attribute is
        just a label to be used by field definitions.  The "class"

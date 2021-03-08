@@ -1,19 +1,13 @@
 {
-  "basefolder": "/home/alberto/Projects/NTK/balicky/",
-  "score": {
-    "found": 0.2,
-    "matched": 2.0,
-    "multiple": 3.0,
-    "hasProperNoun": 1.9,
-    "isDictionaryWord": 2.0,
-    "extent": 0.1,
-    "inTitle": 1.5,
-    "addExtentForTitle": false,
-    "dictionaries": {
-      "psh": 2.4,
-      "keywords": 2.2,
-      "konspekt": 2.3,
-      "nerizene": 2.2
-    }
+  "context": "/tagger",
+  "lang": "cs",
+  "snackDuration": 2000,
+  "scoreConfig": {
+    "isInTitle": 6.5,
+    "excludedThemes": [
+      "generalities"
+    ],
+    "titleTheme": 15.5,
+    "bodyTheme": 1.8
   }
 }

@@ -1,5 +1,12 @@
 export class ScoreConfig {
   
+  isInTitle = 6.5;
+
+  excludedThemes = ['generalities'];
+  titleTheme = 5.5;
+  bodyTheme = 1.2;
+
+
   found: number = .2;
   matched: number = 2.0;
   multiple: number = 3.0;

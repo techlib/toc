@@ -8,20 +8,43 @@
   </div>
   <div class="app-table-cell app-right">
 
-    <app-toolbar></app-toolbar>
-    <ng-container *ngIf="info">
-        <div>{{info.title}}</div>
-        <div>{{info.author}}</div>
-
-        <div>Main themes</div>
-        <ul>
-          <li *ngFor="let th of themes">
-            <mat-checkbox [checked]="true">{{ th }}</mat-checkbox>
-          </li>
-        </ul>
-    </ng-container>
-    <mat-card *ngFor="let c of state.candidates">
-      <div>{{c.text}}</div>
+    <button mat-button (click)="rescore()">rescore</button>
+    <mat-card *ngIf="info">
+      <div>{{info.title}}</div>
+      <div>{{info.author}}</div>
+      <div fxLayout="row" fxFlexFill>
+        <div fxFlex class="app-fx-left">
+          <div>Themes in title</div>
+          <ul style="max-height: 150px;">
+            <li *ngFor="let th of titleThemes;let i=index">
+              <mat-checkbox [checked]="th.selected" (change)="themeChange(th,$event)" [(ngModel)]="th.selected"
+                [name]="'tt'+i" [id]="'tt'+i">{{ th.label }}</mat-checkbox>
+            </li>
+          </ul>
+        </div>
+        <div fxFlex class="app-fx-left">
+          <div>Themes found for author</div>
+          <ul style="max-height: 150px; overflow-y: scroll;">
+            <li *ngFor="let th of authorThemes;let i=index">
+              <mat-checkbox [checked]="th.selected" (change)="themeChange(th,$event)" [(ngModel)]="th.selected"
+                [name]="'ta'+i" [id]="'ta'+i">{{ th.label }}</mat-checkbox>
+            </li>
+          </ul>
+        </div>
+        <div fxFlex class="app-fx-left">
+          <div>TOC themes</div>
+          <ul style="max-height: 150px; overflow-y: scroll;">
+            <li *ngFor="let th of bodyThemes;let i=index">
+              <mat-checkbox [checked]="th.selected" (change)="themeChange(th,$event)" [(ngModel)]="th.selected"
+                [name]="'bt'+i" [id]="'bt'+i">{{ th.label }} ({{ th.count }})</mat-checkbox>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </mat-card>
+    <mat-card *ngFor="let c of candidates" [title]="c.explain">
+      <div>{{c.text}} ({{c.path}})</div>
+      <div> {{c.count}} {{c.matchedText}} {{ c.score }} {{c.isInTitle }}</div>
     </mat-card>
 
   </div>

@@ -29,6 +29,8 @@ import org.apache.solr.client.solrj.impl.HttpSolrClient;
 import org.apache.solr.client.solrj.impl.NoOpResponseParser;
 import org.apache.solr.client.solrj.request.ContentStreamUpdateRequest;
 import org.apache.solr.client.solrj.request.QueryRequest;
+import org.apache.solr.client.solrj.response.FacetField;
+import org.apache.solr.client.solrj.response.FacetField.Count;
 import org.apache.solr.client.solrj.response.UpdateResponse;
 import org.apache.solr.common.SolrDocument;
 import org.apache.solr.common.SolrDocumentList;
@@ -36,6 +38,7 @@ import org.apache.solr.common.params.SolrParams;
 import org.apache.solr.common.util.ContentStream;
 import org.apache.solr.common.util.ContentStreamBase;
 import org.apache.solr.common.util.NamedList;
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 /**
@@ -81,6 +84,24 @@ public class SolrTaggerAnalyzer {
     }
     return ret;
   }
+  
+  private static FacetField getAuthorThemes(String author, String sysno, String lang) {
+    try (SolrClient solr = new HttpSolrClient.Builder(Options.getInstance().getString("vufindserver", "http://localhost:8983/solr/")).build()) {
+      Map<String, String> ffMap = new HashMap();
+      ffMap.put("cze", "psh_facet");
+      ffMap.put("eng", "psh_english");
+      SolrQuery q = new SolrQuery("*")
+              .setFacet(true)
+              .addFacetField(ffMap.get(lang))
+              .setFacetMinCount(1)
+//              .addFilterQuery("-id:\"" + sysno + "\"")
+              .addFilterQuery("author:\"" + author + "\"");
+      return solr.query(q).getFacetField(ffMap.get(lang));
+    } catch (IOException | SolrServerException ex) {
+      LOGGER.log(Level.SEVERE, null, ex);
+      return null;
+    }
+  }
 
   public static JSONObject getTags(String sysno) {
     JSONObject ret = new JSONObject();
@@ -117,7 +138,15 @@ public class SolrTaggerAnalyzer {
       NamedList nlr2 = solr.request(queryRequestTitle, COLLECTION);
       JSONObject jsTitle = processResponse(nlr2, lang, candidates, true);
       jsTitle.put("title", title);
-      jsTitle.put("author", XServer.getAuthor(marc));
+      String author = XServer.getAuthor(marc); 
+      jsTitle.put("author", author);
+      FacetField ff = getAuthorThemes(author, sysno, lang);
+      if (ff != null) {
+        ret.put("authorThemes", new JSONObject());
+        for (Count ffv :  ff.getValues()) {
+          ret.getJSONObject("authorThemes").put(ffv.getName(), ffv.getCount());
+        }
+      }
       ret.put("info", jsTitle);
 
       String text = FileService.getRawToc(sysno);
@@ -146,7 +175,7 @@ public class SolrTaggerAnalyzer {
       for (Object theme : tb.keySet()) {
         tocThemes.add(new SimpleEntry<>((String) theme, tb.getInt((String) theme)));
       }
-
+      
       List<TagCandidate> list = new ArrayList<>(candidates.values());
       for (TagCandidate c : list) {
         c.setScore(titleThemes, tocThemes);
@@ -176,14 +205,20 @@ public class SolrTaggerAnalyzer {
     ArrayList tags = (ArrayList) nlr.get("tags");
 
     Map<String, Integer> ids = new HashMap<>();
+    Map<String, List<String>> matches = new HashMap<>();
     for (Iterator it = tags.iterator(); it.hasNext();) {
       NamedList tag = (NamedList) it.next();
       // String tagIds = ((ArrayList<String>) tag.get("ids"));
       for (String id : ((ArrayList<String>) tag.get("ids"))) {
         if (ids.containsKey(id)) {
           ids.put(id, ids.get(id) + 1);
+          if (!matches.get(id).contains((String) tag.get("matchText"))) {
+            matches.get(id).add((String) tag.get("matchText"));
+          }
         } else {
           ids.put(id, 1);
+          matches.put(id, new ArrayList<String>());
+          matches.get(id).add((String) tag.get("matchText"));
         }
       }
       ret.append("tags", tag.asShallowMap());
@@ -213,6 +248,7 @@ public class SolrTaggerAnalyzer {
       }
       c.count = ids.get(docId) + c.count;
       c.isInTitle = isInTitle || c.isInTitle;
+      c.matchedText.addAll(matches.get(docId));
       candidates.put(docId, c);
       String[] path = ((String) doc.getFirstValue("path_" + lang)).split("/");
       broaders = ret.getJSONObject("broaders");

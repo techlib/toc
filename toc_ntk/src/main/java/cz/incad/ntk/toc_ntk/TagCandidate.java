@@ -23,6 +23,9 @@ public class TagCandidate {
   public String text_cze;
   public String text_eng;
   
+  // list of matches
+  public List<String> matchedText = new ArrayList<>();
+  
   //Keeps how many times the canddate was found in the ToC 
   public int count;
   
@@ -39,7 +42,7 @@ public class TagCandidate {
   
   public void setScore(List<AbstractMap.SimpleEntry<String, Integer>> titleThemes, List<AbstractMap.SimpleEntry<String, Integer>> body) {
     score = count * (isInTitle ? 6.5 : 1);
-    explain = "count:" + count + " * (is in title)(" + (isInTitle ? 6.5 : 1) + ")";
+    explain = "count: " + count + " * (is in title)(" + (isInTitle ? 6.5 : 1) + ")";
     for (Entry<String, Integer> e : titleThemes) {
       for (String cpath: path) {
         if (cpath.contains(e.getKey()) && !"generalities".equals(e.getKey())) {
@@ -49,9 +52,11 @@ public class TagCandidate {
       }
     }
     for (Entry<String, Integer> e : body) {
-      if (path.contains(e.getKey()) && !"generalities".equals(e.getKey())) {
-        score = score * e.getValue();
-        explain += " * (theme " + e.getKey() + " found " + e.getValue() + " times in TOC)";
+      for (String cpath: path) {
+        if (cpath.contains(e.getKey()) && !"generalities".equals(e.getKey())) {
+          score = score + e.getValue();
+          explain += " + (theme " + e.getKey() + " found " + e.getValue() + " times in TOC)";
+        }
       }
     }
   }
@@ -62,6 +67,10 @@ public class TagCandidate {
   
   public String getExplain() {
     return explain;
+  }
+  
+  public List<String> getMatchedText() {
+    return matchedText;
   }
   
   public String getTextEng() {
@@ -76,7 +85,7 @@ public class TagCandidate {
     return path;
   }
   
-  public boolean isInTitle() {
+  public boolean getIsInTitle() {
     return isInTitle;
   }
   

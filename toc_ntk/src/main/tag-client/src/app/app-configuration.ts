@@ -23,6 +23,12 @@ import { AppState } from './app.state';
         return this.config.snackDuration;
     }
 
+    public get scoreConfig() {
+        return this.config.scoreConfig;
+    }
+
+
+
     /**
      * List the files holding section configuration in assets/configs folder
      * ['search'] will look for /assets/configs/search.json

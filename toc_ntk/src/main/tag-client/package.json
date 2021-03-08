@@ -6,6 +6,7 @@
     "start": "ng serve",
     "start.ui.api": "ng serve --proxy-config proxy.api.conf.json",
     "build": "ng build",
+    "build.prod": "ng build --prod",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"

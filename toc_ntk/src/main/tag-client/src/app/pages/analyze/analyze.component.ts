@@ -1,9 +1,12 @@
+import { TagPlaceholder } from '@angular/compiler/src/i18n/i18n_ast';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { AppConfiguration } from 'src/app/app-configuration';
 import { AppService } from 'src/app/app.service';
 import { AppState } from 'src/app/app.state';
-import { Candidate } from 'src/app/shared/candidate';
+import { ScoreConfig } from 'src/app/shared/score-config';
+import { TagCandidate } from 'src/app/shared/tag-candidate';
 
 @Component({
   selector: 'app-analyze',
@@ -25,13 +28,17 @@ export class AnalyzeComponent implements OnInit, OnDestroy {
   showMatched = true;
   showFree = true;
 
-  themes = [];
+  titleThemes: { label: string, count: number, selected: boolean }[] = [];
+  authorThemes: { label: string, count: number, selected: boolean }[] = [];
+  bodyThemes: { label: string, count: number, selected: boolean }[] = [];
+  candidates: TagCandidate[];
 
   displayedColumns: string[] = ['score', 'PSH', 'keywords', 'konspekt', 'noslovnik'];
 
   constructor(
     private router: Router,
     private route: ActivatedRoute,
+    private config: AppConfiguration,
     public state: AppState,
     private service: AppService) { }
 
@@ -43,7 +50,6 @@ export class AnalyzeComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-
     const sysno = this.route.snapshot.paramMap.get('sysno');
     if (sysno) {
       setTimeout(() => this.state.setSysno(sysno, 'analyze'), 10);
@@ -61,8 +67,48 @@ export class AnalyzeComponent implements OnInit, OnDestroy {
 
   select(c: string): void {
     // this.selected = this.candidates.filter((c: Candidate) => {return c['selected'] !== 'undefined' && c['selected']});
-
     this.service.copyTextToClipboard(c);
+  }
+
+  themeChange(th, e) {
+    th.selected = e.checked;
+    this.rescore();
+  }
+
+  rescore() {
+    const titleThemes = this.titleThemes.filter(t => t.selected);
+    const bodyThemes = this.bodyThemes.filter(t => t.selected);
+
+    this.candidates.forEach(tc => {
+      this.setScore(tc, this.config.scoreConfig, titleThemes, bodyThemes);
+    });
+    this.candidates.sort((a, b) => b.score - a.score);
+  }
+
+  setScore(tc: TagCandidate, conf: ScoreConfig, titleThemes: { label: string, count: number, selected: boolean }[], bodyThemes: { label: string, count: number, selected: boolean }[]) {
+    tc.explain = [];
+    tc.score = tc.count * (tc.isInTitle ? conf.isInTitle : 1);
+    tc.explain.push("count:" + tc.count);
+    tc.explain.push(" * (is in title)(" + (tc.isInTitle ? conf.isInTitle : 1) + ")");
+
+    titleThemes.forEach(th => {
+      tc.path.forEach(p => {
+        if (!conf.excludedThemes.includes(th.label) && p.indexOf(th.label)>-1) {
+          tc.score = tc.score * conf.titleTheme;
+          tc.explain.push(" * (theme " + th.label + " found " + th.count + " times in title) *" + conf.titleTheme);
+        }
+      });
+    });
+
+    bodyThemes.forEach(th => {
+      tc.path.forEach(p => {
+        if (!conf.excludedThemes.includes(th.label) && p.indexOf(th.label)>-1) {
+          tc.score = tc.score + th.count * conf.bodyTheme;
+          tc.explain.push(" + (theme " + th.label + " found " + th.count + " times in TOC)");
+        }
+      });
+    });
+
   }
 
   analyze(): void {
@@ -72,7 +118,7 @@ export class AnalyzeComponent implements OnInit, OnDestroy {
     this.state.hasToc = false;
     this.error = '';
     this.author = '';
-    this.state.candidates = [];
+    this.candidates = [];
     // this.state.selected = [];
     this.service.processSysno(this.state.sysno, this.state.scoreConfig).subscribe(res => {
 
@@ -83,14 +129,31 @@ export class AnalyzeComponent implements OnInit, OnDestroy {
       } else {
 
         this.state.currentToc = res;
-        this.state.candidates = res.candidates;
+        this.candidates = res.candidates;
         this.info = res.info;
         this.setInfo();
         this.state.rescore();
         this.state.hasToc = true;
         this.loading = false;
 
-        this.themes = Object.keys(res.info.themes);
+        this.titleThemes = [];
+        const ks = Object.keys(res.info.themes);
+        ks.forEach(k => {
+          this.titleThemes.push({ label: k, count: res.info.themes[k], selected: true })
+        });
+
+        this.authorThemes = [];
+        const ksa = Object.keys(res.authorThemes);
+        ksa.forEach(k => {
+          this.authorThemes.push({ label: k, count: res.authorThemes[k], selected: true })
+        });
+        this.bodyThemes = [];
+        const ks2 = Object.keys(res.body.themes);
+        ks2.forEach(k => {
+          this.bodyThemes.push({ label: k, count: res.body.themes[k], selected: true })
+        });
+
+        this.bodyThemes.sort((a, b) => b.count - a.count);
 
         setTimeout(() => {
           // $("#app-table-score").tableHeadFixer();
@@ -124,9 +187,7 @@ export class AnalyzeComponent implements OnInit, OnDestroy {
     }
   }
 
-
-
-  formatInfo(c: Candidate): string {
+  formatInfo(c: TagCandidate): string {
     let ret: string = c.text + '\n\n';
     c.explain.forEach(e => {
       ret += e + '\n';
@@ -134,7 +195,7 @@ export class AnalyzeComponent implements OnInit, OnDestroy {
     return ret;
   }
 
-  formatTooltip(c: Candidate): string {
+  formatTooltip(c: TagCandidate): string {
     let ret: string = c.text + '<br/><br/>';
     c.explain.forEach(e => {
       ret += e + '<br/>';
@@ -146,7 +207,7 @@ export class AnalyzeComponent implements OnInit, OnDestroy {
     console.log(e, d);
   }
 
-  addToBlackList(c: Candidate): void {
+  addToBlackList(c: TagCandidate): void {
     this.service.addToBlackList(c.text).subscribe(res => {
       console.log(res);
     });
