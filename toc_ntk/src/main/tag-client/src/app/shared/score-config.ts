@@ -4,6 +4,7 @@ export class ScoreConfig {
 
   excludedThemes = ['generalities'];
   titleTheme = 5.5;
+  authorTheme = 5.5;
   bodyTheme = 1.2;
 
 

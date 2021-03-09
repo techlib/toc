@@ -18,6 +18,7 @@ import { AnalyzeComponent } from './pages/analyze/analyze.component';
 import { AsideComponent } from './components/aside/aside.component';
 import { BlackListComponent } from './components/black-list/black-list.component';
 import { ToolbarComponent } from './components/toolbar/toolbar.component';
+import { TocDialogComponent } from './components/toc-dialog/toc-dialog.component';
 
 const providers: any[] =[
   AppState, 
@@ -36,6 +37,7 @@ const providers: any[] =[
     BlackListComponent,
     ToolbarComponent,
     AsideComponent,
+    TocDialogComponent,
   ],
   imports: [
     BrowserModule,

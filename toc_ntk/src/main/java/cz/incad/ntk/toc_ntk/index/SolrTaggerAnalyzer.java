@@ -94,7 +94,7 @@ public class SolrTaggerAnalyzer {
               .setFacet(true)
               .addFacetField(ffMap.get(lang))
               .setFacetMinCount(1)
-//              .addFilterQuery("-id:\"" + sysno + "\"")
+              .addFilterQuery("-id:\"" + sysno + "\"")
               .addFilterQuery("author:\"" + author + "\"");
       return solr.query(q).getFacetField(ffMap.get(lang));
     } catch (IOException | SolrServerException ex) {
@@ -140,11 +140,13 @@ public class SolrTaggerAnalyzer {
       jsTitle.put("title", title);
       String author = XServer.getAuthor(marc); 
       jsTitle.put("author", author);
+      ret.put("authorThemes", new JSONObject());
       FacetField ff = getAuthorThemes(author, sysno, lang);
       if (ff != null) {
-        ret.put("authorThemes", new JSONObject());
         for (Count ffv :  ff.getValues()) {
+          if (!"".equals(ffv.getName())){
           ret.getJSONObject("authorThemes").put(ffv.getName(), ffv.getCount());
+          }
         }
       }
       ret.put("info", jsTitle);

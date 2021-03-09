@@ -7,45 +7,66 @@
     </div>
   </div>
   <div class="app-table-cell app-right">
-
-    <button mat-button (click)="rescore()">rescore</button>
-    <mat-card *ngIf="info">
-      <div>{{info.title}}</div>
-      <div>{{info.author}}</div>
-      <div fxLayout="row" fxFlexFill>
-        <div fxFlex class="app-fx-left">
-          <div>Themes in title</div>
-          <ul style="max-height: 150px;">
-            <li *ngFor="let th of titleThemes;let i=index">
-              <mat-checkbox [checked]="th.selected" (change)="themeChange(th,$event)" [(ngModel)]="th.selected"
-                [name]="'tt'+i" [id]="'tt'+i">{{ th.label }}</mat-checkbox>
-            </li>
-          </ul>
-        </div>
-        <div fxFlex class="app-fx-left">
-          <div>Themes found for author</div>
-          <ul style="max-height: 150px; overflow-y: scroll;">
-            <li *ngFor="let th of authorThemes;let i=index">
-              <mat-checkbox [checked]="th.selected" (change)="themeChange(th,$event)" [(ngModel)]="th.selected"
-                [name]="'ta'+i" [id]="'ta'+i">{{ th.label }}</mat-checkbox>
-            </li>
-          </ul>
-        </div>
-        <div fxFlex class="app-fx-left">
-          <div>TOC themes</div>
-          <ul style="max-height: 150px; overflow-y: scroll;">
-            <li *ngFor="let th of bodyThemes;let i=index">
-              <mat-checkbox [checked]="th.selected" (change)="themeChange(th,$event)" [(ngModel)]="th.selected"
-                [name]="'bt'+i" [id]="'bt'+i">{{ th.label }} ({{ th.count }})</mat-checkbox>
-            </li>
-          </ul>
-        </div>
+    <div fxLayout="row" >
+      <div fxFlex class="app-fx-left">
+        <div><strong>{{info.title}}</strong></div>
+        <div>{{info.author}}</div>
       </div>
-    </mat-card>
-    <mat-card *ngFor="let c of candidates" [title]="c.explain">
-      <div>{{c.text}} ({{c.path}})</div>
-      <div> {{c.count}} {{c.matchedText}} {{ c.score }} {{c.isInTitle }}</div>
-    </mat-card>
-
+      <div  fxFlex class="app-fx-right app-right">
+        <!-- <button mat-button (click)="rescore()">rescore</button> -->
+        <button mat-stroked-button (click)="viewToc()">view TOC</button>
+        <button mat-stroked-button (click)="save()">save</button>
+      </div>
+    </div>
+      <mat-card *ngIf="info">
+        <div fxLayout="row" fxFlexFill>
+          <div fxFlex class="app-fx-left">
+            <div>Themes in title</div>
+            <mat-list style="max-height: 150px; overflow-y: auto;">
+              <mat-list-item *ngFor="let th of titleThemes;let i=index">
+                <button mat-icon-button title="Add to selected keywords" (click)="addToSelected(th.label)" class="app-fx-right"><mat-icon>add_task</mat-icon></button>
+                <mat-checkbox [checked]="th.selected" (change)="themeChange(th,$event)" [(ngModel)]="th.selected"
+                  [name]="'tt'+i" [id]="'tt'+i">{{ th.label }}</mat-checkbox>
+              </mat-list-item>
+            </mat-list>
+          </div>
+          <div fxFlex class="app-fx-left">
+            <div>Themes found for author</div>
+            <mat-list style="max-height: 150px; overflow-y: auto;">
+              <mat-list-item *ngFor="let th of authorThemes;let i=index">
+                <button mat-icon-button title="Add to selected keywords" (click)="addToSelected(th.label)" class="app-fx-right"><mat-icon>add_task</mat-icon></button>
+                <mat-checkbox [checked]="th.selected" (change)="themeChange(th,$event)" [(ngModel)]="th.selected"
+                  [name]="'ta'+i" [id]="'ta'+i">{{ th.label }} ({{ th.count }})</mat-checkbox>
+              </mat-list-item>
+            </mat-list>
+          </div>
+          <div fxFlex class="app-fx-left">
+            <div>TOC themes</div>
+            <mat-list style="max-height: 150px; overflow-y: auto;">
+              <mat-list-item *ngFor="let th of bodyThemes;let i=index">
+                <button mat-icon-button title="Add to selected keywords" (click)="addToSelected(th.label)" class="app-fx-right"><mat-icon>add_task</mat-icon></button>
+                <mat-checkbox [checked]="th.selected" (change)="themeChange(th,$event)" [(ngModel)]="th.selected"
+                  [name]="'bt'+i" [id]="'bt'+i">{{ th.label }} ({{ th.count }})</mat-checkbox>
+              </mat-list-item>
+            </mat-list>
+          </div>
+          <div fxFlex class="app-fx-right">
+            <div>Selected keywords</div>
+            <mat-list style="max-height: 150px; overflow-y: auto;">
+              <mat-list-item *ngFor="let sel of selected;let i=index">
+                <label>{{ sel }}</label>
+                <button mat-icon-button title="Remove from selected keywords" (click)="removeFromSelected(i)"><mat-icon>delete</mat-icon></button>
+              </mat-list-item>
+            </mat-list>
+          </div>
+        </div>
+      </mat-card>
+      <mat-card *ngFor="let c of candidates">
+        <mat-icon style="float: right;" [title]="c.explain">info</mat-icon>
+        <div>
+          <button mat-icon-button title="Add to selected keywords" (click)="addToSelected(c.text)" class="app-fx-right"><mat-icon>add_task</mat-icon></button>
+          <strong>{{c.text}}</strong> ({{c.path}})</div>
+        <div>Found: {{c.count}} | Matched text: {{c.matchedText}} | Computed score: {{ c.score }} {{c.isInTitle ? ' | Found in title' : '' }}</div>
+      </mat-card>
   </div>
 </div>

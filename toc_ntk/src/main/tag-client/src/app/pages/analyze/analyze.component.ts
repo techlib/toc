@@ -1,12 +1,16 @@
 import { TagPlaceholder } from '@angular/compiler/src/i18n/i18n_ast';
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { AppConfiguration } from 'src/app/app-configuration';
 import { AppService } from 'src/app/app.service';
 import { AppState } from 'src/app/app.state';
+import { TocDialogComponent } from 'src/app/components/toc-dialog/toc-dialog.component';
 import { ScoreConfig } from 'src/app/shared/score-config';
 import { TagCandidate } from 'src/app/shared/tag-candidate';
+
+interface ThemeCount { label: string, count: number, selected: boolean };
 
 @Component({
   selector: 'app-analyze',
@@ -28,16 +32,16 @@ export class AnalyzeComponent implements OnInit, OnDestroy {
   showMatched = true;
   showFree = true;
 
-  titleThemes: { label: string, count: number, selected: boolean }[] = [];
-  authorThemes: { label: string, count: number, selected: boolean }[] = [];
-  bodyThemes: { label: string, count: number, selected: boolean }[] = [];
+  titleThemes: ThemeCount[] = [];
+  authorThemes: ThemeCount[] = [];
+  bodyThemes: ThemeCount[] = [];
   candidates: TagCandidate[];
-
-  displayedColumns: string[] = ['score', 'PSH', 'keywords', 'konspekt', 'noslovnik'];
+  selected: string[] = [];
 
   constructor(
     private router: Router,
     private route: ActivatedRoute,
+    public dialog: MatDialog,
     private config: AppConfiguration,
     public state: AppState,
     private service: AppService) { }
@@ -78,14 +82,15 @@ export class AnalyzeComponent implements OnInit, OnDestroy {
   rescore() {
     const titleThemes = this.titleThemes.filter(t => t.selected);
     const bodyThemes = this.bodyThemes.filter(t => t.selected);
+    const authorThemes = this.authorThemes.filter(t => t.selected);
 
     this.candidates.forEach(tc => {
-      this.setScore(tc, this.config.scoreConfig, titleThemes, bodyThemes);
+      this.setScore(tc, this.config.scoreConfig, titleThemes, authorThemes, bodyThemes);
     });
     this.candidates.sort((a, b) => b.score - a.score);
   }
 
-  setScore(tc: TagCandidate, conf: ScoreConfig, titleThemes: { label: string, count: number, selected: boolean }[], bodyThemes: { label: string, count: number, selected: boolean }[]) {
+  setScore(tc: TagCandidate, conf: ScoreConfig, titleThemes: ThemeCount[], authorThemes: ThemeCount[], bodyThemes: ThemeCount[]) {
     tc.explain = [];
     tc.score = tc.count * (tc.isInTitle ? conf.isInTitle : 1);
     tc.explain.push("count:" + tc.count);
@@ -96,6 +101,15 @@ export class AnalyzeComponent implements OnInit, OnDestroy {
         if (!conf.excludedThemes.includes(th.label) && p.indexOf(th.label)>-1) {
           tc.score = tc.score * conf.titleTheme;
           tc.explain.push(" * (theme " + th.label + " found " + th.count + " times in title) *" + conf.titleTheme);
+        }
+      });
+    });
+
+    authorThemes.forEach(th => {
+      tc.path.forEach(p => {
+        if (!conf.excludedThemes.includes(th.label) && p.indexOf(th.label)>-1) {
+          tc.score = tc.score * conf.authorTheme;
+          tc.explain.push(" * (theme " + th.label + " found " + th.count + " times in author) *" + conf.authorTheme);
         }
       });
     });
@@ -132,7 +146,6 @@ export class AnalyzeComponent implements OnInit, OnDestroy {
         this.candidates = res.candidates;
         this.info = res.info;
         this.setInfo();
-        this.state.rescore();
         this.state.hasToc = true;
         this.loading = false;
 
@@ -154,10 +167,7 @@ export class AnalyzeComponent implements OnInit, OnDestroy {
         });
 
         this.bodyThemes.sort((a, b) => b.count - a.count);
-
-        setTimeout(() => {
-          // $("#app-table-score").tableHeadFixer();
-        }, 1);
+        this.rescore();
       }
     });
   }
@@ -215,6 +225,39 @@ export class AnalyzeComponent implements OnInit, OnDestroy {
 
   toogleAsideBar(): void {
     this.state.showAsideBar();
+  }
+
+  viewToc(): void {
+    
+    this.service.getTocText(this.state.sysno).subscribe(res => {
+      this.toc_text = res + '\n';
+      const dialogRef = this.dialog.open(TocDialogComponent, {
+        width: '750px',
+        data: this.toc_text
+      });
+  
+      dialogRef.afterClosed().subscribe(result => {
+        console.log('The dialog was closed');
+        
+      });
+  });
+
+    
+  }
+
+  addToSelected(s: string) {
+    if (!this.selected.includes(s)) {
+      this.selected.push(s);
+    }
+    
+  }
+
+  removeFromSelected(index: number) {
+    this.selected.splice(index, 1);
+  }
+
+  save() {
+
   }
 
 }
