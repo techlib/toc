@@ -50,35 +50,41 @@ public class FileService {
   }
 
   public static String getRawToc(String sysno) {
-      StringBuilder ret = new StringBuilder();
-    try {
-      String foldername;
-      JSONObject jfolders = Options.getInstance().getFolders();
+    String foldername;
+    JSONObject jfolders = Options.getInstance().getFolders();
+    if (jfolders.has(sysno)) {
+      foldername = Options.getInstance().getString("balicky_dir", "~/.ntk/balicky/") + jfolders.getJSONObject(sysno).optString("name");
+    } else {
+      //Mozna pridan pozdeji
+      Options.resetInstance();
+      jfolders = Options.getInstance().getFolders();
       if (jfolders.has(sysno)) {
         foldername = Options.getInstance().getString("balicky_dir", "~/.ntk/balicky/") + jfolders.getJSONObject(sysno).optString("name");
       } else {
-        //Mozna pridan pozdeji
-        Options.resetInstance();
-        jfolders = Options.getInstance().getFolders();
-        if (jfolders.has(sysno)) {
-          foldername = Options.getInstance().getString("balicky_dir", "~/.ntk/balicky/") + jfolders.getJSONObject(sysno).optString("name");
-        } else {
-          return "balik neexistuje";
-        }
+        return "balik neexistuje";
       }
+    }
+    return getRawTocFolder(foldername);
+  }
+
+  public static String getRawTocFolder(String foldername) {
+    StringBuilder ret = new StringBuilder();
+    try {
 
       File dir = new File(foldername);
-      String[] extensions = new String[]{"txt"};
-      List<File> files = (List<File>) FileUtils.listFiles(dir, extensions, false);
-      files.sort(new Comparator<File>() {
-        @Override
-        public int compare(File lhs, File rhs) {
-          // -1 - less than, 1 - greater than, 0 - equal, all inversed for descending
-          return lhs.getName().compareToIgnoreCase(rhs.getName());
+      if (dir.exists()) {
+        String[] extensions = new String[]{"txt"};
+        List<File> files = (List<File>) FileUtils.listFiles(dir, extensions, false);
+        files.sort(new Comparator<File>() {
+          @Override
+          public int compare(File lhs, File rhs) {
+            // -1 - less than, 1 - greater than, 0 - equal, all inversed for descending
+            return lhs.getName().compareToIgnoreCase(rhs.getName());
+          }
+        });
+        for (File f : files) {
+          ret.append(FileUtils.readFileToString(f, Charset.forName("UTF-8")));
         }
-      });
-      for (File f : files) {
-        ret.append(FileUtils.readFileToString(f, Charset.forName("UTF-8")));
       }
 
     } catch (IOException | JSONException ex) {

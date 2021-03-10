@@ -5,6 +5,7 @@ import cz.incad.ntk.toc_ntk.index.KonspektReader;
 import cz.incad.ntk.toc_ntk.index.PSHIndexer;
 import cz.incad.ntk.toc_ntk.index.SolrService;
 import cz.incad.ntk.toc_ntk.index.SolrTaggerAnalyzer;
+import cz.incad.ntk.toc_ntk.index.TOCIndexer;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.logging.Level;
@@ -79,6 +80,21 @@ public class IndexerServlet extends HttpServlet {
         try {
           Indexer indexer = new Indexer();
           json.put("psh", indexer.indexPSH());
+
+        } catch (Exception ex) {
+          LOGGER.log(Level.SEVERE, null, ex);
+          json.put("error", ex.toString());
+        }
+        return json;
+      }
+    },
+    TOCS {
+      @Override
+      JSONObject doPerform(HttpServletRequest req, HttpServletResponse response) throws Exception {
+        JSONObject json = new JSONObject();
+        try {
+          TOCIndexer indexer = new TOCIndexer();
+          json.put("tocs", indexer.full());
 
         } catch (Exception ex) {
           LOGGER.log(Level.SEVERE, null, ex);

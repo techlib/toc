@@ -90,6 +90,7 @@ public class SolrTaggerAnalyzer {
       Map<String, String> ffMap = new HashMap();
       ffMap.put("cze", "psh_facet");
       ffMap.put("eng", "psh_english");
+      // Map<String, String> ffMap = Map.of("cze", "psh_facet","eng", "psh_english");
       SolrQuery q = new SolrQuery("*")
               .setFacet(true)
               .addFacetField(ffMap.get(lang))
@@ -115,6 +116,7 @@ public class SolrTaggerAnalyzer {
       supportedLangs.add("eng");
       supportedLangs.add("cze");
       String fallBack = "eng";
+      // List<String> supportedLangs = List.of("eng","cze");
       if (!supportedLangs.contains(lang)) {
         lang = fallBack;
       }

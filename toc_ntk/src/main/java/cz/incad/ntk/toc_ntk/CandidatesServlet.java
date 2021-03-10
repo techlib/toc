@@ -23,7 +23,7 @@ import org.json.JSONObject;
  * @author alberto
  */
 
-@WebServlet(value = "/candidates")
+@WebServlet(value = "/candidates/*")
 public class CandidatesServlet extends HttpServlet {
 
     public static final Logger LOGGER = Logger.getLogger(CandidatesServlet.class.getName());
@@ -42,8 +42,8 @@ public class CandidatesServlet extends HttpServlet {
             throws ServletException, IOException {
 
         try {
-
-            String actionNameParam = request.getParameter(ACTION_NAME);
+            // String actionNameParam = request.getParameter(ACTION_NAME);
+            String actionNameParam = request.getPathInfo().substring(1);
             if (actionNameParam != null) {
 
                 Actions actionToDo = Actions.valueOf(actionNameParam.toUpperCase());

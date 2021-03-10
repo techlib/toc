@@ -92,7 +92,7 @@ public class Options {
       JSONObject dirs = new JSONObject();
 
       String foldername = server_conf.optString("balicky_dir", "~/.ntk/balicky/");
-      LOGGER.log(Level.INFO, foldername);
+      LOGGER.log(Level.FINE, foldername);
       File dir = new File(foldername);
       String[] directories = dir.list(new FilenameFilter() {
         @Override

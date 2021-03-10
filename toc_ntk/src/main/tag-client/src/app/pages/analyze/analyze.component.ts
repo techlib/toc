@@ -260,4 +260,8 @@ export class AnalyzeComponent implements OnInit, OnDestroy {
 
   }
 
+  copy() {
+    this.service.copyTextToClipboard(this.selected.join(';'));
+  }
+
 }

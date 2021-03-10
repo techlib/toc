@@ -28,10 +28,9 @@ export class AppService {
 
     processFolder(foldername: string, config: ScoreConfig): Observable<any> {
 
-        let url = 'candidates';
+        let url = 'candidates/find';
         // url = '/assets/F21395f_000170834.json';
         const params: HttpParams = new HttpParams()
-            .set('action', 'FIND')
             .set('foldername', this.state.config.basefolder + foldername)
             .set('scoreconfig', JSON.stringify(config));
         return this.get(url, params);
@@ -49,15 +48,16 @@ export class AppService {
 
     getExport(cs: DictionaryMatch[]): Observable<any> {
 
-        let url = 'candidates';
-        const params: HttpParams = new HttpParams().set('action', 'EXPORT').set('candidates', JSON.stringify(cs));
+        let url = 'candidates/export';
+        const params: HttpParams = new HttpParams()
+        .set('candidates', JSON.stringify(cs));
         return this.get(url, params);
     }
 
     saveNewKeys(cs: DictionaryMatch[]): Observable<any> {
 
-        let url = 'candidates';
-        let params: HttpParams = new HttpParams().set('action', 'ADD_TO_NERIZENE');
+        let url = 'candidates/add_to_nerizene';
+        let params: HttpParams = new HttpParams();
         cs.forEach(dm => {
             if (dm.name === 'novy') {
                 params = params.append('key', dm.text);
@@ -76,7 +76,7 @@ export class AppService {
 
 
 
-        let url = 'candidates?action=SAVE_TOC&sysno=' + this.state.sysno;
+        let url = 'candidates/save_toc?sysno=' + this.state.sysno;
         // let params: HttpParams = new HttpParams();
 
         // params.set('sysno', this.state.sysno);
@@ -87,17 +87,17 @@ export class AppService {
 
     updateFolders(): Observable<any> {
 
-        let url = 'candidates';
+        let url = 'candidates/balicky';
         // url = '/assets/balicky.json'; // comment
-        const params: HttpParams = new HttpParams().set('action', 'BALICKY');
+        const params: HttpParams = new HttpParams();
         return this.get(url, params);
     }
 
     getBalicky(update: boolean = false): Observable<any> {
 
-        let url = 'candidates';
+        let url = 'candidates/balicky';
         // url = '/assets/balicky.json'; // comment
-        const params: HttpParams = new HttpParams().set('action', 'BALICKY');
+        const params: HttpParams = new HttpParams();
         if (update) {
             params.set('update', 'true');
         }
@@ -114,16 +114,15 @@ export class AppService {
 
     addToBlackList(key: string): Observable<any> {
 
-        let url = 'candidates';
-        const params: HttpParams = new HttpParams().set('action', 'ADD_TO_BLACKLIST').set('key', key);
+        let url = 'candidates/ADD_TO_BLACKLIST';
+        const params: HttpParams = new HttpParams().set('key', key);
         return this.get(url, params);
     }
 
     removeFromBlackList(key: string): Observable<any> {
 
-        let url = 'candidates';
+        let url = 'candidates/REMOVE_FROM_BLACKLIST';
         const params: HttpParams = new HttpParams()
-            .set('action', 'REMOVE_FROM_BLACKLIST')
             .set('key', key);
         return this.get(url, params);
     }
